@@ -10,6 +10,7 @@ A typescript monorepo template to create organized, flexible apps.
 - `mercurius`
 - `nexus`
 - `prisma`
+- `paljs`
 
 ### Web
 
