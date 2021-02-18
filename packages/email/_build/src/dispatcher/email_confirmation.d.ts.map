@@ -1,1 +1,0 @@
-{"version":3,"file":"email_confirmation.d.ts","sourceRoot":"","sources":["../../../src/dispatcher/email_confirmation.ts"],"names":[],"mappings":"AAMA,wBAAsB,qBAAqB,CAC1C,EAAE,EAAE,MAAM,EACV,MAAM,EAAE;IAAE,SAAS,EAAE,MAAM,CAAC;IAAC,QAAQ,EAAE,MAAM,CAAC;IAAC,KAAK,EAAE,MAAM,CAAA;CAAE,gBAc9D"}
