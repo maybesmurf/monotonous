@@ -1,0 +1,14 @@
+.env
+.vscode
+.ultra.cache
+.nyc_output
+.ultra.cache.json
+
+.next/
+build/
+dist/
+node_modules/
+
+npm-debug.log
+yarn-error.log
+*.tsbuildinfo

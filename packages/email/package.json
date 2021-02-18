@@ -1,0 +1,23 @@
+{
+  "name": "@monotonous/email",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "main": "build/src/index.js",
+  "types": "build/src/index.d.ts",
+  "scripts": {
+    "prepare": "tsc -b && maizzle build production --bin ../../node_modules/@maizzle/framework/src",
+    "clean": "rm -rf ./build ./node_modules",
+    "dev": "tsc-watch --noClear",
+    "build": "tsc -b && maizzle build production --bin ../../node_modules/@maizzle/framework/src",
+    "email:local": "maizzle build --bin ../../node_modules/@maizzle/framework/src",
+    "email:build": "maizzle build production --bin ../../node_modules/@maizzle/framework/src",
+    "email:dev": "maizzle serve --bin ../../node_modules/@maizzle/framework/src"
+  },
+  "devDependencies": {
+    "@maizzle/cli": "^1.2.0",
+    "@maizzle/framework": "^2.3.0"
+  },
+  "browserslist": [
+    "> 1%"
+  ]
+}

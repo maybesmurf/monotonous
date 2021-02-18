@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": ["./src", "./src/**/*.json"],
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "./build"
+  },
+  "references": [
+    { "path": "../../packages/@types" },
+    { "path": "../../packages/email" },
+    { "path": "../../packages/sdk-server" }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "main": "build/index.js",
+  "license": "UNLICENSED",
+  "scripts": {
+    "clean": "rm -rf ./_build ./node_modules",
+    "dev": "tsc-watch --project . --onSuccess 'node ./build/src/index.js' --noClear",
+    "build": "tsc -b",
+    "start": "NODE_ENV=production node ./build/src/index.js",
+    "test": "ava"
+  },
+  "dependencies": {
+    "@monotonous/conf": "1.0.0",
+    "@monotonous/sdk-server": "1.0.0"
+  },
+  "devDependencies": {
+    "@monotonous/types": "1.0.0"
+  }
+}

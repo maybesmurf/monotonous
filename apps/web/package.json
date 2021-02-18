@@ -1,0 +1,22 @@
+{
+  "name": "web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "clean": "rm -rf ./.next ./node_modules",
+    "dev": "next dev -p 8080",
+    "build": "NODE_ENV=production yarn tw:prod && next build",
+    "start": "next start -p 8080",
+    "tw:dev": "tailwindcss build ./tailwind.src.css -o ./styles/tailwind.css",
+    "tw:prod": "NODE_ENV=production tailwindcss build ./tailwind.src.css -o ./styles/tailwind.css"
+  },
+  "dependencies": {
+    "@monotonous/conf": "1.0.0",
+    "@monotonous/sdk-client": "1.0.0",
+    "react": "npm:@preact/compat",
+    "react-dom": "npm:@preact/compat"
+  },
+  "devDependencies": {
+    "@monotonous/types": "1.0.0"
+  }
+}

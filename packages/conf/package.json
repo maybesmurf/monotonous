@@ -1,0 +1,13 @@
+{
+  "name": "@monotonous/conf",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "main": "build/src/index.js",
+  "types": "build/src/index.d.ts",
+  "scripts": {
+    "prepare": "tsc -b",
+    "clean": "rm -rf ./build ./node_modules",
+    "dev": "tsc-watch --noClear",
+    "build": "tsc -b"
+  }
+}

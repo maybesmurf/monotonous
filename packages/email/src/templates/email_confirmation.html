@@ -1,0 +1,78 @@
+---
+title: 'Confirm your email'
+preheader: 'Confirm your email'
+bodyClass: bg-accent-light
+---
+
+<extends src="src/layouts/master.html">
+	<block name="template">
+		<table class="w-full font-arial">
+			<tr>
+				<td align="center" class="bg-accent-light">
+					<table class="w-600 sm:w-full">
+						<tr>
+							<td class="px-20 py-48 sm:p-24">
+								<table class="w-full">
+									<tr>
+										<td>
+											<div>
+												<a href="https://example.com">
+													<img src="logo.png" width="200" alt="Logo" />
+												</a>
+											</div>
+
+											<div class="leading-120 sm:leading-64">&zwnj;</div>
+
+											<h1
+												class="font-serif m-0 text-40px sm:text-32px leading-44 sm:leading-36 text-gray-dark"
+											>
+												Hey, @{{ firstName }}.
+												<br />
+												It's really you.
+											</h1>
+
+											<div class="leading-48 sm:leading-32">&zwnj;</div>
+
+											<p class="m-0 text-base leading-24 text-gray-dark">
+												Please validate your email address so you can finish your Chapter
+												Chat account setup. If you didn't request this email confirmation
+												you can just go about your day. We won't bug you anymore
+											</p>
+
+											<div class="leading-48 sm:leading-32">&zwnj;</div>
+
+											<a
+												href="{{ url }}/register?token=@{{ token }}"
+												class="inline-block sm:block py-16 px-48 rounded text-16 leading-full font-bold text-center no-underline text-white bg-accent hover:bg-accent-dark"
+												><!--[if mso
+													]><i
+														style="
+															letter-spacing: 48px;
+															mso-font-width: -100%;
+															mso-text-raise: 30px;
+														"
+														>&nbsp;</i
+													><!
+												[endif]--><span style="mso-text-raise: 15px"
+													>Confirm your email</span
+												><!--[if mso
+													]><i style="letter-spacing: 48px; mso-font-width: -100%"
+														>&nbsp;</i
+													><!
+												[endif]--></a
+											>
+
+											<div class="leading-120 sm:leading-64">&zwnj;</div>
+
+											<component src="src/components/footer.html" />
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</block>
+</extends>
