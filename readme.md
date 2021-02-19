@@ -1,6 +1,6 @@
 ![monotonous' logo](https://github.com/kidqueb/monotonous/blob/master/logo.png?raw=true)
 
-# Monotonous
+# Monotonous (WORK IN PROGRESS)
 
 A typescript monorepo template to create organized, flexible apps.
 

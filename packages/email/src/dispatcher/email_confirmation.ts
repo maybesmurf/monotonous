@@ -4,22 +4,22 @@ import { transport } from '../transport';
 
 const render = compileTemplate('email_confirmation');
 
-export interface ISendEmailConfirmation {
+export interface ISendEmailConfirmationParams {
+  to: string;
   firstName: string;
   lastName: string;
   token: string;
 }
 
 export async function sendEmailConfirmation(
-  to: string,
-  params: ISendEmailConfirmation
+  params: ISendEmailConfirmationParams
 ) {
   const html = render(params);
   const text = htmlToText(html);
 
   const message = {
     from: '"Monotonous" <hello@monotonousrepo.com>',
-    to: `${params.firstName} ${params.lastName} <${to}>`,
+    to: `${params.firstName} ${params.lastName} <${params.to}>`,
     subject: 'Email Confirmation',
     text,
     html,
