@@ -1,5 +1,5 @@
 import Redis from 'ioredis';
-import { config } from '../../../conf/build/src';
+import { config } from '@monotonous/conf';
 
 export const redis = new Redis({
   host: config.redis.host,

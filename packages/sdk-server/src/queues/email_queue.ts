@@ -1,39 +1,36 @@
 import { Job, Queue, Worker } from 'bullmq';
 import EmailDispatcher, {
   ISendEmailConfirmationParams,
-  IResetPasswordParams,
 } from '@monotonous/email';
 
 const queueName = 'email';
 const queue = new Queue(queueName);
 
+const JobNames = {
+  EMAIL_CONFIRMATION: 'email_confirmation',
+};
+
 const jobs = {
-  emailConfirmation: {
-    name: 'email_confirmation',
-    handler: async (job: Job<ISendEmailConfirmationParams>) => {
-      return EmailDispatcher.sendEmailConfirmation(job.data);
-    },
-  },
-  resetPassword: {
-    name: 'reset_password',
-    handler: async (job: Job<IResetPasswordParams>) => {
-      return EmailDispatcher.resetPassword(job.data);
-    },
+  [JobNames.EMAIL_CONFIRMATION]: async (
+    job: Job<ISendEmailConfirmationParams>
+  ) => {
+    await EmailDispatcher.sendEmailConfirmation(job.data);
   },
 };
 
 export function initWorker() {
   new Worker(queueName, async job => {
-    await jobs[job.name]?.handler(job);
+    try {
+      await jobs[job.name]?.(job);
+      return true;
+    } catch (e) {
+      throw new Error(e);
+    }
   });
 }
 
 export async function queueEmailConfirmation(
   data: ISendEmailConfirmationParams
 ) {
-  return queue.add(jobs.emailConfirmation.name, data);
-}
-
-export async function queueResetPassword(data: IResetPasswordParams) {
-  return queue.add(jobs.emailConfirmation.name, data);
+  await queue.add(JobNames.EMAIL_CONFIRMATION, data);
 }

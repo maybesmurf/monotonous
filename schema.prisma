@@ -42,10 +42,10 @@ model User {
   createdAt         DateTime           @default(now())
   updatedAt         DateTime           @updatedAt
   confirmed         Boolean            @default(false)
-  passwordHash      String
   email             String             @unique
   //
   emailConfirmation EmailConfirmation?
+  profile           UserProfile?
 }
 
 model EmailConfirmation {
@@ -59,6 +59,8 @@ model UserProfile {
   id        String @id @default(cuid())
   firstName String
   lastName  String
+  user      User   @relation(fields: [userId], references: [id])
+  userId    String @unique
 }
 
 model BillingPlan {
