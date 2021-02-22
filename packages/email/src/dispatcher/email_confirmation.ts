@@ -4,16 +4,14 @@ import { transport } from '../transport';
 
 const render = compileTemplate('email_confirmation');
 
-export interface ISendEmailConfirmationParams {
+export interface ISendEmailConfirmation {
   to: string;
   firstName: string;
   lastName: string;
   token: string;
 }
 
-export async function sendEmailConfirmation(
-  params: ISendEmailConfirmationParams
-) {
+export async function sendEmailConfirmation(params: ISendEmailConfirmation) {
   const html = render(params);
   const text = htmlToText(html);
 

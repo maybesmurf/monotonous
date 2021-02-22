@@ -372,6 +372,10 @@ input IntFilter {
 """Json custom scalar type"""
 scalar Json
 
+type Mutation {
+  preRegistration(email: String!, firstName: String!, lastName: String!): SuccessResponse
+}
+
 input NestedBoolFilter {
   equals: Boolean
   not: NestedBoolFilter
@@ -451,6 +455,10 @@ input StringFilter {
   not: NestedStringFilter
   notIn: [String]
   startsWith: String
+}
+
+type SuccessResponse {
+  success: Boolean!
 }
 
 type User {

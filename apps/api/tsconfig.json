@@ -3,7 +3,8 @@
   "include": ["./src", "./src/**/*.json"],
   "compilerOptions": {
     "rootDir": ".",
-    "outDir": "./build"
+    "outDir": "./build",
+    "typeRoots": ["./typings", "../../node_modules/@types"]
   },
   "references": [
     { "path": "../../packages/@types" },

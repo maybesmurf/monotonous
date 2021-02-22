@@ -5,7 +5,6 @@ import { CustomContext } from '@monotonous/types';
 import { prisma } from '@monotonous/sdk-server';
 
 import { schema } from './graphql_schema';
-import { AuthController } from './auth_controller';
 
 export function createServer() {
   const server = fastify();
@@ -21,8 +20,6 @@ export function createServer() {
     graphiql: process.env.NODE_ENV !== 'production' ? 'playground' : false,
     jit: 1,
   });
-
-  server.register(AuthController);
 
   return server;
 }

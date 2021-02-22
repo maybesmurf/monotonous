@@ -1391,10 +1391,15 @@
   resolved "https://registry.yarnpkg.com/@types/minimist/-/minimist-1.2.1.tgz#283f669ff76d7b8260df8ab7a4262cc83d988256"
   integrity sha512-fZQQafSREFyuZcdWFAExYjBiCL7AUCdgsk80iO0q4yihYYdcIiH28CcuPTGFgLOCC8RlW49GSQxdHwZP+I7CNg==
 
-"@types/node@*", "@types/node@^14.6.4":
+"@types/node@*":
   version "14.14.29"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.29.tgz#2bbaefda2b715f9a0cd31c55b55b9092c5920e59"
   integrity sha512-z1PF7SVwqolmqu21eoWM82FPx699C2sCmrxTcCRotRn+2gt9Ve4dwmZsDntxgGyEHFHXYaqMcMMCdPKUeTKXsA==
+
+"@types/node@^14.6.4":
+  version "14.14.31"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.31.tgz#72286bd33d137aa0d152d47ec7c1762563d34055"
+  integrity sha512-vFHy/ezP5qI0rFgJ7aQnjDXwAMrG0KqqIH7tQG5PPv3BWBayOPIQNBjVc/P6hhdZfMx51REc6tfDNXHUio893g==
 
 "@types/nodemailer@^6.4.0":
   version "6.4.0"
@@ -7254,9 +7259,9 @@ mercurius-upload@^1.1.1:
     graphql-upload "^11.0.0"
 
 mercurius@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/mercurius/-/mercurius-7.0.0.tgz#d0c4f89b675263dfaeea2f2e83ef5a5b421c583d"
-  integrity sha512-tAV6QtXefi7bea8J4dVKZLbMee+ZY0r4qtkc94NA9ZOX54R+spukQ+ZQQm9p8WnXo4Z8hMOIEzGk84++Hbr6iQ==
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/mercurius/-/mercurius-7.1.0.tgz#961fd34bd5a803c99cbfd6b19c6eda9853ee3db7"
+  integrity sha512-T/i865xuFu/eUv127YnIO3M48NKXEIFtvXKXwZrxBFdvAqIEckgLHasqJa0GBlwfkPZyzXUVyV6nchu2C6i3yQ==
   dependencies:
     "@types/isomorphic-form-data" "^2.0.0"
     end-of-stream "^1.4.4"
@@ -7272,7 +7277,7 @@ mercurius@^7.0.0:
     promise.allsettled "^1.0.2"
     readable-stream "^3.5.0"
     secure-json-parse "^2.2.0"
-    single-user-cache "^0.3.0"
+    single-user-cache "^0.4.0"
     tiny-lru "^7.0.2"
     undici "^3.0.0"
     ws "^7.4.2"
@@ -10492,10 +10497,10 @@ simple-swizzle@^0.2.2:
   dependencies:
     is-arrayish "^0.3.1"
 
-single-user-cache@^0.3.0:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/single-user-cache/-/single-user-cache-0.3.1.tgz#3c42372caf8260441b6e87be0555c6a27ff19747"
-  integrity sha512-Axn+MfT1tR3WqSERWdEckqPLwxd21L9nAXwj3ZyyHfqtNOXbP8OvwaIqAYX8Yywckg9dKxLaoDigQcXMbNSiTA==
+single-user-cache@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/single-user-cache/-/single-user-cache-0.4.0.tgz#9e44e1393b34b9c5728d24afac6d28c41f7751fe"
+  integrity sha512-aUJDbwD+ZEVqffkFCy71xgiLT0/KHE0Fmi3+lsVoWcURI/gmSU3nwc9b9Kq34ZXZR9MqFw2YdS3r1r6UjYMyTg==
   dependencies:
     safe-stable-stringify "^1.1.0"
 
@@ -11683,7 +11688,7 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@^4.0.2:
+typescript@^4.1.5:
   version "4.1.5"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.1.5.tgz#123a3b214aaff3be32926f0d8f1f6e704eb89a72"
   integrity sha512-6OSu9PTIzmn9TCDiovULTnET6BgXtDYL4Gg4szY+cGsc3JP1dQL8qvE8kShTRx1NIw4Q9IBHlwODjkjWEtMUyA==

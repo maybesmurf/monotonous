@@ -1,3 +1,15 @@
-export * from './graphql_context';
+import mercurius, { MercuriusContext } from 'mercurius';
+import { FastifyRequest } from 'fastify';
+import { PrismaClient } from '@prisma/client';
+import { PrismaSelect } from '@paljs/plugins';
 
-export * from './fastify_schemas/ pre_registration_schema';
+export interface CustomContext {
+  request: FastifyRequest;
+  prisma: PrismaClient;
+  GqlError(message: string, extensions?: object): mercurius.ErrorWithProps;
+  userId?: string;
+}
+
+export interface Context extends MercuriusContext, CustomContext {
+  select: PrismaSelect['value'];
+}

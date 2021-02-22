@@ -1,5 +1,5 @@
 {
-  "exclude": ["node_modules", "**/*.spec.ts"],
+  "exclude": ["node_modules", "build", "**/*.d.ts"],
   "compileOnSave": true,
   "compilerOptions": {
     "target": "es2017",
@@ -9,6 +9,7 @@
     "declarationMap": true,
     "sourceMap": true,
     "composite": true,
+    "allowJs": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
@@ -17,13 +18,6 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "resolveJsonModule": true,
-    "typeRoots": ["./typings", "./node_modules/@types"]
-  },
-  "references": [
-    { "path": "packages/@types" },
-    { "path": "packages/conf" },
-    { "path": "packages/email" },
-    { "path": "packages/sdk-server" },
-    { "path": "packages/sdk-client" }
-  ]
+    "typeRoots": ["./node_modules/@types"]
+  }
 }

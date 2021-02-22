@@ -4,7 +4,7 @@
   "main": "build/index.js",
   "license": "UNLICENSED",
   "scripts": {
-    "clean": "rm -rf ./_build ./node_modules",
+    "clean": "rm -rf ./build ./node_modules",
     "dev": "tsc-watch --project . --onSuccess 'node ./build/src/index.js' --noClear",
     "build": "tsc -b",
     "start": "NODE_ENV=production node ./build/src/index.js",

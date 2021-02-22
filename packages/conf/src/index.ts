@@ -30,12 +30,8 @@ export const config = {
       .asString(),
     secret: env.get('AUTH_JWT_SECRET').default('supersecret').asString(),
   },
-  // mailer: {
-  //   host: env.get('MAILER_SMTP_HOST').default('localhost').asString(),
-  //   port: env.get('MAILER_SMTP_PORT').default('1025').asPortNumber(),
-  //   auth: {
-  //     user: env.get('MAILER_SMTP_USER').asString(),
-  //     pass: env.get('MAILER_SMTP_PASSWORD').asString(),
-  //   },
-  // },
+  mailer: {
+    host: env.get('MAILER_SMTP_HOST').default('127.0.0.1').asString(),
+    port: env.get('MAILER_SMTP_PORT').default('1025').asPortNumber(),
+  },
 };
