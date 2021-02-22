@@ -5,6 +5,7 @@ import { FieldResolver } from 'nexus';
 /**
  * @see Query
  * @name preRegistration
+ * Create a user and user profile. Send them an email to confirm their email.
  */
 export const preRegistration: FieldResolver<
   'Mutation',
