@@ -373,7 +373,10 @@ input IntFilter {
 scalar Json
 
 type Mutation {
-  preRegistration(email: String!, firstName: String!, lastName: String!): SuccessResponse
+  confirmEmail(email: String!, firstName: String!, lastName: String!, token: String!): User
+  login(token: String!): User
+  requestEmailConfirmation(email: String!, firstName: String!, lastName: String!): User
+  requestLogin(email: String!): SuccessResponse
 }
 
 input NestedBoolFilter {

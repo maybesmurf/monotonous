@@ -7,7 +7,7 @@ import Handlebars from 'handlebars';
  * Gets the html template as a string from the build directory
  * and compiles it as a handlebars template.
  */
-export function compileTemplate(name) {
+export function compileTemplate(name: string) {
   const tplPath = path.resolve(__dirname, '../../compiled_templates');
   const tpl = fs.readFileSync(`${tplPath}/${name}.html`).toString();
   return Handlebars.compile(tpl);

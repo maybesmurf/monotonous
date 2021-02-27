@@ -862,7 +862,10 @@ export interface NexusGenFieldTypes {
     userId: string | null; // String
   }
   Mutation: { // field return type
-    preRegistration: NexusGenRootTypes['SuccessResponse'] | null; // SuccessResponse
+    confirmEmail: NexusGenRootTypes['User'] | null; // User
+    login: NexusGenRootTypes['User'] | null; // User
+    requestEmailConfirmation: NexusGenRootTypes['User'] | null; // User
+    requestLogin: NexusGenRootTypes['SuccessResponse'] | null; // SuccessResponse
   }
   Query: { // field return type
     me: NexusGenRootTypes['User'] | null; // User
@@ -998,7 +1001,10 @@ export interface NexusGenFieldTypeNames {
     userId: 'String'
   }
   Mutation: { // field return type name
-    preRegistration: 'SuccessResponse'
+    confirmEmail: 'User'
+    login: 'User'
+    requestEmailConfirmation: 'User'
+    requestLogin: 'SuccessResponse'
   }
   Query: { // field return type name
     me: 'User'
@@ -1062,10 +1068,22 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
-    preRegistration: { // args
+    confirmEmail: { // args
       email: string; // String!
       firstName: string; // String!
       lastName: string; // String!
+      token: string; // String!
+    }
+    login: { // args
+      token: string; // String!
+    }
+    requestEmailConfirmation: { // args
+      email: string; // String!
+      firstName: string; // String!
+      lastName: string; // String!
+    }
+    requestLogin: { // args
+      email: string; // String!
     }
   }
 }

@@ -1,5 +1,4 @@
 // next.config.js
-const withPreact = require('next-plugin-preact');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
@@ -7,6 +6,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 let conf = {
   experimental: {
     modern: true,
+    polyfillsOptimization: true,
   },
   async rewrites() {
     return [
@@ -18,7 +18,6 @@ let conf = {
   },
 };
 
-conf = withPreact(conf);
 conf = withBundleAnalyzer(conf);
 
 module.exports = conf;

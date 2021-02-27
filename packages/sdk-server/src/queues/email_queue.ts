@@ -1,5 +1,9 @@
 import { Job, Queue, Worker } from 'bullmq';
-import { EmailDispatcher, ISendEmailConfirmation } from '@monotonous/email';
+import {
+  EmailDispatcher,
+  ISendEmailConfirmation,
+  ISendLoginLink,
+} from '@monotonous/email';
 
 const queueName = 'email';
 const queue = new Queue(queueName);
@@ -13,8 +17,8 @@ const jobs = {
   [JobNames.EMAIL_CONFIRMATION]: async (job: Job<ISendEmailConfirmation>) => {
     await EmailDispatcher.sendEmailConfirmation(job.data);
   },
-  [JobNames.LOGIN_LINK]: async job => {
-    throw new Error('Not implemented');
+  [JobNames.LOGIN_LINK]: async (job: Job<ISendLoginLink>) => {
+    await EmailDispatcher.sendLoginLink(job.data);
   },
 };
 
@@ -35,8 +39,16 @@ export function initWorker() {
 
 /**
  * @name queueEmailConfirmation
- * Add an email confirmation email to the queue.
+ * Queue up an email confirmation.
  */
 export async function queueEmailConfirmation(data: ISendEmailConfirmation) {
   await queue.add(JobNames.EMAIL_CONFIRMATION, data);
+}
+
+/**
+ * @name queueLoginLink
+ * Queue up a login link email.
+ */
+export async function queueLoginLink(data: ISendLoginLink) {
+  await queue.add(JobNames.LOGIN_LINK, data);
 }

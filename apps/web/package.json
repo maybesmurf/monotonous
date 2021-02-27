@@ -12,9 +12,7 @@
   },
   "dependencies": {
     "@monotonous/conf": "1.0.0",
-    "@monotonous/sdk-client": "1.0.0",
-    "react": "npm:@preact/compat",
-    "react-dom": "npm:@preact/compat"
+    "@monotonous/sdk-client": "1.0.0"
   },
   "devDependencies": {
     "@monotonous/types": "1.0.0"

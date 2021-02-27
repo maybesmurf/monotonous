@@ -1,2 +1,2 @@
 export * from './email_confirmation';
-export * from './reset_password';
+export * from './login_link';
