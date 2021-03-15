@@ -1,7 +1,7 @@
-import { FieldResolver } from 'nexus';
-import { nanoid } from 'nanoid';
-import { config } from '@monotonous/conf';
-import { EmailQueue, redis } from '@monotonous/sdk-server';
+import { FieldResolver } from "nexus";
+import { nanoid } from "nanoid";
+import { config } from "@monotonous/conf";
+import { EmailQueue, redis } from "@monotonous/sdk-server";
 
 /**
  * @see Mutation
@@ -9,9 +9,9 @@ import { EmailQueue, redis } from '@monotonous/sdk-server';
  * Create a user and user profile.
  * Send them an email to confirm their email.
  */
-export const requestEmailConfirmation: FieldResolver<
-  'Mutation',
-  'requestEmailConfirmation'
+export const register: FieldResolver<
+  "Mutation",
+  "requestEmailConfirmation"
 > = async (_source, { email, firstName, lastName }, { prisma, select }) => {
   const token = nanoid(32);
 
@@ -46,7 +46,7 @@ export const requestEmailConfirmation: FieldResolver<
  * @name confirmEmail
  * Confirm a users email and update their profile if they change anything.
  */
-export const confirmEmail: FieldResolver<'Mutation', 'confirmEmail'> = async (
+export const confirmEmail: FieldResolver<"Mutation", "confirmEmail"> = async (
   _source,
   { token, email, firstName, lastName },
   { prisma, select, GqlError }
@@ -57,7 +57,7 @@ export const confirmEmail: FieldResolver<'Mutation', 'confirmEmail'> = async (
   });
 
   if (!confirmation || confirmation.user.email !== email) {
-    throw GqlError('Invalid token');
+    throw GqlError("Invalid token");
   }
 
   return prisma.user.update({
@@ -77,7 +77,7 @@ export const confirmEmail: FieldResolver<'Mutation', 'confirmEmail'> = async (
  * @name requestLogin
  * Request an email be sent with a token to log the user in.
  */
-export const requestLogin: FieldResolver<'Mutation', 'requestLogin'> = async (
+export const requestLogin: FieldResolver<"Mutation", "requestLogin"> = async (
   _source,
   { email },
   { prisma, GqlError }
@@ -87,11 +87,11 @@ export const requestLogin: FieldResolver<'Mutation', 'requestLogin'> = async (
   });
 
   if (!user) {
-    throw GqlError('Invalid email');
+    throw GqlError("Invalid email");
   }
 
   const token = nanoid(32);
-  await redis.set(token, user.id, 'EX', config.auth.loginTokenExpiration);
+  await redis.set(token, user.id, "EX", config.auth.loginTokenExpiration);
 
   // TODO - send login token email
 
@@ -103,7 +103,7 @@ export const requestLogin: FieldResolver<'Mutation', 'requestLogin'> = async (
  * @name login
  * Log a user in with the token that was emailed to them.
  */
-export const login: FieldResolver<'Mutation', 'login'> = async (
+export const login: FieldResolver<"Mutation", "login"> = async (
   _source,
   { token },
   { prisma, select, GqlError }
@@ -111,7 +111,7 @@ export const login: FieldResolver<'Mutation', 'login'> = async (
   const id = await redis.get(token);
 
   if (!id) {
-    throw GqlError('Invalid token');
+    throw GqlError("Invalid token");
   }
 
   const user = await prisma.user.findUnique({
@@ -120,7 +120,7 @@ export const login: FieldResolver<'Mutation', 'login'> = async (
   });
 
   if (!user) {
-    throw GqlError('User doesnt exist');
+    throw GqlError("User doesnt exist");
   }
 
   return user;
