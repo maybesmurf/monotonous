@@ -5,14 +5,15 @@ import { EmailQueue, redis } from "@monotonous/sdk-server";
 
 /**
  * @see Mutation
- * @name requestEmailConfirmation
+ * @name register
  * Create a user and user profile.
  * Send them an email to confirm their email.
  */
-export const register: FieldResolver<
-  "Mutation",
-  "requestEmailConfirmation"
-> = async (_source, { email, firstName, lastName }, { prisma, select }) => {
+export const register: FieldResolver<"Mutation", "register"> = async (
+  _source,
+  { email, firstName, lastName },
+  { prisma }
+) => {
   const token = nanoid(32);
 
   const user = await prisma.user.create({
@@ -28,7 +29,6 @@ export const register: FieldResolver<
         create: { token },
       },
     },
-    ...select,
   });
 
   await EmailQueue.queueEmailConfirmation({
@@ -49,7 +49,7 @@ export const register: FieldResolver<
 export const confirmEmail: FieldResolver<"Mutation", "confirmEmail"> = async (
   _source,
   { token, email, firstName, lastName },
-  { prisma, select, GqlError }
+  { prisma, GqlError }
 ) => {
   const confirmation = await prisma.emailConfirmation.findUnique({
     where: { token },
@@ -65,10 +65,13 @@ export const confirmEmail: FieldResolver<"Mutation", "confirmEmail"> = async (
       id: confirmation.userId,
     },
     data: {
-      firstName,
-      lastName,
+      profile: {
+        update: {
+          firstName,
+          lastName,
+        },
+      },
     },
-    ...select,
   });
 };
 
@@ -91,7 +94,7 @@ export const requestLogin: FieldResolver<"Mutation", "requestLogin"> = async (
   }
 
   const token = nanoid(32);
-  await redis.set(token, user.id, "EX", config.auth.loginTokenExpiration);
+  await redis.set(token, user.id, "EX", config.auth.loginTTL);
 
   // TODO - send login token email
 
@@ -106,7 +109,7 @@ export const requestLogin: FieldResolver<"Mutation", "requestLogin"> = async (
 export const login: FieldResolver<"Mutation", "login"> = async (
   _source,
   { token },
-  { prisma, select, GqlError }
+  { prisma, GqlError }
 ) => {
   const id = await redis.get(token);
 
@@ -116,7 +119,6 @@ export const login: FieldResolver<"Mutation", "login"> = async (
 
   const user = await prisma.user.findUnique({
     where: { id },
-    ...select,
   });
 
   if (!user) {
