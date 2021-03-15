@@ -1,5 +1,10 @@
-import React from 'react';
+import React from "react";
 
 export default function Login() {
-  return <main>Login</main>;
+  return (
+    <main>
+      <p>asdfasdf</p>
+      <p>asdfasdf</p>
+    </main>
+  );
 }

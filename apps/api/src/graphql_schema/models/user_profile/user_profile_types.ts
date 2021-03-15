@@ -1,10 +1,10 @@
-import { extendType, objectType } from 'nexus';
+import { objectType } from "nexus";
 
 export const UserProfile = objectType({
-  name: 'UserProfile',
+  name: "UserProfile",
   definition(t) {
-    t.nonNull.id('id');
-    t.nonNull.string('firstName');
-    t.nonNull.string('lastName');
+    t.nonNull.id("id");
+    t.nonNull.string("firstName");
+    t.nonNull.string("lastName");
   },
 });

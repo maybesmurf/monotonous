@@ -93,8 +93,8 @@ export const requestLogin: FieldResolver<"Mutation", "requestLogin"> = async (
     throw GqlError("Invalid email");
   }
 
-  const token = nanoid(32);
-  await redis.set(token, user.id, "EX", config.auth.loginTTL);
+  const code = Math.floor(100000 + Math.random() * 900000).toString(); // 6 digit number
+  await redis.set(code, user.id, "EX", config.auth.loginTTL);
 
   // TODO - send login token email
 
