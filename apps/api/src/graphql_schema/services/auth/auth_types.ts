@@ -1,4 +1,4 @@
-import { extendType, nonNull } from "nexus";
+import { extendType, inputObjectType, nonNull } from "nexus";
 import * as resolvers from "./auth_resolvers";
 
 export const AuthMutation = extendType({
@@ -36,9 +36,18 @@ export const AuthMutation = extendType({
     t.field("login", {
       type: "User",
       args: {
-        token: nonNull("String"),
+        code: nonNull("String"),
       },
       resolve: resolvers.login,
     });
+  },
+});
+
+export const RegisterInput = inputObjectType({
+  name: "RegisterInput",
+  definition(t) {
+    t.nonNull.string("email");
+    t.nonNull.string("firstName");
+    t.nonNull.string("lastName");
   },
 });

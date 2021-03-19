@@ -308,6 +308,11 @@ export interface NexusGenInputs {
     notIn?: Array<string | null> | null; // [String]
     startsWith?: string | null; // String
   }
+  RegisterInput: { // input type
+    email: string; // String!
+    firstName: string; // String!
+    lastName: string; // String!
+  }
   StringFieldUpdateOperationsInput: { // input type
     set?: string | null; // String
   }
@@ -864,7 +869,7 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     confirmEmail: NexusGenRootTypes['User'] | null; // User
     login: NexusGenRootTypes['User'] | null; // User
-    requestEmailConfirmation: NexusGenRootTypes['User'] | null; // User
+    register: NexusGenRootTypes['User'] | null; // User
     requestLogin: NexusGenRootTypes['SuccessResponse'] | null; // SuccessResponse
   }
   Query: { // field return type
@@ -903,6 +908,7 @@ export interface NexusGenFieldTypes {
   }
   UserProfile: { // field return type
     firstName: string; // String!
+    fullName: string; // String!
     id: string; // ID!
     lastName: string; // String!
   }
@@ -1003,7 +1009,7 @@ export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     confirmEmail: 'User'
     login: 'User'
-    requestEmailConfirmation: 'User'
+    register: 'User'
     requestLogin: 'SuccessResponse'
   }
   Query: { // field return type name
@@ -1042,6 +1048,7 @@ export interface NexusGenFieldTypeNames {
   }
   UserProfile: { // field return type name
     firstName: 'String'
+    fullName: 'String'
     id: 'ID'
     lastName: 'String'
   }
@@ -1075,15 +1082,20 @@ export interface NexusGenArgTypes {
       token: string; // String!
     }
     login: { // args
-      token: string; // String!
+      code: string; // String!
     }
-    requestEmailConfirmation: { // args
+    register: { // args
       email: string; // String!
       firstName: string; // String!
       lastName: string; // String!
     }
     requestLogin: { // args
       email: string; // String!
+    }
+  }
+  Query: {
+    me: { // args
+      id: string; // String!
     }
   }
 }

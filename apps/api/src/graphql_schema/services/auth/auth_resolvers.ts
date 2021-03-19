@@ -1,7 +1,7 @@
 import { FieldResolver } from "nexus";
 import { nanoid } from "nanoid";
 import { config } from "@monotonous/conf";
-import { EmailQueue, redis } from "@monotonous/sdk-server";
+import { EmailQueue, redis, logger } from "@monotonous/sdk-server";
 
 /**
  * @see Mutation
@@ -65,6 +65,7 @@ export const confirmEmail: FieldResolver<"Mutation", "confirmEmail"> = async (
       id: confirmation.userId,
     },
     data: {
+      confirmed: true,
       profile: {
         update: {
           firstName,
@@ -97,6 +98,7 @@ export const requestLogin: FieldResolver<"Mutation", "requestLogin"> = async (
   await redis.set(code, user.id, "EX", config.auth.loginTTL);
 
   // TODO - send login token email
+  logger.debug({ emailName: "login code", code });
 
   return { success: true };
 };
@@ -108,10 +110,10 @@ export const requestLogin: FieldResolver<"Mutation", "requestLogin"> = async (
  */
 export const login: FieldResolver<"Mutation", "login"> = async (
   _source,
-  { token },
+  { code },
   { prisma, GqlError }
 ) => {
-  const id = await redis.get(token);
+  const id = await redis.get(code);
 
   if (!id) {
     throw GqlError("Invalid token");
@@ -122,7 +124,7 @@ export const login: FieldResolver<"Mutation", "login"> = async (
   });
 
   if (!user) {
-    throw GqlError("User doesnt exist");
+    throw GqlError("User doesn't exist");
   }
 
   return user;

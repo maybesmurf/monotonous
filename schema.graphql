@@ -374,8 +374,8 @@ scalar Json
 
 type Mutation {
   confirmEmail(email: String!, firstName: String!, lastName: String!, token: String!): User
-  login(token: String!): User
-  requestEmailConfirmation(email: String!, firstName: String!, lastName: String!): User
+  login(code: String!): User
+  register(email: String!, firstName: String!, lastName: String!): User
   requestLogin(email: String!): SuccessResponse
 }
 
@@ -428,12 +428,18 @@ input NestedStringFilter {
 }
 
 type Query {
-  me: User
+  me(id: String!): User
 }
 
 enum QueryMode {
   default
   insensitive
+}
+
+input RegisterInput {
+  email: String!
+  firstName: String!
+  lastName: String!
 }
 
 enum SortOrder {
@@ -558,6 +564,7 @@ input UserOrderByInput {
 
 type UserProfile {
   firstName: String!
+  fullName: String!
   id: ID!
   lastName: String!
 }

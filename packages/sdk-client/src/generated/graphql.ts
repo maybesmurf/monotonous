@@ -399,7 +399,7 @@ export type Mutation = {
   __typename: 'Mutation';
   confirmEmail?: Maybe<User>;
   login?: Maybe<User>;
-  requestEmailConfirmation?: Maybe<User>;
+  register?: Maybe<User>;
   requestLogin?: Maybe<SuccessResponse>;
 };
 
@@ -413,11 +413,11 @@ export type MutationConfirmEmailArgs = {
 
 
 export type MutationLoginArgs = {
-  token: Scalars['String'];
+  code: Scalars['String'];
 };
 
 
-export type MutationRequestEmailConfirmationArgs = {
+export type MutationRegisterArgs = {
   email: Scalars['String'];
   firstName: Scalars['String'];
   lastName: Scalars['String'];
@@ -481,10 +481,21 @@ export type Query = {
   me?: Maybe<User>;
 };
 
+
+export type QueryMeArgs = {
+  id: Scalars['String'];
+};
+
 export enum QueryMode {
   Default = 'default',
   Insensitive = 'insensitive'
 }
+
+export type RegisterInput = {
+  email: Scalars['String'];
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+};
 
 export enum SortOrder {
   Asc = 'asc',
@@ -614,6 +625,7 @@ export type UserOrderByInput = {
 export type UserProfile = {
   __typename: 'UserProfile';
   firstName: Scalars['String'];
+  fullName: Scalars['String'];
   id: Scalars['ID'];
   lastName: Scalars['String'];
 };

@@ -1,10 +1,11 @@
-import fastify, { FastifyRequest } from 'fastify';
-import cookie from 'fastify-cookie';
-import merc from 'mercurius';
-import { CustomContext } from '@monotonous/types';
-import { prisma } from '@monotonous/sdk-server';
+import fastify, { FastifyRequest } from "fastify";
+import cookie from "fastify-cookie";
+import merc from "mercurius";
+import { CustomContext } from "@monotonous/types";
+import { prisma } from "@monotonous/sdk-server";
 
-import { schema } from './graphql_schema';
+import { loaders } from "./graphql_schema/loaders";
+import { schema } from "./graphql_schema";
 
 export function createServer() {
   const server = fastify();
@@ -14,10 +15,11 @@ export function createServer() {
   server.register(merc, {
     context,
     schema,
+    loaders,
     persistedQueryProvider: merc.persistedQueryDefaults.automatic(5000),
     allowBatchedQueries: true,
     subscription: true,
-    graphiql: process.env.NODE_ENV !== 'production' ? 'playground' : false,
+    graphiql: process.env.NODE_ENV !== "production" ? "playground" : false,
     jit: 1,
   });
 

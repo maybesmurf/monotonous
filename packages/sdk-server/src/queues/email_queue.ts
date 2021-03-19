@@ -1,16 +1,17 @@
-import { Job, Queue, Worker } from 'bullmq';
+import { Job, Queue, Worker } from "bullmq";
 import {
   EmailDispatcher,
   ISendEmailConfirmation,
   ISendLoginLink,
-} from '@monotonous/email';
+} from "@monotonous/email";
+import { logger } from "../lib/logger";
 
-const queueName = 'email';
+const queueName = "email";
 const queue = new Queue(queueName);
 
 const JobNames = {
-  EMAIL_CONFIRMATION: 'email_confirmation',
-  LOGIN_LINK: 'login_link',
+  EMAIL_CONFIRMATION: "email_confirmation",
+  LOGIN_LINK: "login_link",
 };
 
 const jobs = {
@@ -27,7 +28,7 @@ const jobs = {
  * Initialize the worker so it begins to watch our redus queues for jobs to process.
  */
 export function initWorker() {
-  new Worker(queueName, async job => {
+  new Worker(queueName, async (job) => {
     try {
       await jobs[job.name]?.(job);
       return true;
@@ -42,6 +43,7 @@ export function initWorker() {
  * Queue up an email confirmation.
  */
 export async function queueEmailConfirmation(data: ISendEmailConfirmation) {
+  logger.debug({ emailName: JobNames.EMAIL_CONFIRMATION, data });
   await queue.add(JobNames.EMAIL_CONFIRMATION, data);
 }
 
