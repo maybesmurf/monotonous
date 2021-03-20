@@ -1,20 +1,25 @@
 import { User } from "@prisma/client";
-import { prisma } from "@monotonous/sdk-server";
-import { CustomContext } from "@monotonous/types";
+import { Context } from "@monotonous/types";
+import { Loader } from "mercurius";
 
-type UserQueries = {
-  obj: User;
-  params: Record<string, any>;
-}[];
+type UserLoader = {
+  User: {
+    profile: Loader<User, {}, Context>;
+  };
+};
 
-export const UserLoader = {
-  async profile(queries: UserQueries, ctx: CustomContext) {
-    const ids = queries.map((query: { obj: User }) => query.obj.id);
-
-    return prisma.userProfile.findMany({
-      where: {
-        user: { id: { in: ids } },
-      },
-    });
+export const UserLoader: UserLoader = {
+  User: {
+    async profile(queries, { prisma }) {
+      return prisma.userProfile.findMany({
+        where: {
+          user: {
+            id: {
+              in: queries.map((query) => query.obj.id),
+            },
+          },
+        },
+      });
+    },
   },
 };

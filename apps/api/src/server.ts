@@ -1,7 +1,7 @@
 import fastify, { FastifyRequest } from "fastify";
 import cookie from "fastify-cookie";
 import merc from "mercurius";
-import { CustomContext } from "@monotonous/types";
+import { Context } from "@monotonous/types";
 import { prisma } from "@monotonous/sdk-server";
 
 import { loaders } from "./graphql_schema/loaders";
@@ -26,7 +26,7 @@ export function createServer() {
   return server;
 }
 
-function context(request: FastifyRequest): CustomContext {
+function context(request: FastifyRequest): Context {
   return {
     request,
     prisma,
