@@ -428,7 +428,7 @@ input NestedStringFilter {
 }
 
 type Query {
-  me(id: String!): User
+  me: User
 }
 
 enum QueryMode {
@@ -556,9 +556,7 @@ input UserOrderByInput {
   confirmed: SortOrder
   createdAt: SortOrder
   email: SortOrder
-  emailConfirmation: EmailConfirmationOrderByInput
   id: SortOrder
-  profile: UserProfileOrderByInput
   updatedAt: SortOrder
 }
 

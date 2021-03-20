@@ -1,5 +1,0 @@
-mutation Signup($data: SignupParams) {
-  signup($data) {
-    success
-  }
-}

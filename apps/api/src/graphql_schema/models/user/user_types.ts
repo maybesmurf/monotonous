@@ -1,4 +1,5 @@
 import { extendType, objectType, nonNull } from "nexus";
+import * as resolvers from "./user_resolvers";
 
 export const User = objectType({
   name: "User",
@@ -18,17 +19,7 @@ export const UserQuery = extendType({
   definition(t) {
     t.field("me", {
       type: "User",
-      args: {
-        id: nonNull("String"),
-      },
-      async resolve(_source, args, { prisma }) {
-        return prisma.user.findFirst({
-          where: {
-            id: args.id || undefined,
-            confirmed: true,
-          },
-        });
-      },
+      resolve: resolvers.me,
     });
   },
 });

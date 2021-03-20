@@ -1,7 +1,7 @@
 import { FieldResolver } from "nexus";
 import { nanoid } from "nanoid";
 import { config } from "@monotonous/conf";
-import { EmailQueue, redis, logger } from "@monotonous/sdk-server";
+import { EmailQueue, redis, logger, AuthService } from "@monotonous/sdk-server";
 
 /**
  * @see Mutation
@@ -94,8 +94,7 @@ export const requestLogin: FieldResolver<"Mutation", "requestLogin"> = async (
     throw GqlError("Invalid email");
   }
 
-  const code = Math.floor(100000 + Math.random() * 900000).toString(); // 6 digit number
-  await redis.set(code, user.id, "EX", config.auth.loginTTL);
+  const code = await AuthService.assignOtp(user.id);
 
   // TODO - send login token email
   logger.debug({ emailName: "login code", code });
@@ -111,13 +110,15 @@ export const requestLogin: FieldResolver<"Mutation", "requestLogin"> = async (
 export const login: FieldResolver<"Mutation", "login"> = async (
   _source,
   { code },
-  { prisma, GqlError }
+  { reply, prisma, GqlError }
 ) => {
   const id = await redis.get(code);
 
   if (!id) {
     throw GqlError("Invalid token");
   }
+
+  await redis.del(code);
 
   const user = await prisma.user.findUnique({
     where: { id },
@@ -126,6 +127,13 @@ export const login: FieldResolver<"Mutation", "login"> = async (
   if (!user) {
     throw GqlError("User doesn't exist");
   }
+
+  const jwt = await AuthService.signJwt(user.id);
+
+  reply.setCookie(config.auth.cookiePrefix, jwt, {
+    httpOnly: true,
+    expires: new Date(config.auth.expires),
+  });
 
   return user;
 };

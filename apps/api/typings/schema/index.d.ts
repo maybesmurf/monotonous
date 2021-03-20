@@ -377,9 +377,7 @@ export interface NexusGenInputs {
     confirmed?: NexusGenEnums['SortOrder'] | null; // SortOrder
     createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
     email?: NexusGenEnums['SortOrder'] | null; // SortOrder
-    emailConfirmation?: NexusGenInputs['EmailConfirmationOrderByInput'] | null; // EmailConfirmationOrderByInput
     id?: NexusGenEnums['SortOrder'] | null; // SortOrder
-    profile?: NexusGenInputs['UserProfileOrderByInput'] | null; // UserProfileOrderByInput
     updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
   }
   UserProfileCreateInput: { // input type
@@ -1091,11 +1089,6 @@ export interface NexusGenArgTypes {
     }
     requestLogin: { // args
       email: string; // String!
-    }
-  }
-  Query: {
-    me: { // args
-      id: string; // String!
     }
   }
 }

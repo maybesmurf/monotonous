@@ -1,8 +1,10 @@
 import gql from 'graphql-tag';
+import * as Urql from 'urql';
 export type Maybe<T> = T;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -481,11 +483,6 @@ export type Query = {
   me?: Maybe<User>;
 };
 
-
-export type QueryMeArgs = {
-  id: Scalars['String'];
-};
-
 export enum QueryMode {
   Default = 'default',
   Insensitive = 'insensitive'
@@ -616,9 +613,7 @@ export type UserOrderByInput = {
   confirmed?: Maybe<SortOrder>;
   createdAt?: Maybe<SortOrder>;
   email?: Maybe<SortOrder>;
-  emailConfirmation?: Maybe<EmailConfirmationOrderByInput>;
   id?: Maybe<SortOrder>;
-  profile?: Maybe<UserProfileOrderByInput>;
   updatedAt?: Maybe<SortOrder>;
 };
 
@@ -952,4 +947,64 @@ export type UserWhereInput = {
 export type UserWhereUniqueInput = {
   email?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
+};
+
+export type ConfirmEmailMutationVariables = Exact<{
+  token: Scalars['String'];
+  email: Scalars['String'];
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+}>;
+
+
+export type ConfirmEmailMutation = (
+  { __typename: 'Mutation' }
+  & { confirmEmail?: Maybe<(
+    { __typename: 'User' }
+    & Pick<User, 'id'>
+  )> }
+);
+
+export type RegisterMutationVariables = Exact<{
+  email: Scalars['String'];
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+}>;
+
+
+export type RegisterMutation = (
+  { __typename: 'Mutation' }
+  & { register?: Maybe<(
+    { __typename: 'User' }
+    & Pick<User, 'id'>
+  )> }
+);
+
+
+export const ConfirmEmailDocument = gql`
+    mutation ConfirmEmail($token: String!, $email: String!, $firstName: String!, $lastName: String!) {
+  confirmEmail(
+    token: $token
+    email: $email
+    firstName: $firstName
+    lastName: $lastName
+  ) {
+    id
+  }
+}
+    `;
+
+export function useConfirmEmailMutation() {
+  return Urql.useMutation<ConfirmEmailMutation, ConfirmEmailMutationVariables>(ConfirmEmailDocument);
+};
+export const RegisterDocument = gql`
+    mutation Register($email: String!, $firstName: String!, $lastName: String!) {
+  register(email: $email, firstName: $firstName, lastName: $lastName) {
+    id
+  }
+}
+    `;
+
+export function useRegisterMutation() {
+  return Urql.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument);
 };

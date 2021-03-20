@@ -1,8 +1,8 @@
 overwrite: true
 schema: "schema.graphql"
 documents:
-# - "packages/sdk-client/**/*.graphql"
-# - "apps/web/**/!(*.d).{ts,tsx}"
+  - "packages/sdk-client/**/*.graphql"
+  - "apps/web/**/!(*.d).{ts,tsx}"
 generates:
   ./packages/sdk-client/src/generated/graphql.ts:
     plugins:
