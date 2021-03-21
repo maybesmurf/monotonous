@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { useRegisterMutation } from "@monotonous/sdk-client";
 
 export default function Signup() {
@@ -7,7 +7,7 @@ export default function Signup() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
     try {
@@ -30,10 +30,11 @@ export default function Signup() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="flex flex-col mx-auto max-w-2xl">
       <p>
         <label htmlFor="email">Email Address</label>
         <input
+          type="email"
           name="email"
           value={email}
           onChange={(e) => setEmail(e.currentTarget.value)}
@@ -42,6 +43,7 @@ export default function Signup() {
       <p>
         <label htmlFor="firstName">First Name</label>
         <input
+          type="text"
           name="firstName"
           value={firstName}
           onChange={(e) => setFirstName(e.currentTarget.value)}
@@ -50,6 +52,7 @@ export default function Signup() {
       <p>
         <label htmlFor="lastName">Last Name</label>
         <input
+          type="text"
           name="lastName"
           value={lastName}
           onChange={(e) => setLastName(e.currentTarget.value)}
