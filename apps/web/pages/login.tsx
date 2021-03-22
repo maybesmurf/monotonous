@@ -13,21 +13,26 @@ export default function Login() {
   const initialCode =
     typeof window !== "undefined" &&
     new URLSearchParams(window.location.search).get("code");
-  const [{ fetching }, requestLogin] = useRequestLoginMutation();
-  const [{ fetching: loginFetching }, login] = useLoginMutation();
+  const [{ fetching: fetching1 }, requestLogin] = useRequestLoginMutation();
+  const [{ fetching: fetching2 }, login] = useLoginMutation();
   const [email, setEmail] = useState(initialEmail || "");
   const [code, setCode] = useState(initialCode || "");
+  const [showCode, setShowCode] = useState(false);
 
   async function handleLoginRequest(e: FormEvent) {
-    e.preventDefault();
-
     try {
-      if (data) {
-        await requestLogin({ email });
-      } else {
-        await login({ code });
-        router.replace("/");
-      }
+      e.preventDefault();
+      await requestLogin({ email });
+      setShowCode(true);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  async function handleLogin(e: FormEvent) {
+    try {
+      e.preventDefault();
+      await login({ code });
     } catch (e) {
       console.error(e);
     }
@@ -35,7 +40,7 @@ export default function Login() {
 
   return (
     <main className="max-w-sm mx-auto text-sm">
-      <form onSubmit={handleLoginRequest}>
+      <form onSubmit={showCode ? handleLogin : handleLoginRequest}>
         <p>
           <label htmlFor="email">Email</label>
           <input
@@ -46,7 +51,7 @@ export default function Login() {
             readOnly={Boolean(data)}
           />
         </p>
-        {data && (
+        {showCode && (
           <p>
             <label htmlFor="code">Code</label>
             <input
@@ -58,7 +63,7 @@ export default function Login() {
           </p>
         )}
 
-        <button type="submit" disabled={fetching || loginFetching}>
+        <button type="submit" disabled={fetching1 || fetching2}>
           Submit
         </button>
       </form>
