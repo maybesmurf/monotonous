@@ -9,8 +9,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <button className="focus-visible:text-red-500">do stuff</button>
+      <main className="container">
+        <h1>Make stuff</h1>
       </main>
     </>
   );

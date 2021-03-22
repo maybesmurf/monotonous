@@ -3,8 +3,12 @@ import Link from "next/link";
 
 export const Header = () => {
   return (
-    <header className="flex items-center container">
-      <p>Monotonous</p>
+    <header className="flex items-center container py-10">
+      <p>
+        <Link href="/">
+          <a>Monotonous</a>
+        </Link>
+      </p>
 
       <nav className="ml-auto space-x-3">
         <Link href="/signup">
