@@ -1,21 +1,21 @@
-import fastify, { FastifyRequest } from "fastify";
+import fastify from "fastify";
 import cookie from "fastify-cookie";
 import merc from "mercurius";
-import { Context } from "@monotonous/types";
-import { AuthService, prisma } from "@monotonous/sdk-server";
+import { AuthService } from "@monotonous/sdk-server";
 
 import { loaders } from "./graphql_schema/loaders";
 import { schema } from "./graphql_schema";
 import { config } from "@monotonous/conf";
-import { User, UserProfile } from ".prisma/client";
+import { CustomContext } from "@monotonous/types";
+import { PrismaClient } from ".prisma/client";
 
-export function createServer() {
+export function createServer(prisma: PrismaClient) {
   const server = fastify();
 
   server.register(cookie);
 
   server.register(merc, {
-    async context(request, reply) {
+    async context(request, reply): Promise<CustomContext> {
       const cookie = reply.cookie[config.auth.cookiePrefix];
       const claims = await AuthService.verifyJwt(cookie);
 

@@ -1,9 +1,10 @@
-import { config } from '@monotonous/conf';
-import { createServer } from './server';
+import { config } from "@monotonous/conf";
+import { prisma } from "@monotonous/sdk-server";
+import { createServer } from "./server";
 
 async function init() {
   try {
-    const server = createServer();
+    const server = createServer(prisma);
 
     server.listen(config.api.port, config.api.host, (err, address) => {
       if (err) {
@@ -11,12 +12,12 @@ async function init() {
         process.exit(1);
       }
 
-      server.log.info('listening on ' + address);
+      server.log.info("listening on " + address);
     });
 
     return server;
   } catch (error) {
-    console.error('Error starting api: ' + error);
+    console.error("Error starting api: " + error);
     process.exit(1);
   }
 }
