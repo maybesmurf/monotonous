@@ -1,10 +1,10 @@
 // tests/__helpers.ts
-import { prisma } from "@monotonous/sdk-server";
 import { FastifyInstance } from "fastify";
 import { PrismaClient } from "@prisma/client";
 import { execSync } from "child_process";
 import { join } from "path";
-import { Database } from "sqlite3";
+import { GenericContainer, StartedTestContainer } from "testcontainers";
+import { createServer } from "../src/server";
 
 type TestContext = {
   server: FastifyInstance;
@@ -19,43 +19,45 @@ const prismaBinary = join(
   "prisma"
 );
 
+const pg = new GenericContainer("postgres:alpine")
+  .withEnv("POSTGRES_USER", "test")
+  .withEnv("POSTGRES_PASSWORD", "test")
+  .withExposedPorts(5432);
+
 export function createTestContext(): TestContext {
   let ctx = {} as TestContext;
-  const prismaCtx = prismaTestContext();
+  let db: StartedTestContainer;
+  let prisma: PrismaClient;
+  let server: FastifyInstance;
 
-  beforeEach(async () => {
-    Object.assign(ctx, {
-      prisma: await prismaCtx.before(),
-    });
+  beforeEach(async (done) => {
+    db = await pg.start();
+
+    const url = `postgres://test:test@localhost:${db.getMappedPort(5432)}/test`;
+    process.env.DATABASE_URL = url;
+
+    execSync(
+      `DATABASE_URL=${url} ${prismaBinary} db push --skip-generate --preview-feature`
+    );
+    prisma = new PrismaClient();
+    server = createServer({ prisma });
+
+    Object.assign(ctx, { prisma, server });
+
+    done();
   });
 
-  afterEach(async () => {
-    await prismaCtx.after();
+  afterEach(async (done) => {
+    try {
+      await prisma.$disconnect();
+      await db.stop({ removeVolumes: true });
+      await server.close();
+      done();
+    } catch (e) {
+      console.log(e);
+      done();
+    }
   });
 
   return ctx;
-}
-
-function prismaTestContext() {
-  let prismaClient: null | PrismaClient = null;
-
-  return {
-    async before() {
-      // Run the migrations to ensure our schema has the required structure
-      execSync(`${prismaBinary} db push --preview-feature`);
-
-      // Constuct a new Prisma Client connected to the generated schema
-      prismaClient = new PrismaClient();
-
-      return prismaClient;
-    },
-    async after() {
-      const client = new Database(":memory:");
-      // Drop the schema after the tests have completed
-      client.close();
-
-      // Release the Prisma Client connection
-      await prismaClient?.$disconnect();
-    },
-  };
 }

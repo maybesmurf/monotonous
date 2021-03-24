@@ -4,7 +4,7 @@ import { createServer } from "./server";
 
 async function init() {
   try {
-    const server = createServer(prisma);
+    const server = createServer({ prisma });
 
     server.listen(config.api.port, config.api.host, (err, address) => {
       if (err) {

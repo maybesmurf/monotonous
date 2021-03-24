@@ -9,7 +9,7 @@ import { config } from "@monotonous/conf";
 import { CustomContext } from "@monotonous/types";
 import { PrismaClient } from ".prisma/client";
 
-export function createServer(prisma: PrismaClient) {
+export function createServer(params: { prisma: PrismaClient }) {
   const server = fastify();
 
   server.register(cookie);
@@ -19,14 +19,14 @@ export function createServer(prisma: PrismaClient) {
       const cookie = reply.cookie[config.auth.cookiePrefix];
       const claims = await AuthService.verifyJwt(cookie);
 
-      const currentUser = await prisma.user.findFirst({
+      const currentUser = await params.prisma.user.findFirst({
         where: { id: claims?.userId },
       });
 
       return {
         request,
         currentUser,
-        prisma,
+        prisma: params.prisma,
         GqlError(message: string, extensions?: object) {
           return new merc.ErrorWithProps(message, extensions);
         },
