@@ -1,5 +1,4 @@
 // tests/__helpers.ts
-import { prisma } from "@monotonous/sdk-server";
 import { FastifyInstance } from "fastify";
 import { PrismaClient } from "@prisma/client";
 import { execSync } from "child_process";
@@ -21,41 +20,20 @@ const prismaBinary = join(
 
 export function createTestContext(): TestContext {
   let ctx = {} as TestContext;
-  const prismaCtx = prismaTestContext();
+  let prisma: PrismaClient | undefined;
+  let db: Database | null;
 
-  beforeEach(async () => {
-    Object.assign(ctx, {
-      prisma: await prismaCtx.before(),
-    });
+  beforeEach(async (done) => {
+    prisma = new PrismaClient();
+    Object.assign(ctx, { prisma });
+    done();
   });
 
-  afterEach(async () => {
-    await prismaCtx.after();
+  afterEach(async (done) => {
+    db?.close();
+    await prisma?.$disconnect();
+    done();
   });
 
   return ctx;
-}
-
-function prismaTestContext() {
-  let prismaClient: null | PrismaClient = null;
-
-  return {
-    async before() {
-      // Run the migrations to ensure our schema has the required structure
-      execSync(`${prismaBinary} db push --preview-feature`);
-
-      // Constuct a new Prisma Client connected to the generated schema
-      prismaClient = new PrismaClient();
-
-      return prismaClient;
-    },
-    async after() {
-      const client = new Database(":memory:");
-      // Drop the schema after the tests have completed
-      client.close();
-
-      // Release the Prisma Client connection
-      await prismaClient?.$disconnect();
-    },
-  };
 }

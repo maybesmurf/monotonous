@@ -1,7 +1,9 @@
 import { createMercuriusTestClient } from "mercurius-integration-testing";
 import { createTestContext } from "../../../../tests/__helpers";
+import { createServer } from "../../../server";
 
 const ctx = createTestContext();
+const server = createServer(ctx.prisma);
 
 it("does stuff", async () => {
   await ctx.prisma.user.create({
@@ -11,7 +13,7 @@ it("does stuff", async () => {
     },
   });
 
-  const client = createMercuriusTestClient(ctx.server);
+  const client = createMercuriusTestClient(server);
   const query = `
     mutation {
       requestLogin(email: "asd@asd.com") {
