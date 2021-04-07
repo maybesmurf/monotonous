@@ -48,7 +48,6 @@ export default function Login() {
             name="email"
             value={email}
             onChange={(e) => setEmail(e.currentTarget.value)}
-            readOnly={Boolean(data)}
           />
         </p>
         {showCode && (
