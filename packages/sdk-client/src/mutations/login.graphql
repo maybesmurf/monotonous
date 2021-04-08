@@ -1,9 +1,0 @@
-mutation Login($code: String!) {
-  login(code: $code) {
-    id
-    profile {
-      firstName
-      lastName
-    }
-  }
-}

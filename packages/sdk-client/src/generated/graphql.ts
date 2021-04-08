@@ -85,6 +85,15 @@ export type BillingPlanCreateInput = {
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
+export type BillingPlanCreateManyInput = {
+  billingFrequency: BillingFrequencies;
+  cost: Scalars['Int'];
+  createdAt?: Maybe<Scalars['DateTime']>;
+  id?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
 export type BillingPlanMaxAggregateOutputType = {
   __typename: 'BillingPlanMaxAggregateOutputType';
   billingFrequency?: Maybe<BillingFrequencies>;
@@ -122,6 +131,18 @@ export enum BillingPlanScalarFieldEnum {
   Name = 'name',
   UpdatedAt = 'updatedAt'
 }
+
+export type BillingPlanScalarWhereWithAggregatesInput = {
+  AND?: Maybe<Array<Maybe<BillingPlanScalarWhereWithAggregatesInput>>>;
+  NOT?: Maybe<Array<Maybe<BillingPlanScalarWhereWithAggregatesInput>>>;
+  OR?: Maybe<Array<Maybe<BillingPlanScalarWhereWithAggregatesInput>>>;
+  billingFrequency?: Maybe<EnumBillingFrequenciesWithAggregatesFilter>;
+  cost?: Maybe<IntWithAggregatesFilter>;
+  createdAt?: Maybe<DateTimeWithAggregatesFilter>;
+  id?: Maybe<StringWithAggregatesFilter>;
+  name?: Maybe<StringWithAggregatesFilter>;
+  updatedAt?: Maybe<DateTimeWithAggregatesFilter>;
+};
 
 export type BillingPlanSumAggregateOutputType = {
   __typename: 'BillingPlanSumAggregateOutputType';
@@ -198,6 +219,14 @@ export type BoolFilter = {
   not?: Maybe<NestedBoolFilter>;
 };
 
+export type BoolWithAggregatesFilter = {
+  count?: Maybe<NestedIntFilter>;
+  equals?: Maybe<Scalars['Boolean']>;
+  max?: Maybe<NestedBoolFilter>;
+  min?: Maybe<NestedBoolFilter>;
+  not?: Maybe<NestedBoolWithAggregatesFilter>;
+};
+
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Maybe<Scalars['DateTime']>;
@@ -214,6 +243,20 @@ export type DateTimeFilter = {
   notIn?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
 };
 
+export type DateTimeWithAggregatesFilter = {
+  count?: Maybe<NestedIntFilter>;
+  equals?: Maybe<Scalars['DateTime']>;
+  gt?: Maybe<Scalars['DateTime']>;
+  gte?: Maybe<Scalars['DateTime']>;
+  in?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  lt?: Maybe<Scalars['DateTime']>;
+  lte?: Maybe<Scalars['DateTime']>;
+  max?: Maybe<NestedDateTimeFilter>;
+  min?: Maybe<NestedDateTimeFilter>;
+  not?: Maybe<NestedDateTimeWithAggregatesFilter>;
+  notIn?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+};
+
 
 export type EmailConfirmationCountAggregateOutputType = {
   __typename: 'EmailConfirmationCountAggregateOutputType';
@@ -227,6 +270,12 @@ export type EmailConfirmationCreateInput = {
   createdAt?: Maybe<Scalars['DateTime']>;
   token: Scalars['String'];
   user: UserCreateNestedOneWithoutEmailConfirmationInput;
+};
+
+export type EmailConfirmationCreateManyInput = {
+  createdAt?: Maybe<Scalars['DateTime']>;
+  token: Scalars['String'];
+  userId: Scalars['String'];
 };
 
 export type EmailConfirmationCreateNestedOneWithoutUserInput = {
@@ -275,6 +324,15 @@ export enum EmailConfirmationScalarFieldEnum {
   Token = 'token',
   UserId = 'userId'
 }
+
+export type EmailConfirmationScalarWhereWithAggregatesInput = {
+  AND?: Maybe<Array<Maybe<EmailConfirmationScalarWhereWithAggregatesInput>>>;
+  NOT?: Maybe<Array<Maybe<EmailConfirmationScalarWhereWithAggregatesInput>>>;
+  OR?: Maybe<Array<Maybe<EmailConfirmationScalarWhereWithAggregatesInput>>>;
+  createdAt?: Maybe<DateTimeWithAggregatesFilter>;
+  token?: Maybe<StringWithAggregatesFilter>;
+  userId?: Maybe<StringWithAggregatesFilter>;
+};
 
 export type EmailConfirmationUncheckedCreateInput = {
   createdAt?: Maybe<Scalars['DateTime']>;
@@ -377,6 +435,16 @@ export type EnumBillingFrequenciesFilter = {
   notIn?: Maybe<Array<Maybe<BillingFrequencies>>>;
 };
 
+export type EnumBillingFrequenciesWithAggregatesFilter = {
+  count?: Maybe<NestedIntFilter>;
+  equals?: Maybe<BillingFrequencies>;
+  in?: Maybe<Array<Maybe<BillingFrequencies>>>;
+  max?: Maybe<NestedEnumBillingFrequenciesFilter>;
+  min?: Maybe<NestedEnumBillingFrequenciesFilter>;
+  not?: Maybe<NestedEnumBillingFrequenciesWithAggregatesFilter>;
+  notIn?: Maybe<Array<Maybe<BillingFrequencies>>>;
+};
+
 export type IntFieldUpdateOperationsInput = {
   decrement?: Maybe<Scalars['Int']>;
   divide?: Maybe<Scalars['Int']>;
@@ -394,6 +462,22 @@ export type IntFilter = {
   lte?: Maybe<Scalars['Int']>;
   not?: Maybe<NestedIntFilter>;
   notIn?: Maybe<Array<Maybe<Scalars['Int']>>>;
+};
+
+export type IntWithAggregatesFilter = {
+  avg?: Maybe<NestedFloatFilter>;
+  count?: Maybe<NestedIntFilter>;
+  equals?: Maybe<Scalars['Int']>;
+  gt?: Maybe<Scalars['Int']>;
+  gte?: Maybe<Scalars['Int']>;
+  in?: Maybe<Array<Maybe<Scalars['Int']>>>;
+  lt?: Maybe<Scalars['Int']>;
+  lte?: Maybe<Scalars['Int']>;
+  max?: Maybe<NestedIntFilter>;
+  min?: Maybe<NestedIntFilter>;
+  not?: Maybe<NestedIntWithAggregatesFilter>;
+  notIn?: Maybe<Array<Maybe<Scalars['Int']>>>;
+  sum?: Maybe<NestedIntFilter>;
 };
 
 
@@ -433,6 +517,14 @@ export type NestedBoolFilter = {
   not?: Maybe<NestedBoolFilter>;
 };
 
+export type NestedBoolWithAggregatesFilter = {
+  count?: Maybe<NestedIntFilter>;
+  equals?: Maybe<Scalars['Boolean']>;
+  max?: Maybe<NestedBoolFilter>;
+  min?: Maybe<NestedBoolFilter>;
+  not?: Maybe<NestedBoolWithAggregatesFilter>;
+};
+
 export type NestedDateTimeFilter = {
   equals?: Maybe<Scalars['DateTime']>;
   gt?: Maybe<Scalars['DateTime']>;
@@ -444,11 +536,46 @@ export type NestedDateTimeFilter = {
   notIn?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
 };
 
+export type NestedDateTimeWithAggregatesFilter = {
+  count?: Maybe<NestedIntFilter>;
+  equals?: Maybe<Scalars['DateTime']>;
+  gt?: Maybe<Scalars['DateTime']>;
+  gte?: Maybe<Scalars['DateTime']>;
+  in?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  lt?: Maybe<Scalars['DateTime']>;
+  lte?: Maybe<Scalars['DateTime']>;
+  max?: Maybe<NestedDateTimeFilter>;
+  min?: Maybe<NestedDateTimeFilter>;
+  not?: Maybe<NestedDateTimeWithAggregatesFilter>;
+  notIn?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+};
+
 export type NestedEnumBillingFrequenciesFilter = {
   equals?: Maybe<BillingFrequencies>;
   in?: Maybe<Array<Maybe<BillingFrequencies>>>;
   not?: Maybe<NestedEnumBillingFrequenciesFilter>;
   notIn?: Maybe<Array<Maybe<BillingFrequencies>>>;
+};
+
+export type NestedEnumBillingFrequenciesWithAggregatesFilter = {
+  count?: Maybe<NestedIntFilter>;
+  equals?: Maybe<BillingFrequencies>;
+  in?: Maybe<Array<Maybe<BillingFrequencies>>>;
+  max?: Maybe<NestedEnumBillingFrequenciesFilter>;
+  min?: Maybe<NestedEnumBillingFrequenciesFilter>;
+  not?: Maybe<NestedEnumBillingFrequenciesWithAggregatesFilter>;
+  notIn?: Maybe<Array<Maybe<BillingFrequencies>>>;
+};
+
+export type NestedFloatFilter = {
+  equals?: Maybe<Scalars['Float']>;
+  gt?: Maybe<Scalars['Float']>;
+  gte?: Maybe<Scalars['Float']>;
+  in?: Maybe<Array<Maybe<Scalars['Float']>>>;
+  lt?: Maybe<Scalars['Float']>;
+  lte?: Maybe<Scalars['Float']>;
+  not?: Maybe<NestedFloatFilter>;
+  notIn?: Maybe<Array<Maybe<Scalars['Float']>>>;
 };
 
 export type NestedIntFilter = {
@@ -462,6 +589,22 @@ export type NestedIntFilter = {
   notIn?: Maybe<Array<Maybe<Scalars['Int']>>>;
 };
 
+export type NestedIntWithAggregatesFilter = {
+  avg?: Maybe<NestedFloatFilter>;
+  count?: Maybe<NestedIntFilter>;
+  equals?: Maybe<Scalars['Int']>;
+  gt?: Maybe<Scalars['Int']>;
+  gte?: Maybe<Scalars['Int']>;
+  in?: Maybe<Array<Maybe<Scalars['Int']>>>;
+  lt?: Maybe<Scalars['Int']>;
+  lte?: Maybe<Scalars['Int']>;
+  max?: Maybe<NestedIntFilter>;
+  min?: Maybe<NestedIntFilter>;
+  not?: Maybe<NestedIntWithAggregatesFilter>;
+  notIn?: Maybe<Array<Maybe<Scalars['Int']>>>;
+  sum?: Maybe<NestedIntFilter>;
+};
+
 export type NestedStringFilter = {
   contains?: Maybe<Scalars['String']>;
   endsWith?: Maybe<Scalars['String']>;
@@ -472,6 +615,23 @@ export type NestedStringFilter = {
   lt?: Maybe<Scalars['String']>;
   lte?: Maybe<Scalars['String']>;
   not?: Maybe<NestedStringFilter>;
+  notIn?: Maybe<Array<Maybe<Scalars['String']>>>;
+  startsWith?: Maybe<Scalars['String']>;
+};
+
+export type NestedStringWithAggregatesFilter = {
+  contains?: Maybe<Scalars['String']>;
+  count?: Maybe<NestedIntFilter>;
+  endsWith?: Maybe<Scalars['String']>;
+  equals?: Maybe<Scalars['String']>;
+  gt?: Maybe<Scalars['String']>;
+  gte?: Maybe<Scalars['String']>;
+  in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  lt?: Maybe<Scalars['String']>;
+  lte?: Maybe<Scalars['String']>;
+  max?: Maybe<NestedStringFilter>;
+  min?: Maybe<NestedStringFilter>;
+  not?: Maybe<NestedStringWithAggregatesFilter>;
   notIn?: Maybe<Array<Maybe<Scalars['String']>>>;
   startsWith?: Maybe<Scalars['String']>;
 };
@@ -516,6 +676,24 @@ export type StringFilter = {
   startsWith?: Maybe<Scalars['String']>;
 };
 
+export type StringWithAggregatesFilter = {
+  contains?: Maybe<Scalars['String']>;
+  count?: Maybe<NestedIntFilter>;
+  endsWith?: Maybe<Scalars['String']>;
+  equals?: Maybe<Scalars['String']>;
+  gt?: Maybe<Scalars['String']>;
+  gte?: Maybe<Scalars['String']>;
+  in?: Maybe<Array<Maybe<Scalars['String']>>>;
+  lt?: Maybe<Scalars['String']>;
+  lte?: Maybe<Scalars['String']>;
+  max?: Maybe<NestedStringFilter>;
+  min?: Maybe<NestedStringFilter>;
+  mode?: Maybe<QueryMode>;
+  not?: Maybe<NestedStringWithAggregatesFilter>;
+  notIn?: Maybe<Array<Maybe<Scalars['String']>>>;
+  startsWith?: Maybe<Scalars['String']>;
+};
+
 export type SuccessResponse = {
   __typename: 'SuccessResponse';
   success: Scalars['Boolean'];
@@ -546,6 +724,14 @@ export type UserCreateInput = {
   emailConfirmation?: Maybe<EmailConfirmationCreateNestedOneWithoutUserInput>;
   id?: Maybe<Scalars['String']>;
   profile?: Maybe<UserProfileCreateNestedOneWithoutUserInput>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type UserCreateManyInput = {
+  confirmed?: Maybe<Scalars['Boolean']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  email: Scalars['String'];
+  id?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
@@ -639,6 +825,13 @@ export type UserProfileCreateInput = {
   user: UserCreateNestedOneWithoutProfileInput;
 };
 
+export type UserProfileCreateManyInput = {
+  firstName: Scalars['String'];
+  id?: Maybe<Scalars['String']>;
+  lastName: Scalars['String'];
+  userId: Scalars['String'];
+};
+
 export type UserProfileCreateNestedOneWithoutUserInput = {
   connect?: Maybe<UserProfileWhereUniqueInput>;
   connectOrCreate?: Maybe<UserProfileCreateOrConnectWithoutUserInput>;
@@ -690,6 +883,16 @@ export enum UserProfileScalarFieldEnum {
   LastName = 'lastName',
   UserId = 'userId'
 }
+
+export type UserProfileScalarWhereWithAggregatesInput = {
+  AND?: Maybe<Array<Maybe<UserProfileScalarWhereWithAggregatesInput>>>;
+  NOT?: Maybe<Array<Maybe<UserProfileScalarWhereWithAggregatesInput>>>;
+  OR?: Maybe<Array<Maybe<UserProfileScalarWhereWithAggregatesInput>>>;
+  firstName?: Maybe<StringWithAggregatesFilter>;
+  id?: Maybe<StringWithAggregatesFilter>;
+  lastName?: Maybe<StringWithAggregatesFilter>;
+  userId?: Maybe<StringWithAggregatesFilter>;
+};
 
 export type UserProfileUncheckedCreateInput = {
   firstName: Scalars['String'];
@@ -802,6 +1005,17 @@ export enum UserScalarFieldEnum {
   Id = 'id',
   UpdatedAt = 'updatedAt'
 }
+
+export type UserScalarWhereWithAggregatesInput = {
+  AND?: Maybe<Array<Maybe<UserScalarWhereWithAggregatesInput>>>;
+  NOT?: Maybe<Array<Maybe<UserScalarWhereWithAggregatesInput>>>;
+  OR?: Maybe<Array<Maybe<UserScalarWhereWithAggregatesInput>>>;
+  confirmed?: Maybe<BoolWithAggregatesFilter>;
+  createdAt?: Maybe<DateTimeWithAggregatesFilter>;
+  email?: Maybe<StringWithAggregatesFilter>;
+  id?: Maybe<StringWithAggregatesFilter>;
+  updatedAt?: Maybe<DateTimeWithAggregatesFilter>;
+};
 
 export type UserUncheckedCreateInput = {
   confirmed?: Maybe<Scalars['Boolean']>;
