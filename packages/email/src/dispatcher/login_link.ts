@@ -1,8 +1,9 @@
-import { htmlToText } from 'html-to-text';
-import { compileTemplate } from '../compile_template';
-import { transport } from '../transport';
+import { htmlToText } from "html-to-text";
+import { logger } from "@monotonous/sdk-server";
+import { compileTemplate } from "../compile_template";
+import { transport } from "../transport";
 
-const render = compileTemplate('login_link');
+const render = compileTemplate("login_link");
 
 export interface ISendLoginLink {
   to: string;
@@ -18,10 +19,12 @@ export async function sendLoginLink(params: ISendLoginLink) {
   const message = {
     from: '"Monotonous" <hello@monotonousrepo.com>',
     to: `${params.firstName} ${params.lastName} <${params.to}>`,
-    subject: 'Monotonous Login',
+    subject: "Monotonous Login",
     text,
     html,
   };
+
+  logger.debug(message);
 
   return transport.sendMail(message);
 }
