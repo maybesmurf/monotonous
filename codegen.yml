@@ -1,10 +1,9 @@
 overwrite: true
 schema: "schema.graphql"
 documents:
-  - "packages/sdk-client/**/*.graphql"
-  - "apps/web/**/!(*.d).{ts,tsx}"
+  - "apps/web/pages/**/!(*.d).{ts,tsx}"
 generates:
-  ./packages/sdk-client/src/generated/graphql.ts:
+  ./apps/web/graphql_client.ts:
     plugins:
       - "typescript"
       - "typescript-operations"

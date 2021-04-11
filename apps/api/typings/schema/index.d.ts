@@ -54,14 +54,6 @@ export interface NexusGenInputs {
     name: string; // String!
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
-  BillingPlanCreateManyInput: { // input type
-    billingFrequency: NexusGenEnums['BillingFrequencies']; // BillingFrequencies!
-    cost: number; // Int!
-    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    id?: string | null; // String
-    name: string; // String!
-    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-  }
   BillingPlanOrderByInput: { // input type
     billingFrequency?: NexusGenEnums['SortOrder'] | null; // SortOrder
     cost?: NexusGenEnums['SortOrder'] | null; // SortOrder
@@ -69,17 +61,6 @@ export interface NexusGenInputs {
     id?: NexusGenEnums['SortOrder'] | null; // SortOrder
     name?: NexusGenEnums['SortOrder'] | null; // SortOrder
     updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
-  }
-  BillingPlanScalarWhereWithAggregatesInput: { // input type
-    AND?: Array<NexusGenInputs['BillingPlanScalarWhereWithAggregatesInput'] | null> | null; // [BillingPlanScalarWhereWithAggregatesInput]
-    NOT?: Array<NexusGenInputs['BillingPlanScalarWhereWithAggregatesInput'] | null> | null; // [BillingPlanScalarWhereWithAggregatesInput]
-    OR?: Array<NexusGenInputs['BillingPlanScalarWhereWithAggregatesInput'] | null> | null; // [BillingPlanScalarWhereWithAggregatesInput]
-    billingFrequency?: NexusGenInputs['EnumBillingFrequenciesWithAggregatesFilter'] | null; // EnumBillingFrequenciesWithAggregatesFilter
-    cost?: NexusGenInputs['IntWithAggregatesFilter'] | null; // IntWithAggregatesFilter
-    createdAt?: NexusGenInputs['DateTimeWithAggregatesFilter'] | null; // DateTimeWithAggregatesFilter
-    id?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
-    name?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
-    updatedAt?: NexusGenInputs['DateTimeWithAggregatesFilter'] | null; // DateTimeWithAggregatesFilter
   }
   BillingPlanUncheckedCreateInput: { // input type
     billingFrequency: NexusGenEnums['BillingFrequencies']; // BillingFrequencies!
@@ -142,13 +123,6 @@ export interface NexusGenInputs {
     equals?: boolean | null; // Boolean
     not?: NexusGenInputs['NestedBoolFilter'] | null; // NestedBoolFilter
   }
-  BoolWithAggregatesFilter: { // input type
-    count?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-    equals?: boolean | null; // Boolean
-    max?: NexusGenInputs['NestedBoolFilter'] | null; // NestedBoolFilter
-    min?: NexusGenInputs['NestedBoolFilter'] | null; // NestedBoolFilter
-    not?: NexusGenInputs['NestedBoolWithAggregatesFilter'] | null; // NestedBoolWithAggregatesFilter
-  }
   DateTimeFieldUpdateOperationsInput: { // input type
     set?: NexusGenScalars['DateTime'] | null; // DateTime
   }
@@ -162,28 +136,10 @@ export interface NexusGenInputs {
     not?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
     notIn?: Array<NexusGenScalars['DateTime'] | null> | null; // [DateTime]
   }
-  DateTimeWithAggregatesFilter: { // input type
-    count?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-    equals?: NexusGenScalars['DateTime'] | null; // DateTime
-    gt?: NexusGenScalars['DateTime'] | null; // DateTime
-    gte?: NexusGenScalars['DateTime'] | null; // DateTime
-    in?: Array<NexusGenScalars['DateTime'] | null> | null; // [DateTime]
-    lt?: NexusGenScalars['DateTime'] | null; // DateTime
-    lte?: NexusGenScalars['DateTime'] | null; // DateTime
-    max?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
-    min?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
-    not?: NexusGenInputs['NestedDateTimeWithAggregatesFilter'] | null; // NestedDateTimeWithAggregatesFilter
-    notIn?: Array<NexusGenScalars['DateTime'] | null> | null; // [DateTime]
-  }
   EmailConfirmationCreateInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     token: string; // String!
     user: NexusGenInputs['UserCreateNestedOneWithoutEmailConfirmationInput']; // UserCreateNestedOneWithoutEmailConfirmationInput!
-  }
-  EmailConfirmationCreateManyInput: { // input type
-    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    token: string; // String!
-    userId: string; // String!
   }
   EmailConfirmationCreateNestedOneWithoutUserInput: { // input type
     connect?: NexusGenInputs['EmailConfirmationWhereUniqueInput'] | null; // EmailConfirmationWhereUniqueInput
@@ -206,14 +162,6 @@ export interface NexusGenInputs {
   EmailConfirmationRelationFilter: { // input type
     is?: NexusGenInputs['EmailConfirmationWhereInput'] | null; // EmailConfirmationWhereInput
     isNot?: NexusGenInputs['EmailConfirmationWhereInput'] | null; // EmailConfirmationWhereInput
-  }
-  EmailConfirmationScalarWhereWithAggregatesInput: { // input type
-    AND?: Array<NexusGenInputs['EmailConfirmationScalarWhereWithAggregatesInput'] | null> | null; // [EmailConfirmationScalarWhereWithAggregatesInput]
-    NOT?: Array<NexusGenInputs['EmailConfirmationScalarWhereWithAggregatesInput'] | null> | null; // [EmailConfirmationScalarWhereWithAggregatesInput]
-    OR?: Array<NexusGenInputs['EmailConfirmationScalarWhereWithAggregatesInput'] | null> | null; // [EmailConfirmationScalarWhereWithAggregatesInput]
-    createdAt?: NexusGenInputs['DateTimeWithAggregatesFilter'] | null; // DateTimeWithAggregatesFilter
-    token?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
-    userId?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
   }
   EmailConfirmationUncheckedCreateInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
@@ -300,15 +248,6 @@ export interface NexusGenInputs {
     not?: NexusGenInputs['NestedEnumBillingFrequenciesFilter'] | null; // NestedEnumBillingFrequenciesFilter
     notIn?: Array<NexusGenEnums['BillingFrequencies'] | null> | null; // [BillingFrequencies]
   }
-  EnumBillingFrequenciesWithAggregatesFilter: { // input type
-    count?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-    equals?: NexusGenEnums['BillingFrequencies'] | null; // BillingFrequencies
-    in?: Array<NexusGenEnums['BillingFrequencies'] | null> | null; // [BillingFrequencies]
-    max?: NexusGenInputs['NestedEnumBillingFrequenciesFilter'] | null; // NestedEnumBillingFrequenciesFilter
-    min?: NexusGenInputs['NestedEnumBillingFrequenciesFilter'] | null; // NestedEnumBillingFrequenciesFilter
-    not?: NexusGenInputs['NestedEnumBillingFrequenciesWithAggregatesFilter'] | null; // NestedEnumBillingFrequenciesWithAggregatesFilter
-    notIn?: Array<NexusGenEnums['BillingFrequencies'] | null> | null; // [BillingFrequencies]
-  }
   IntFieldUpdateOperationsInput: { // input type
     decrement?: number | null; // Int
     divide?: number | null; // Int
@@ -326,31 +265,9 @@ export interface NexusGenInputs {
     not?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
     notIn?: Array<number | null> | null; // [Int]
   }
-  IntWithAggregatesFilter: { // input type
-    avg?: NexusGenInputs['NestedFloatFilter'] | null; // NestedFloatFilter
-    count?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-    equals?: number | null; // Int
-    gt?: number | null; // Int
-    gte?: number | null; // Int
-    in?: Array<number | null> | null; // [Int]
-    lt?: number | null; // Int
-    lte?: number | null; // Int
-    max?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-    min?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-    not?: NexusGenInputs['NestedIntWithAggregatesFilter'] | null; // NestedIntWithAggregatesFilter
-    notIn?: Array<number | null> | null; // [Int]
-    sum?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-  }
   NestedBoolFilter: { // input type
     equals?: boolean | null; // Boolean
     not?: NexusGenInputs['NestedBoolFilter'] | null; // NestedBoolFilter
-  }
-  NestedBoolWithAggregatesFilter: { // input type
-    count?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-    equals?: boolean | null; // Boolean
-    max?: NexusGenInputs['NestedBoolFilter'] | null; // NestedBoolFilter
-    min?: NexusGenInputs['NestedBoolFilter'] | null; // NestedBoolFilter
-    not?: NexusGenInputs['NestedBoolWithAggregatesFilter'] | null; // NestedBoolWithAggregatesFilter
   }
   NestedDateTimeFilter: { // input type
     equals?: NexusGenScalars['DateTime'] | null; // DateTime
@@ -362,43 +279,11 @@ export interface NexusGenInputs {
     not?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
     notIn?: Array<NexusGenScalars['DateTime'] | null> | null; // [DateTime]
   }
-  NestedDateTimeWithAggregatesFilter: { // input type
-    count?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-    equals?: NexusGenScalars['DateTime'] | null; // DateTime
-    gt?: NexusGenScalars['DateTime'] | null; // DateTime
-    gte?: NexusGenScalars['DateTime'] | null; // DateTime
-    in?: Array<NexusGenScalars['DateTime'] | null> | null; // [DateTime]
-    lt?: NexusGenScalars['DateTime'] | null; // DateTime
-    lte?: NexusGenScalars['DateTime'] | null; // DateTime
-    max?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
-    min?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
-    not?: NexusGenInputs['NestedDateTimeWithAggregatesFilter'] | null; // NestedDateTimeWithAggregatesFilter
-    notIn?: Array<NexusGenScalars['DateTime'] | null> | null; // [DateTime]
-  }
   NestedEnumBillingFrequenciesFilter: { // input type
     equals?: NexusGenEnums['BillingFrequencies'] | null; // BillingFrequencies
     in?: Array<NexusGenEnums['BillingFrequencies'] | null> | null; // [BillingFrequencies]
     not?: NexusGenInputs['NestedEnumBillingFrequenciesFilter'] | null; // NestedEnumBillingFrequenciesFilter
     notIn?: Array<NexusGenEnums['BillingFrequencies'] | null> | null; // [BillingFrequencies]
-  }
-  NestedEnumBillingFrequenciesWithAggregatesFilter: { // input type
-    count?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-    equals?: NexusGenEnums['BillingFrequencies'] | null; // BillingFrequencies
-    in?: Array<NexusGenEnums['BillingFrequencies'] | null> | null; // [BillingFrequencies]
-    max?: NexusGenInputs['NestedEnumBillingFrequenciesFilter'] | null; // NestedEnumBillingFrequenciesFilter
-    min?: NexusGenInputs['NestedEnumBillingFrequenciesFilter'] | null; // NestedEnumBillingFrequenciesFilter
-    not?: NexusGenInputs['NestedEnumBillingFrequenciesWithAggregatesFilter'] | null; // NestedEnumBillingFrequenciesWithAggregatesFilter
-    notIn?: Array<NexusGenEnums['BillingFrequencies'] | null> | null; // [BillingFrequencies]
-  }
-  NestedFloatFilter: { // input type
-    equals?: number | null; // Float
-    gt?: number | null; // Float
-    gte?: number | null; // Float
-    in?: Array<number | null> | null; // [Float]
-    lt?: number | null; // Float
-    lte?: number | null; // Float
-    not?: NexusGenInputs['NestedFloatFilter'] | null; // NestedFloatFilter
-    notIn?: Array<number | null> | null; // [Float]
   }
   NestedIntFilter: { // input type
     equals?: number | null; // Int
@@ -410,21 +295,6 @@ export interface NexusGenInputs {
     not?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
     notIn?: Array<number | null> | null; // [Int]
   }
-  NestedIntWithAggregatesFilter: { // input type
-    avg?: NexusGenInputs['NestedFloatFilter'] | null; // NestedFloatFilter
-    count?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-    equals?: number | null; // Int
-    gt?: number | null; // Int
-    gte?: number | null; // Int
-    in?: Array<number | null> | null; // [Int]
-    lt?: number | null; // Int
-    lte?: number | null; // Int
-    max?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-    min?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-    not?: NexusGenInputs['NestedIntWithAggregatesFilter'] | null; // NestedIntWithAggregatesFilter
-    notIn?: Array<number | null> | null; // [Int]
-    sum?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-  }
   NestedStringFilter: { // input type
     contains?: string | null; // String
     endsWith?: string | null; // String
@@ -435,22 +305,6 @@ export interface NexusGenInputs {
     lt?: string | null; // String
     lte?: string | null; // String
     not?: NexusGenInputs['NestedStringFilter'] | null; // NestedStringFilter
-    notIn?: Array<string | null> | null; // [String]
-    startsWith?: string | null; // String
-  }
-  NestedStringWithAggregatesFilter: { // input type
-    contains?: string | null; // String
-    count?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-    endsWith?: string | null; // String
-    equals?: string | null; // String
-    gt?: string | null; // String
-    gte?: string | null; // String
-    in?: Array<string | null> | null; // [String]
-    lt?: string | null; // String
-    lte?: string | null; // String
-    max?: NexusGenInputs['NestedStringFilter'] | null; // NestedStringFilter
-    min?: NexusGenInputs['NestedStringFilter'] | null; // NestedStringFilter
-    not?: NexusGenInputs['NestedStringWithAggregatesFilter'] | null; // NestedStringWithAggregatesFilter
     notIn?: Array<string | null> | null; // [String]
     startsWith?: string | null; // String
   }
@@ -476,23 +330,6 @@ export interface NexusGenInputs {
     notIn?: Array<string | null> | null; // [String]
     startsWith?: string | null; // String
   }
-  StringWithAggregatesFilter: { // input type
-    contains?: string | null; // String
-    count?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-    endsWith?: string | null; // String
-    equals?: string | null; // String
-    gt?: string | null; // String
-    gte?: string | null; // String
-    in?: Array<string | null> | null; // [String]
-    lt?: string | null; // String
-    lte?: string | null; // String
-    max?: NexusGenInputs['NestedStringFilter'] | null; // NestedStringFilter
-    min?: NexusGenInputs['NestedStringFilter'] | null; // NestedStringFilter
-    mode?: NexusGenEnums['QueryMode'] | null; // QueryMode
-    not?: NexusGenInputs['NestedStringWithAggregatesFilter'] | null; // NestedStringWithAggregatesFilter
-    notIn?: Array<string | null> | null; // [String]
-    startsWith?: string | null; // String
-  }
   UserCreateInput: { // input type
     confirmed?: boolean | null; // Boolean
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
@@ -500,13 +337,6 @@ export interface NexusGenInputs {
     emailConfirmation?: NexusGenInputs['EmailConfirmationCreateNestedOneWithoutUserInput'] | null; // EmailConfirmationCreateNestedOneWithoutUserInput
     id?: string | null; // String
     profile?: NexusGenInputs['UserProfileCreateNestedOneWithoutUserInput'] | null; // UserProfileCreateNestedOneWithoutUserInput
-    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-  }
-  UserCreateManyInput: { // input type
-    confirmed?: boolean | null; // Boolean
-    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    email: string; // String!
-    id?: string | null; // String
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
   UserCreateNestedOneWithoutEmailConfirmationInput: { // input type
@@ -556,12 +386,6 @@ export interface NexusGenInputs {
     lastName: string; // String!
     user: NexusGenInputs['UserCreateNestedOneWithoutProfileInput']; // UserCreateNestedOneWithoutProfileInput!
   }
-  UserProfileCreateManyInput: { // input type
-    firstName: string; // String!
-    id?: string | null; // String
-    lastName: string; // String!
-    userId: string; // String!
-  }
   UserProfileCreateNestedOneWithoutUserInput: { // input type
     connect?: NexusGenInputs['UserProfileWhereUniqueInput'] | null; // UserProfileWhereUniqueInput
     connectOrCreate?: NexusGenInputs['UserProfileCreateOrConnectWithoutUserInput'] | null; // UserProfileCreateOrConnectWithoutUserInput
@@ -585,15 +409,6 @@ export interface NexusGenInputs {
   UserProfileRelationFilter: { // input type
     is?: NexusGenInputs['UserProfileWhereInput'] | null; // UserProfileWhereInput
     isNot?: NexusGenInputs['UserProfileWhereInput'] | null; // UserProfileWhereInput
-  }
-  UserProfileScalarWhereWithAggregatesInput: { // input type
-    AND?: Array<NexusGenInputs['UserProfileScalarWhereWithAggregatesInput'] | null> | null; // [UserProfileScalarWhereWithAggregatesInput]
-    NOT?: Array<NexusGenInputs['UserProfileScalarWhereWithAggregatesInput'] | null> | null; // [UserProfileScalarWhereWithAggregatesInput]
-    OR?: Array<NexusGenInputs['UserProfileScalarWhereWithAggregatesInput'] | null> | null; // [UserProfileScalarWhereWithAggregatesInput]
-    firstName?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
-    id?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
-    lastName?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
-    userId?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
   }
   UserProfileUncheckedCreateInput: { // input type
     firstName: string; // String!
@@ -683,16 +498,6 @@ export interface NexusGenInputs {
   UserRelationFilter: { // input type
     is?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     isNot?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
-  }
-  UserScalarWhereWithAggregatesInput: { // input type
-    AND?: Array<NexusGenInputs['UserScalarWhereWithAggregatesInput'] | null> | null; // [UserScalarWhereWithAggregatesInput]
-    NOT?: Array<NexusGenInputs['UserScalarWhereWithAggregatesInput'] | null> | null; // [UserScalarWhereWithAggregatesInput]
-    OR?: Array<NexusGenInputs['UserScalarWhereWithAggregatesInput'] | null> | null; // [UserScalarWhereWithAggregatesInput]
-    confirmed?: NexusGenInputs['BoolWithAggregatesFilter'] | null; // BoolWithAggregatesFilter
-    createdAt?: NexusGenInputs['DateTimeWithAggregatesFilter'] | null; // DateTimeWithAggregatesFilter
-    email?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
-    id?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
-    updatedAt?: NexusGenInputs['DateTimeWithAggregatesFilter'] | null; // DateTimeWithAggregatesFilter
   }
   UserUncheckedCreateInput: { // input type
     confirmed?: boolean | null; // Boolean

@@ -1,5 +1,14 @@
 import React, { FormEvent, useState } from "react";
 import { useRegisterMutation } from "@monotonous/sdk-client";
+import { gql } from "urql";
+
+gql`
+  mutation Register($email: String!, $firstName: String!, $lastName: String!) {
+    register(email: $email, firstName: $firstName, lastName: $lastName) {
+      id
+    }
+  }
+`;
 
 export default function Signup() {
   const [{ data, fetching }, register] = useRegisterMutation();

@@ -1,18 +1,30 @@
 import React, { FormEvent, useState } from "react";
-import {
-  useRequestLoginMutation,
-  useLoginMutation,
-} from "@monotonous/sdk-client";
+import { gql } from "@urql/core";
 import { useRouter } from "next/router";
+import { useLoginMutation, useRequestLoginMutation } from "graphql_client";
+import { useSearchParams } from "hooks/use_search_params";
+
+gql`
+  mutation RequestLogin($email: String!) {
+    requestLogin(email: $email) {
+      success
+    }
+  }
+  mutation Login($code: String!) {
+    login(code: $code) {
+      id
+      profile {
+        firstName
+        lastName
+      }
+    }
+  }
+`;
 
 export default function Login() {
   const router = useRouter();
-  const initialEmail =
-    typeof window !== "undefined" &&
-    new URLSearchParams(window.location.search).get("email");
-  const initialCode =
-    typeof window !== "undefined" &&
-    new URLSearchParams(window.location.search).get("code");
+  const initialEmail = useSearchParams("email");
+  const initialCode = useSearchParams("code");
   const [{ fetching: fetching1 }, requestLogin] = useRequestLoginMutation();
   const [{ fetching: fetching2 }, login] = useLoginMutation();
   const [email, setEmail] = useState(initialEmail || "");
@@ -20,8 +32,9 @@ export default function Login() {
   const [showCode, setShowCode] = useState(false);
 
   async function handleLoginRequest(e: FormEvent) {
+    e.preventDefault();
+
     try {
-      e.preventDefault();
       await requestLogin({ email });
       setShowCode(true);
     } catch (e) {
@@ -33,6 +46,7 @@ export default function Login() {
     try {
       e.preventDefault();
       await login({ code });
+      router.replace("/");
     } catch (e) {
       console.error(e);
     }
