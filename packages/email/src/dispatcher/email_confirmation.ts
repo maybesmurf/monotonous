@@ -1,6 +1,6 @@
 import { htmlToText } from "html-to-text";
 import { compileTemplate } from "../compile_template";
-import { transport } from "../transport";
+import { sendEmail } from "../transport";
 
 const render = compileTemplate("email_confirmation");
 
@@ -23,5 +23,5 @@ export async function sendEmailConfirmation(params: ISendEmailConfirmation) {
     html,
   };
 
-  return transport.sendMail(message);
+  return sendEmail(message);
 }

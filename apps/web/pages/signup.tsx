@@ -1,9 +1,10 @@
 import React, { FormEvent, useState } from "react";
-import { useRegisterMutation } from "@monotonous/sdk-client";
+import { useSignupMutation } from "graphql_client";
 import { gql } from "urql";
+import { useRouter } from "next/router";
 
 gql`
-  mutation Register($email: String!, $firstName: String!, $lastName: String!) {
+  mutation Signup($email: String!, $firstName: String!, $lastName: String!) {
     register(email: $email, firstName: $firstName, lastName: $lastName) {
       id
     }
@@ -11,7 +12,8 @@ gql`
 `;
 
 export default function Signup() {
-  const [{ data, fetching }, register] = useRegisterMutation();
+  const router = useRouter();
+  const [{ data, fetching }, signup] = useSignupMutation();
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -20,11 +22,8 @@ export default function Signup() {
     e.preventDefault();
 
     try {
-      await register({
-        email,
-        firstName,
-        lastName,
-      });
+      await signup({ email, firstName, lastName });
+      router.push("/login");
     } catch (e) {
       console.error(e);
     }

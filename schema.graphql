@@ -60,6 +60,15 @@ input BillingPlanCreateInput {
   updatedAt: DateTime
 }
 
+input BillingPlanCreateManyInput {
+  billingFrequency: BillingFrequencies!
+  cost: Int!
+  createdAt: DateTime
+  id: String
+  name: String!
+  updatedAt: DateTime
+}
+
 type BillingPlanMaxAggregateOutputType {
   billingFrequency: BillingFrequencies
   cost: Int!
@@ -94,6 +103,18 @@ enum BillingPlanScalarFieldEnum {
   id
   name
   updatedAt
+}
+
+input BillingPlanScalarWhereWithAggregatesInput {
+  AND: [BillingPlanScalarWhereWithAggregatesInput]
+  NOT: [BillingPlanScalarWhereWithAggregatesInput]
+  OR: [BillingPlanScalarWhereWithAggregatesInput]
+  billingFrequency: EnumBillingFrequenciesWithAggregatesFilter
+  cost: IntWithAggregatesFilter
+  createdAt: DateTimeWithAggregatesFilter
+  id: StringWithAggregatesFilter
+  name: StringWithAggregatesFilter
+  updatedAt: DateTimeWithAggregatesFilter
 }
 
 type BillingPlanSumAggregateOutputType {
@@ -170,6 +191,14 @@ input BoolFilter {
   not: NestedBoolFilter
 }
 
+input BoolWithAggregatesFilter {
+  count: NestedIntFilter
+  equals: Boolean
+  max: NestedBoolFilter
+  min: NestedBoolFilter
+  not: NestedBoolWithAggregatesFilter
+}
+
 """Date custom scalar type"""
 scalar DateTime
 
@@ -188,6 +217,20 @@ input DateTimeFilter {
   notIn: [DateTime]
 }
 
+input DateTimeWithAggregatesFilter {
+  count: NestedIntFilter
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime]
+  lt: DateTime
+  lte: DateTime
+  max: NestedDateTimeFilter
+  min: NestedDateTimeFilter
+  not: NestedDateTimeWithAggregatesFilter
+  notIn: [DateTime]
+}
+
 """Decimal custom scalar type"""
 scalar Decimal
 
@@ -202,6 +245,12 @@ input EmailConfirmationCreateInput {
   createdAt: DateTime
   token: String!
   user: UserCreateNestedOneWithoutEmailConfirmationInput!
+}
+
+input EmailConfirmationCreateManyInput {
+  createdAt: DateTime
+  token: String!
+  userId: String!
 }
 
 input EmailConfirmationCreateNestedOneWithoutUserInput {
@@ -247,6 +296,15 @@ enum EmailConfirmationScalarFieldEnum {
   createdAt
   token
   userId
+}
+
+input EmailConfirmationScalarWhereWithAggregatesInput {
+  AND: [EmailConfirmationScalarWhereWithAggregatesInput]
+  NOT: [EmailConfirmationScalarWhereWithAggregatesInput]
+  OR: [EmailConfirmationScalarWhereWithAggregatesInput]
+  createdAt: DateTimeWithAggregatesFilter
+  token: StringWithAggregatesFilter
+  userId: StringWithAggregatesFilter
 }
 
 input EmailConfirmationUncheckedCreateInput {
@@ -350,6 +408,16 @@ input EnumBillingFrequenciesFilter {
   notIn: [BillingFrequencies]
 }
 
+input EnumBillingFrequenciesWithAggregatesFilter {
+  count: NestedIntFilter
+  equals: BillingFrequencies
+  in: [BillingFrequencies]
+  max: NestedEnumBillingFrequenciesFilter
+  min: NestedEnumBillingFrequenciesFilter
+  not: NestedEnumBillingFrequenciesWithAggregatesFilter
+  notIn: [BillingFrequencies]
+}
+
 input IntFieldUpdateOperationsInput {
   decrement: Int
   divide: Int
@@ -369,6 +437,22 @@ input IntFilter {
   notIn: [Int]
 }
 
+input IntWithAggregatesFilter {
+  avg: NestedFloatFilter
+  count: NestedIntFilter
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int]
+  lt: Int
+  lte: Int
+  max: NestedIntFilter
+  min: NestedIntFilter
+  not: NestedIntWithAggregatesFilter
+  notIn: [Int]
+  sum: NestedIntFilter
+}
+
 """Json custom scalar type"""
 scalar Json
 
@@ -384,6 +468,14 @@ input NestedBoolFilter {
   not: NestedBoolFilter
 }
 
+input NestedBoolWithAggregatesFilter {
+  count: NestedIntFilter
+  equals: Boolean
+  max: NestedBoolFilter
+  min: NestedBoolFilter
+  not: NestedBoolWithAggregatesFilter
+}
+
 input NestedDateTimeFilter {
   equals: DateTime
   gt: DateTime
@@ -395,11 +487,46 @@ input NestedDateTimeFilter {
   notIn: [DateTime]
 }
 
+input NestedDateTimeWithAggregatesFilter {
+  count: NestedIntFilter
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime]
+  lt: DateTime
+  lte: DateTime
+  max: NestedDateTimeFilter
+  min: NestedDateTimeFilter
+  not: NestedDateTimeWithAggregatesFilter
+  notIn: [DateTime]
+}
+
 input NestedEnumBillingFrequenciesFilter {
   equals: BillingFrequencies
   in: [BillingFrequencies]
   not: NestedEnumBillingFrequenciesFilter
   notIn: [BillingFrequencies]
+}
+
+input NestedEnumBillingFrequenciesWithAggregatesFilter {
+  count: NestedIntFilter
+  equals: BillingFrequencies
+  in: [BillingFrequencies]
+  max: NestedEnumBillingFrequenciesFilter
+  min: NestedEnumBillingFrequenciesFilter
+  not: NestedEnumBillingFrequenciesWithAggregatesFilter
+  notIn: [BillingFrequencies]
+}
+
+input NestedFloatFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float]
+  lt: Float
+  lte: Float
+  not: NestedFloatFilter
+  notIn: [Float]
 }
 
 input NestedIntFilter {
@@ -413,6 +540,22 @@ input NestedIntFilter {
   notIn: [Int]
 }
 
+input NestedIntWithAggregatesFilter {
+  avg: NestedFloatFilter
+  count: NestedIntFilter
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int]
+  lt: Int
+  lte: Int
+  max: NestedIntFilter
+  min: NestedIntFilter
+  not: NestedIntWithAggregatesFilter
+  notIn: [Int]
+  sum: NestedIntFilter
+}
+
 input NestedStringFilter {
   contains: String
   endsWith: String
@@ -423,6 +566,23 @@ input NestedStringFilter {
   lt: String
   lte: String
   not: NestedStringFilter
+  notIn: [String]
+  startsWith: String
+}
+
+input NestedStringWithAggregatesFilter {
+  contains: String
+  count: NestedIntFilter
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String]
+  lt: String
+  lte: String
+  max: NestedStringFilter
+  min: NestedStringFilter
+  not: NestedStringWithAggregatesFilter
   notIn: [String]
   startsWith: String
 }
@@ -466,6 +626,24 @@ input StringFilter {
   startsWith: String
 }
 
+input StringWithAggregatesFilter {
+  contains: String
+  count: NestedIntFilter
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String]
+  lt: String
+  lte: String
+  max: NestedStringFilter
+  min: NestedStringFilter
+  mode: QueryMode
+  not: NestedStringWithAggregatesFilter
+  notIn: [String]
+  startsWith: String
+}
+
 type SuccessResponse {
   success: Boolean!
 }
@@ -493,6 +671,14 @@ input UserCreateInput {
   emailConfirmation: EmailConfirmationCreateNestedOneWithoutUserInput
   id: String
   profile: UserProfileCreateNestedOneWithoutUserInput
+  updatedAt: DateTime
+}
+
+input UserCreateManyInput {
+  confirmed: Boolean
+  createdAt: DateTime
+  email: String!
+  id: String
   updatedAt: DateTime
 }
 
@@ -582,6 +768,13 @@ input UserProfileCreateInput {
   user: UserCreateNestedOneWithoutProfileInput!
 }
 
+input UserProfileCreateManyInput {
+  firstName: String!
+  id: String
+  lastName: String!
+  userId: String!
+}
+
 input UserProfileCreateNestedOneWithoutUserInput {
   connect: UserProfileWhereUniqueInput
   connectOrCreate: UserProfileCreateOrConnectWithoutUserInput
@@ -630,6 +823,16 @@ enum UserProfileScalarFieldEnum {
   id
   lastName
   userId
+}
+
+input UserProfileScalarWhereWithAggregatesInput {
+  AND: [UserProfileScalarWhereWithAggregatesInput]
+  NOT: [UserProfileScalarWhereWithAggregatesInput]
+  OR: [UserProfileScalarWhereWithAggregatesInput]
+  firstName: StringWithAggregatesFilter
+  id: StringWithAggregatesFilter
+  lastName: StringWithAggregatesFilter
+  userId: StringWithAggregatesFilter
 }
 
 input UserProfileUncheckedCreateInput {
@@ -742,6 +945,17 @@ enum UserScalarFieldEnum {
   email
   id
   updatedAt
+}
+
+input UserScalarWhereWithAggregatesInput {
+  AND: [UserScalarWhereWithAggregatesInput]
+  NOT: [UserScalarWhereWithAggregatesInput]
+  OR: [UserScalarWhereWithAggregatesInput]
+  confirmed: BoolWithAggregatesFilter
+  createdAt: DateTimeWithAggregatesFilter
+  email: StringWithAggregatesFilter
+  id: StringWithAggregatesFilter
+  updatedAt: DateTimeWithAggregatesFilter
 }
 
 input UserUncheckedCreateInput {

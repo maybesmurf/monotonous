@@ -1,4 +1,4 @@
-import { extendType, objectType, nonNull } from "nexus";
+import { extendType, objectType } from "nexus";
 import * as resolvers from "./user_resolvers";
 
 export const User = objectType({

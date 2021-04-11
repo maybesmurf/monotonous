@@ -1,28 +1,29 @@
-import { useConfirmEmailMutation } from "@monotonous/sdk-client";
 import React, { FormEvent, useState } from "react";
 import { useRouter } from "next/router";
+import { gql } from "@urql/core";
+import { useConfirmEmailMutation } from 'graphql_client'
+import {useSearchParams} from "hooks/use_search_params";
+
+gql`
+  mutation ConfirmEmail($token: String!, $email: String!) {
+    confirmEmail(token: $token, email: $email) {
+      id
+    }
+  }
+`;
 
 export default function ConfirmEmail() {
   const router = useRouter();
-  const initialToken =
-    typeof window !== "undefined" &&
-    new URLSearchParams(window.location.search).get("token");
-  const email =
-    (typeof window !== "undefined" &&
-      new URLSearchParams(window.location.search).get("email")) ||
-    "";
+  const initialToken = useSearchParams('token')
+  const email = useSearchParams('email') || '';
   const [{ fetching }, confirmEmail] = useConfirmEmailMutation();
   const [token, setToken] = useState(initialToken || "");
 
   async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+
     try {
-      e.preventDefault();
-
-      await confirmEmail({
-        email,
-        token,
-      });
-
+      await confirmEmail({ email, token });
       router.replace("/");
     } catch (e) {
       console.error(e);
