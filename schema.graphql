@@ -2,14 +2,6 @@
 ### Do not make changes to this file directly
 
 
-type AggregateBillingPlan {
-  avg: BillingPlanAvgAggregateOutputType
-  count: BillingPlanCountAggregateOutputType
-  max: BillingPlanMaxAggregateOutputType
-  min: BillingPlanMinAggregateOutputType
-  sum: BillingPlanSumAggregateOutputType
-}
-
 type AggregateEmailConfirmation {
   count: EmailConfirmationCountAggregateOutputType
   max: EmailConfirmationMaxAggregateOutputType
@@ -30,156 +22,6 @@ type AggregateUserProfile {
 
 type BatchPayload {
   count: Int!
-}
-
-enum BillingFrequencies {
-  ANNUALLY
-  MONTHLY
-}
-
-type BillingPlanAvgAggregateOutputType {
-  cost: Float!
-}
-
-type BillingPlanCountAggregateOutputType {
-  _all: Int!
-  billingFrequency: Int
-  cost: Int!
-  createdAt: Int
-  id: Int
-  name: Int
-  updatedAt: Int
-}
-
-input BillingPlanCreateInput {
-  billingFrequency: BillingFrequencies!
-  cost: Int!
-  createdAt: DateTime
-  id: String
-  name: String!
-  updatedAt: DateTime
-}
-
-input BillingPlanCreateManyInput {
-  billingFrequency: BillingFrequencies!
-  cost: Int!
-  createdAt: DateTime
-  id: String
-  name: String!
-  updatedAt: DateTime
-}
-
-type BillingPlanMaxAggregateOutputType {
-  billingFrequency: BillingFrequencies
-  cost: Int!
-  createdAt: DateTime
-  id: String
-  name: String
-  updatedAt: DateTime
-}
-
-type BillingPlanMinAggregateOutputType {
-  billingFrequency: BillingFrequencies
-  cost: Int!
-  createdAt: DateTime
-  id: String
-  name: String
-  updatedAt: DateTime
-}
-
-input BillingPlanOrderByInput {
-  billingFrequency: SortOrder
-  cost: SortOrder
-  createdAt: SortOrder
-  id: SortOrder
-  name: SortOrder
-  updatedAt: SortOrder
-}
-
-enum BillingPlanScalarFieldEnum {
-  billingFrequency
-  cost
-  createdAt
-  id
-  name
-  updatedAt
-}
-
-input BillingPlanScalarWhereWithAggregatesInput {
-  AND: [BillingPlanScalarWhereWithAggregatesInput]
-  NOT: [BillingPlanScalarWhereWithAggregatesInput]
-  OR: [BillingPlanScalarWhereWithAggregatesInput]
-  billingFrequency: EnumBillingFrequenciesWithAggregatesFilter
-  cost: IntWithAggregatesFilter
-  createdAt: DateTimeWithAggregatesFilter
-  id: StringWithAggregatesFilter
-  name: StringWithAggregatesFilter
-  updatedAt: DateTimeWithAggregatesFilter
-}
-
-type BillingPlanSumAggregateOutputType {
-  cost: Int!
-}
-
-input BillingPlanUncheckedCreateInput {
-  billingFrequency: BillingFrequencies!
-  cost: Int!
-  createdAt: DateTime
-  id: String
-  name: String!
-  updatedAt: DateTime
-}
-
-input BillingPlanUncheckedUpdateInput {
-  billingFrequency: EnumBillingFrequenciesFieldUpdateOperationsInput
-  cost: IntFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  name: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
-input BillingPlanUncheckedUpdateManyInput {
-  billingFrequency: EnumBillingFrequenciesFieldUpdateOperationsInput
-  cost: IntFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  name: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
-input BillingPlanUpdateInput {
-  billingFrequency: EnumBillingFrequenciesFieldUpdateOperationsInput
-  cost: IntFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  name: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
-input BillingPlanUpdateManyMutationInput {
-  billingFrequency: EnumBillingFrequenciesFieldUpdateOperationsInput
-  cost: IntFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  id: StringFieldUpdateOperationsInput
-  name: StringFieldUpdateOperationsInput
-  updatedAt: DateTimeFieldUpdateOperationsInput
-}
-
-input BillingPlanWhereInput {
-  AND: [BillingPlanWhereInput]
-  NOT: [BillingPlanWhereInput]
-  OR: [BillingPlanWhereInput]
-  billingFrequency: EnumBillingFrequenciesFilter
-  cost: IntFilter
-  createdAt: DateTimeFilter
-  id: StringFilter
-  name: StringFilter
-  updatedAt: DateTimeFilter
-}
-
-input BillingPlanWhereUniqueInput {
-  id: String
 }
 
 input BoolFieldUpdateOperationsInput {
@@ -397,62 +239,6 @@ input EmailConfirmationWhereUniqueInput {
   userId: String
 }
 
-input EnumBillingFrequenciesFieldUpdateOperationsInput {
-  set: BillingFrequencies
-}
-
-input EnumBillingFrequenciesFilter {
-  equals: BillingFrequencies
-  in: [BillingFrequencies]
-  not: NestedEnumBillingFrequenciesFilter
-  notIn: [BillingFrequencies]
-}
-
-input EnumBillingFrequenciesWithAggregatesFilter {
-  count: NestedIntFilter
-  equals: BillingFrequencies
-  in: [BillingFrequencies]
-  max: NestedEnumBillingFrequenciesFilter
-  min: NestedEnumBillingFrequenciesFilter
-  not: NestedEnumBillingFrequenciesWithAggregatesFilter
-  notIn: [BillingFrequencies]
-}
-
-input IntFieldUpdateOperationsInput {
-  decrement: Int
-  divide: Int
-  increment: Int
-  multiply: Int
-  set: Int
-}
-
-input IntFilter {
-  equals: Int
-  gt: Int
-  gte: Int
-  in: [Int]
-  lt: Int
-  lte: Int
-  not: NestedIntFilter
-  notIn: [Int]
-}
-
-input IntWithAggregatesFilter {
-  avg: NestedFloatFilter
-  count: NestedIntFilter
-  equals: Int
-  gt: Int
-  gte: Int
-  in: [Int]
-  lt: Int
-  lte: Int
-  max: NestedIntFilter
-  min: NestedIntFilter
-  not: NestedIntWithAggregatesFilter
-  notIn: [Int]
-  sum: NestedIntFilter
-}
-
 """Json custom scalar type"""
 scalar Json
 
@@ -501,34 +287,6 @@ input NestedDateTimeWithAggregatesFilter {
   notIn: [DateTime]
 }
 
-input NestedEnumBillingFrequenciesFilter {
-  equals: BillingFrequencies
-  in: [BillingFrequencies]
-  not: NestedEnumBillingFrequenciesFilter
-  notIn: [BillingFrequencies]
-}
-
-input NestedEnumBillingFrequenciesWithAggregatesFilter {
-  count: NestedIntFilter
-  equals: BillingFrequencies
-  in: [BillingFrequencies]
-  max: NestedEnumBillingFrequenciesFilter
-  min: NestedEnumBillingFrequenciesFilter
-  not: NestedEnumBillingFrequenciesWithAggregatesFilter
-  notIn: [BillingFrequencies]
-}
-
-input NestedFloatFilter {
-  equals: Float
-  gt: Float
-  gte: Float
-  in: [Float]
-  lt: Float
-  lte: Float
-  not: NestedFloatFilter
-  notIn: [Float]
-}
-
 input NestedIntFilter {
   equals: Int
   gt: Int
@@ -538,22 +296,6 @@ input NestedIntFilter {
   lte: Int
   not: NestedIntFilter
   notIn: [Int]
-}
-
-input NestedIntWithAggregatesFilter {
-  avg: NestedFloatFilter
-  count: NestedIntFilter
-  equals: Int
-  gt: Int
-  gte: Int
-  in: [Int]
-  lt: Int
-  lte: Int
-  max: NestedIntFilter
-  min: NestedIntFilter
-  not: NestedIntWithAggregatesFilter
-  notIn: [Int]
-  sum: NestedIntFilter
 }
 
 input NestedStringFilter {

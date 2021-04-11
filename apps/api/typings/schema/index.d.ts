@@ -46,95 +46,6 @@ declare global {
 }
 
 export interface NexusGenInputs {
-  BillingPlanCreateInput: { // input type
-    billingFrequency: NexusGenEnums['BillingFrequencies']; // BillingFrequencies!
-    cost: number; // Int!
-    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    id?: string | null; // String
-    name: string; // String!
-    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-  }
-  BillingPlanCreateManyInput: { // input type
-    billingFrequency: NexusGenEnums['BillingFrequencies']; // BillingFrequencies!
-    cost: number; // Int!
-    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    id?: string | null; // String
-    name: string; // String!
-    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-  }
-  BillingPlanOrderByInput: { // input type
-    billingFrequency?: NexusGenEnums['SortOrder'] | null; // SortOrder
-    cost?: NexusGenEnums['SortOrder'] | null; // SortOrder
-    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
-    id?: NexusGenEnums['SortOrder'] | null; // SortOrder
-    name?: NexusGenEnums['SortOrder'] | null; // SortOrder
-    updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
-  }
-  BillingPlanScalarWhereWithAggregatesInput: { // input type
-    AND?: Array<NexusGenInputs['BillingPlanScalarWhereWithAggregatesInput'] | null> | null; // [BillingPlanScalarWhereWithAggregatesInput]
-    NOT?: Array<NexusGenInputs['BillingPlanScalarWhereWithAggregatesInput'] | null> | null; // [BillingPlanScalarWhereWithAggregatesInput]
-    OR?: Array<NexusGenInputs['BillingPlanScalarWhereWithAggregatesInput'] | null> | null; // [BillingPlanScalarWhereWithAggregatesInput]
-    billingFrequency?: NexusGenInputs['EnumBillingFrequenciesWithAggregatesFilter'] | null; // EnumBillingFrequenciesWithAggregatesFilter
-    cost?: NexusGenInputs['IntWithAggregatesFilter'] | null; // IntWithAggregatesFilter
-    createdAt?: NexusGenInputs['DateTimeWithAggregatesFilter'] | null; // DateTimeWithAggregatesFilter
-    id?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
-    name?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
-    updatedAt?: NexusGenInputs['DateTimeWithAggregatesFilter'] | null; // DateTimeWithAggregatesFilter
-  }
-  BillingPlanUncheckedCreateInput: { // input type
-    billingFrequency: NexusGenEnums['BillingFrequencies']; // BillingFrequencies!
-    cost: number; // Int!
-    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    id?: string | null; // String
-    name: string; // String!
-    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-  }
-  BillingPlanUncheckedUpdateInput: { // input type
-    billingFrequency?: NexusGenInputs['EnumBillingFrequenciesFieldUpdateOperationsInput'] | null; // EnumBillingFrequenciesFieldUpdateOperationsInput
-    cost?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
-    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
-    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
-  }
-  BillingPlanUncheckedUpdateManyInput: { // input type
-    billingFrequency?: NexusGenInputs['EnumBillingFrequenciesFieldUpdateOperationsInput'] | null; // EnumBillingFrequenciesFieldUpdateOperationsInput
-    cost?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
-    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
-    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
-  }
-  BillingPlanUpdateInput: { // input type
-    billingFrequency?: NexusGenInputs['EnumBillingFrequenciesFieldUpdateOperationsInput'] | null; // EnumBillingFrequenciesFieldUpdateOperationsInput
-    cost?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
-    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
-    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
-  }
-  BillingPlanUpdateManyMutationInput: { // input type
-    billingFrequency?: NexusGenInputs['EnumBillingFrequenciesFieldUpdateOperationsInput'] | null; // EnumBillingFrequenciesFieldUpdateOperationsInput
-    cost?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
-    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
-    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
-  }
-  BillingPlanWhereInput: { // input type
-    AND?: Array<NexusGenInputs['BillingPlanWhereInput'] | null> | null; // [BillingPlanWhereInput]
-    NOT?: Array<NexusGenInputs['BillingPlanWhereInput'] | null> | null; // [BillingPlanWhereInput]
-    OR?: Array<NexusGenInputs['BillingPlanWhereInput'] | null> | null; // [BillingPlanWhereInput]
-    billingFrequency?: NexusGenInputs['EnumBillingFrequenciesFilter'] | null; // EnumBillingFrequenciesFilter
-    cost?: NexusGenInputs['IntFilter'] | null; // IntFilter
-    createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
-    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
-    name?: NexusGenInputs['StringFilter'] | null; // StringFilter
-    updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
-  }
-  BillingPlanWhereUniqueInput: { // input type
-    id?: string | null; // String
-  }
   BoolFieldUpdateOperationsInput: { // input type
     set?: boolean | null; // Boolean
   }
@@ -291,56 +202,6 @@ export interface NexusGenInputs {
     token?: string | null; // String
     userId?: string | null; // String
   }
-  EnumBillingFrequenciesFieldUpdateOperationsInput: { // input type
-    set?: NexusGenEnums['BillingFrequencies'] | null; // BillingFrequencies
-  }
-  EnumBillingFrequenciesFilter: { // input type
-    equals?: NexusGenEnums['BillingFrequencies'] | null; // BillingFrequencies
-    in?: Array<NexusGenEnums['BillingFrequencies'] | null> | null; // [BillingFrequencies]
-    not?: NexusGenInputs['NestedEnumBillingFrequenciesFilter'] | null; // NestedEnumBillingFrequenciesFilter
-    notIn?: Array<NexusGenEnums['BillingFrequencies'] | null> | null; // [BillingFrequencies]
-  }
-  EnumBillingFrequenciesWithAggregatesFilter: { // input type
-    count?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-    equals?: NexusGenEnums['BillingFrequencies'] | null; // BillingFrequencies
-    in?: Array<NexusGenEnums['BillingFrequencies'] | null> | null; // [BillingFrequencies]
-    max?: NexusGenInputs['NestedEnumBillingFrequenciesFilter'] | null; // NestedEnumBillingFrequenciesFilter
-    min?: NexusGenInputs['NestedEnumBillingFrequenciesFilter'] | null; // NestedEnumBillingFrequenciesFilter
-    not?: NexusGenInputs['NestedEnumBillingFrequenciesWithAggregatesFilter'] | null; // NestedEnumBillingFrequenciesWithAggregatesFilter
-    notIn?: Array<NexusGenEnums['BillingFrequencies'] | null> | null; // [BillingFrequencies]
-  }
-  IntFieldUpdateOperationsInput: { // input type
-    decrement?: number | null; // Int
-    divide?: number | null; // Int
-    increment?: number | null; // Int
-    multiply?: number | null; // Int
-    set?: number | null; // Int
-  }
-  IntFilter: { // input type
-    equals?: number | null; // Int
-    gt?: number | null; // Int
-    gte?: number | null; // Int
-    in?: Array<number | null> | null; // [Int]
-    lt?: number | null; // Int
-    lte?: number | null; // Int
-    not?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-    notIn?: Array<number | null> | null; // [Int]
-  }
-  IntWithAggregatesFilter: { // input type
-    avg?: NexusGenInputs['NestedFloatFilter'] | null; // NestedFloatFilter
-    count?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-    equals?: number | null; // Int
-    gt?: number | null; // Int
-    gte?: number | null; // Int
-    in?: Array<number | null> | null; // [Int]
-    lt?: number | null; // Int
-    lte?: number | null; // Int
-    max?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-    min?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-    not?: NexusGenInputs['NestedIntWithAggregatesFilter'] | null; // NestedIntWithAggregatesFilter
-    notIn?: Array<number | null> | null; // [Int]
-    sum?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-  }
   NestedBoolFilter: { // input type
     equals?: boolean | null; // Boolean
     not?: NexusGenInputs['NestedBoolFilter'] | null; // NestedBoolFilter
@@ -375,31 +236,6 @@ export interface NexusGenInputs {
     not?: NexusGenInputs['NestedDateTimeWithAggregatesFilter'] | null; // NestedDateTimeWithAggregatesFilter
     notIn?: Array<NexusGenScalars['DateTime'] | null> | null; // [DateTime]
   }
-  NestedEnumBillingFrequenciesFilter: { // input type
-    equals?: NexusGenEnums['BillingFrequencies'] | null; // BillingFrequencies
-    in?: Array<NexusGenEnums['BillingFrequencies'] | null> | null; // [BillingFrequencies]
-    not?: NexusGenInputs['NestedEnumBillingFrequenciesFilter'] | null; // NestedEnumBillingFrequenciesFilter
-    notIn?: Array<NexusGenEnums['BillingFrequencies'] | null> | null; // [BillingFrequencies]
-  }
-  NestedEnumBillingFrequenciesWithAggregatesFilter: { // input type
-    count?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-    equals?: NexusGenEnums['BillingFrequencies'] | null; // BillingFrequencies
-    in?: Array<NexusGenEnums['BillingFrequencies'] | null> | null; // [BillingFrequencies]
-    max?: NexusGenInputs['NestedEnumBillingFrequenciesFilter'] | null; // NestedEnumBillingFrequenciesFilter
-    min?: NexusGenInputs['NestedEnumBillingFrequenciesFilter'] | null; // NestedEnumBillingFrequenciesFilter
-    not?: NexusGenInputs['NestedEnumBillingFrequenciesWithAggregatesFilter'] | null; // NestedEnumBillingFrequenciesWithAggregatesFilter
-    notIn?: Array<NexusGenEnums['BillingFrequencies'] | null> | null; // [BillingFrequencies]
-  }
-  NestedFloatFilter: { // input type
-    equals?: number | null; // Float
-    gt?: number | null; // Float
-    gte?: number | null; // Float
-    in?: Array<number | null> | null; // [Float]
-    lt?: number | null; // Float
-    lte?: number | null; // Float
-    not?: NexusGenInputs['NestedFloatFilter'] | null; // NestedFloatFilter
-    notIn?: Array<number | null> | null; // [Float]
-  }
   NestedIntFilter: { // input type
     equals?: number | null; // Int
     gt?: number | null; // Int
@@ -409,21 +245,6 @@ export interface NexusGenInputs {
     lte?: number | null; // Int
     not?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
     notIn?: Array<number | null> | null; // [Int]
-  }
-  NestedIntWithAggregatesFilter: { // input type
-    avg?: NexusGenInputs['NestedFloatFilter'] | null; // NestedFloatFilter
-    count?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-    equals?: number | null; // Int
-    gt?: number | null; // Int
-    gte?: number | null; // Int
-    in?: Array<number | null> | null; // [Int]
-    lt?: number | null; // Int
-    lte?: number | null; // Int
-    max?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-    min?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
-    not?: NexusGenInputs['NestedIntWithAggregatesFilter'] | null; // NestedIntWithAggregatesFilter
-    notIn?: Array<number | null> | null; // [Int]
-    sum?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
   }
   NestedStringFilter: { // input type
     contains?: string | null; // String
@@ -824,8 +645,6 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
-  BillingFrequencies: "ANNUALLY" | "MONTHLY"
-  BillingPlanScalarFieldEnum: "billingFrequency" | "cost" | "createdAt" | "id" | "name" | "updatedAt"
   EmailConfirmationScalarFieldEnum: "createdAt" | "token" | "userId"
   QueryMode: "default" | "insensitive"
   SortOrder: "asc" | "desc"
@@ -845,13 +664,6 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
-  AggregateBillingPlan: { // root type
-    avg?: NexusGenRootTypes['BillingPlanAvgAggregateOutputType'] | null; // BillingPlanAvgAggregateOutputType
-    count?: NexusGenRootTypes['BillingPlanCountAggregateOutputType'] | null; // BillingPlanCountAggregateOutputType
-    max?: NexusGenRootTypes['BillingPlanMaxAggregateOutputType'] | null; // BillingPlanMaxAggregateOutputType
-    min?: NexusGenRootTypes['BillingPlanMinAggregateOutputType'] | null; // BillingPlanMinAggregateOutputType
-    sum?: NexusGenRootTypes['BillingPlanSumAggregateOutputType'] | null; // BillingPlanSumAggregateOutputType
-  }
   AggregateEmailConfirmation: { // root type
     count?: NexusGenRootTypes['EmailConfirmationCountAggregateOutputType'] | null; // EmailConfirmationCountAggregateOutputType
     max?: NexusGenRootTypes['EmailConfirmationMaxAggregateOutputType'] | null; // EmailConfirmationMaxAggregateOutputType
@@ -869,37 +681,6 @@ export interface NexusGenObjects {
   }
   BatchPayload: { // root type
     count: number; // Int!
-  }
-  BillingPlanAvgAggregateOutputType: { // root type
-    cost: number; // Float!
-  }
-  BillingPlanCountAggregateOutputType: { // root type
-    _all: number; // Int!
-    billingFrequency?: number | null; // Int
-    cost: number; // Int!
-    createdAt?: number | null; // Int
-    id?: number | null; // Int
-    name?: number | null; // Int
-    updatedAt?: number | null; // Int
-  }
-  BillingPlanMaxAggregateOutputType: { // root type
-    billingFrequency?: NexusGenEnums['BillingFrequencies'] | null; // BillingFrequencies
-    cost: number; // Int!
-    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    id?: string | null; // String
-    name?: string | null; // String
-    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-  }
-  BillingPlanMinAggregateOutputType: { // root type
-    billingFrequency?: NexusGenEnums['BillingFrequencies'] | null; // BillingFrequencies
-    cost: number; // Int!
-    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    id?: string | null; // String
-    name?: string | null; // String
-    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
-  }
-  BillingPlanSumAggregateOutputType: { // root type
-    cost: number; // Int!
   }
   EmailConfirmationCountAggregateOutputType: { // root type
     _all: number; // Int!
@@ -987,13 +768,6 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
-  AggregateBillingPlan: { // field return type
-    avg: NexusGenRootTypes['BillingPlanAvgAggregateOutputType'] | null; // BillingPlanAvgAggregateOutputType
-    count: NexusGenRootTypes['BillingPlanCountAggregateOutputType'] | null; // BillingPlanCountAggregateOutputType
-    max: NexusGenRootTypes['BillingPlanMaxAggregateOutputType'] | null; // BillingPlanMaxAggregateOutputType
-    min: NexusGenRootTypes['BillingPlanMinAggregateOutputType'] | null; // BillingPlanMinAggregateOutputType
-    sum: NexusGenRootTypes['BillingPlanSumAggregateOutputType'] | null; // BillingPlanSumAggregateOutputType
-  }
   AggregateEmailConfirmation: { // field return type
     count: NexusGenRootTypes['EmailConfirmationCountAggregateOutputType'] | null; // EmailConfirmationCountAggregateOutputType
     max: NexusGenRootTypes['EmailConfirmationMaxAggregateOutputType'] | null; // EmailConfirmationMaxAggregateOutputType
@@ -1011,37 +785,6 @@ export interface NexusGenFieldTypes {
   }
   BatchPayload: { // field return type
     count: number; // Int!
-  }
-  BillingPlanAvgAggregateOutputType: { // field return type
-    cost: number; // Float!
-  }
-  BillingPlanCountAggregateOutputType: { // field return type
-    _all: number; // Int!
-    billingFrequency: number | null; // Int
-    cost: number; // Int!
-    createdAt: number | null; // Int
-    id: number | null; // Int
-    name: number | null; // Int
-    updatedAt: number | null; // Int
-  }
-  BillingPlanMaxAggregateOutputType: { // field return type
-    billingFrequency: NexusGenEnums['BillingFrequencies'] | null; // BillingFrequencies
-    cost: number; // Int!
-    createdAt: NexusGenScalars['DateTime'] | null; // DateTime
-    id: string | null; // String
-    name: string | null; // String
-    updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
-  }
-  BillingPlanMinAggregateOutputType: { // field return type
-    billingFrequency: NexusGenEnums['BillingFrequencies'] | null; // BillingFrequencies
-    cost: number; // Int!
-    createdAt: NexusGenScalars['DateTime'] | null; // DateTime
-    id: string | null; // String
-    name: string | null; // String
-    updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
-  }
-  BillingPlanSumAggregateOutputType: { // field return type
-    cost: number; // Int!
   }
   EmailConfirmationCountAggregateOutputType: { // field return type
     _all: number; // Int!
@@ -1127,13 +870,6 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
-  AggregateBillingPlan: { // field return type name
-    avg: 'BillingPlanAvgAggregateOutputType'
-    count: 'BillingPlanCountAggregateOutputType'
-    max: 'BillingPlanMaxAggregateOutputType'
-    min: 'BillingPlanMinAggregateOutputType'
-    sum: 'BillingPlanSumAggregateOutputType'
-  }
   AggregateEmailConfirmation: { // field return type name
     count: 'EmailConfirmationCountAggregateOutputType'
     max: 'EmailConfirmationMaxAggregateOutputType'
@@ -1151,37 +887,6 @@ export interface NexusGenFieldTypeNames {
   }
   BatchPayload: { // field return type name
     count: 'Int'
-  }
-  BillingPlanAvgAggregateOutputType: { // field return type name
-    cost: 'Float'
-  }
-  BillingPlanCountAggregateOutputType: { // field return type name
-    _all: 'Int'
-    billingFrequency: 'Int'
-    cost: 'Int'
-    createdAt: 'Int'
-    id: 'Int'
-    name: 'Int'
-    updatedAt: 'Int'
-  }
-  BillingPlanMaxAggregateOutputType: { // field return type name
-    billingFrequency: 'BillingFrequencies'
-    cost: 'Int'
-    createdAt: 'DateTime'
-    id: 'String'
-    name: 'String'
-    updatedAt: 'DateTime'
-  }
-  BillingPlanMinAggregateOutputType: { // field return type name
-    billingFrequency: 'BillingFrequencies'
-    cost: 'Int'
-    createdAt: 'DateTime'
-    id: 'String'
-    name: 'String'
-    updatedAt: 'DateTime'
-  }
-  BillingPlanSumAggregateOutputType: { // field return type name
-    cost: 'Int'
   }
   EmailConfirmationCountAggregateOutputType: { // field return type name
     _all: 'Int'

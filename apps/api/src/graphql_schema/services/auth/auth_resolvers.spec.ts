@@ -1,12 +1,19 @@
 import { createMercuriusTestClient } from "mercurius-integration-testing";
+import { gql } from "urql";
 import { createTestContext } from "../../../../tests/__helpers";
 
-import { RequestLoginDocument } from "@monotonous/sdk-client";
+const query = gql`
+  mutation RequestLogin($email: String!) {
+    requestLogin(email: $email) {
+      success
+    }
+  }
+`;
 
 describe("requestLogin mutation", () => {
   const ctx = createTestContext();
 
-  beforeEach(async (done) => {
+  beforeAll(async (done) => {
     await ctx.prisma.user.create({
       data: {
         email: "asd@asd.com",
@@ -19,7 +26,7 @@ describe("requestLogin mutation", () => {
 
   test("successfully requests a login", async (done) => {
     let client = createMercuriusTestClient(ctx.server);
-    const res = await client.mutate(RequestLoginDocument, {
+    const res = await client.mutate(query, {
       variables: {
         email: "asd@asd.com",
       },
@@ -35,7 +42,7 @@ describe("requestLogin mutation", () => {
 
   test("returns an error when user doesnt exist", async (done) => {
     let client = createMercuriusTestClient(ctx.server);
-    const res = await client.mutate(RequestLoginDocument, {
+    const res = await client.mutate(query, {
       variables: {
         email: "doesnt@exist.com",
       },

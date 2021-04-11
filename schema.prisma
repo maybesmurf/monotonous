@@ -16,11 +16,6 @@ datasource db {
 // Enums
 // ======================
 
-enum BillingFrequencies {
-  MONTHLY
-  ANNUALLY
-}
-
 enum TeamRoles {
   ADMIN
   MEMBER
@@ -44,7 +39,7 @@ model User {
   confirmed         Boolean            @default(false)
   email             String             @unique
   //
-  emailConfirmation EmailConfirmation?
+  emailConfirmation EmailConfirmation? 
   profile           UserProfile?
 }
 
@@ -61,13 +56,4 @@ model UserProfile {
   lastName  String
   user      User   @relation(fields: [userId], references: [id])
   userId    String @unique
-}
-
-model BillingPlan {
-  id               String             @id @default(cuid())
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
-  cost             Int
-  billingFrequency BillingFrequencies
-  name             String
 }

@@ -1,3 +1,5 @@
+const path = require("path");
+
 module.exports = {
   roots: ["<rootDir>/src"],
   testMatch: [
@@ -7,4 +9,5 @@ module.exports = {
   transform: {
     "^.+\\.(ts|tsx)$": "esbuild-jest",
   },
+  testEnvironment: path.join(__dirname, "tests/db_test_env.js"),
 };

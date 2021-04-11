@@ -20,15 +20,6 @@ export type Scalars = {
   Json: any;
 };
 
-export type AggregateBillingPlan = {
-  __typename: 'AggregateBillingPlan';
-  avg?: Maybe<BillingPlanAvgAggregateOutputType>;
-  count?: Maybe<BillingPlanCountAggregateOutputType>;
-  max?: Maybe<BillingPlanMaxAggregateOutputType>;
-  min?: Maybe<BillingPlanMinAggregateOutputType>;
-  sum?: Maybe<BillingPlanSumAggregateOutputType>;
-};
-
 export type AggregateEmailConfirmation = {
   __typename: 'AggregateEmailConfirmation';
   count?: Maybe<EmailConfirmationCountAggregateOutputType>;
@@ -53,161 +44,6 @@ export type AggregateUserProfile = {
 export type BatchPayload = {
   __typename: 'BatchPayload';
   count: Scalars['Int'];
-};
-
-export enum BillingFrequencies {
-  Annually = 'ANNUALLY',
-  Monthly = 'MONTHLY'
-}
-
-export type BillingPlanAvgAggregateOutputType = {
-  __typename: 'BillingPlanAvgAggregateOutputType';
-  cost: Scalars['Float'];
-};
-
-export type BillingPlanCountAggregateOutputType = {
-  __typename: 'BillingPlanCountAggregateOutputType';
-  _all: Scalars['Int'];
-  billingFrequency?: Maybe<Scalars['Int']>;
-  cost: Scalars['Int'];
-  createdAt?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['Int']>;
-  updatedAt?: Maybe<Scalars['Int']>;
-};
-
-export type BillingPlanCreateInput = {
-  billingFrequency: BillingFrequencies;
-  cost: Scalars['Int'];
-  createdAt?: Maybe<Scalars['DateTime']>;
-  id?: Maybe<Scalars['String']>;
-  name: Scalars['String'];
-  updatedAt?: Maybe<Scalars['DateTime']>;
-};
-
-export type BillingPlanCreateManyInput = {
-  billingFrequency: BillingFrequencies;
-  cost: Scalars['Int'];
-  createdAt?: Maybe<Scalars['DateTime']>;
-  id?: Maybe<Scalars['String']>;
-  name: Scalars['String'];
-  updatedAt?: Maybe<Scalars['DateTime']>;
-};
-
-export type BillingPlanMaxAggregateOutputType = {
-  __typename: 'BillingPlanMaxAggregateOutputType';
-  billingFrequency?: Maybe<BillingFrequencies>;
-  cost: Scalars['Int'];
-  createdAt?: Maybe<Scalars['DateTime']>;
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-};
-
-export type BillingPlanMinAggregateOutputType = {
-  __typename: 'BillingPlanMinAggregateOutputType';
-  billingFrequency?: Maybe<BillingFrequencies>;
-  cost: Scalars['Int'];
-  createdAt?: Maybe<Scalars['DateTime']>;
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-};
-
-export type BillingPlanOrderByInput = {
-  billingFrequency?: Maybe<SortOrder>;
-  cost?: Maybe<SortOrder>;
-  createdAt?: Maybe<SortOrder>;
-  id?: Maybe<SortOrder>;
-  name?: Maybe<SortOrder>;
-  updatedAt?: Maybe<SortOrder>;
-};
-
-export enum BillingPlanScalarFieldEnum {
-  BillingFrequency = 'billingFrequency',
-  Cost = 'cost',
-  CreatedAt = 'createdAt',
-  Id = 'id',
-  Name = 'name',
-  UpdatedAt = 'updatedAt'
-}
-
-export type BillingPlanScalarWhereWithAggregatesInput = {
-  AND?: Maybe<Array<Maybe<BillingPlanScalarWhereWithAggregatesInput>>>;
-  NOT?: Maybe<Array<Maybe<BillingPlanScalarWhereWithAggregatesInput>>>;
-  OR?: Maybe<Array<Maybe<BillingPlanScalarWhereWithAggregatesInput>>>;
-  billingFrequency?: Maybe<EnumBillingFrequenciesWithAggregatesFilter>;
-  cost?: Maybe<IntWithAggregatesFilter>;
-  createdAt?: Maybe<DateTimeWithAggregatesFilter>;
-  id?: Maybe<StringWithAggregatesFilter>;
-  name?: Maybe<StringWithAggregatesFilter>;
-  updatedAt?: Maybe<DateTimeWithAggregatesFilter>;
-};
-
-export type BillingPlanSumAggregateOutputType = {
-  __typename: 'BillingPlanSumAggregateOutputType';
-  cost: Scalars['Int'];
-};
-
-export type BillingPlanUncheckedCreateInput = {
-  billingFrequency: BillingFrequencies;
-  cost: Scalars['Int'];
-  createdAt?: Maybe<Scalars['DateTime']>;
-  id?: Maybe<Scalars['String']>;
-  name: Scalars['String'];
-  updatedAt?: Maybe<Scalars['DateTime']>;
-};
-
-export type BillingPlanUncheckedUpdateInput = {
-  billingFrequency?: Maybe<EnumBillingFrequenciesFieldUpdateOperationsInput>;
-  cost?: Maybe<IntFieldUpdateOperationsInput>;
-  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
-  id?: Maybe<StringFieldUpdateOperationsInput>;
-  name?: Maybe<StringFieldUpdateOperationsInput>;
-  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
-};
-
-export type BillingPlanUncheckedUpdateManyInput = {
-  billingFrequency?: Maybe<EnumBillingFrequenciesFieldUpdateOperationsInput>;
-  cost?: Maybe<IntFieldUpdateOperationsInput>;
-  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
-  id?: Maybe<StringFieldUpdateOperationsInput>;
-  name?: Maybe<StringFieldUpdateOperationsInput>;
-  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
-};
-
-export type BillingPlanUpdateInput = {
-  billingFrequency?: Maybe<EnumBillingFrequenciesFieldUpdateOperationsInput>;
-  cost?: Maybe<IntFieldUpdateOperationsInput>;
-  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
-  id?: Maybe<StringFieldUpdateOperationsInput>;
-  name?: Maybe<StringFieldUpdateOperationsInput>;
-  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
-};
-
-export type BillingPlanUpdateManyMutationInput = {
-  billingFrequency?: Maybe<EnumBillingFrequenciesFieldUpdateOperationsInput>;
-  cost?: Maybe<IntFieldUpdateOperationsInput>;
-  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
-  id?: Maybe<StringFieldUpdateOperationsInput>;
-  name?: Maybe<StringFieldUpdateOperationsInput>;
-  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
-};
-
-export type BillingPlanWhereInput = {
-  AND?: Maybe<Array<Maybe<BillingPlanWhereInput>>>;
-  NOT?: Maybe<Array<Maybe<BillingPlanWhereInput>>>;
-  OR?: Maybe<Array<Maybe<BillingPlanWhereInput>>>;
-  billingFrequency?: Maybe<EnumBillingFrequenciesFilter>;
-  cost?: Maybe<IntFilter>;
-  createdAt?: Maybe<DateTimeFilter>;
-  id?: Maybe<StringFilter>;
-  name?: Maybe<StringFilter>;
-  updatedAt?: Maybe<DateTimeFilter>;
-};
-
-export type BillingPlanWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
 };
 
 export type BoolFieldUpdateOperationsInput = {
@@ -424,62 +260,6 @@ export type EmailConfirmationWhereUniqueInput = {
   userId?: Maybe<Scalars['String']>;
 };
 
-export type EnumBillingFrequenciesFieldUpdateOperationsInput = {
-  set?: Maybe<BillingFrequencies>;
-};
-
-export type EnumBillingFrequenciesFilter = {
-  equals?: Maybe<BillingFrequencies>;
-  in?: Maybe<Array<Maybe<BillingFrequencies>>>;
-  not?: Maybe<NestedEnumBillingFrequenciesFilter>;
-  notIn?: Maybe<Array<Maybe<BillingFrequencies>>>;
-};
-
-export type EnumBillingFrequenciesWithAggregatesFilter = {
-  count?: Maybe<NestedIntFilter>;
-  equals?: Maybe<BillingFrequencies>;
-  in?: Maybe<Array<Maybe<BillingFrequencies>>>;
-  max?: Maybe<NestedEnumBillingFrequenciesFilter>;
-  min?: Maybe<NestedEnumBillingFrequenciesFilter>;
-  not?: Maybe<NestedEnumBillingFrequenciesWithAggregatesFilter>;
-  notIn?: Maybe<Array<Maybe<BillingFrequencies>>>;
-};
-
-export type IntFieldUpdateOperationsInput = {
-  decrement?: Maybe<Scalars['Int']>;
-  divide?: Maybe<Scalars['Int']>;
-  increment?: Maybe<Scalars['Int']>;
-  multiply?: Maybe<Scalars['Int']>;
-  set?: Maybe<Scalars['Int']>;
-};
-
-export type IntFilter = {
-  equals?: Maybe<Scalars['Int']>;
-  gt?: Maybe<Scalars['Int']>;
-  gte?: Maybe<Scalars['Int']>;
-  in?: Maybe<Array<Maybe<Scalars['Int']>>>;
-  lt?: Maybe<Scalars['Int']>;
-  lte?: Maybe<Scalars['Int']>;
-  not?: Maybe<NestedIntFilter>;
-  notIn?: Maybe<Array<Maybe<Scalars['Int']>>>;
-};
-
-export type IntWithAggregatesFilter = {
-  avg?: Maybe<NestedFloatFilter>;
-  count?: Maybe<NestedIntFilter>;
-  equals?: Maybe<Scalars['Int']>;
-  gt?: Maybe<Scalars['Int']>;
-  gte?: Maybe<Scalars['Int']>;
-  in?: Maybe<Array<Maybe<Scalars['Int']>>>;
-  lt?: Maybe<Scalars['Int']>;
-  lte?: Maybe<Scalars['Int']>;
-  max?: Maybe<NestedIntFilter>;
-  min?: Maybe<NestedIntFilter>;
-  not?: Maybe<NestedIntWithAggregatesFilter>;
-  notIn?: Maybe<Array<Maybe<Scalars['Int']>>>;
-  sum?: Maybe<NestedIntFilter>;
-};
-
 
 export type Mutation = {
   __typename: 'Mutation';
@@ -550,34 +330,6 @@ export type NestedDateTimeWithAggregatesFilter = {
   notIn?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
 };
 
-export type NestedEnumBillingFrequenciesFilter = {
-  equals?: Maybe<BillingFrequencies>;
-  in?: Maybe<Array<Maybe<BillingFrequencies>>>;
-  not?: Maybe<NestedEnumBillingFrequenciesFilter>;
-  notIn?: Maybe<Array<Maybe<BillingFrequencies>>>;
-};
-
-export type NestedEnumBillingFrequenciesWithAggregatesFilter = {
-  count?: Maybe<NestedIntFilter>;
-  equals?: Maybe<BillingFrequencies>;
-  in?: Maybe<Array<Maybe<BillingFrequencies>>>;
-  max?: Maybe<NestedEnumBillingFrequenciesFilter>;
-  min?: Maybe<NestedEnumBillingFrequenciesFilter>;
-  not?: Maybe<NestedEnumBillingFrequenciesWithAggregatesFilter>;
-  notIn?: Maybe<Array<Maybe<BillingFrequencies>>>;
-};
-
-export type NestedFloatFilter = {
-  equals?: Maybe<Scalars['Float']>;
-  gt?: Maybe<Scalars['Float']>;
-  gte?: Maybe<Scalars['Float']>;
-  in?: Maybe<Array<Maybe<Scalars['Float']>>>;
-  lt?: Maybe<Scalars['Float']>;
-  lte?: Maybe<Scalars['Float']>;
-  not?: Maybe<NestedFloatFilter>;
-  notIn?: Maybe<Array<Maybe<Scalars['Float']>>>;
-};
-
 export type NestedIntFilter = {
   equals?: Maybe<Scalars['Int']>;
   gt?: Maybe<Scalars['Int']>;
@@ -587,22 +339,6 @@ export type NestedIntFilter = {
   lte?: Maybe<Scalars['Int']>;
   not?: Maybe<NestedIntFilter>;
   notIn?: Maybe<Array<Maybe<Scalars['Int']>>>;
-};
-
-export type NestedIntWithAggregatesFilter = {
-  avg?: Maybe<NestedFloatFilter>;
-  count?: Maybe<NestedIntFilter>;
-  equals?: Maybe<Scalars['Int']>;
-  gt?: Maybe<Scalars['Int']>;
-  gte?: Maybe<Scalars['Int']>;
-  in?: Maybe<Array<Maybe<Scalars['Int']>>>;
-  lt?: Maybe<Scalars['Int']>;
-  lte?: Maybe<Scalars['Int']>;
-  max?: Maybe<NestedIntFilter>;
-  min?: Maybe<NestedIntFilter>;
-  not?: Maybe<NestedIntWithAggregatesFilter>;
-  notIn?: Maybe<Array<Maybe<Scalars['Int']>>>;
-  sum?: Maybe<NestedIntFilter>;
 };
 
 export type NestedStringFilter = {
