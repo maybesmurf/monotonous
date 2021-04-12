@@ -4,7 +4,6 @@
   "main": "build/index.js",
   "license": "UNLICENSED",
   "scripts": {
-    "prepare": "tsc -b",
     "clean": "rm -rf ./build ./node_modules",
     "dev": "tsc-watch --project . --onSuccess 'node ./build/src/index.js' --noClear",
     "build": "tsc -b"

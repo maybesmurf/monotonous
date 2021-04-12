@@ -13,7 +13,9 @@ const query = gql`
 describe("requestLogin mutation", () => {
   const ctx = createTestContext();
 
-  beforeAll(async (done) => {
+  test("successfully requests a login", async (done) => {
+    let client = createMercuriusTestClient(ctx.server);
+
     await ctx.prisma.user.create({
       data: {
         email: "asd@asd.com",
@@ -21,11 +23,6 @@ describe("requestLogin mutation", () => {
       },
     });
 
-    done();
-  });
-
-  test("successfully requests a login", async (done) => {
-    let client = createMercuriusTestClient(ctx.server);
     const res = await client.mutate(query, {
       variables: {
         email: "asd@asd.com",
