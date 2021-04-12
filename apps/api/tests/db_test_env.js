@@ -18,7 +18,6 @@ class PrismaTestEnvironment extends NodeEnvironment {
     super(config);
     this.schema = `test_${nanoid()}`;
     this.connectionString = `postgresql://postgres@localhost:5432/monotonous-test?schema=${this.schema}`;
-    console.log(this.connectionString);
   }
 
   async setup() {
