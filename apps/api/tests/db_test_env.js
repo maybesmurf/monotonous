@@ -21,7 +21,6 @@ class PrismaTestEnvironment extends NodeEnvironment {
   }
 
   async setup() {
-    await super.setup();
     process.env.DATABASE_URL = this.connectionString;
     this.global.process.env.DATABASE_URL = this.connectionString;
 

@@ -1,4 +1,3 @@
-import { createMercuriusTestClient } from "mercurius-integration-testing";
 import { gql } from "urql";
 import { createTestContext } from "../../../../../tests/__helpers";
 
@@ -19,7 +18,6 @@ const query = gql`
 
 describe("register mutation", () => {
   const ctx = createTestContext();
-  const client = createMercuriusTestClient(ctx.server);
 
   test("should register a user with proper params", async (done) => {
     const variables = {
@@ -27,7 +25,8 @@ describe("register mutation", () => {
       firstName: "Nick",
       lastName: "Q",
     };
-    const result = await client.mutate(query, {
+
+    const result = await ctx.client.mutate(query, {
       variables,
     });
 
@@ -44,7 +43,7 @@ describe("register mutation", () => {
   });
 
   test("returns errors if improper attributs are given", async (done) => {
-    const result = await client.mutate(query, {
+    const result = await ctx.client.mutate(query, {
       variables: {
         email: "none",
       },

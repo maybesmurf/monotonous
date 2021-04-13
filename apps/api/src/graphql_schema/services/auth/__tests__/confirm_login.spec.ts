@@ -1,5 +1,4 @@
 import { gql } from "@urql/core";
-import { createMercuriusTestClient } from "mercurius-integration-testing";
 import { createTestContext } from "../../../../../tests/__helpers";
 
 const query = gql`
@@ -12,7 +11,6 @@ const query = gql`
 
 describe("confirmLogin mutation", () => {
   const ctx = createTestContext();
-  const client = createMercuriusTestClient(ctx.server);
 
   test("requests a otp", async (done) => {
     const email = "asd@asd.com";
@@ -20,7 +18,7 @@ describe("confirmLogin mutation", () => {
       data: { email },
     });
 
-    const result = await client.mutate(query, {
+    const result = await ctx.client.mutate(query, {
       variables: { email },
     });
 

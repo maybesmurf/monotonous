@@ -1,5 +1,5 @@
 import { config } from "@monotonous/conf";
-import { prisma } from "@monotonous/sdk-server";
+import { prisma, redis } from "@monotonous/sdk-server";
 import { createServer } from "./server";
 
 async function init() {
@@ -17,6 +17,8 @@ async function init() {
 
     return server;
   } catch (error) {
+    await prisma.$disconnect();
+    await redis.quit();
     console.error("Error starting api: " + error);
     process.exit(1);
   }

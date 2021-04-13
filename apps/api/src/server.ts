@@ -1,7 +1,7 @@
 import fastify from "fastify";
 import cookie from "fastify-cookie";
 import merc from "mercurius";
-import { AuthService } from "@monotonous/sdk-server";
+import { AuthService, prisma, redis } from "@monotonous/sdk-server";
 
 import { loaders } from "./graphql_schema/loaders";
 import { schema } from "./graphql_schema";
@@ -39,6 +39,12 @@ export function createServer(params: { prisma: PrismaClient }) {
     subscription: true,
     graphiql: process.env.NODE_ENV !== "production" ? "playground" : false,
     jit: 1,
+  });
+
+  server.addHook("onClose", async (_instance, done) => {
+    await prisma.$disconnect();
+    await redis.quit();
+    done();
   });
 
   return server;

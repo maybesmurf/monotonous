@@ -1,17 +1,12 @@
-import { FastifyInstance } from "fastify";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@monotonous/sdk-server";
+import { createMercuriusTestClient } from "mercurius-integration-testing";
 import { createServer } from "../src/server";
 
-type TestContext = {
-  server: FastifyInstance;
-  prisma: PrismaClient;
-};
+export function createTestContext() {
+  const server = createServer({ prisma });
+  const client = createMercuriusTestClient(server);
 
-export function createTestContext(): TestContext {
-  let prisma = new PrismaClient();
-  let server = createServer({ prisma });
-
-  beforeEach(async (done) => {
+  afterEach(async (done) => {
     await prisma.$executeRaw(`
       DO $$ DECLARE
         r RECORD;
@@ -29,12 +24,12 @@ export function createTestContext(): TestContext {
     try {
       await prisma.$disconnect();
       await server.close();
-      done();
     } catch (e) {
       console.log(e);
-      done();
     }
+
+    done();
   });
 
-  return { prisma, server };
+  return { prisma, server, client };
 }

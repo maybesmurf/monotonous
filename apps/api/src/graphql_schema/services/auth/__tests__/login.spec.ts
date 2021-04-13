@@ -1,4 +1,3 @@
-import { createMercuriusTestClient } from "mercurius-integration-testing";
 import { gql } from "urql";
 import { createTestContext } from "../../../../../tests/__helpers";
 
@@ -16,7 +15,6 @@ const query = gql`
 
 describe("login mutation", () => {
   const ctx = createTestContext();
-  const client = createMercuriusTestClient(ctx.server);
 
   test("", async (done) => {
     done();
