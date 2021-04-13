@@ -38,6 +38,11 @@ export const AuthMutation = extendType({
       },
       resolve: resolvers.login,
     });
+
+    t.field("logout", {
+      type: "SuccessResponse",
+      resolve: resolvers.logout,
+    });
   },
 });
 

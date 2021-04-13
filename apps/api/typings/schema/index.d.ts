@@ -805,6 +805,7 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     confirmEmail: NexusGenRootTypes['User'] | null; // User
     login: NexusGenRootTypes['User'] | null; // User
+    logout: NexusGenRootTypes['SuccessResponse'] | null; // SuccessResponse
     register: NexusGenRootTypes['User'] | null; // User
     requestLogin: NexusGenRootTypes['SuccessResponse'] | null; // SuccessResponse
   }
@@ -907,6 +908,7 @@ export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     confirmEmail: 'User'
     login: 'User'
+    logout: 'SuccessResponse'
     register: 'User'
     requestLogin: 'SuccessResponse'
   }

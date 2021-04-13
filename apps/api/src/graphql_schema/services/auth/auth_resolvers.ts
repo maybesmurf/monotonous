@@ -140,3 +140,15 @@ export const login: FieldResolver<"Mutation", "login"> = async (
 
   return user;
 };
+
+export const logout: FieldResolver<"Mutation", "logout"> = async (
+  _source,
+  _args,
+  { reply }
+) => {
+  reply.setCookie(config.auth.cookiePrefix, "", {
+    httpOnly: true,
+  });
+
+  return { success: true };
+};

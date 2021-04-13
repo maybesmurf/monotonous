@@ -12,7 +12,6 @@ gql`
 `;
 
 export default function Signup() {
-  const router = useRouter();
   const [{ data, fetching }, signup] = useSignupMutation();
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -23,7 +22,6 @@ export default function Signup() {
 
     try {
       await signup({ email, firstName, lastName });
-      router.push("/login");
     } catch (e) {
       console.error(e);
     }
@@ -34,31 +32,37 @@ export default function Signup() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col mx-auto max-w-2xl">
-      <p>
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col mx-auto max-w-2xl space-y-5"
+    >
+      <p className="flex flex-col">
         <label htmlFor="email">Email Address</label>
         <input
           type="email"
           name="email"
           value={email}
+          className="bg-gray-800 text-white border border-gray-700"
           onChange={(e) => setEmail(e.currentTarget.value)}
         />
       </p>
-      <p>
+      <p className="flex flex-col">
         <label htmlFor="firstName">First Name</label>
         <input
           type="text"
           name="firstName"
           value={firstName}
+          className="bg-gray-800 text-white border border-gray-700"
           onChange={(e) => setFirstName(e.currentTarget.value)}
         />
       </p>
-      <p>
+      <p className="flex flex-col">
         <label htmlFor="lastName">Last Name</label>
         <input
           type="text"
           name="lastName"
           value={lastName}
+          className="bg-gray-800 text-white border border-gray-700"
           onChange={(e) => setLastName(e.currentTarget.value)}
         />
       </p>

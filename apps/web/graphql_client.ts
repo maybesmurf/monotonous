@@ -265,6 +265,7 @@ export type Mutation = {
   __typename: 'Mutation';
   confirmEmail?: Maybe<User>;
   login?: Maybe<User>;
+  logout?: Maybe<SuccessResponse>;
   register?: Maybe<User>;
   requestLogin?: Maybe<SuccessResponse>;
 };
@@ -897,6 +898,32 @@ export type UserWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
 };
 
+export type MeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MeQuery = (
+  { __typename: 'Query' }
+  & { me?: Maybe<(
+    { __typename: 'User' }
+    & Pick<User, 'id'>
+    & { profile?: Maybe<(
+      { __typename: 'UserProfile' }
+      & Pick<UserProfile, 'firstName' | 'lastName'>
+    )> }
+  )> }
+);
+
+export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LogoutMutation = (
+  { __typename: 'Mutation' }
+  & { logout?: Maybe<(
+    { __typename: 'SuccessResponse' }
+    & Pick<SuccessResponse, 'success'>
+  )> }
+);
+
 export type ConfirmEmailMutationVariables = Exact<{
   token: Scalars['String'];
   email: Scalars['String'];
@@ -957,6 +984,32 @@ export type SignupMutation = (
 );
 
 
+export const MeDocument = gql`
+    query Me {
+  me {
+    id
+    profile {
+      firstName
+      lastName
+    }
+  }
+}
+    `;
+
+export function useMeQuery(options: Omit<Urql.UseQueryArgs<MeQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<MeQuery>({ query: MeDocument, ...options });
+};
+export const LogoutDocument = gql`
+    mutation Logout {
+  logout {
+    success
+  }
+}
+    `;
+
+export function useLogoutMutation() {
+  return Urql.useMutation<LogoutMutation, LogoutMutationVariables>(LogoutDocument);
+};
 export const ConfirmEmailDocument = gql`
     mutation ConfirmEmail($token: String!, $email: String!) {
   confirmEmail(token: $token, email: $email) {
