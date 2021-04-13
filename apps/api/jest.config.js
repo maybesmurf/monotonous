@@ -1,6 +1,7 @@
 const path = require("path");
 
 module.exports = {
+  verbose: false,
   roots: ["<rootDir>/src"],
   testMatch: [
     "**/__tests__/**/*.+(ts|tsx|js)",

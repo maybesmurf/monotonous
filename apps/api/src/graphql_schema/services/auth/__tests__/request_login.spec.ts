@@ -1,6 +1,6 @@
 import { createMercuriusTestClient } from "mercurius-integration-testing";
 import { gql } from "urql";
-import { createTestContext } from "../../../../tests/__helpers";
+import { createTestContext } from "../../../../../tests/__helpers";
 
 const query = gql`
   mutation RequestLogin($email: String!) {
