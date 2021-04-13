@@ -1,4 +1,5 @@
-import { prisma } from "@monotonous/sdk-server";
+import { config } from "@monotonous/conf";
+import { AuthService, prisma } from "@monotonous/sdk-server";
 import { createMercuriusTestClient } from "mercurius-integration-testing";
 import { createServer } from "../src/server";
 
@@ -6,7 +7,18 @@ export function createTestContext() {
   const server = createServer({ prisma });
   const client = createMercuriusTestClient(server);
 
+  async function authenticate(userId: string): Promise<void> {
+    const jwt = await AuthService.signJwt(userId);
+    client.setCookies({ [config.auth.cookiePrefix]: jwt });
+  }
+
   afterEach(async (done) => {
+    // If we set a cookie during an authenticated test clean it up.
+    if (client.cookies[config.auth.cookiePrefix]) {
+      client.setCookies({ [config.auth.cookiePrefix]: "" });
+    }
+
+    // Cleanup database tables.
     await prisma.$executeRaw(`
       DO $$ DECLARE
         r RECORD;
@@ -31,5 +43,5 @@ export function createTestContext() {
     done();
   });
 
-  return { prisma, server, client };
+  return { prisma, server, client, authenticate };
 }
