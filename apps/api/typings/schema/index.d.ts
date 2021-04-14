@@ -4,7 +4,7 @@
  */
 
 
-import { Context } from "@monotonous/types"
+import { Context } from "./../../src/graphql_schema/custom_context"
 import { FieldShieldResolver, ObjectTypeShieldResolver } from "nexus-shield"
 import { core } from "nexus"
 declare global {

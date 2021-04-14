@@ -103,7 +103,6 @@
     "packages/conf",
     "packages/email",
     "packages/sdk-server",
-    "packages/sdk-client",
     "apps/api",
     "apps/web",
     "apps/worker"

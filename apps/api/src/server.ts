@@ -6,8 +6,8 @@ import { AuthService, prisma, redis } from "@monotonous/sdk-server";
 import { loaders } from "./graphql_schema/loaders";
 import { schema } from "./graphql_schema";
 import { config } from "@monotonous/conf";
-import { CustomContext } from "@monotonous/types";
 import { PrismaClient } from ".prisma/client";
+import { CustomContext } from "./graphql_schema/custom_context";
 
 export function createServer(params: { prisma: PrismaClient }) {
   const server = fastify();

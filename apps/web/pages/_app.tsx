@@ -1,11 +1,13 @@
 import "../styles/index.css";
 import "../styles/tailwind.css";
-import { gql } from "urql";
+import { useEffect } from "react";
+import { gql, createClient, defaultExchanges, Provider } from "urql";
+import { devtoolsExchange } from "@urql/devtools";
 import shallow from "zustand/shallow";
+
 import { Header } from "components/header";
 import { Footer } from "components/footer";
-import { useLogoutMutation, useMeQuery } from "graphql_client";
-import { useEffect } from "react";
+import { useMeQuery } from "graphql_client";
 import { useAuth } from "hooks/use_auth";
 
 gql`
@@ -24,6 +26,11 @@ gql`
     }
   }
 `;
+
+const client = createClient({
+  url: "/graphql",
+  exchanges: [devtoolsExchange, ...defaultExchanges],
+});
 
 export default function App({ Component, pageProps }) {
   const [setUser] = useAuth((s) => [s.setUser], shallow);
@@ -44,14 +51,16 @@ export default function App({ Component, pageProps }) {
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
+    <Provider value={client}>
+      <div className="min-h-screen flex flex-col">
+        <Header />
 
-      <Component {...pageProps} />
+        <Component {...pageProps} />
 
-      <div className="mt-auto">
-        <Footer />
+        <div className="mt-auto">
+          <Footer />
+        </div>
       </div>
-    </div>
+    </Provider>
   );
 }

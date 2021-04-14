@@ -14,8 +14,8 @@ let conf = {
   async rewrites() {
     return [
       {
-        source: "/:path*",
-        destination: "http://localhost:3000/:path*",
+        source: "/graphql",
+        destination: "http://localhost:3000/graphql",
       },
     ];
   },

@@ -8,12 +8,12 @@ dotenv({ path: `${rootPath}/.env` });
 
 export const config = {
   api: {
-    host: env.get("API_HOST").default("0.0.0.0").asString(),
+    host: env.get("API_HOST").default("localhost").asString(),
     port: env.get("API_PORT").default("3000").asPortNumber(),
   },
   web: {
     host: env.get("WEB_HOST").default("localhost").asString(),
-    port: env.get("WEB_PORT").default("3000").asPortNumber(),
+    port: env.get("WEB_PORT").default("8080").asPortNumber(),
   },
   redis: {
     host: env.get("REDIS_HOST").default("127.0.0.1").asString(),

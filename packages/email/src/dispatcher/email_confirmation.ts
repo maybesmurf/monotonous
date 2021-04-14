@@ -1,3 +1,4 @@
+import { config } from "@monotonous/conf";
 import { htmlToText } from "html-to-text";
 import { compileTemplate } from "../compile_template";
 import { sendEmail } from "../transport";
@@ -22,6 +23,14 @@ export async function sendEmailConfirmation(params: ISendEmailConfirmation) {
     text,
     html,
   };
+
+  if (config.mode === "development") {
+    const base = `http://${config.web.host}:${config.web.port}`;
+    console.debug("===== ! =====");
+    console.debug("Use this link to confirm email.");
+    console.debug(`${base}/confirm-email?token=${params.token}`);
+    console.debug("=============");
+  }
 
   return sendEmail(message);
 }

@@ -8,9 +8,5 @@ export const transport = nodemailer.createTransport({
 });
 
 export function sendEmail(message: Record<string, string | number | boolean>) {
-  if (config.mode === "development") {
-    console.log(message);
-  }
-
   return transport.sendMail(message);
 }
