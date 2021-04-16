@@ -11,8 +11,5 @@
   "dependencies": {
     "@monotonous/conf": "1.0.0",
     "@monotonous/sdk-server": "1.0.0"
-  },
-  "devDependencies": {
-    "@monotonous/types": "1.0.0"
   }
 }

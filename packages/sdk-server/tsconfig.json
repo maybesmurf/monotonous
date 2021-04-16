@@ -5,5 +5,5 @@
     "rootDir": ".",
     "outDir": "./build"
   },
-  "references": [{ "path": "../conf" }, { "path": "../@types" }]
+  "references": [{ "path": "../conf" }]
 }
