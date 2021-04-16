@@ -21,6 +21,7 @@ export default function Login() {
 
     try {
       await requestLogin({ email });
+      setAttemptsLeft(3);
       setShowCode(true);
     } catch (e) {
       console.error(e);
@@ -30,21 +31,7 @@ export default function Login() {
   async function handleLogin(e: FormEvent) {
     try {
       e.preventDefault();
-      const { error, data } = await login({ email, code });
-
-      if (error) {
-        const attemptsLeft = error.graphQLErrors[0].extensions?.attemptsLeft;
-
-        if (attemptsLeft) {
-          setAttemptsLeft(attemptsLeft);
-        } else {
-          setShowCode(false);
-          setEmail("");
-          setCode("");
-          setAttemptsLeft(3);
-        }
-        return;
-      }
+      const { data, error } = await login({ email, code });
 
       if (data?.login) {
         const user = {
@@ -55,6 +42,20 @@ export default function Login() {
 
         setUser(user);
         router.replace("/");
+      }
+
+      if (error) {
+        error.graphQLErrors.forEach((err) => {
+          const attemptsLeft = err.extensions?.attemptsLeft;
+
+          if (attemptsLeft) {
+            setAttemptsLeft(attemptsLeft);
+          } else {
+            setEmail("");
+            setCode("");
+            setShowCode(false);
+          }
+        });
       }
     } catch (e) {
       console.error(e);

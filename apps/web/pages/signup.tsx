@@ -12,9 +12,7 @@ export default function Signup() {
   const [lastName, setLastName] = useState("");
 
   useEffect(() => {
-    if (loggedIn) {
-      router.replace("/");
-    }
+    if (loggedIn) router.replace("/");
   }, [loggedIn]);
 
   async function handleSubmit(e: FormEvent) {
