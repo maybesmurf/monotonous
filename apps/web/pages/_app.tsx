@@ -3,12 +3,15 @@ import "../styles/tailwind.css";
 import { useEffect } from "react";
 import { gql, createClient, defaultExchanges, Provider } from "urql";
 import { devtoolsExchange } from "@urql/devtools";
+import { cacheExchange } from "@urql/exchange-graphcache";
+import { IntrospectionData } from "@urql/exchange-graphcache/dist/types/ast";
 import shallow from "zustand/shallow";
 
 import { Header } from "components/header";
 import { Footer } from "components/footer";
 import { useMeQuery } from "graphql_client";
 import { useAuth } from "hooks/use_auth";
+import introspectedSchema from "schema_introspection.json";
 
 gql`
   query Me {
@@ -20,16 +23,13 @@ gql`
       }
     }
   }
-  mutation Logout {
-    logout {
-      success
-    }
-  }
 `;
+
+const schema = (introspectedSchema as unknown) as IntrospectionData;
 
 const client = createClient({
   url: "/graphql",
-  exchanges: [devtoolsExchange, ...defaultExchanges],
+  exchanges: [devtoolsExchange, cacheExchange({ schema }), ...defaultExchanges],
 });
 
 export default function App({ Component, pageProps }) {
