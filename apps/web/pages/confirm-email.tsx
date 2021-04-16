@@ -6,7 +6,7 @@ import { useAuth } from "hooks/use_auth";
 
 export default function ConfirmEmail() {
   const router = useRouter();
-  const setUser = useAuth((s) => s.useAuth);
+  const setUser = useAuth((s) => s.setUser);
   const initialToken = useSearchParams("token");
   const initialEmail = useSearchParams("email") || "";
   const [{ fetching }, confirmEmail] = useConfirmEmailMutation();

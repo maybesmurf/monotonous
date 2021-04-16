@@ -1,11 +1,21 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { useSignupMutation } from "graphql_client";
+import { useAuth } from "hooks/use_auth";
 
 export default function Signup() {
+  const router = useRouter();
+  const loggedIn = useAuth((s) => s.loggedIn);
   const [{ data, fetching }, signup] = useSignupMutation();
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+
+  useEffect(() => {
+    if (loggedIn) {
+      router.replace("/");
+    }
+  }, [loggedIn]);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();

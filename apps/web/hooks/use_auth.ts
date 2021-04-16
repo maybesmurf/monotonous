@@ -8,7 +8,7 @@ type State = {
 };
 
 type Actions = {
-  setUser(user: { id: string; firstName: string; lastName: string }): void;
+  setUser(user: { id?: string; firstName?: string; lastName?: string }): void;
   resetUser(): void;
 };
 
