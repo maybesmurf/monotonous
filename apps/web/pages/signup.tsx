@@ -1,15 +1,5 @@
 import React, { FormEvent, useState } from "react";
 import { useSignupMutation } from "graphql_client";
-import { gql } from "urql";
-import { useRouter } from "next/router";
-
-gql`
-  mutation Signup($email: String!, $firstName: String!, $lastName: String!) {
-    register(email: $email, firstName: $firstName, lastName: $lastName) {
-      id
-    }
-  }
-`;
 
 export default function Signup() {
   const [{ data, fetching }, signup] = useSignupMutation();

@@ -34,6 +34,7 @@ export const AuthMutation = extendType({
     t.field("login", {
       type: "User",
       args: {
+        email: nonNull("String"),
         code: nonNull("String"),
       },
       resolve: resolvers.login,

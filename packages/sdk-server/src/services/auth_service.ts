@@ -44,11 +44,12 @@ export async function assignOtp(email: string): Promise<string> {
     }
 
     await redis.set(
-      JSON.stringify({ code, attemptsLeft: 3 }),
       email,
+      JSON.stringify({ code, attemptsLeft: 3 }),
       "EX",
       config.auth.loginTTL
     );
+
     return code;
   } catch (e) {
     console.error(e);
@@ -61,11 +62,17 @@ export async function assignOtp(email: string): Promise<string> {
  * Verify a given one time password for a user. If its incorrect,
  * decrement it and update the value in redis.
  */
-export async function verifyOtp(email: string, code: string): Promise<boolean> {
+export async function verifyOtp(
+  email: string,
+  code: string
+): Promise<{
+  success: boolean;
+  attemptsLeft?: number;
+}> {
   const record = await redis.get(email);
 
   if (!record) {
-    throw new Error("No login code for that user.");
+    return { success: false };
   }
 
   const attempt = JSON.parse(record) as { code: string; attemptsLeft: number };
@@ -73,17 +80,19 @@ export async function verifyOtp(email: string, code: string): Promise<boolean> {
   if (attempt.code !== code) {
     const attemptsLeft = attempt.attemptsLeft - 1;
 
-    await redis.set(
-      JSON.stringify({ code, attemptsLeft }),
-      email,
-      "EX",
-      config.auth.loginTTL
-    );
+    if (attemptsLeft) {
+      await redis.set(
+        email,
+        JSON.stringify({ code: attempt.code, attemptsLeft }),
+        "EX",
+        config.auth.loginTTL
+      );
+    } else {
+      await redis.del(email);
+    }
 
-    throw new Error(
-      `Incorrect code. You have ${attemptsLeft} attempts remaining.`
-    );
+    return { success: false, attemptsLeft };
   }
 
-  return true;
+  return { success: true };
 }

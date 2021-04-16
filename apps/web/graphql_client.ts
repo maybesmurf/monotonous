@@ -279,6 +279,7 @@ export type MutationConfirmEmailArgs = {
 
 export type MutationLoginArgs = {
   code: Scalars['String'];
+  email: Scalars['String'];
 };
 
 
@@ -898,6 +899,70 @@ export type UserWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
 };
 
+export type ConfirmEmailMutationVariables = Exact<{
+  token: Scalars['String'];
+  email: Scalars['String'];
+}>;
+
+
+export type ConfirmEmailMutation = (
+  { __typename: 'Mutation' }
+  & { confirmEmail?: Maybe<(
+    { __typename: 'User' }
+    & Pick<User, 'id'>
+    & { profile?: Maybe<(
+      { __typename: 'UserProfile' }
+      & Pick<UserProfile, 'firstName' | 'lastName'>
+    )> }
+  )> }
+);
+
+export type LoginMutationVariables = Exact<{
+  email: Scalars['String'];
+  code: Scalars['String'];
+}>;
+
+
+export type LoginMutation = (
+  { __typename: 'Mutation' }
+  & { login?: Maybe<(
+    { __typename: 'User' }
+    & Pick<User, 'id'>
+    & { profile?: Maybe<(
+      { __typename: 'UserProfile' }
+      & Pick<UserProfile, 'firstName' | 'lastName'>
+    )> }
+  )> }
+);
+
+export type RequestLoginMutationVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type RequestLoginMutation = (
+  { __typename: 'Mutation' }
+  & { requestLogin?: Maybe<(
+    { __typename: 'SuccessResponse' }
+    & Pick<SuccessResponse, 'success'>
+  )> }
+);
+
+export type SignupMutationVariables = Exact<{
+  email: Scalars['String'];
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+}>;
+
+
+export type SignupMutation = (
+  { __typename: 'Mutation' }
+  & { register?: Maybe<(
+    { __typename: 'User' }
+    & Pick<User, 'id'>
+  )> }
+);
+
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -924,66 +989,59 @@ export type LogoutMutation = (
   )> }
 );
 
-export type ConfirmEmailMutationVariables = Exact<{
-  token: Scalars['String'];
-  email: Scalars['String'];
-}>;
 
+export const ConfirmEmailDocument = gql`
+    mutation ConfirmEmail($token: String!, $email: String!) {
+  confirmEmail(token: $token, email: $email) {
+    id
+    profile {
+      firstName
+      lastName
+    }
+  }
+}
+    `;
 
-export type ConfirmEmailMutation = (
-  { __typename: 'Mutation' }
-  & { confirmEmail?: Maybe<(
-    { __typename: 'User' }
-    & Pick<User, 'id'>
-  )> }
-);
+export function useConfirmEmailMutation() {
+  return Urql.useMutation<ConfirmEmailMutation, ConfirmEmailMutationVariables>(ConfirmEmailDocument);
+};
+export const LoginDocument = gql`
+    mutation Login($email: String!, $code: String!) {
+  login(email: $email, code: $code) {
+    id
+    profile {
+      firstName
+      lastName
+    }
+  }
+}
+    `;
 
-export type RequestLoginMutationVariables = Exact<{
-  email: Scalars['String'];
-}>;
+export function useLoginMutation() {
+  return Urql.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument);
+};
+export const RequestLoginDocument = gql`
+    mutation RequestLogin($email: String!) {
+  requestLogin(email: $email) {
+    success
+  }
+}
+    `;
 
+export function useRequestLoginMutation() {
+  return Urql.useMutation<RequestLoginMutation, RequestLoginMutationVariables>(RequestLoginDocument);
+};
+export const SignupDocument = gql`
+    mutation Signup($email: String!, $firstName: String!, $lastName: String!) {
+  register(email: $email, firstName: $firstName, lastName: $lastName) {
+    id
+  }
+}
+    `;
 
-export type RequestLoginMutation = (
-  { __typename: 'Mutation' }
-  & { requestLogin?: Maybe<(
-    { __typename: 'SuccessResponse' }
-    & Pick<SuccessResponse, 'success'>
-  )> }
-);
-
-export type LoginMutationVariables = Exact<{
-  code: Scalars['String'];
-}>;
-
-
-export type LoginMutation = (
-  { __typename: 'Mutation' }
-  & { login?: Maybe<(
-    { __typename: 'User' }
-    & Pick<User, 'id'>
-    & { profile?: Maybe<(
-      { __typename: 'UserProfile' }
-      & Pick<UserProfile, 'firstName' | 'lastName'>
-    )> }
-  )> }
-);
-
-export type SignupMutationVariables = Exact<{
-  email: Scalars['String'];
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
-}>;
-
-
-export type SignupMutation = (
-  { __typename: 'Mutation' }
-  & { register?: Maybe<(
-    { __typename: 'User' }
-    & Pick<User, 'id'>
-  )> }
-);
-
-
+export function useSignupMutation() {
+  return Urql.useMutation<SignupMutation, SignupMutationVariables>(SignupDocument);
+};
 export const MeDocument = gql`
     query Me {
   me {
@@ -1009,52 +1067,4 @@ export const LogoutDocument = gql`
 
 export function useLogoutMutation() {
   return Urql.useMutation<LogoutMutation, LogoutMutationVariables>(LogoutDocument);
-};
-export const ConfirmEmailDocument = gql`
-    mutation ConfirmEmail($token: String!, $email: String!) {
-  confirmEmail(token: $token, email: $email) {
-    id
-  }
-}
-    `;
-
-export function useConfirmEmailMutation() {
-  return Urql.useMutation<ConfirmEmailMutation, ConfirmEmailMutationVariables>(ConfirmEmailDocument);
-};
-export const RequestLoginDocument = gql`
-    mutation RequestLogin($email: String!) {
-  requestLogin(email: $email) {
-    success
-  }
-}
-    `;
-
-export function useRequestLoginMutation() {
-  return Urql.useMutation<RequestLoginMutation, RequestLoginMutationVariables>(RequestLoginDocument);
-};
-export const LoginDocument = gql`
-    mutation Login($code: String!) {
-  login(code: $code) {
-    id
-    profile {
-      firstName
-      lastName
-    }
-  }
-}
-    `;
-
-export function useLoginMutation() {
-  return Urql.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument);
-};
-export const SignupDocument = gql`
-    mutation Signup($email: String!, $firstName: String!, $lastName: String!) {
-  register(email: $email, firstName: $firstName, lastName: $lastName) {
-    id
-  }
-}
-    `;
-
-export function useSignupMutation() {
-  return Urql.useMutation<SignupMutation, SignupMutationVariables>(SignupDocument);
 };

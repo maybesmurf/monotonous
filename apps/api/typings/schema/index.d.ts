@@ -981,6 +981,7 @@ export interface NexusGenArgTypes {
     }
     login: { // args
       code: string; // String!
+      email: string; // String!
     }
     register: { // args
       email: string; // String!

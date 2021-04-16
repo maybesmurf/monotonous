@@ -1,28 +1,12 @@
 import React, { FormEvent, useState } from "react";
-import { gql } from "@urql/core";
 import { useRouter } from "next/router";
 import { useLoginMutation, useRequestLoginMutation } from "graphql_client";
 import { useSearchParams } from "hooks/use_search_params";
-
-gql`
-  mutation RequestLogin($email: String!) {
-    requestLogin(email: $email) {
-      success
-    }
-  }
-  mutation Login($code: String!) {
-    login(code: $code) {
-      id
-      profile {
-        firstName
-        lastName
-      }
-    }
-  }
-`;
+import { useAuth } from "hooks/use_auth";
 
 export default function Login() {
   const router = useRouter();
+  const setUser = useAuth((s) => s.setUser);
   const initialEmail = useSearchParams("email");
   const initialCode = useSearchParams("code");
   const [{ fetching: fetching1 }, requestLogin] = useRequestLoginMutation();
@@ -30,6 +14,7 @@ export default function Login() {
   const [email, setEmail] = useState(initialEmail || "");
   const [code, setCode] = useState(initialCode || "");
   const [showCode, setShowCode] = useState(false);
+  const [attemptsLeft, setAttemptsLeft] = useState(3);
 
   async function handleLoginRequest(e: FormEvent) {
     e.preventDefault();
@@ -45,8 +30,32 @@ export default function Login() {
   async function handleLogin(e: FormEvent) {
     try {
       e.preventDefault();
-      await login({ code });
-      router.replace("/");
+      const { error, data } = await login({ email, code });
+
+      if (error) {
+        const attemptsLeft = error.graphQLErrors[0].extensions?.attemptsLeft;
+
+        if (attemptsLeft) {
+          setAttemptsLeft(attemptsLeft);
+        } else {
+          setShowCode(false);
+          setEmail("");
+          setCode("");
+          setAttemptsLeft(3);
+        }
+        return;
+      }
+
+      if (data?.login) {
+        const user = {
+          id: data.login?.id,
+          firstName: data.login?.profile?.firstName,
+          lastName: data.login?.profile?.lastName,
+        };
+
+        setUser(user);
+        router.replace("/");
+      }
     } catch (e) {
       console.error(e);
     }
@@ -54,6 +63,8 @@ export default function Login() {
 
   return (
     <main className="max-w-sm mx-auto text-sm">
+      <p>You have {attemptsLeft} attempts left.</p>
+
       <form onSubmit={showCode ? handleLogin : handleLoginRequest}>
         <p>
           <label htmlFor="email">Email</label>
@@ -61,6 +72,7 @@ export default function Login() {
             id="email"
             name="email"
             value={email}
+            className="bg-gray-800 border border-gray-700 text-white"
             onChange={(e) => setEmail(e.currentTarget.value)}
           />
         </p>
@@ -71,6 +83,7 @@ export default function Login() {
               id="code"
               name="code"
               value={code}
+              className="bg-gray-800 border border-gray-700 text-white"
               onChange={(e) => setCode(e.currentTarget.value)}
             />
           </p>

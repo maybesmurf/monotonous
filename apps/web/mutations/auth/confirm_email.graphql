@@ -1,0 +1,9 @@
+mutation ConfirmEmail($token: String!, $email: String!) {
+  confirmEmail(token: $token, email: $email) {
+    id
+    profile {
+      firstName
+      lastName
+    }
+  }
+}

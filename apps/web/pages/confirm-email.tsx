@@ -1,19 +1,12 @@
 import React, { FormEvent, useState } from "react";
 import { useRouter } from "next/router";
-import { gql } from "@urql/core";
 import { useConfirmEmailMutation } from "graphql_client";
 import { useSearchParams } from "hooks/use_search_params";
-
-gql`
-  mutation ConfirmEmail($token: String!, $email: String!) {
-    confirmEmail(token: $token, email: $email) {
-      id
-    }
-  }
-`;
+import { useAuth } from "hooks/use_auth";
 
 export default function ConfirmEmail() {
   const router = useRouter();
+  const setUser = useAuth((s) => s.useAuth);
   const initialToken = useSearchParams("token");
   const initialEmail = useSearchParams("email") || "";
   const [{ fetching }, confirmEmail] = useConfirmEmailMutation();
@@ -24,7 +17,18 @@ export default function ConfirmEmail() {
     e.preventDefault();
 
     try {
-      await confirmEmail({ email, token });
+      const result = await confirmEmail({ email, token });
+
+      if (result.data) {
+        const user = {
+          id: result.data.confirmEmail?.id,
+          firstName: result.data.confirmEmail?.profile?.firstName,
+          lastName: result.data.confirmEmail?.profile?.lastName,
+        };
+
+        setUser(user);
+      }
+
       router.replace("/");
     } catch (e) {
       console.error(e);

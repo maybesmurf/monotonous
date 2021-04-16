@@ -1,0 +1,9 @@
+mutation Login($email: String!, $code: String!) {
+  login(email: $email, code: $code) {
+    id
+    profile {
+      firstName
+      lastName
+    }
+  }
+}

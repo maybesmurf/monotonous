@@ -60,6 +60,10 @@ export const confirmEmail: FieldResolver<"Mutation", "confirmEmail"> = async (
     throw GqlError("Invalid token");
   }
 
+  await prisma.emailConfirmation.delete({
+    where: { token },
+  });
+
   const updatedUser = await prisma.user.update({
     where: {
       id: confirmation.userId,
@@ -97,7 +101,7 @@ export const requestLogin: FieldResolver<"Mutation", "requestLogin"> = async (
     throw GqlError("Invalid email");
   }
 
-  const code = await AuthService.assignOtp(user.id);
+  const code = await AuthService.assignOtp(user.email);
 
   // TODO - send login token email
   logger.debug({ emailName: "login code", code });
@@ -112,19 +116,17 @@ export const requestLogin: FieldResolver<"Mutation", "requestLogin"> = async (
  */
 export const login: FieldResolver<"Mutation", "login"> = async (
   _source,
-  { code },
+  { email, code },
   { reply, prisma, GqlError }
 ) => {
-  const id = await redis.get(code);
+  const attempt = await AuthService.verifyOtp(email, code);
 
-  if (!id) {
-    throw GqlError("Invalid token");
+  if (!attempt.success) {
+    throw GqlError("Invalid token", attempt);
   }
 
-  await redis.del(code);
-
   const user = await prisma.user.findFirst({
-    where: { id },
+    where: { email },
   });
 
   if (!user) {

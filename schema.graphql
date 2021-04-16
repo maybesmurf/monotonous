@@ -244,7 +244,7 @@ scalar Json
 
 type Mutation {
   confirmEmail(email: String!, token: String!): User
-  login(code: String!): User
+  login(code: String!, email: String!): User
   logout: SuccessResponse
   register(email: String!, firstName: String!, lastName: String!): User
   requestLogin(email: String!): SuccessResponse

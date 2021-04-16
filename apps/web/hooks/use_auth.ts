@@ -2,9 +2,9 @@ import create from "zustand";
 
 type State = {
   loggedIn: boolean;
-  id: string;
-  firstName: string;
-  lastName: string;
+  id?: string;
+  firstName?: string;
+  lastName?: string;
 };
 
 type Actions = {
@@ -14,9 +14,9 @@ type Actions = {
 
 const initialState = {
   loggedIn: false,
-  id: "",
-  firstName: "",
-  lastName: "",
+  id: undefined,
+  firstName: undefined,
+  lastName: undefined,
 };
 
 export const useAuth = create<State & Actions>((set) => ({
