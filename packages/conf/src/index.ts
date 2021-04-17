@@ -26,8 +26,8 @@ export const config = {
   auth: {
     cookiePrefix: env.get("COOKIE_PREFIX").default("session").asString(),
     secret: env.get("AUTH_JWT_SECRET").default("supersecret").asString(),
-    loginTTL: 60 * 3, // 3 min in seconds
-    expires: new Date().getTime() + 1000 * 60 * 60 * 60 * 24 * 14, // 14 days
+    loginTTL: 60 * 15, // 15 min in seconds
+    expires: new Date().getTime() + 1000 * 60 * 60 * 60 * 24 * 30, // 30 days in seconds
   },
   mailer: {
     host: env.get("MAILER_SMTP_HOST").default("127.0.0.1").asString(),

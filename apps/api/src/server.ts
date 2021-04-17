@@ -2,6 +2,7 @@ import fastify from "fastify";
 import cookie from "fastify-cookie";
 import merc from "mercurius";
 import { AuthService, prisma, redis } from "@monotonous/sdk-server";
+import { Logger } from "pino";
 
 import { loaders } from "./graphql_schema/loaders";
 import { schema } from "./graphql_schema";
@@ -9,7 +10,7 @@ import { config } from "@monotonous/conf";
 import { PrismaClient } from ".prisma/client";
 import { CustomContext } from "./graphql_schema/custom_context";
 
-export function createServer(params: { prisma: PrismaClient }) {
+export function createServer(params: { prisma: PrismaClient; logger: Logger }) {
   const server = fastify();
 
   server.register(cookie);
@@ -26,6 +27,7 @@ export function createServer(params: { prisma: PrismaClient }) {
       return {
         request,
         currentUser,
+        logger: params.logger,
         prisma: params.prisma,
         GqlError(message: string, extensions?: object) {
           return new merc.ErrorWithProps(message, extensions);

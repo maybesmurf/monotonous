@@ -12,22 +12,17 @@ export const me: FieldResolver<"Query", "me"> = async (
   _args,
   { prisma, request, GqlError }
 ) => {
-  try {
-    const cookie = request.cookies[config.auth.cookiePrefix];
-    const claims = await AuthService.verifyJwt(cookie);
+  const cookie = request.cookies[config.auth.cookiePrefix];
+  const claims = await AuthService.verifyJwt(cookie);
 
-    if (!claims) {
-      throw GqlError("Unauthorized");
-    }
-
-    return prisma.user.findFirst({
-      where: {
-        id: claims?.userId,
-        confirmed: true,
-      },
-    });
-  } catch (e) {
-    console.log(e);
+  if (!claims) {
     throw GqlError("Unauthorized");
   }
+
+  return prisma.user.findFirst({
+    where: {
+      id: claims.userId,
+      confirmed: true,
+    },
+  });
 };

@@ -1,6 +1,6 @@
 import { User } from "@prisma/client";
-import { Context } from "@monotonous/types";
 import { Loader } from "mercurius";
+import { Context } from "../../custom_context";
 
 const profile: Loader<User, {}, Context> = async (queries, { prisma }) => {
   return prisma.userProfile.findMany({

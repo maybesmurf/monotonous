@@ -1,7 +1,8 @@
 import { FieldResolver } from "nexus";
 import { nanoid } from "nanoid";
 import { config } from "@monotonous/conf";
-import { EmailQueue, redis, logger, AuthService } from "@monotonous/sdk-server";
+import { EmailQueue, AuthService } from "@monotonous/sdk-server";
+import { EmailDispatcher } from "@monotonous/email";
 
 /**
  * @see Mutation
@@ -91,10 +92,13 @@ export const confirmEmail: FieldResolver<"Mutation", "confirmEmail"> = async (
 export const requestLogin: FieldResolver<"Mutation", "requestLogin"> = async (
   _source,
   { email },
-  { prisma, GqlError }
+  { logger, prisma, GqlError }
 ) => {
   const user = await prisma.user.findFirst({
     where: { email },
+    include: {
+      profile: true,
+    },
   });
 
   if (!user) {
@@ -103,8 +107,12 @@ export const requestLogin: FieldResolver<"Mutation", "requestLogin"> = async (
 
   const code = await AuthService.assignOtp(user.email);
 
-  // TODO - send login token email
-  logger.debug({ emailName: "login code", code });
+  await EmailDispatcher.sendLoginLink({
+    to: user.email,
+    firstName: user.profile.firstName,
+    lastName: user.profile.lastName,
+    code,
+  });
 
   return { success: true };
 };

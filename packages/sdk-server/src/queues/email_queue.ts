@@ -52,5 +52,6 @@ export async function queueEmailConfirmation(data: ISendEmailConfirmation) {
  * Queue up a login link email.
  */
 export async function queueLoginLink(data: ISendLoginLink) {
+  logger.debug({ emailName: JobNames.LOGIN_LINK, data });
   await queue.add(JobNames.LOGIN_LINK, data);
 }

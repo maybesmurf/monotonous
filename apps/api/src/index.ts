@@ -1,10 +1,10 @@
 import { config } from "@monotonous/conf";
-import { prisma, redis } from "@monotonous/sdk-server";
+import { prisma, redis, logger } from "@monotonous/sdk-server";
 import { createServer } from "./server";
 
 async function init() {
   try {
-    const server = createServer({ prisma });
+    const server = createServer({ prisma, logger });
 
     server.listen(config.api.port, config.api.host, (err, address) => {
       if (err) {

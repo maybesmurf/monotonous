@@ -935,6 +935,17 @@ export type LoginMutation = (
   )> }
 );
 
+export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LogoutMutation = (
+  { __typename: 'Mutation' }
+  & { logout?: Maybe<(
+    { __typename: 'SuccessResponse' }
+    & Pick<SuccessResponse, 'success'>
+  )> }
+);
+
 export type RequestLoginMutationVariables = Exact<{
   email: Scalars['String'];
 }>;
@@ -978,17 +989,6 @@ export type MeQuery = (
   )> }
 );
 
-export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
-
-
-export type LogoutMutation = (
-  { __typename: 'Mutation' }
-  & { logout?: Maybe<(
-    { __typename: 'SuccessResponse' }
-    & Pick<SuccessResponse, 'success'>
-  )> }
-);
-
 
 export const ConfirmEmailDocument = gql`
     mutation ConfirmEmail($token: String!, $email: String!) {
@@ -1019,6 +1019,17 @@ export const LoginDocument = gql`
 
 export function useLoginMutation() {
   return Urql.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument);
+};
+export const LogoutDocument = gql`
+    mutation Logout {
+  logout {
+    success
+  }
+}
+    `;
+
+export function useLogoutMutation() {
+  return Urql.useMutation<LogoutMutation, LogoutMutationVariables>(LogoutDocument);
 };
 export const RequestLoginDocument = gql`
     mutation RequestLogin($email: String!) {
@@ -1056,15 +1067,4 @@ export const MeDocument = gql`
 
 export function useMeQuery(options: Omit<Urql.UseQueryArgs<MeQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<MeQuery>({ query: MeDocument, ...options });
-};
-export const LogoutDocument = gql`
-    mutation Logout {
-  logout {
-    success
-  }
-}
-    `;
-
-export function useLogoutMutation() {
-  return Urql.useMutation<LogoutMutation, LogoutMutationVariables>(LogoutDocument);
 };

@@ -8,7 +8,7 @@ export interface ISendLoginLink {
   to: string;
   firstName: string;
   lastName: string;
-  token: string;
+  code: string;
 }
 
 export async function sendLoginLink(params: ISendLoginLink) {
