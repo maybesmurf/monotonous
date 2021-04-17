@@ -684,9 +684,9 @@ export interface NexusGenObjects {
   }
   EmailConfirmationCountAggregateOutputType: { // root type
     _all: number; // Int!
-    createdAt?: number | null; // Int
-    token?: number | null; // Int
-    userId?: number | null; // Int
+    createdAt: number; // Int!
+    token: number; // Int!
+    userId: number; // Int!
   }
   EmailConfirmationMaxAggregateOutputType: { // root type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
@@ -711,11 +711,11 @@ export interface NexusGenObjects {
   }
   UserCountAggregateOutputType: { // root type
     _all: number; // Int!
-    confirmed?: number | null; // Int
-    createdAt?: number | null; // Int
-    email?: number | null; // Int
-    id?: number | null; // Int
-    updatedAt?: number | null; // Int
+    confirmed: number; // Int!
+    createdAt: number; // Int!
+    email: number; // Int!
+    id: number; // Int!
+    updatedAt: number; // Int!
   }
   UserMaxAggregateOutputType: { // root type
     confirmed?: boolean | null; // Boolean
@@ -738,10 +738,10 @@ export interface NexusGenObjects {
   }
   UserProfileCountAggregateOutputType: { // root type
     _all: number; // Int!
-    firstName?: number | null; // Int
-    id?: number | null; // Int
-    lastName?: number | null; // Int
-    userId?: number | null; // Int
+    firstName: number; // Int!
+    id: number; // Int!
+    lastName: number; // Int!
+    userId: number; // Int!
   }
   UserProfileMaxAggregateOutputType: { // root type
     firstName?: string | null; // String
@@ -788,9 +788,9 @@ export interface NexusGenFieldTypes {
   }
   EmailConfirmationCountAggregateOutputType: { // field return type
     _all: number; // Int!
-    createdAt: number | null; // Int
-    token: number | null; // Int
-    userId: number | null; // Int
+    createdAt: number; // Int!
+    token: number; // Int!
+    userId: number; // Int!
   }
   EmailConfirmationMaxAggregateOutputType: { // field return type
     createdAt: NexusGenScalars['DateTime'] | null; // DateTime
@@ -823,11 +823,11 @@ export interface NexusGenFieldTypes {
   }
   UserCountAggregateOutputType: { // field return type
     _all: number; // Int!
-    confirmed: number | null; // Int
-    createdAt: number | null; // Int
-    email: number | null; // Int
-    id: number | null; // Int
-    updatedAt: number | null; // Int
+    confirmed: number; // Int!
+    createdAt: number; // Int!
+    email: number; // Int!
+    id: number; // Int!
+    updatedAt: number; // Int!
   }
   UserMaxAggregateOutputType: { // field return type
     confirmed: boolean | null; // Boolean
@@ -851,10 +851,10 @@ export interface NexusGenFieldTypes {
   }
   UserProfileCountAggregateOutputType: { // field return type
     _all: number; // Int!
-    firstName: number | null; // Int
-    id: number | null; // Int
-    lastName: number | null; // Int
-    userId: number | null; // Int
+    firstName: number; // Int!
+    id: number; // Int!
+    lastName: number; // Int!
+    userId: number; // Int!
   }
   UserProfileMaxAggregateOutputType: { // field return type
     firstName: string | null; // String

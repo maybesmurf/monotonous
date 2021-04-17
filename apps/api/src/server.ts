@@ -1,14 +1,15 @@
 import fastify from "fastify";
 import cookie from "fastify-cookie";
 import merc from "mercurius";
-import { AuthService, prisma, redis } from "@monotonous/sdk-server";
 import { Logger } from "pino";
+import { AuthService, prisma, redis } from "@monotonous/sdk-server";
+import { config } from "@monotonous/conf";
 
 import { loaders } from "./graphql_schema/loaders";
 import { schema } from "./graphql_schema";
-import { config } from "@monotonous/conf";
 import { PrismaClient } from ".prisma/client";
 import { CustomContext } from "./graphql_schema/custom_context";
+import { logger } from "handlebars";
 
 export function createServer(params: { prisma: PrismaClient; logger: Logger }) {
   const server = fastify();
@@ -16,13 +17,18 @@ export function createServer(params: { prisma: PrismaClient; logger: Logger }) {
   server.register(cookie);
 
   server.register(merc, {
-    async context(request, reply): Promise<CustomContext> {
-      const cookie = reply.cookie[config.auth.cookiePrefix];
+    async context(request, _reply): Promise<CustomContext> {
+      const cookie = request.cookies[config.auth.cookiePrefix];
       const claims = await AuthService.verifyJwt(cookie);
 
-      const currentUser = await params.prisma.user.findFirst({
-        where: { id: claims?.userId },
-      });
+      let currentUser = claims
+        ? await params.prisma.user.findFirst({
+            where: {
+              id: claims.userId,
+              confirmed: true,
+            },
+          })
+        : null;
 
       return {
         request,
@@ -39,13 +45,15 @@ export function createServer(params: { prisma: PrismaClient; logger: Logger }) {
     persistedQueryProvider: merc.persistedQueryDefaults.automatic(5000),
     allowBatchedQueries: true,
     subscription: true,
-    graphiql: process.env.NODE_ENV !== "production" ? "playground" : false,
+    graphiql: process.env.NODE_ENV !== "production",
     jit: 1,
   });
 
   server.addHook("onClose", async (_instance, done) => {
+    logger.debug("Closing server. Disconnecting prisma and redis...");
     await prisma.$disconnect();
     await redis.quit();
+    logger.debug("Server closed.");
     done();
   });
 

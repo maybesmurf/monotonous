@@ -97,9 +97,9 @@ export type DateTimeWithAggregatesFilter = {
 export type EmailConfirmationCountAggregateOutputType = {
   __typename: 'EmailConfirmationCountAggregateOutputType';
   _all: Scalars['Int'];
-  createdAt?: Maybe<Scalars['Int']>;
-  token?: Maybe<Scalars['Int']>;
-  userId?: Maybe<Scalars['Int']>;
+  createdAt: Scalars['Int'];
+  token: Scalars['Int'];
+  userId: Scalars['Int'];
 };
 
 export type EmailConfirmationCreateInput = {
@@ -448,11 +448,11 @@ export type User = {
 export type UserCountAggregateOutputType = {
   __typename: 'UserCountAggregateOutputType';
   _all: Scalars['Int'];
-  confirmed?: Maybe<Scalars['Int']>;
-  createdAt?: Maybe<Scalars['Int']>;
-  email?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  updatedAt?: Maybe<Scalars['Int']>;
+  confirmed: Scalars['Int'];
+  createdAt: Scalars['Int'];
+  email: Scalars['Int'];
+  id: Scalars['Int'];
+  updatedAt: Scalars['Int'];
 };
 
 export type UserCreateInput = {
@@ -550,10 +550,10 @@ export type UserProfile = {
 export type UserProfileCountAggregateOutputType = {
   __typename: 'UserProfileCountAggregateOutputType';
   _all: Scalars['Int'];
-  firstName?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  lastName?: Maybe<Scalars['Int']>;
-  userId?: Maybe<Scalars['Int']>;
+  firstName: Scalars['Int'];
+  id: Scalars['Int'];
+  lastName: Scalars['Int'];
+  userId: Scalars['Int'];
 };
 
 export type UserProfileCreateInput = {

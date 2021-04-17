@@ -1,6 +1,4 @@
-import { AuthService } from "@monotonous/sdk-server";
 import { FieldResolver } from "nexus";
-import { config } from "@monotonous/conf";
 
 /**
  * @see Query
@@ -10,19 +8,5 @@ import { config } from "@monotonous/conf";
 export const me: FieldResolver<"Query", "me"> = async (
   _source,
   _args,
-  { prisma, request, GqlError }
-) => {
-  const cookie = request.cookies[config.auth.cookiePrefix];
-  const claims = await AuthService.verifyJwt(cookie);
-
-  if (!claims) {
-    throw GqlError("Unauthorized");
-  }
-
-  return prisma.user.findFirst({
-    where: {
-      id: claims.userId,
-      confirmed: true,
-    },
-  });
-};
+  { currentUser }
+) => currentUser;

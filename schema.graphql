@@ -78,9 +78,9 @@ scalar Decimal
 
 type EmailConfirmationCountAggregateOutputType {
   _all: Int!
-  createdAt: Int
-  token: Int
-  userId: Int
+  createdAt: Int!
+  token: Int!
+  userId: Int!
 }
 
 input EmailConfirmationCreateInput {
@@ -400,11 +400,11 @@ type User {
 
 type UserCountAggregateOutputType {
   _all: Int!
-  confirmed: Int
-  createdAt: Int
-  email: Int
-  id: Int
-  updatedAt: Int
+  confirmed: Int!
+  createdAt: Int!
+  email: Int!
+  id: Int!
+  updatedAt: Int!
 }
 
 input UserCreateInput {
@@ -498,10 +498,10 @@ type UserProfile {
 
 type UserProfileCountAggregateOutputType {
   _all: Int!
-  firstName: Int
-  id: Int
-  lastName: Int
-  userId: Int
+  firstName: Int!
+  id: Int!
+  lastName: Int!
+  userId: Int!
 }
 
 input UserProfileCreateInput {

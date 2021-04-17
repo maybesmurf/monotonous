@@ -1,4 +1,5 @@
 import { extendType, objectType } from "nexus";
+import { shields } from "../../../lib/shield_rules";
 import * as resolvers from "./user_resolvers";
 
 export const User = objectType({
@@ -16,11 +17,10 @@ export const User = objectType({
  */
 export const UserQuery = extendType({
   type: "Query",
-
   definition(t) {
     t.field("me", {
       type: "User",
-      //shield: authGuard,
+      shield: shields.auth,
       resolve: resolvers.me,
     });
   },
