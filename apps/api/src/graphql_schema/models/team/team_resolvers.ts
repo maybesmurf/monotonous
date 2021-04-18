@@ -10,12 +10,16 @@ export const createTeam: FieldResolver<"Mutation", "createTeam"> = async (
   { name },
   { currentUser, prisma, GqlError }
 ) => {
+  if (!currentUser) {
+    throw GqlError("Unauthorized");
+  }
+
   return prisma.team.create({
     data: {
       name,
       memberships: {
         create: {
-          userId: "cknmiufy20009se54pfxmuidz",
+          userId: currentUser.id,
           status: MembershipStatuses.ACCEPTED,
           role: TeamRoles.ADMIN,
         },
@@ -24,10 +28,33 @@ export const createTeam: FieldResolver<"Mutation", "createTeam"> = async (
   });
 };
 
-export const listTeams: FieldResolver<"Query", "listTeams"> = async (
+/**
+ * @name getTeam
+ * Get a team by id.
+ */
+export const getTeam: FieldResolver<"Query", "team"> = async (
   _root,
-  _args,
+  { id },
   { prisma }
 ) => {
-  return prisma.team.findMany();
+  return prisma.team.findFirst({
+    where: { id },
+    rejectOnNotFound: true,
+  });
+};
+
+/**
+ * @name listTeams
+ * Get a list of filtered teams.
+ */
+export const listTeams: FieldResolver<"Query", "listTeams"> = async (
+  _root,
+  { cursor, take, skip },
+  { prisma }
+) => {
+  return prisma.team.findMany({
+    cursor: cursor ? { id: cursor } : undefined,
+    take: take ?? 10,
+    skip: skip ?? 0,
+  });
 };

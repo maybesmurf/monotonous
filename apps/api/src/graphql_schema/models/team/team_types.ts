@@ -1,4 +1,4 @@
-import { extendType, objectType, nonNull, list } from "nexus";
+import { extendType, objectType, nonNull, list, idArg, intArg } from "nexus";
 import * as resolvers from "./team_resolvers";
 
 export const Team = objectType({
@@ -16,8 +16,21 @@ export const Team = objectType({
 export const TeamQueries = extendType({
   type: "Query",
   definition(t) {
+    t.nonNull.field("team", {
+      type: "Team",
+      args: {
+        id: nonNull(idArg()),
+      },
+      resolve: resolvers.getTeam,
+    });
+
     t.nonNull.field("listTeams", {
       type: list("Team"),
+      args: {
+        cursor: idArg(),
+        take: intArg(),
+        skip: intArg(),
+      },
       resolve: resolvers.listTeams,
     });
   },

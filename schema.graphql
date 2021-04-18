@@ -48,6 +48,9 @@ type BatchPayload {
   count: Int!
 }
 
+"""BigInt custom scalar type"""
+scalar BigInt
+
 input BoolFieldUpdateOperationsInput {
   set: Boolean
 }
@@ -64,6 +67,11 @@ input BoolWithAggregatesFilter {
   min: NestedBoolFilter
   not: NestedBoolWithAggregatesFilter
 }
+
+"""
+A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar Date
 
 """Date custom scalar type"""
 scalar DateTime
@@ -435,6 +443,12 @@ input NestedStringWithAggregatesFilter {
   not: NestedStringWithAggregatesFilter
   notIn: [String]
   startsWith: String
+}
+
+type PaginationParams {
+  cursor: ID
+  skip: Int
+  take: Int
 }
 
 type Project {
@@ -878,6 +892,11 @@ input ProjectMembersipUpsertWithWhereUniqueWithoutUserInput {
   where: ProjectMembersipWhereUniqueInput!
 }
 
+input ProjectMembersipUserIdProjectIdCompoundUniqueInput {
+  projectId: String!
+  userId: String!
+}
+
 input ProjectMembersipWhereInput {
   AND: [ProjectMembersipWhereInput]
   NOT: [ProjectMembersipWhereInput]
@@ -893,6 +912,7 @@ input ProjectMembersipWhereInput {
 
 input ProjectMembersipWhereUniqueInput {
   id: String
+  userId_projectId: ProjectMembersipUserIdProjectIdCompoundUniqueInput
 }
 
 type ProjectMinAggregateOutputType {
@@ -1126,8 +1146,9 @@ input ProjectWhereUniqueInput {
 
 type Query {
   listTeamMembersips: [TeamMembership]!
-  listTeams: [Team]!
+  listTeams(cursor: ID, skip: Int, take: Int): [Team]!
   me: User
+  team(id: ID!): Team!
   teamMembership(id: String!): TeamMembership!
 }
 
@@ -1671,6 +1692,11 @@ input TeamMembershipUpsertWithWhereUniqueWithoutUserInput {
   where: TeamMembershipWhereUniqueInput!
 }
 
+input TeamMembershipUserIdTeamIdCompoundUniqueInput {
+  teamId: String!
+  userId: String!
+}
+
 input TeamMembershipWhereInput {
   AND: [TeamMembershipWhereInput]
   NOT: [TeamMembershipWhereInput]
@@ -1688,6 +1714,7 @@ input TeamMembershipWhereInput {
 
 input TeamMembershipWhereUniqueInput {
   id: String
+  userId_teamId: TeamMembershipUserIdTeamIdCompoundUniqueInput
 }
 
 type TeamMinAggregateOutputType {
@@ -1880,13 +1907,13 @@ type UserCountAggregateOutputType {
 }
 
 input UserCreateInput {
-  ProjectMembersip: ProjectMembersipCreateNestedManyWithoutUserInput
   confirmed: Boolean
   createdAt: DateTime
   email: String!
   emailConfirmation: EmailConfirmationCreateNestedOneWithoutUserInput
   id: String
   profile: UserProfileCreateNestedOneWithoutUserInput
+  projectMembersip: ProjectMembersipCreateNestedManyWithoutUserInput
   teamMemberships: TeamMembershipCreateNestedManyWithoutUserInput
   updatedAt: DateTime
 }
@@ -1944,23 +1971,23 @@ input UserCreateOrConnectWithoutTeamMembershipsInput {
 }
 
 input UserCreateWithoutEmailConfirmationInput {
-  ProjectMembersip: ProjectMembersipCreateNestedManyWithoutUserInput
   confirmed: Boolean
   createdAt: DateTime
   email: String!
   id: String
   profile: UserProfileCreateNestedOneWithoutUserInput
+  projectMembersip: ProjectMembersipCreateNestedManyWithoutUserInput
   teamMemberships: TeamMembershipCreateNestedManyWithoutUserInput
   updatedAt: DateTime
 }
 
 input UserCreateWithoutProfileInput {
-  ProjectMembersip: ProjectMembersipCreateNestedManyWithoutUserInput
   confirmed: Boolean
   createdAt: DateTime
   email: String!
   emailConfirmation: EmailConfirmationCreateNestedOneWithoutUserInput
   id: String
+  projectMembersip: ProjectMembersipCreateNestedManyWithoutUserInput
   teamMemberships: TeamMembershipCreateNestedManyWithoutUserInput
   updatedAt: DateTime
 }
@@ -1977,13 +2004,13 @@ input UserCreateWithoutProjectMembersipInput {
 }
 
 input UserCreateWithoutTeamMembershipsInput {
-  ProjectMembersip: ProjectMembersipCreateNestedManyWithoutUserInput
   confirmed: Boolean
   createdAt: DateTime
   email: String!
   emailConfirmation: EmailConfirmationCreateNestedOneWithoutUserInput
   id: String
   profile: UserProfileCreateNestedOneWithoutUserInput
+  projectMembersip: ProjectMembersipCreateNestedManyWithoutUserInput
   updatedAt: DateTime
 }
 
@@ -2260,35 +2287,35 @@ input UserScalarWhereWithAggregatesInput {
 }
 
 input UserUncheckedCreateInput {
-  ProjectMembersip: ProjectMembersipUncheckedCreateNestedManyWithoutUserInput
   confirmed: Boolean
   createdAt: DateTime
   email: String!
   emailConfirmation: EmailConfirmationUncheckedCreateNestedOneWithoutUserInput
   id: String
   profile: UserProfileUncheckedCreateNestedOneWithoutUserInput
+  projectMembersip: ProjectMembersipUncheckedCreateNestedManyWithoutUserInput
   teamMemberships: TeamMembershipUncheckedCreateNestedManyWithoutUserInput
   updatedAt: DateTime
 }
 
 input UserUncheckedCreateWithoutEmailConfirmationInput {
-  ProjectMembersip: ProjectMembersipUncheckedCreateNestedManyWithoutUserInput
   confirmed: Boolean
   createdAt: DateTime
   email: String!
   id: String
   profile: UserProfileUncheckedCreateNestedOneWithoutUserInput
+  projectMembersip: ProjectMembersipUncheckedCreateNestedManyWithoutUserInput
   teamMemberships: TeamMembershipUncheckedCreateNestedManyWithoutUserInput
   updatedAt: DateTime
 }
 
 input UserUncheckedCreateWithoutProfileInput {
-  ProjectMembersip: ProjectMembersipUncheckedCreateNestedManyWithoutUserInput
   confirmed: Boolean
   createdAt: DateTime
   email: String!
   emailConfirmation: EmailConfirmationUncheckedCreateNestedOneWithoutUserInput
   id: String
+  projectMembersip: ProjectMembersipUncheckedCreateNestedManyWithoutUserInput
   teamMemberships: TeamMembershipUncheckedCreateNestedManyWithoutUserInput
   updatedAt: DateTime
 }
@@ -2305,24 +2332,24 @@ input UserUncheckedCreateWithoutProjectMembersipInput {
 }
 
 input UserUncheckedCreateWithoutTeamMembershipsInput {
-  ProjectMembersip: ProjectMembersipUncheckedCreateNestedManyWithoutUserInput
   confirmed: Boolean
   createdAt: DateTime
   email: String!
   emailConfirmation: EmailConfirmationUncheckedCreateNestedOneWithoutUserInput
   id: String
   profile: UserProfileUncheckedCreateNestedOneWithoutUserInput
+  projectMembersip: ProjectMembersipUncheckedCreateNestedManyWithoutUserInput
   updatedAt: DateTime
 }
 
 input UserUncheckedUpdateInput {
-  ProjectMembersip: ProjectMembersipUncheckedUpdateManyWithoutUserInput
   confirmed: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   emailConfirmation: EmailConfirmationUncheckedUpdateOneWithoutUserInput
   id: StringFieldUpdateOperationsInput
   profile: UserProfileUncheckedUpdateOneWithoutUserInput
+  projectMembersip: ProjectMembersipUncheckedUpdateManyWithoutUserInput
   teamMemberships: TeamMembershipUncheckedUpdateManyWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -2336,23 +2363,23 @@ input UserUncheckedUpdateManyInput {
 }
 
 input UserUncheckedUpdateWithoutEmailConfirmationInput {
-  ProjectMembersip: ProjectMembersipUncheckedUpdateManyWithoutUserInput
   confirmed: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   profile: UserProfileUncheckedUpdateOneWithoutUserInput
+  projectMembersip: ProjectMembersipUncheckedUpdateManyWithoutUserInput
   teamMemberships: TeamMembershipUncheckedUpdateManyWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input UserUncheckedUpdateWithoutProfileInput {
-  ProjectMembersip: ProjectMembersipUncheckedUpdateManyWithoutUserInput
   confirmed: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   emailConfirmation: EmailConfirmationUncheckedUpdateOneWithoutUserInput
   id: StringFieldUpdateOperationsInput
+  projectMembersip: ProjectMembersipUncheckedUpdateManyWithoutUserInput
   teamMemberships: TeamMembershipUncheckedUpdateManyWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -2369,24 +2396,24 @@ input UserUncheckedUpdateWithoutProjectMembersipInput {
 }
 
 input UserUncheckedUpdateWithoutTeamMembershipsInput {
-  ProjectMembersip: ProjectMembersipUncheckedUpdateManyWithoutUserInput
   confirmed: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   emailConfirmation: EmailConfirmationUncheckedUpdateOneWithoutUserInput
   id: StringFieldUpdateOperationsInput
   profile: UserProfileUncheckedUpdateOneWithoutUserInput
+  projectMembersip: ProjectMembersipUncheckedUpdateManyWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input UserUpdateInput {
-  ProjectMembersip: ProjectMembersipUpdateManyWithoutUserInput
   confirmed: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   emailConfirmation: EmailConfirmationUpdateOneWithoutUserInput
   id: StringFieldUpdateOperationsInput
   profile: UserProfileUpdateOneWithoutUserInput
+  projectMembersip: ProjectMembersipUpdateManyWithoutUserInput
   teamMemberships: TeamMembershipUpdateManyWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -2432,23 +2459,23 @@ input UserUpdateOneRequiredWithoutTeamMembershipsInput {
 }
 
 input UserUpdateWithoutEmailConfirmationInput {
-  ProjectMembersip: ProjectMembersipUpdateManyWithoutUserInput
   confirmed: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   profile: UserProfileUpdateOneWithoutUserInput
+  projectMembersip: ProjectMembersipUpdateManyWithoutUserInput
   teamMemberships: TeamMembershipUpdateManyWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input UserUpdateWithoutProfileInput {
-  ProjectMembersip: ProjectMembersipUpdateManyWithoutUserInput
   confirmed: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   emailConfirmation: EmailConfirmationUpdateOneWithoutUserInput
   id: StringFieldUpdateOperationsInput
+  projectMembersip: ProjectMembersipUpdateManyWithoutUserInput
   teamMemberships: TeamMembershipUpdateManyWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -2465,13 +2492,13 @@ input UserUpdateWithoutProjectMembersipInput {
 }
 
 input UserUpdateWithoutTeamMembershipsInput {
-  ProjectMembersip: ProjectMembersipUpdateManyWithoutUserInput
   confirmed: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   emailConfirmation: EmailConfirmationUpdateOneWithoutUserInput
   id: StringFieldUpdateOperationsInput
   profile: UserProfileUpdateOneWithoutUserInput
+  projectMembersip: ProjectMembersipUpdateManyWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
@@ -2499,13 +2526,13 @@ input UserWhereInput {
   AND: [UserWhereInput]
   NOT: [UserWhereInput]
   OR: [UserWhereInput]
-  ProjectMembersip: ProjectMembersipListRelationFilter
   confirmed: BoolFilter
   createdAt: DateTimeFilter
   email: StringFilter
   emailConfirmation: EmailConfirmationWhereInput
   id: StringFilter
   profile: UserProfileWhereInput
+  projectMembersip: ProjectMembersipListRelationFilter
   teamMemberships: TeamMembershipListRelationFilter
   updatedAt: DateTimeFilter
 }

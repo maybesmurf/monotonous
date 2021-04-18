@@ -12,6 +12,10 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /** BigInt custom scalar type */
+  BigInt: any;
+  /** A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
+  Date: any;
   /** Date custom scalar type */
   DateTime: any;
   /** Decimal custom scalar type */
@@ -74,6 +78,7 @@ export type BatchPayload = {
   count: Scalars['Int'];
 };
 
+
 export type BoolFieldUpdateOperationsInput = {
   set?: Maybe<Scalars['Boolean']>;
 };
@@ -90,6 +95,7 @@ export type BoolWithAggregatesFilter = {
   min?: Maybe<NestedBoolFilter>;
   not?: Maybe<NestedBoolWithAggregatesFilter>;
 };
+
 
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -488,6 +494,13 @@ export type NestedStringWithAggregatesFilter = {
   not?: Maybe<NestedStringWithAggregatesFilter>;
   notIn?: Maybe<Array<Maybe<Scalars['String']>>>;
   startsWith?: Maybe<Scalars['String']>;
+};
+
+export type PaginationParams = {
+  __typename: 'PaginationParams';
+  cursor?: Maybe<Scalars['ID']>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
 };
 
 export type Project = {
@@ -937,6 +950,11 @@ export type ProjectMembersipUpsertWithWhereUniqueWithoutUserInput = {
   where: ProjectMembersipWhereUniqueInput;
 };
 
+export type ProjectMembersipUserIdProjectIdCompoundUniqueInput = {
+  projectId: Scalars['String'];
+  userId: Scalars['String'];
+};
+
 export type ProjectMembersipWhereInput = {
   AND?: Maybe<Array<Maybe<ProjectMembersipWhereInput>>>;
   NOT?: Maybe<Array<Maybe<ProjectMembersipWhereInput>>>;
@@ -952,6 +970,7 @@ export type ProjectMembersipWhereInput = {
 
 export type ProjectMembersipWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
+  userId_projectId?: Maybe<ProjectMembersipUserIdProjectIdCompoundUniqueInput>;
 };
 
 export type ProjectMinAggregateOutputType = {
@@ -1189,7 +1208,20 @@ export type Query = {
   listTeamMembersips: Array<Maybe<TeamMembership>>;
   listTeams: Array<Maybe<Team>>;
   me?: Maybe<User>;
+  team: Team;
   teamMembership: TeamMembership;
+};
+
+
+export type QueryListTeamsArgs = {
+  cursor?: Maybe<Scalars['ID']>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryTeamArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -1745,6 +1777,11 @@ export type TeamMembershipUpsertWithWhereUniqueWithoutUserInput = {
   where: TeamMembershipWhereUniqueInput;
 };
 
+export type TeamMembershipUserIdTeamIdCompoundUniqueInput = {
+  teamId: Scalars['String'];
+  userId: Scalars['String'];
+};
+
 export type TeamMembershipWhereInput = {
   AND?: Maybe<Array<Maybe<TeamMembershipWhereInput>>>;
   NOT?: Maybe<Array<Maybe<TeamMembershipWhereInput>>>;
@@ -1762,6 +1799,7 @@ export type TeamMembershipWhereInput = {
 
 export type TeamMembershipWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
+  userId_teamId?: Maybe<TeamMembershipUserIdTeamIdCompoundUniqueInput>;
 };
 
 export type TeamMinAggregateOutputType = {
@@ -1957,13 +1995,13 @@ export type UserCountAggregateOutputType = {
 };
 
 export type UserCreateInput = {
-  ProjectMembersip?: Maybe<ProjectMembersipCreateNestedManyWithoutUserInput>;
   confirmed?: Maybe<Scalars['Boolean']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   email: Scalars['String'];
   emailConfirmation?: Maybe<EmailConfirmationCreateNestedOneWithoutUserInput>;
   id?: Maybe<Scalars['String']>;
   profile?: Maybe<UserProfileCreateNestedOneWithoutUserInput>;
+  projectMembersip?: Maybe<ProjectMembersipCreateNestedManyWithoutUserInput>;
   teamMemberships?: Maybe<TeamMembershipCreateNestedManyWithoutUserInput>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
@@ -2021,23 +2059,23 @@ export type UserCreateOrConnectWithoutTeamMembershipsInput = {
 };
 
 export type UserCreateWithoutEmailConfirmationInput = {
-  ProjectMembersip?: Maybe<ProjectMembersipCreateNestedManyWithoutUserInput>;
   confirmed?: Maybe<Scalars['Boolean']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   email: Scalars['String'];
   id?: Maybe<Scalars['String']>;
   profile?: Maybe<UserProfileCreateNestedOneWithoutUserInput>;
+  projectMembersip?: Maybe<ProjectMembersipCreateNestedManyWithoutUserInput>;
   teamMemberships?: Maybe<TeamMembershipCreateNestedManyWithoutUserInput>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
 export type UserCreateWithoutProfileInput = {
-  ProjectMembersip?: Maybe<ProjectMembersipCreateNestedManyWithoutUserInput>;
   confirmed?: Maybe<Scalars['Boolean']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   email: Scalars['String'];
   emailConfirmation?: Maybe<EmailConfirmationCreateNestedOneWithoutUserInput>;
   id?: Maybe<Scalars['String']>;
+  projectMembersip?: Maybe<ProjectMembersipCreateNestedManyWithoutUserInput>;
   teamMemberships?: Maybe<TeamMembershipCreateNestedManyWithoutUserInput>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
@@ -2054,13 +2092,13 @@ export type UserCreateWithoutProjectMembersipInput = {
 };
 
 export type UserCreateWithoutTeamMembershipsInput = {
-  ProjectMembersip?: Maybe<ProjectMembersipCreateNestedManyWithoutUserInput>;
   confirmed?: Maybe<Scalars['Boolean']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   email: Scalars['String'];
   emailConfirmation?: Maybe<EmailConfirmationCreateNestedOneWithoutUserInput>;
   id?: Maybe<Scalars['String']>;
   profile?: Maybe<UserProfileCreateNestedOneWithoutUserInput>;
+  projectMembersip?: Maybe<ProjectMembersipCreateNestedManyWithoutUserInput>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
@@ -2343,35 +2381,35 @@ export type UserScalarWhereWithAggregatesInput = {
 };
 
 export type UserUncheckedCreateInput = {
-  ProjectMembersip?: Maybe<ProjectMembersipUncheckedCreateNestedManyWithoutUserInput>;
   confirmed?: Maybe<Scalars['Boolean']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   email: Scalars['String'];
   emailConfirmation?: Maybe<EmailConfirmationUncheckedCreateNestedOneWithoutUserInput>;
   id?: Maybe<Scalars['String']>;
   profile?: Maybe<UserProfileUncheckedCreateNestedOneWithoutUserInput>;
+  projectMembersip?: Maybe<ProjectMembersipUncheckedCreateNestedManyWithoutUserInput>;
   teamMemberships?: Maybe<TeamMembershipUncheckedCreateNestedManyWithoutUserInput>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
 export type UserUncheckedCreateWithoutEmailConfirmationInput = {
-  ProjectMembersip?: Maybe<ProjectMembersipUncheckedCreateNestedManyWithoutUserInput>;
   confirmed?: Maybe<Scalars['Boolean']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   email: Scalars['String'];
   id?: Maybe<Scalars['String']>;
   profile?: Maybe<UserProfileUncheckedCreateNestedOneWithoutUserInput>;
+  projectMembersip?: Maybe<ProjectMembersipUncheckedCreateNestedManyWithoutUserInput>;
   teamMemberships?: Maybe<TeamMembershipUncheckedCreateNestedManyWithoutUserInput>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
 export type UserUncheckedCreateWithoutProfileInput = {
-  ProjectMembersip?: Maybe<ProjectMembersipUncheckedCreateNestedManyWithoutUserInput>;
   confirmed?: Maybe<Scalars['Boolean']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   email: Scalars['String'];
   emailConfirmation?: Maybe<EmailConfirmationUncheckedCreateNestedOneWithoutUserInput>;
   id?: Maybe<Scalars['String']>;
+  projectMembersip?: Maybe<ProjectMembersipUncheckedCreateNestedManyWithoutUserInput>;
   teamMemberships?: Maybe<TeamMembershipUncheckedCreateNestedManyWithoutUserInput>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
@@ -2388,24 +2426,24 @@ export type UserUncheckedCreateWithoutProjectMembersipInput = {
 };
 
 export type UserUncheckedCreateWithoutTeamMembershipsInput = {
-  ProjectMembersip?: Maybe<ProjectMembersipUncheckedCreateNestedManyWithoutUserInput>;
   confirmed?: Maybe<Scalars['Boolean']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   email: Scalars['String'];
   emailConfirmation?: Maybe<EmailConfirmationUncheckedCreateNestedOneWithoutUserInput>;
   id?: Maybe<Scalars['String']>;
   profile?: Maybe<UserProfileUncheckedCreateNestedOneWithoutUserInput>;
+  projectMembersip?: Maybe<ProjectMembersipUncheckedCreateNestedManyWithoutUserInput>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
 export type UserUncheckedUpdateInput = {
-  ProjectMembersip?: Maybe<ProjectMembersipUncheckedUpdateManyWithoutUserInput>;
   confirmed?: Maybe<BoolFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<StringFieldUpdateOperationsInput>;
   emailConfirmation?: Maybe<EmailConfirmationUncheckedUpdateOneWithoutUserInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   profile?: Maybe<UserProfileUncheckedUpdateOneWithoutUserInput>;
+  projectMembersip?: Maybe<ProjectMembersipUncheckedUpdateManyWithoutUserInput>;
   teamMemberships?: Maybe<TeamMembershipUncheckedUpdateManyWithoutUserInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
 };
@@ -2419,23 +2457,23 @@ export type UserUncheckedUpdateManyInput = {
 };
 
 export type UserUncheckedUpdateWithoutEmailConfirmationInput = {
-  ProjectMembersip?: Maybe<ProjectMembersipUncheckedUpdateManyWithoutUserInput>;
   confirmed?: Maybe<BoolFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<StringFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   profile?: Maybe<UserProfileUncheckedUpdateOneWithoutUserInput>;
+  projectMembersip?: Maybe<ProjectMembersipUncheckedUpdateManyWithoutUserInput>;
   teamMemberships?: Maybe<TeamMembershipUncheckedUpdateManyWithoutUserInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type UserUncheckedUpdateWithoutProfileInput = {
-  ProjectMembersip?: Maybe<ProjectMembersipUncheckedUpdateManyWithoutUserInput>;
   confirmed?: Maybe<BoolFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<StringFieldUpdateOperationsInput>;
   emailConfirmation?: Maybe<EmailConfirmationUncheckedUpdateOneWithoutUserInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
+  projectMembersip?: Maybe<ProjectMembersipUncheckedUpdateManyWithoutUserInput>;
   teamMemberships?: Maybe<TeamMembershipUncheckedUpdateManyWithoutUserInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
 };
@@ -2452,24 +2490,24 @@ export type UserUncheckedUpdateWithoutProjectMembersipInput = {
 };
 
 export type UserUncheckedUpdateWithoutTeamMembershipsInput = {
-  ProjectMembersip?: Maybe<ProjectMembersipUncheckedUpdateManyWithoutUserInput>;
   confirmed?: Maybe<BoolFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<StringFieldUpdateOperationsInput>;
   emailConfirmation?: Maybe<EmailConfirmationUncheckedUpdateOneWithoutUserInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   profile?: Maybe<UserProfileUncheckedUpdateOneWithoutUserInput>;
+  projectMembersip?: Maybe<ProjectMembersipUncheckedUpdateManyWithoutUserInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type UserUpdateInput = {
-  ProjectMembersip?: Maybe<ProjectMembersipUpdateManyWithoutUserInput>;
   confirmed?: Maybe<BoolFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<StringFieldUpdateOperationsInput>;
   emailConfirmation?: Maybe<EmailConfirmationUpdateOneWithoutUserInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   profile?: Maybe<UserProfileUpdateOneWithoutUserInput>;
+  projectMembersip?: Maybe<ProjectMembersipUpdateManyWithoutUserInput>;
   teamMemberships?: Maybe<TeamMembershipUpdateManyWithoutUserInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
 };
@@ -2515,23 +2553,23 @@ export type UserUpdateOneRequiredWithoutTeamMembershipsInput = {
 };
 
 export type UserUpdateWithoutEmailConfirmationInput = {
-  ProjectMembersip?: Maybe<ProjectMembersipUpdateManyWithoutUserInput>;
   confirmed?: Maybe<BoolFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<StringFieldUpdateOperationsInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   profile?: Maybe<UserProfileUpdateOneWithoutUserInput>;
+  projectMembersip?: Maybe<ProjectMembersipUpdateManyWithoutUserInput>;
   teamMemberships?: Maybe<TeamMembershipUpdateManyWithoutUserInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type UserUpdateWithoutProfileInput = {
-  ProjectMembersip?: Maybe<ProjectMembersipUpdateManyWithoutUserInput>;
   confirmed?: Maybe<BoolFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<StringFieldUpdateOperationsInput>;
   emailConfirmation?: Maybe<EmailConfirmationUpdateOneWithoutUserInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
+  projectMembersip?: Maybe<ProjectMembersipUpdateManyWithoutUserInput>;
   teamMemberships?: Maybe<TeamMembershipUpdateManyWithoutUserInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
 };
@@ -2548,13 +2586,13 @@ export type UserUpdateWithoutProjectMembersipInput = {
 };
 
 export type UserUpdateWithoutTeamMembershipsInput = {
-  ProjectMembersip?: Maybe<ProjectMembersipUpdateManyWithoutUserInput>;
   confirmed?: Maybe<BoolFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   email?: Maybe<StringFieldUpdateOperationsInput>;
   emailConfirmation?: Maybe<EmailConfirmationUpdateOneWithoutUserInput>;
   id?: Maybe<StringFieldUpdateOperationsInput>;
   profile?: Maybe<UserProfileUpdateOneWithoutUserInput>;
+  projectMembersip?: Maybe<ProjectMembersipUpdateManyWithoutUserInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
 };
 
@@ -2582,13 +2620,13 @@ export type UserWhereInput = {
   AND?: Maybe<Array<Maybe<UserWhereInput>>>;
   NOT?: Maybe<Array<Maybe<UserWhereInput>>>;
   OR?: Maybe<Array<Maybe<UserWhereInput>>>;
-  ProjectMembersip?: Maybe<ProjectMembersipListRelationFilter>;
   confirmed?: Maybe<BoolFilter>;
   createdAt?: Maybe<DateTimeFilter>;
   email?: Maybe<StringFilter>;
   emailConfirmation?: Maybe<EmailConfirmationWhereInput>;
   id?: Maybe<StringFilter>;
   profile?: Maybe<UserProfileWhereInput>;
+  projectMembersip?: Maybe<ProjectMembersipListRelationFilter>;
   teamMemberships?: Maybe<TeamMembershipListRelationFilter>;
   updatedAt?: Maybe<DateTimeFilter>;
 };

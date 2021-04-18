@@ -10,6 +10,10 @@ import { core } from "nexus"
 declare global {
   interface NexusGenCustomInputMethods<TypeName extends string> {
     /**
+     * Date custom scalar type
+     */
+    date<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "DateTime";
+    /**
      * Json custom scalar type
      */
     json<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "Json";
@@ -18,13 +22,17 @@ declare global {
      */
     decimal<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "Decimal";
     /**
-     * Date custom scalar type
+     * BigInt custom scalar type
      */
-    date<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "DateTime";
+    bigint<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "BigInt";
   }
 }
 declare global {
   interface NexusGenCustomOutputMethods<TypeName extends string> {
+    /**
+     * Date custom scalar type
+     */
+    date<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "DateTime";
     /**
      * Json custom scalar type
      */
@@ -34,9 +42,9 @@ declare global {
      */
     decimal<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "Decimal";
     /**
-     * Date custom scalar type
+     * BigInt custom scalar type
      */
-    date<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "DateTime";
+    bigint<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "BigInt";
   }
 }
 
@@ -673,6 +681,10 @@ export interface NexusGenInputs {
     update: NexusGenInputs['ProjectMembersipUncheckedUpdateWithoutUserInput']; // ProjectMembersipUncheckedUpdateWithoutUserInput!
     where: NexusGenInputs['ProjectMembersipWhereUniqueInput']; // ProjectMembersipWhereUniqueInput!
   }
+  ProjectMembersipUserIdProjectIdCompoundUniqueInput: { // input type
+    projectId: string; // String!
+    userId: string; // String!
+  }
   ProjectMembersipWhereInput: { // input type
     AND?: Array<NexusGenInputs['ProjectMembersipWhereInput'] | null> | null; // [ProjectMembersipWhereInput]
     NOT?: Array<NexusGenInputs['ProjectMembersipWhereInput'] | null> | null; // [ProjectMembersipWhereInput]
@@ -687,6 +699,7 @@ export interface NexusGenInputs {
   }
   ProjectMembersipWhereUniqueInput: { // input type
     id?: string | null; // String
+    userId_projectId?: NexusGenInputs['ProjectMembersipUserIdProjectIdCompoundUniqueInput'] | null; // ProjectMembersipUserIdProjectIdCompoundUniqueInput
   }
   ProjectOrderByInput: { // input type
     createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
@@ -1273,6 +1286,10 @@ export interface NexusGenInputs {
     update: NexusGenInputs['TeamMembershipUncheckedUpdateWithoutUserInput']; // TeamMembershipUncheckedUpdateWithoutUserInput!
     where: NexusGenInputs['TeamMembershipWhereUniqueInput']; // TeamMembershipWhereUniqueInput!
   }
+  TeamMembershipUserIdTeamIdCompoundUniqueInput: { // input type
+    teamId: string; // String!
+    userId: string; // String!
+  }
   TeamMembershipWhereInput: { // input type
     AND?: Array<NexusGenInputs['TeamMembershipWhereInput'] | null> | null; // [TeamMembershipWhereInput]
     NOT?: Array<NexusGenInputs['TeamMembershipWhereInput'] | null> | null; // [TeamMembershipWhereInput]
@@ -1289,6 +1306,7 @@ export interface NexusGenInputs {
   }
   TeamMembershipWhereUniqueInput: { // input type
     id?: string | null; // String
+    userId_teamId?: NexusGenInputs['TeamMembershipUserIdTeamIdCompoundUniqueInput'] | null; // TeamMembershipUserIdTeamIdCompoundUniqueInput
   }
   TeamOrderByInput: { // input type
     createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
@@ -1424,13 +1442,13 @@ export interface NexusGenInputs {
     id?: string | null; // String
   }
   UserCreateInput: { // input type
-    ProjectMembersip?: NexusGenInputs['ProjectMembersipCreateNestedManyWithoutUserInput'] | null; // ProjectMembersipCreateNestedManyWithoutUserInput
     confirmed?: boolean | null; // Boolean
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     email: string; // String!
     emailConfirmation?: NexusGenInputs['EmailConfirmationCreateNestedOneWithoutUserInput'] | null; // EmailConfirmationCreateNestedOneWithoutUserInput
     id?: string | null; // String
     profile?: NexusGenInputs['UserProfileCreateNestedOneWithoutUserInput'] | null; // UserProfileCreateNestedOneWithoutUserInput
+    projectMembersip?: NexusGenInputs['ProjectMembersipCreateNestedManyWithoutUserInput'] | null; // ProjectMembersipCreateNestedManyWithoutUserInput
     teamMemberships?: NexusGenInputs['TeamMembershipCreateNestedManyWithoutUserInput'] | null; // TeamMembershipCreateNestedManyWithoutUserInput
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
@@ -1478,22 +1496,22 @@ export interface NexusGenInputs {
     where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
   }
   UserCreateWithoutEmailConfirmationInput: { // input type
-    ProjectMembersip?: NexusGenInputs['ProjectMembersipCreateNestedManyWithoutUserInput'] | null; // ProjectMembersipCreateNestedManyWithoutUserInput
     confirmed?: boolean | null; // Boolean
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     email: string; // String!
     id?: string | null; // String
     profile?: NexusGenInputs['UserProfileCreateNestedOneWithoutUserInput'] | null; // UserProfileCreateNestedOneWithoutUserInput
+    projectMembersip?: NexusGenInputs['ProjectMembersipCreateNestedManyWithoutUserInput'] | null; // ProjectMembersipCreateNestedManyWithoutUserInput
     teamMemberships?: NexusGenInputs['TeamMembershipCreateNestedManyWithoutUserInput'] | null; // TeamMembershipCreateNestedManyWithoutUserInput
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
   UserCreateWithoutProfileInput: { // input type
-    ProjectMembersip?: NexusGenInputs['ProjectMembersipCreateNestedManyWithoutUserInput'] | null; // ProjectMembersipCreateNestedManyWithoutUserInput
     confirmed?: boolean | null; // Boolean
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     email: string; // String!
     emailConfirmation?: NexusGenInputs['EmailConfirmationCreateNestedOneWithoutUserInput'] | null; // EmailConfirmationCreateNestedOneWithoutUserInput
     id?: string | null; // String
+    projectMembersip?: NexusGenInputs['ProjectMembersipCreateNestedManyWithoutUserInput'] | null; // ProjectMembersipCreateNestedManyWithoutUserInput
     teamMemberships?: NexusGenInputs['TeamMembershipCreateNestedManyWithoutUserInput'] | null; // TeamMembershipCreateNestedManyWithoutUserInput
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
@@ -1508,13 +1526,13 @@ export interface NexusGenInputs {
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
   UserCreateWithoutTeamMembershipsInput: { // input type
-    ProjectMembersip?: NexusGenInputs['ProjectMembersipCreateNestedManyWithoutUserInput'] | null; // ProjectMembersipCreateNestedManyWithoutUserInput
     confirmed?: boolean | null; // Boolean
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     email: string; // String!
     emailConfirmation?: NexusGenInputs['EmailConfirmationCreateNestedOneWithoutUserInput'] | null; // EmailConfirmationCreateNestedOneWithoutUserInput
     id?: string | null; // String
     profile?: NexusGenInputs['UserProfileCreateNestedOneWithoutUserInput'] | null; // UserProfileCreateNestedOneWithoutUserInput
+    projectMembersip?: NexusGenInputs['ProjectMembersipCreateNestedManyWithoutUserInput'] | null; // ProjectMembersipCreateNestedManyWithoutUserInput
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
   UserOrderByInput: { // input type
@@ -1697,33 +1715,33 @@ export interface NexusGenInputs {
     updatedAt?: NexusGenInputs['DateTimeWithAggregatesFilter'] | null; // DateTimeWithAggregatesFilter
   }
   UserUncheckedCreateInput: { // input type
-    ProjectMembersip?: NexusGenInputs['ProjectMembersipUncheckedCreateNestedManyWithoutUserInput'] | null; // ProjectMembersipUncheckedCreateNestedManyWithoutUserInput
     confirmed?: boolean | null; // Boolean
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     email: string; // String!
     emailConfirmation?: NexusGenInputs['EmailConfirmationUncheckedCreateNestedOneWithoutUserInput'] | null; // EmailConfirmationUncheckedCreateNestedOneWithoutUserInput
     id?: string | null; // String
     profile?: NexusGenInputs['UserProfileUncheckedCreateNestedOneWithoutUserInput'] | null; // UserProfileUncheckedCreateNestedOneWithoutUserInput
+    projectMembersip?: NexusGenInputs['ProjectMembersipUncheckedCreateNestedManyWithoutUserInput'] | null; // ProjectMembersipUncheckedCreateNestedManyWithoutUserInput
     teamMemberships?: NexusGenInputs['TeamMembershipUncheckedCreateNestedManyWithoutUserInput'] | null; // TeamMembershipUncheckedCreateNestedManyWithoutUserInput
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
   UserUncheckedCreateWithoutEmailConfirmationInput: { // input type
-    ProjectMembersip?: NexusGenInputs['ProjectMembersipUncheckedCreateNestedManyWithoutUserInput'] | null; // ProjectMembersipUncheckedCreateNestedManyWithoutUserInput
     confirmed?: boolean | null; // Boolean
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     email: string; // String!
     id?: string | null; // String
     profile?: NexusGenInputs['UserProfileUncheckedCreateNestedOneWithoutUserInput'] | null; // UserProfileUncheckedCreateNestedOneWithoutUserInput
+    projectMembersip?: NexusGenInputs['ProjectMembersipUncheckedCreateNestedManyWithoutUserInput'] | null; // ProjectMembersipUncheckedCreateNestedManyWithoutUserInput
     teamMemberships?: NexusGenInputs['TeamMembershipUncheckedCreateNestedManyWithoutUserInput'] | null; // TeamMembershipUncheckedCreateNestedManyWithoutUserInput
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
   UserUncheckedCreateWithoutProfileInput: { // input type
-    ProjectMembersip?: NexusGenInputs['ProjectMembersipUncheckedCreateNestedManyWithoutUserInput'] | null; // ProjectMembersipUncheckedCreateNestedManyWithoutUserInput
     confirmed?: boolean | null; // Boolean
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     email: string; // String!
     emailConfirmation?: NexusGenInputs['EmailConfirmationUncheckedCreateNestedOneWithoutUserInput'] | null; // EmailConfirmationUncheckedCreateNestedOneWithoutUserInput
     id?: string | null; // String
+    projectMembersip?: NexusGenInputs['ProjectMembersipUncheckedCreateNestedManyWithoutUserInput'] | null; // ProjectMembersipUncheckedCreateNestedManyWithoutUserInput
     teamMemberships?: NexusGenInputs['TeamMembershipUncheckedCreateNestedManyWithoutUserInput'] | null; // TeamMembershipUncheckedCreateNestedManyWithoutUserInput
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
@@ -1738,23 +1756,23 @@ export interface NexusGenInputs {
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
   UserUncheckedCreateWithoutTeamMembershipsInput: { // input type
-    ProjectMembersip?: NexusGenInputs['ProjectMembersipUncheckedCreateNestedManyWithoutUserInput'] | null; // ProjectMembersipUncheckedCreateNestedManyWithoutUserInput
     confirmed?: boolean | null; // Boolean
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     email: string; // String!
     emailConfirmation?: NexusGenInputs['EmailConfirmationUncheckedCreateNestedOneWithoutUserInput'] | null; // EmailConfirmationUncheckedCreateNestedOneWithoutUserInput
     id?: string | null; // String
     profile?: NexusGenInputs['UserProfileUncheckedCreateNestedOneWithoutUserInput'] | null; // UserProfileUncheckedCreateNestedOneWithoutUserInput
+    projectMembersip?: NexusGenInputs['ProjectMembersipUncheckedCreateNestedManyWithoutUserInput'] | null; // ProjectMembersipUncheckedCreateNestedManyWithoutUserInput
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
   UserUncheckedUpdateInput: { // input type
-    ProjectMembersip?: NexusGenInputs['ProjectMembersipUncheckedUpdateManyWithoutUserInput'] | null; // ProjectMembersipUncheckedUpdateManyWithoutUserInput
     confirmed?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     emailConfirmation?: NexusGenInputs['EmailConfirmationUncheckedUpdateOneWithoutUserInput'] | null; // EmailConfirmationUncheckedUpdateOneWithoutUserInput
     id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     profile?: NexusGenInputs['UserProfileUncheckedUpdateOneWithoutUserInput'] | null; // UserProfileUncheckedUpdateOneWithoutUserInput
+    projectMembersip?: NexusGenInputs['ProjectMembersipUncheckedUpdateManyWithoutUserInput'] | null; // ProjectMembersipUncheckedUpdateManyWithoutUserInput
     teamMemberships?: NexusGenInputs['TeamMembershipUncheckedUpdateManyWithoutUserInput'] | null; // TeamMembershipUncheckedUpdateManyWithoutUserInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
@@ -1766,22 +1784,22 @@ export interface NexusGenInputs {
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
   UserUncheckedUpdateWithoutEmailConfirmationInput: { // input type
-    ProjectMembersip?: NexusGenInputs['ProjectMembersipUncheckedUpdateManyWithoutUserInput'] | null; // ProjectMembersipUncheckedUpdateManyWithoutUserInput
     confirmed?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     profile?: NexusGenInputs['UserProfileUncheckedUpdateOneWithoutUserInput'] | null; // UserProfileUncheckedUpdateOneWithoutUserInput
+    projectMembersip?: NexusGenInputs['ProjectMembersipUncheckedUpdateManyWithoutUserInput'] | null; // ProjectMembersipUncheckedUpdateManyWithoutUserInput
     teamMemberships?: NexusGenInputs['TeamMembershipUncheckedUpdateManyWithoutUserInput'] | null; // TeamMembershipUncheckedUpdateManyWithoutUserInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
   UserUncheckedUpdateWithoutProfileInput: { // input type
-    ProjectMembersip?: NexusGenInputs['ProjectMembersipUncheckedUpdateManyWithoutUserInput'] | null; // ProjectMembersipUncheckedUpdateManyWithoutUserInput
     confirmed?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     emailConfirmation?: NexusGenInputs['EmailConfirmationUncheckedUpdateOneWithoutUserInput'] | null; // EmailConfirmationUncheckedUpdateOneWithoutUserInput
     id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    projectMembersip?: NexusGenInputs['ProjectMembersipUncheckedUpdateManyWithoutUserInput'] | null; // ProjectMembersipUncheckedUpdateManyWithoutUserInput
     teamMemberships?: NexusGenInputs['TeamMembershipUncheckedUpdateManyWithoutUserInput'] | null; // TeamMembershipUncheckedUpdateManyWithoutUserInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
@@ -1796,23 +1814,23 @@ export interface NexusGenInputs {
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
   UserUncheckedUpdateWithoutTeamMembershipsInput: { // input type
-    ProjectMembersip?: NexusGenInputs['ProjectMembersipUncheckedUpdateManyWithoutUserInput'] | null; // ProjectMembersipUncheckedUpdateManyWithoutUserInput
     confirmed?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     emailConfirmation?: NexusGenInputs['EmailConfirmationUncheckedUpdateOneWithoutUserInput'] | null; // EmailConfirmationUncheckedUpdateOneWithoutUserInput
     id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     profile?: NexusGenInputs['UserProfileUncheckedUpdateOneWithoutUserInput'] | null; // UserProfileUncheckedUpdateOneWithoutUserInput
+    projectMembersip?: NexusGenInputs['ProjectMembersipUncheckedUpdateManyWithoutUserInput'] | null; // ProjectMembersipUncheckedUpdateManyWithoutUserInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
   UserUpdateInput: { // input type
-    ProjectMembersip?: NexusGenInputs['ProjectMembersipUpdateManyWithoutUserInput'] | null; // ProjectMembersipUpdateManyWithoutUserInput
     confirmed?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     emailConfirmation?: NexusGenInputs['EmailConfirmationUpdateOneWithoutUserInput'] | null; // EmailConfirmationUpdateOneWithoutUserInput
     id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     profile?: NexusGenInputs['UserProfileUpdateOneWithoutUserInput'] | null; // UserProfileUpdateOneWithoutUserInput
+    projectMembersip?: NexusGenInputs['ProjectMembersipUpdateManyWithoutUserInput'] | null; // ProjectMembersipUpdateManyWithoutUserInput
     teamMemberships?: NexusGenInputs['TeamMembershipUpdateManyWithoutUserInput'] | null; // TeamMembershipUpdateManyWithoutUserInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
@@ -1852,22 +1870,22 @@ export interface NexusGenInputs {
     upsert?: NexusGenInputs['UserUpsertWithoutTeamMembershipsInput'] | null; // UserUpsertWithoutTeamMembershipsInput
   }
   UserUpdateWithoutEmailConfirmationInput: { // input type
-    ProjectMembersip?: NexusGenInputs['ProjectMembersipUpdateManyWithoutUserInput'] | null; // ProjectMembersipUpdateManyWithoutUserInput
     confirmed?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     profile?: NexusGenInputs['UserProfileUpdateOneWithoutUserInput'] | null; // UserProfileUpdateOneWithoutUserInput
+    projectMembersip?: NexusGenInputs['ProjectMembersipUpdateManyWithoutUserInput'] | null; // ProjectMembersipUpdateManyWithoutUserInput
     teamMemberships?: NexusGenInputs['TeamMembershipUpdateManyWithoutUserInput'] | null; // TeamMembershipUpdateManyWithoutUserInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
   UserUpdateWithoutProfileInput: { // input type
-    ProjectMembersip?: NexusGenInputs['ProjectMembersipUpdateManyWithoutUserInput'] | null; // ProjectMembersipUpdateManyWithoutUserInput
     confirmed?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     emailConfirmation?: NexusGenInputs['EmailConfirmationUpdateOneWithoutUserInput'] | null; // EmailConfirmationUpdateOneWithoutUserInput
     id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    projectMembersip?: NexusGenInputs['ProjectMembersipUpdateManyWithoutUserInput'] | null; // ProjectMembersipUpdateManyWithoutUserInput
     teamMemberships?: NexusGenInputs['TeamMembershipUpdateManyWithoutUserInput'] | null; // TeamMembershipUpdateManyWithoutUserInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
@@ -1882,13 +1900,13 @@ export interface NexusGenInputs {
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
   UserUpdateWithoutTeamMembershipsInput: { // input type
-    ProjectMembersip?: NexusGenInputs['ProjectMembersipUpdateManyWithoutUserInput'] | null; // ProjectMembersipUpdateManyWithoutUserInput
     confirmed?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     emailConfirmation?: NexusGenInputs['EmailConfirmationUpdateOneWithoutUserInput'] | null; // EmailConfirmationUpdateOneWithoutUserInput
     id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     profile?: NexusGenInputs['UserProfileUpdateOneWithoutUserInput'] | null; // UserProfileUpdateOneWithoutUserInput
+    projectMembersip?: NexusGenInputs['ProjectMembersipUpdateManyWithoutUserInput'] | null; // ProjectMembersipUpdateManyWithoutUserInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
   UserUpsertWithoutEmailConfirmationInput: { // input type
@@ -1911,13 +1929,13 @@ export interface NexusGenInputs {
     AND?: Array<NexusGenInputs['UserWhereInput'] | null> | null; // [UserWhereInput]
     NOT?: Array<NexusGenInputs['UserWhereInput'] | null> | null; // [UserWhereInput]
     OR?: Array<NexusGenInputs['UserWhereInput'] | null> | null; // [UserWhereInput]
-    ProjectMembersip?: NexusGenInputs['ProjectMembersipListRelationFilter'] | null; // ProjectMembersipListRelationFilter
     confirmed?: NexusGenInputs['BoolFilter'] | null; // BoolFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     email?: NexusGenInputs['StringFilter'] | null; // StringFilter
     emailConfirmation?: NexusGenInputs['EmailConfirmationWhereInput'] | null; // EmailConfirmationWhereInput
     id?: NexusGenInputs['StringFilter'] | null; // StringFilter
     profile?: NexusGenInputs['UserProfileWhereInput'] | null; // UserProfileWhereInput
+    projectMembersip?: NexusGenInputs['ProjectMembersipListRelationFilter'] | null; // ProjectMembersipListRelationFilter
     teamMemberships?: NexusGenInputs['TeamMembershipListRelationFilter'] | null; // TeamMembershipListRelationFilter
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
   }
@@ -1947,6 +1965,8 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
+  BigInt: any
+  Date: any
   DateTime: any
   Decimal: any
   Json: any
@@ -2008,6 +2028,11 @@ export interface NexusGenObjects {
     userId?: string | null; // String
   }
   Mutation: {};
+  PaginationParams: { // root type
+    cursor?: string | null; // ID
+    skip?: number | null; // Int
+    take?: number | null; // Int
+  }
   Project: { // root type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // ID!
@@ -2259,6 +2284,11 @@ export interface NexusGenFieldTypes {
     register: NexusGenRootTypes['User'] | null; // User
     requestLogin: NexusGenRootTypes['SuccessResponse'] | null; // SuccessResponse
   }
+  PaginationParams: { // field return type
+    cursor: string | null; // ID
+    skip: number | null; // Int
+    take: number | null; // Int
+  }
   Project: { // field return type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // ID!
@@ -2313,6 +2343,7 @@ export interface NexusGenFieldTypes {
     listTeamMembersips: Array<NexusGenRootTypes['TeamMembership'] | null>; // [TeamMembership]!
     listTeams: Array<NexusGenRootTypes['Team'] | null>; // [Team]!
     me: NexusGenRootTypes['User'] | null; // User
+    team: NexusGenRootTypes['Team']; // Team!
     teamMembership: NexusGenRootTypes['TeamMembership']; // TeamMembership!
   }
   SuccessResponse: { // field return type
@@ -2506,6 +2537,11 @@ export interface NexusGenFieldTypeNames {
     register: 'User'
     requestLogin: 'SuccessResponse'
   }
+  PaginationParams: { // field return type name
+    cursor: 'ID'
+    skip: 'Int'
+    take: 'Int'
+  }
   Project: { // field return type name
     createdAt: 'DateTime'
     id: 'ID'
@@ -2560,6 +2596,7 @@ export interface NexusGenFieldTypeNames {
     listTeamMembersips: 'TeamMembership'
     listTeams: 'Team'
     me: 'User'
+    team: 'Team'
     teamMembership: 'TeamMembership'
   }
   SuccessResponse: { // field return type name
@@ -2713,6 +2750,14 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    listTeams: { // args
+      cursor?: string | null; // ID
+      skip?: number | null; // Int
+      take?: number | null; // Int
+    }
+    team: { // args
+      id: string; // ID!
+    }
     teamMembership: { // args
       id: string; // String!
     }

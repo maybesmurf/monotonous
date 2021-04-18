@@ -4,12 +4,12 @@ import { allow, nexusShield } from "nexus-shield";
 import { paljs } from "@paljs/nexus";
 import { config } from "@monotonous/conf";
 
-import * as GenericResponses from "./types/generic_response_types";
+import * as MiscResponses from "./misc_types";
 import * as Models from "./models";
 import * as Services from "./services";
 
 export const schema = makeSchema({
-  types: [GenericResponses, Models, Services],
+  types: [MiscResponses, Models, Services],
 
   plugins: [
     paljs(),

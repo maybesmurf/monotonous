@@ -22,8 +22,8 @@
     "gql:build": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
-    "@paljs/nexus": "^2.12.2",
-    "@paljs/plugins": "^2.12.2",
+    "@paljs/nexus": "^3.0.1",
+    "@paljs/plugins": "^3.0.1",
     "@prisma/client": "^2.18.0",
     "@sinclair/typebox": "^0.12.7",
     "bullmq": "^1.14.7",

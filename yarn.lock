@@ -1376,28 +1376,28 @@
   resolved "https://registry.yarnpkg.com/@opentelemetry/context-base/-/context-base-0.14.0.tgz#c67fc20a4d891447ca1a855d7d70fa79a3533001"
   integrity sha512-sDOAZcYwynHFTbLo6n8kIbLiVF3a3BLkrmehJUyEbT9F+Smbi47kLGS2gG2g0fjBLR/Lr1InPD7kXL7FaTqEkw==
 
-"@paljs/nexus@^2.12.2":
-  version "2.14.0"
-  resolved "https://registry.yarnpkg.com/@paljs/nexus/-/nexus-2.14.0.tgz#9de0ed5d960be71c39c5d03787cb42bb3ac19a85"
-  integrity sha512-qTJw6IxK/VviLMu7gAFZ+xsvtIrjNRnEaIW9bT841pFwPouKf+0L89W6HqQDPXI6bcU2gI1M1c7CW/GaKyiDww==
+"@paljs/nexus@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@paljs/nexus/-/nexus-3.0.1.tgz#0c974aa5c68cf8cbcb3eb215c160a849f0c7ad5f"
+  integrity sha512-n50PmevTdlUowSTSYxwFSFA8XhpI8zEvOIXBEWkiRXl/8pQ26kqr3Wc6FsL4F5wjSQbiB1GZqJOAdTv9L+fDWg==
   dependencies:
-    "@paljs/plugins" "^2.14.0"
+    "@paljs/plugins" "^3.0.1"
     fs-extra "^9.1.0"
     lowdb "^1.0.0"
 
-"@paljs/plugins@^2.12.2", "@paljs/plugins@^2.14.0":
-  version "2.14.0"
-  resolved "https://registry.yarnpkg.com/@paljs/plugins/-/plugins-2.14.0.tgz#4ed95a63f9b23da96981373e52cfa9871fc9889c"
-  integrity sha512-e2NSL4ca6Nb/GOb+lwqJpsPy6TOWs4hJkj0DlUIMF4XI3oH4jm3qE8D4vshIyFoLdXzBFruy9FWLDWpDZuaphQ==
+"@paljs/plugins@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@paljs/plugins/-/plugins-3.0.1.tgz#0d6e95ad086c18ea84f054b30bcebe19d790e00b"
+  integrity sha512-PjnqnmYl/MexWIfpHTVvWbjyMBo9B0W8ZbYcv9eUIuaM7/bEoTSd3w++PUBdCXF4phtaxbDXnKscpi+UOKlrvg==
   dependencies:
-    "@paljs/types" "^2.14.0"
+    "@paljs/types" "^3.0.1"
     graphql-fields "2.0.3"
     graphql-tag "2.11.0"
 
-"@paljs/types@^2.14.0":
-  version "2.14.0"
-  resolved "https://registry.yarnpkg.com/@paljs/types/-/types-2.14.0.tgz#0234d10053bd03ce911c822ca3c90eac8aa331fa"
-  integrity sha512-/cFaf8Wg+ZW5vNUHBpk7KyO09w5zNDbEP7Sn3L6KyjDWDcQEJlvMIdDo7ZeL4KZDECNhKErXUMM8042MeyR1ag==
+"@paljs/types@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@paljs/types/-/types-3.0.1.tgz#6c4a6ae5fb2ce0fda06a0c48c6ee849ef02d9b38"
+  integrity sha512-rAY8PAy3Lq37yUh7Hh40TdHQyoVoZP+WXX+oiYKuwuH3lMFlVFHJmul6kGUoQOWGMVYbNnZWy6Y/OvRNelPvRA==
 
 "@polka/url@^1.0.0-next.9":
   version "1.0.0-next.12"

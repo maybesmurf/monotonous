@@ -12,9 +12,6 @@ export const User = objectType({
   },
 });
 
-/**
- * Queries
- */
 export const UserQuery = extendType({
   type: "Query",
   definition(t) {
