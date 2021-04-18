@@ -2,7 +2,7 @@ import { createSigner, createVerifier } from "fast-jwt";
 import { config } from "@monotonous/conf";
 import { redis } from "../lib/redis_client";
 
-interface Claims {
+interface JwtClaims {
   userId: string;
 }
 
@@ -21,12 +21,8 @@ export async function signJwt(userId: string): Promise<string> {
  * @name verifyJwt
  * Verify jwt and return the claims.
  */
-export async function verifyJwt(jwt?: string): Promise<Claims | undefined> {
-  if (!jwt) {
-    return undefined;
-  }
-
-  return verify(jwt);
+export async function verifyJwt(jwt?: string): Promise<JwtClaims | undefined> {
+  return jwt ? verify(jwt) : undefined;
 }
 
 /**
@@ -36,12 +32,8 @@ export async function verifyJwt(jwt?: string): Promise<Claims | undefined> {
  */
 export async function assignOtp(email: string): Promise<string> {
   try {
-    const code = Math.floor(100000 + Math.random() * 900000).toString(); // 6 digit number
-    const existing = await redis.get(email);
-
-    if (existing) {
-      return assignOtp(email);
-    }
+    // Generate 6 digit number
+    const code = Math.floor(100000 + Math.random() * 900000).toString();
 
     await redis.set(
       email,
@@ -72,7 +64,7 @@ export async function verifyOtp(
   const record = await redis.get(email);
 
   if (!record) {
-    return { success: false };
+    return { success: false, attemptsLeft: 0 };
   }
 
   const attempt = JSON.parse(record) as { code: string; attemptsLeft: number };

@@ -8,6 +8,30 @@ type AggregateEmailConfirmation {
   min: EmailConfirmationMinAggregateOutputType
 }
 
+type AggregateProject {
+  count: ProjectCountAggregateOutputType
+  max: ProjectMaxAggregateOutputType
+  min: ProjectMinAggregateOutputType
+}
+
+type AggregateProjectMembersip {
+  count: ProjectMembersipCountAggregateOutputType
+  max: ProjectMembersipMaxAggregateOutputType
+  min: ProjectMembersipMinAggregateOutputType
+}
+
+type AggregateTeam {
+  count: TeamCountAggregateOutputType
+  max: TeamMaxAggregateOutputType
+  min: TeamMinAggregateOutputType
+}
+
+type AggregateTeamMembership {
+  count: TeamMembershipCountAggregateOutputType
+  max: TeamMembershipMaxAggregateOutputType
+  min: TeamMembershipMinAggregateOutputType
+}
+
 type AggregateUser {
   count: UserCountAggregateOutputType
   max: UserMaxAggregateOutputType
@@ -239,11 +263,60 @@ input EmailConfirmationWhereUniqueInput {
   userId: String
 }
 
+input EnumMembershipStatusesFieldUpdateOperationsInput {
+  set: MembershipStatuses
+}
+
+input EnumMembershipStatusesFilter {
+  equals: MembershipStatuses
+  in: [MembershipStatuses]
+  not: NestedEnumMembershipStatusesFilter
+  notIn: [MembershipStatuses]
+}
+
+input EnumMembershipStatusesWithAggregatesFilter {
+  count: NestedIntFilter
+  equals: MembershipStatuses
+  in: [MembershipStatuses]
+  max: NestedEnumMembershipStatusesFilter
+  min: NestedEnumMembershipStatusesFilter
+  not: NestedEnumMembershipStatusesWithAggregatesFilter
+  notIn: [MembershipStatuses]
+}
+
+input EnumTeamRolesFieldUpdateOperationsInput {
+  set: TeamRoles
+}
+
+input EnumTeamRolesFilter {
+  equals: TeamRoles
+  in: [TeamRoles]
+  not: NestedEnumTeamRolesFilter
+  notIn: [TeamRoles]
+}
+
+input EnumTeamRolesWithAggregatesFilter {
+  count: NestedIntFilter
+  equals: TeamRoles
+  in: [TeamRoles]
+  max: NestedEnumTeamRolesFilter
+  min: NestedEnumTeamRolesFilter
+  not: NestedEnumTeamRolesWithAggregatesFilter
+  notIn: [TeamRoles]
+}
+
 """Json custom scalar type"""
 scalar Json
 
+enum MembershipStatuses {
+  ACCEPTED
+  BANNED
+  PENDING
+}
+
 type Mutation {
   confirmEmail(email: String!, token: String!): User
+  createTeam(name: String!): Team!
   login(code: String!, email: String!): User
   logout: SuccessResponse
   register(email: String!, firstName: String!, lastName: String!): User
@@ -288,6 +361,40 @@ input NestedDateTimeWithAggregatesFilter {
   notIn: [DateTime]
 }
 
+input NestedEnumMembershipStatusesFilter {
+  equals: MembershipStatuses
+  in: [MembershipStatuses]
+  not: NestedEnumMembershipStatusesFilter
+  notIn: [MembershipStatuses]
+}
+
+input NestedEnumMembershipStatusesWithAggregatesFilter {
+  count: NestedIntFilter
+  equals: MembershipStatuses
+  in: [MembershipStatuses]
+  max: NestedEnumMembershipStatusesFilter
+  min: NestedEnumMembershipStatusesFilter
+  not: NestedEnumMembershipStatusesWithAggregatesFilter
+  notIn: [MembershipStatuses]
+}
+
+input NestedEnumTeamRolesFilter {
+  equals: TeamRoles
+  in: [TeamRoles]
+  not: NestedEnumTeamRolesFilter
+  notIn: [TeamRoles]
+}
+
+input NestedEnumTeamRolesWithAggregatesFilter {
+  count: NestedIntFilter
+  equals: TeamRoles
+  in: [TeamRoles]
+  max: NestedEnumTeamRolesFilter
+  min: NestedEnumTeamRolesFilter
+  not: NestedEnumTeamRolesWithAggregatesFilter
+  notIn: [TeamRoles]
+}
+
 input NestedIntFilter {
   equals: Int
   gt: Int
@@ -330,8 +437,698 @@ input NestedStringWithAggregatesFilter {
   startsWith: String
 }
 
+type Project {
+  createdAt: DateTime!
+  id: ID!
+  name: String!
+  updatedAt: DateTime!
+}
+
+type ProjectCountAggregateOutputType {
+  _all: Int!
+  createdAt: Int!
+  id: Int!
+  name: Int!
+  teamId: Int!
+  updatedAt: Int!
+}
+
+input ProjectCreateInput {
+  createdAt: DateTime
+  id: String
+  memberships: ProjectMembersipCreateNestedManyWithoutProjectInput
+  name: String!
+  team: TeamCreateNestedOneWithoutProjectsInput!
+  updatedAt: DateTime
+}
+
+input ProjectCreateManyInput {
+  createdAt: DateTime
+  id: String
+  name: String!
+  teamId: String!
+  updatedAt: DateTime
+}
+
+input ProjectCreateManyTeamInput {
+  createdAt: DateTime
+  id: String
+  name: String!
+  updatedAt: DateTime
+}
+
+input ProjectCreateManyTeamInputEnvelope {
+  data: ProjectCreateManyTeamInput!
+  skipDuplicates: Boolean
+}
+
+input ProjectCreateNestedManyWithoutTeamInput {
+  connect: [ProjectWhereUniqueInput]
+  connectOrCreate: [ProjectCreateOrConnectWithoutTeamInput]
+  create: [ProjectCreateWithoutTeamInput]
+  createMany: ProjectCreateManyTeamInputEnvelope
+}
+
+input ProjectCreateNestedOneWithoutMembershipsInput {
+  connect: ProjectWhereUniqueInput
+  connectOrCreate: ProjectCreateOrConnectWithoutMembershipsInput
+  create: ProjectUncheckedCreateWithoutMembershipsInput
+}
+
+input ProjectCreateOrConnectWithoutMembershipsInput {
+  create: ProjectUncheckedCreateWithoutMembershipsInput!
+  where: ProjectWhereUniqueInput!
+}
+
+input ProjectCreateOrConnectWithoutTeamInput {
+  create: ProjectUncheckedCreateWithoutTeamInput!
+  where: ProjectWhereUniqueInput!
+}
+
+input ProjectCreateWithoutMembershipsInput {
+  createdAt: DateTime
+  id: String
+  name: String!
+  team: TeamCreateNestedOneWithoutProjectsInput!
+  updatedAt: DateTime
+}
+
+input ProjectCreateWithoutTeamInput {
+  createdAt: DateTime
+  id: String
+  memberships: ProjectMembersipCreateNestedManyWithoutProjectInput
+  name: String!
+  updatedAt: DateTime
+}
+
+input ProjectListRelationFilter {
+  every: ProjectWhereInput
+  none: ProjectWhereInput
+  some: ProjectWhereInput
+}
+
+type ProjectMaxAggregateOutputType {
+  createdAt: DateTime
+  id: String
+  name: String
+  teamId: String
+  updatedAt: DateTime
+}
+
+type ProjectMembersipCountAggregateOutputType {
+  _all: Int!
+  createdAt: Int!
+  id: Int!
+  projectId: Int!
+  updatedAt: Int!
+  userId: Int!
+}
+
+input ProjectMembersipCreateInput {
+  createdAt: DateTime
+  id: String
+  project: ProjectCreateNestedOneWithoutMembershipsInput!
+  updatedAt: DateTime
+  user: UserCreateNestedOneWithoutProjectMembersipInput!
+}
+
+input ProjectMembersipCreateManyInput {
+  createdAt: DateTime
+  id: String
+  projectId: String!
+  updatedAt: DateTime
+  userId: String!
+}
+
+input ProjectMembersipCreateManyProjectInput {
+  createdAt: DateTime
+  id: String
+  updatedAt: DateTime
+  userId: String!
+}
+
+input ProjectMembersipCreateManyProjectInputEnvelope {
+  data: ProjectMembersipCreateManyProjectInput!
+  skipDuplicates: Boolean
+}
+
+input ProjectMembersipCreateManyUserInput {
+  createdAt: DateTime
+  id: String
+  projectId: String!
+  updatedAt: DateTime
+}
+
+input ProjectMembersipCreateManyUserInputEnvelope {
+  data: ProjectMembersipCreateManyUserInput!
+  skipDuplicates: Boolean
+}
+
+input ProjectMembersipCreateNestedManyWithoutProjectInput {
+  connect: [ProjectMembersipWhereUniqueInput]
+  connectOrCreate: [ProjectMembersipCreateOrConnectWithoutProjectInput]
+  create: [ProjectMembersipCreateWithoutProjectInput]
+  createMany: ProjectMembersipCreateManyProjectInputEnvelope
+}
+
+input ProjectMembersipCreateNestedManyWithoutUserInput {
+  connect: [ProjectMembersipWhereUniqueInput]
+  connectOrCreate: [ProjectMembersipCreateOrConnectWithoutUserInput]
+  create: [ProjectMembersipCreateWithoutUserInput]
+  createMany: ProjectMembersipCreateManyUserInputEnvelope
+}
+
+input ProjectMembersipCreateOrConnectWithoutProjectInput {
+  create: ProjectMembersipUncheckedCreateWithoutProjectInput!
+  where: ProjectMembersipWhereUniqueInput!
+}
+
+input ProjectMembersipCreateOrConnectWithoutUserInput {
+  create: ProjectMembersipUncheckedCreateWithoutUserInput!
+  where: ProjectMembersipWhereUniqueInput!
+}
+
+input ProjectMembersipCreateWithoutProjectInput {
+  createdAt: DateTime
+  id: String
+  updatedAt: DateTime
+  user: UserCreateNestedOneWithoutProjectMembersipInput!
+}
+
+input ProjectMembersipCreateWithoutUserInput {
+  createdAt: DateTime
+  id: String
+  project: ProjectCreateNestedOneWithoutMembershipsInput!
+  updatedAt: DateTime
+}
+
+input ProjectMembersipListRelationFilter {
+  every: ProjectMembersipWhereInput
+  none: ProjectMembersipWhereInput
+  some: ProjectMembersipWhereInput
+}
+
+type ProjectMembersipMaxAggregateOutputType {
+  createdAt: DateTime
+  id: String
+  projectId: String
+  updatedAt: DateTime
+  userId: String
+}
+
+type ProjectMembersipMinAggregateOutputType {
+  createdAt: DateTime
+  id: String
+  projectId: String
+  updatedAt: DateTime
+  userId: String
+}
+
+input ProjectMembersipOrderByInput {
+  createdAt: SortOrder
+  id: SortOrder
+  projectId: SortOrder
+  updatedAt: SortOrder
+  userId: SortOrder
+}
+
+enum ProjectMembersipScalarFieldEnum {
+  createdAt
+  id
+  projectId
+  updatedAt
+  userId
+}
+
+input ProjectMembersipScalarWhereInput {
+  AND: [ProjectMembersipScalarWhereInput]
+  NOT: [ProjectMembersipScalarWhereInput]
+  OR: [ProjectMembersipScalarWhereInput]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  projectId: StringFilter
+  updatedAt: DateTimeFilter
+  userId: StringFilter
+}
+
+input ProjectMembersipScalarWhereWithAggregatesInput {
+  AND: [ProjectMembersipScalarWhereWithAggregatesInput]
+  NOT: [ProjectMembersipScalarWhereWithAggregatesInput]
+  OR: [ProjectMembersipScalarWhereWithAggregatesInput]
+  createdAt: DateTimeWithAggregatesFilter
+  id: StringWithAggregatesFilter
+  projectId: StringWithAggregatesFilter
+  updatedAt: DateTimeWithAggregatesFilter
+  userId: StringWithAggregatesFilter
+}
+
+input ProjectMembersipUncheckedCreateInput {
+  createdAt: DateTime
+  id: String
+  projectId: String!
+  updatedAt: DateTime
+  userId: String!
+}
+
+input ProjectMembersipUncheckedCreateNestedManyWithoutProjectInput {
+  connect: [ProjectMembersipWhereUniqueInput]
+  connectOrCreate: [ProjectMembersipCreateOrConnectWithoutProjectInput]
+  create: [ProjectMembersipCreateWithoutProjectInput]
+  createMany: ProjectMembersipCreateManyProjectInputEnvelope
+}
+
+input ProjectMembersipUncheckedCreateNestedManyWithoutUserInput {
+  connect: [ProjectMembersipWhereUniqueInput]
+  connectOrCreate: [ProjectMembersipCreateOrConnectWithoutUserInput]
+  create: [ProjectMembersipCreateWithoutUserInput]
+  createMany: ProjectMembersipCreateManyUserInputEnvelope
+}
+
+input ProjectMembersipUncheckedCreateWithoutProjectInput {
+  createdAt: DateTime
+  id: String
+  updatedAt: DateTime
+  userId: String!
+}
+
+input ProjectMembersipUncheckedCreateWithoutUserInput {
+  createdAt: DateTime
+  id: String
+  projectId: String!
+  updatedAt: DateTime
+}
+
+input ProjectMembersipUncheckedUpdateInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  projectId: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  userId: StringFieldUpdateOperationsInput
+}
+
+input ProjectMembersipUncheckedUpdateManyInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  projectId: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  userId: StringFieldUpdateOperationsInput
+}
+
+input ProjectMembersipUncheckedUpdateManyWithoutMembershipsInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  userId: StringFieldUpdateOperationsInput
+}
+
+input ProjectMembersipUncheckedUpdateManyWithoutProjectInput {
+  connect: [ProjectMembersipWhereUniqueInput]
+  connectOrCreate: [ProjectMembersipCreateOrConnectWithoutProjectInput]
+  create: [ProjectMembersipCreateWithoutProjectInput]
+  createMany: ProjectMembersipCreateManyProjectInputEnvelope
+  delete: [ProjectMembersipWhereUniqueInput]
+  deleteMany: [ProjectMembersipScalarWhereInput]
+  disconnect: [ProjectMembersipWhereUniqueInput]
+  set: [ProjectMembersipWhereUniqueInput]
+  update: [ProjectMembersipUpdateWithWhereUniqueWithoutProjectInput]
+  updateMany: [ProjectMembersipUpdateManyWithWhereWithoutProjectInput]
+  upsert: [ProjectMembersipUpsertWithWhereUniqueWithoutProjectInput]
+}
+
+input ProjectMembersipUncheckedUpdateManyWithoutProjectMembersipInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  projectId: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ProjectMembersipUncheckedUpdateManyWithoutUserInput {
+  connect: [ProjectMembersipWhereUniqueInput]
+  connectOrCreate: [ProjectMembersipCreateOrConnectWithoutUserInput]
+  create: [ProjectMembersipCreateWithoutUserInput]
+  createMany: ProjectMembersipCreateManyUserInputEnvelope
+  delete: [ProjectMembersipWhereUniqueInput]
+  deleteMany: [ProjectMembersipScalarWhereInput]
+  disconnect: [ProjectMembersipWhereUniqueInput]
+  set: [ProjectMembersipWhereUniqueInput]
+  update: [ProjectMembersipUpdateWithWhereUniqueWithoutUserInput]
+  updateMany: [ProjectMembersipUpdateManyWithWhereWithoutUserInput]
+  upsert: [ProjectMembersipUpsertWithWhereUniqueWithoutUserInput]
+}
+
+input ProjectMembersipUncheckedUpdateWithoutProjectInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  userId: StringFieldUpdateOperationsInput
+}
+
+input ProjectMembersipUncheckedUpdateWithoutUserInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  projectId: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ProjectMembersipUpdateInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  project: ProjectUpdateOneRequiredWithoutMembershipsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutProjectMembersipInput
+}
+
+input ProjectMembersipUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ProjectMembersipUpdateManyWithWhereWithoutProjectInput {
+  data: ProjectMembersipUncheckedUpdateManyWithoutMembershipsInput!
+  where: ProjectMembersipScalarWhereInput!
+}
+
+input ProjectMembersipUpdateManyWithWhereWithoutUserInput {
+  data: ProjectMembersipUncheckedUpdateManyWithoutProjectMembersipInput!
+  where: ProjectMembersipScalarWhereInput!
+}
+
+input ProjectMembersipUpdateManyWithoutProjectInput {
+  connect: [ProjectMembersipWhereUniqueInput]
+  connectOrCreate: [ProjectMembersipCreateOrConnectWithoutProjectInput]
+  create: [ProjectMembersipCreateWithoutProjectInput]
+  createMany: ProjectMembersipCreateManyProjectInputEnvelope
+  delete: [ProjectMembersipWhereUniqueInput]
+  deleteMany: [ProjectMembersipScalarWhereInput]
+  disconnect: [ProjectMembersipWhereUniqueInput]
+  set: [ProjectMembersipWhereUniqueInput]
+  update: [ProjectMembersipUpdateWithWhereUniqueWithoutProjectInput]
+  updateMany: [ProjectMembersipUpdateManyWithWhereWithoutProjectInput]
+  upsert: [ProjectMembersipUpsertWithWhereUniqueWithoutProjectInput]
+}
+
+input ProjectMembersipUpdateManyWithoutUserInput {
+  connect: [ProjectMembersipWhereUniqueInput]
+  connectOrCreate: [ProjectMembersipCreateOrConnectWithoutUserInput]
+  create: [ProjectMembersipCreateWithoutUserInput]
+  createMany: ProjectMembersipCreateManyUserInputEnvelope
+  delete: [ProjectMembersipWhereUniqueInput]
+  deleteMany: [ProjectMembersipScalarWhereInput]
+  disconnect: [ProjectMembersipWhereUniqueInput]
+  set: [ProjectMembersipWhereUniqueInput]
+  update: [ProjectMembersipUpdateWithWhereUniqueWithoutUserInput]
+  updateMany: [ProjectMembersipUpdateManyWithWhereWithoutUserInput]
+  upsert: [ProjectMembersipUpsertWithWhereUniqueWithoutUserInput]
+}
+
+input ProjectMembersipUpdateWithWhereUniqueWithoutProjectInput {
+  data: ProjectMembersipUncheckedUpdateWithoutProjectInput!
+  where: ProjectMembersipWhereUniqueInput!
+}
+
+input ProjectMembersipUpdateWithWhereUniqueWithoutUserInput {
+  data: ProjectMembersipUncheckedUpdateWithoutUserInput!
+  where: ProjectMembersipWhereUniqueInput!
+}
+
+input ProjectMembersipUpdateWithoutProjectInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutProjectMembersipInput
+}
+
+input ProjectMembersipUpdateWithoutUserInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  project: ProjectUpdateOneRequiredWithoutMembershipsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ProjectMembersipUpsertWithWhereUniqueWithoutProjectInput {
+  create: ProjectMembersipUncheckedCreateWithoutProjectInput!
+  update: ProjectMembersipUncheckedUpdateWithoutProjectInput!
+  where: ProjectMembersipWhereUniqueInput!
+}
+
+input ProjectMembersipUpsertWithWhereUniqueWithoutUserInput {
+  create: ProjectMembersipUncheckedCreateWithoutUserInput!
+  update: ProjectMembersipUncheckedUpdateWithoutUserInput!
+  where: ProjectMembersipWhereUniqueInput!
+}
+
+input ProjectMembersipWhereInput {
+  AND: [ProjectMembersipWhereInput]
+  NOT: [ProjectMembersipWhereInput]
+  OR: [ProjectMembersipWhereInput]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  project: ProjectWhereInput
+  projectId: StringFilter
+  updatedAt: DateTimeFilter
+  user: UserWhereInput
+  userId: StringFilter
+}
+
+input ProjectMembersipWhereUniqueInput {
+  id: String
+}
+
+type ProjectMinAggregateOutputType {
+  createdAt: DateTime
+  id: String
+  name: String
+  teamId: String
+  updatedAt: DateTime
+}
+
+input ProjectOrderByInput {
+  createdAt: SortOrder
+  id: SortOrder
+  name: SortOrder
+  teamId: SortOrder
+  updatedAt: SortOrder
+}
+
+input ProjectRelationFilter {
+  is: ProjectWhereInput
+  isNot: ProjectWhereInput
+}
+
+enum ProjectScalarFieldEnum {
+  createdAt
+  id
+  name
+  teamId
+  updatedAt
+}
+
+input ProjectScalarWhereInput {
+  AND: [ProjectScalarWhereInput]
+  NOT: [ProjectScalarWhereInput]
+  OR: [ProjectScalarWhereInput]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  name: StringFilter
+  teamId: StringFilter
+  updatedAt: DateTimeFilter
+}
+
+input ProjectScalarWhereWithAggregatesInput {
+  AND: [ProjectScalarWhereWithAggregatesInput]
+  NOT: [ProjectScalarWhereWithAggregatesInput]
+  OR: [ProjectScalarWhereWithAggregatesInput]
+  createdAt: DateTimeWithAggregatesFilter
+  id: StringWithAggregatesFilter
+  name: StringWithAggregatesFilter
+  teamId: StringWithAggregatesFilter
+  updatedAt: DateTimeWithAggregatesFilter
+}
+
+input ProjectUncheckedCreateInput {
+  createdAt: DateTime
+  id: String
+  memberships: ProjectMembersipUncheckedCreateNestedManyWithoutProjectInput
+  name: String!
+  teamId: String!
+  updatedAt: DateTime
+}
+
+input ProjectUncheckedCreateNestedManyWithoutTeamInput {
+  connect: [ProjectWhereUniqueInput]
+  connectOrCreate: [ProjectCreateOrConnectWithoutTeamInput]
+  create: [ProjectCreateWithoutTeamInput]
+  createMany: ProjectCreateManyTeamInputEnvelope
+}
+
+input ProjectUncheckedCreateWithoutMembershipsInput {
+  createdAt: DateTime
+  id: String
+  name: String!
+  teamId: String!
+  updatedAt: DateTime
+}
+
+input ProjectUncheckedCreateWithoutTeamInput {
+  createdAt: DateTime
+  id: String
+  memberships: ProjectMembersipUncheckedCreateNestedManyWithoutProjectInput
+  name: String!
+  updatedAt: DateTime
+}
+
+input ProjectUncheckedUpdateInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  memberships: ProjectMembersipUncheckedUpdateManyWithoutProjectInput
+  name: StringFieldUpdateOperationsInput
+  teamId: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ProjectUncheckedUpdateManyInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  teamId: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ProjectUncheckedUpdateManyWithoutProjectsInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ProjectUncheckedUpdateManyWithoutTeamInput {
+  connect: [ProjectWhereUniqueInput]
+  connectOrCreate: [ProjectCreateOrConnectWithoutTeamInput]
+  create: [ProjectCreateWithoutTeamInput]
+  createMany: ProjectCreateManyTeamInputEnvelope
+  delete: [ProjectWhereUniqueInput]
+  deleteMany: [ProjectScalarWhereInput]
+  disconnect: [ProjectWhereUniqueInput]
+  set: [ProjectWhereUniqueInput]
+  update: [ProjectUpdateWithWhereUniqueWithoutTeamInput]
+  updateMany: [ProjectUpdateManyWithWhereWithoutTeamInput]
+  upsert: [ProjectUpsertWithWhereUniqueWithoutTeamInput]
+}
+
+input ProjectUncheckedUpdateWithoutMembershipsInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  teamId: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ProjectUncheckedUpdateWithoutTeamInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  memberships: ProjectMembersipUncheckedUpdateManyWithoutProjectInput
+  name: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ProjectUpdateInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  memberships: ProjectMembersipUpdateManyWithoutProjectInput
+  name: StringFieldUpdateOperationsInput
+  team: TeamUpdateOneRequiredWithoutProjectsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ProjectUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ProjectUpdateManyWithWhereWithoutTeamInput {
+  data: ProjectUncheckedUpdateManyWithoutProjectsInput!
+  where: ProjectScalarWhereInput!
+}
+
+input ProjectUpdateManyWithoutTeamInput {
+  connect: [ProjectWhereUniqueInput]
+  connectOrCreate: [ProjectCreateOrConnectWithoutTeamInput]
+  create: [ProjectCreateWithoutTeamInput]
+  createMany: ProjectCreateManyTeamInputEnvelope
+  delete: [ProjectWhereUniqueInput]
+  deleteMany: [ProjectScalarWhereInput]
+  disconnect: [ProjectWhereUniqueInput]
+  set: [ProjectWhereUniqueInput]
+  update: [ProjectUpdateWithWhereUniqueWithoutTeamInput]
+  updateMany: [ProjectUpdateManyWithWhereWithoutTeamInput]
+  upsert: [ProjectUpsertWithWhereUniqueWithoutTeamInput]
+}
+
+input ProjectUpdateOneRequiredWithoutMembershipsInput {
+  connect: ProjectWhereUniqueInput
+  connectOrCreate: ProjectCreateOrConnectWithoutMembershipsInput
+  create: ProjectUncheckedCreateWithoutMembershipsInput
+  update: ProjectUncheckedUpdateWithoutMembershipsInput
+  upsert: ProjectUpsertWithoutMembershipsInput
+}
+
+input ProjectUpdateWithWhereUniqueWithoutTeamInput {
+  data: ProjectUncheckedUpdateWithoutTeamInput!
+  where: ProjectWhereUniqueInput!
+}
+
+input ProjectUpdateWithoutMembershipsInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  team: TeamUpdateOneRequiredWithoutProjectsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ProjectUpdateWithoutTeamInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  memberships: ProjectMembersipUpdateManyWithoutProjectInput
+  name: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ProjectUpsertWithWhereUniqueWithoutTeamInput {
+  create: ProjectUncheckedCreateWithoutTeamInput!
+  update: ProjectUncheckedUpdateWithoutTeamInput!
+  where: ProjectWhereUniqueInput!
+}
+
+input ProjectUpsertWithoutMembershipsInput {
+  create: ProjectUncheckedCreateWithoutMembershipsInput!
+  update: ProjectUncheckedUpdateWithoutMembershipsInput!
+}
+
+input ProjectWhereInput {
+  AND: [ProjectWhereInput]
+  NOT: [ProjectWhereInput]
+  OR: [ProjectWhereInput]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  memberships: ProjectMembersipListRelationFilter
+  name: StringFilter
+  team: TeamWhereInput
+  teamId: StringFilter
+  updatedAt: DateTimeFilter
+}
+
+input ProjectWhereUniqueInput {
+  id: String
+}
+
 type Query {
+  listTeamMembersips: [TeamMembership]!
+  listTeams: [Team]!
   me: User
+  teamMembership(id: String!): TeamMembership!
 }
 
 enum QueryMode {
@@ -391,6 +1188,681 @@ type SuccessResponse {
   success: Boolean!
 }
 
+type Team {
+  createdAt: DateTime!
+  id: ID!
+  memberships: TeamMembership
+  name: String!
+  projects: Project
+  updatedAt: DateTime!
+}
+
+type TeamCountAggregateOutputType {
+  _all: Int!
+  createdAt: Int!
+  id: Int!
+  name: Int!
+  updatedAt: Int!
+}
+
+input TeamCreateInput {
+  createdAt: DateTime
+  id: String
+  memberships: TeamMembershipCreateNestedManyWithoutTeamInput
+  name: String!
+  projects: ProjectCreateNestedManyWithoutTeamInput
+  updatedAt: DateTime
+}
+
+input TeamCreateManyInput {
+  createdAt: DateTime
+  id: String
+  name: String!
+  updatedAt: DateTime
+}
+
+input TeamCreateNestedOneWithoutMembershipsInput {
+  connect: TeamWhereUniqueInput
+  connectOrCreate: TeamCreateOrConnectWithoutMembershipsInput
+  create: TeamUncheckedCreateWithoutMembershipsInput
+}
+
+input TeamCreateNestedOneWithoutProjectsInput {
+  connect: TeamWhereUniqueInput
+  connectOrCreate: TeamCreateOrConnectWithoutProjectsInput
+  create: TeamUncheckedCreateWithoutProjectsInput
+}
+
+input TeamCreateOrConnectWithoutMembershipsInput {
+  create: TeamUncheckedCreateWithoutMembershipsInput!
+  where: TeamWhereUniqueInput!
+}
+
+input TeamCreateOrConnectWithoutProjectsInput {
+  create: TeamUncheckedCreateWithoutProjectsInput!
+  where: TeamWhereUniqueInput!
+}
+
+input TeamCreateWithoutMembershipsInput {
+  createdAt: DateTime
+  id: String
+  name: String!
+  projects: ProjectCreateNestedManyWithoutTeamInput
+  updatedAt: DateTime
+}
+
+input TeamCreateWithoutProjectsInput {
+  createdAt: DateTime
+  id: String
+  memberships: TeamMembershipCreateNestedManyWithoutTeamInput
+  name: String!
+  updatedAt: DateTime
+}
+
+type TeamMaxAggregateOutputType {
+  createdAt: DateTime
+  id: String
+  name: String
+  updatedAt: DateTime
+}
+
+type TeamMembership {
+  createdAt: DateTime!
+  id: ID!
+  role: TeamRoles!
+  status: MembershipStatuses!
+  team: Team
+  updatedAt: DateTime!
+  user: User
+}
+
+type TeamMembershipCountAggregateOutputType {
+  _all: Int!
+  createdAt: Int!
+  id: Int!
+  role: Int!
+  status: Int!
+  teamId: Int!
+  updatedAt: Int!
+  userId: Int!
+}
+
+input TeamMembershipCreateInput {
+  createdAt: DateTime
+  id: String
+  role: TeamRoles
+  status: MembershipStatuses
+  team: TeamCreateNestedOneWithoutMembershipsInput!
+  updatedAt: DateTime
+  user: UserCreateNestedOneWithoutTeamMembershipsInput!
+}
+
+input TeamMembershipCreateManyInput {
+  createdAt: DateTime
+  id: String
+  role: TeamRoles
+  status: MembershipStatuses
+  teamId: String!
+  updatedAt: DateTime
+  userId: String!
+}
+
+input TeamMembershipCreateManyTeamInput {
+  createdAt: DateTime
+  id: String
+  role: TeamRoles
+  status: MembershipStatuses
+  updatedAt: DateTime
+  userId: String!
+}
+
+input TeamMembershipCreateManyTeamInputEnvelope {
+  data: TeamMembershipCreateManyTeamInput!
+  skipDuplicates: Boolean
+}
+
+input TeamMembershipCreateManyUserInput {
+  createdAt: DateTime
+  id: String
+  role: TeamRoles
+  status: MembershipStatuses
+  teamId: String!
+  updatedAt: DateTime
+}
+
+input TeamMembershipCreateManyUserInputEnvelope {
+  data: TeamMembershipCreateManyUserInput!
+  skipDuplicates: Boolean
+}
+
+input TeamMembershipCreateNestedManyWithoutTeamInput {
+  connect: [TeamMembershipWhereUniqueInput]
+  connectOrCreate: [TeamMembershipCreateOrConnectWithoutTeamInput]
+  create: [TeamMembershipCreateWithoutTeamInput]
+  createMany: TeamMembershipCreateManyTeamInputEnvelope
+}
+
+input TeamMembershipCreateNestedManyWithoutUserInput {
+  connect: [TeamMembershipWhereUniqueInput]
+  connectOrCreate: [TeamMembershipCreateOrConnectWithoutUserInput]
+  create: [TeamMembershipCreateWithoutUserInput]
+  createMany: TeamMembershipCreateManyUserInputEnvelope
+}
+
+input TeamMembershipCreateOrConnectWithoutTeamInput {
+  create: TeamMembershipUncheckedCreateWithoutTeamInput!
+  where: TeamMembershipWhereUniqueInput!
+}
+
+input TeamMembershipCreateOrConnectWithoutUserInput {
+  create: TeamMembershipUncheckedCreateWithoutUserInput!
+  where: TeamMembershipWhereUniqueInput!
+}
+
+input TeamMembershipCreateWithoutTeamInput {
+  createdAt: DateTime
+  id: String
+  role: TeamRoles
+  status: MembershipStatuses
+  updatedAt: DateTime
+  user: UserCreateNestedOneWithoutTeamMembershipsInput!
+}
+
+input TeamMembershipCreateWithoutUserInput {
+  createdAt: DateTime
+  id: String
+  role: TeamRoles
+  status: MembershipStatuses
+  team: TeamCreateNestedOneWithoutMembershipsInput!
+  updatedAt: DateTime
+}
+
+input TeamMembershipListRelationFilter {
+  every: TeamMembershipWhereInput
+  none: TeamMembershipWhereInput
+  some: TeamMembershipWhereInput
+}
+
+type TeamMembershipMaxAggregateOutputType {
+  createdAt: DateTime
+  id: String
+  role: TeamRoles
+  status: MembershipStatuses
+  teamId: String
+  updatedAt: DateTime
+  userId: String
+}
+
+type TeamMembershipMinAggregateOutputType {
+  createdAt: DateTime
+  id: String
+  role: TeamRoles
+  status: MembershipStatuses
+  teamId: String
+  updatedAt: DateTime
+  userId: String
+}
+
+input TeamMembershipOrderByInput {
+  createdAt: SortOrder
+  id: SortOrder
+  role: SortOrder
+  status: SortOrder
+  teamId: SortOrder
+  updatedAt: SortOrder
+  userId: SortOrder
+}
+
+enum TeamMembershipScalarFieldEnum {
+  createdAt
+  id
+  role
+  status
+  teamId
+  updatedAt
+  userId
+}
+
+input TeamMembershipScalarWhereInput {
+  AND: [TeamMembershipScalarWhereInput]
+  NOT: [TeamMembershipScalarWhereInput]
+  OR: [TeamMembershipScalarWhereInput]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  role: EnumTeamRolesFilter
+  status: EnumMembershipStatusesFilter
+  teamId: StringFilter
+  updatedAt: DateTimeFilter
+  userId: StringFilter
+}
+
+input TeamMembershipScalarWhereWithAggregatesInput {
+  AND: [TeamMembershipScalarWhereWithAggregatesInput]
+  NOT: [TeamMembershipScalarWhereWithAggregatesInput]
+  OR: [TeamMembershipScalarWhereWithAggregatesInput]
+  createdAt: DateTimeWithAggregatesFilter
+  id: StringWithAggregatesFilter
+  role: EnumTeamRolesWithAggregatesFilter
+  status: EnumMembershipStatusesWithAggregatesFilter
+  teamId: StringWithAggregatesFilter
+  updatedAt: DateTimeWithAggregatesFilter
+  userId: StringWithAggregatesFilter
+}
+
+input TeamMembershipUncheckedCreateInput {
+  createdAt: DateTime
+  id: String
+  role: TeamRoles
+  status: MembershipStatuses
+  teamId: String!
+  updatedAt: DateTime
+  userId: String!
+}
+
+input TeamMembershipUncheckedCreateNestedManyWithoutTeamInput {
+  connect: [TeamMembershipWhereUniqueInput]
+  connectOrCreate: [TeamMembershipCreateOrConnectWithoutTeamInput]
+  create: [TeamMembershipCreateWithoutTeamInput]
+  createMany: TeamMembershipCreateManyTeamInputEnvelope
+}
+
+input TeamMembershipUncheckedCreateNestedManyWithoutUserInput {
+  connect: [TeamMembershipWhereUniqueInput]
+  connectOrCreate: [TeamMembershipCreateOrConnectWithoutUserInput]
+  create: [TeamMembershipCreateWithoutUserInput]
+  createMany: TeamMembershipCreateManyUserInputEnvelope
+}
+
+input TeamMembershipUncheckedCreateWithoutTeamInput {
+  createdAt: DateTime
+  id: String
+  role: TeamRoles
+  status: MembershipStatuses
+  updatedAt: DateTime
+  userId: String!
+}
+
+input TeamMembershipUncheckedCreateWithoutUserInput {
+  createdAt: DateTime
+  id: String
+  role: TeamRoles
+  status: MembershipStatuses
+  teamId: String!
+  updatedAt: DateTime
+}
+
+input TeamMembershipUncheckedUpdateInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  role: EnumTeamRolesFieldUpdateOperationsInput
+  status: EnumMembershipStatusesFieldUpdateOperationsInput
+  teamId: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  userId: StringFieldUpdateOperationsInput
+}
+
+input TeamMembershipUncheckedUpdateManyInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  role: EnumTeamRolesFieldUpdateOperationsInput
+  status: EnumMembershipStatusesFieldUpdateOperationsInput
+  teamId: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  userId: StringFieldUpdateOperationsInput
+}
+
+input TeamMembershipUncheckedUpdateManyWithoutMembershipsInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  role: EnumTeamRolesFieldUpdateOperationsInput
+  status: EnumMembershipStatusesFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  userId: StringFieldUpdateOperationsInput
+}
+
+input TeamMembershipUncheckedUpdateManyWithoutTeamInput {
+  connect: [TeamMembershipWhereUniqueInput]
+  connectOrCreate: [TeamMembershipCreateOrConnectWithoutTeamInput]
+  create: [TeamMembershipCreateWithoutTeamInput]
+  createMany: TeamMembershipCreateManyTeamInputEnvelope
+  delete: [TeamMembershipWhereUniqueInput]
+  deleteMany: [TeamMembershipScalarWhereInput]
+  disconnect: [TeamMembershipWhereUniqueInput]
+  set: [TeamMembershipWhereUniqueInput]
+  update: [TeamMembershipUpdateWithWhereUniqueWithoutTeamInput]
+  updateMany: [TeamMembershipUpdateManyWithWhereWithoutTeamInput]
+  upsert: [TeamMembershipUpsertWithWhereUniqueWithoutTeamInput]
+}
+
+input TeamMembershipUncheckedUpdateManyWithoutTeamMembershipsInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  role: EnumTeamRolesFieldUpdateOperationsInput
+  status: EnumMembershipStatusesFieldUpdateOperationsInput
+  teamId: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input TeamMembershipUncheckedUpdateManyWithoutUserInput {
+  connect: [TeamMembershipWhereUniqueInput]
+  connectOrCreate: [TeamMembershipCreateOrConnectWithoutUserInput]
+  create: [TeamMembershipCreateWithoutUserInput]
+  createMany: TeamMembershipCreateManyUserInputEnvelope
+  delete: [TeamMembershipWhereUniqueInput]
+  deleteMany: [TeamMembershipScalarWhereInput]
+  disconnect: [TeamMembershipWhereUniqueInput]
+  set: [TeamMembershipWhereUniqueInput]
+  update: [TeamMembershipUpdateWithWhereUniqueWithoutUserInput]
+  updateMany: [TeamMembershipUpdateManyWithWhereWithoutUserInput]
+  upsert: [TeamMembershipUpsertWithWhereUniqueWithoutUserInput]
+}
+
+input TeamMembershipUncheckedUpdateWithoutTeamInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  role: EnumTeamRolesFieldUpdateOperationsInput
+  status: EnumMembershipStatusesFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  userId: StringFieldUpdateOperationsInput
+}
+
+input TeamMembershipUncheckedUpdateWithoutUserInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  role: EnumTeamRolesFieldUpdateOperationsInput
+  status: EnumMembershipStatusesFieldUpdateOperationsInput
+  teamId: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input TeamMembershipUpdateInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  role: EnumTeamRolesFieldUpdateOperationsInput
+  status: EnumMembershipStatusesFieldUpdateOperationsInput
+  team: TeamUpdateOneRequiredWithoutMembershipsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutTeamMembershipsInput
+}
+
+input TeamMembershipUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  role: EnumTeamRolesFieldUpdateOperationsInput
+  status: EnumMembershipStatusesFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input TeamMembershipUpdateManyWithWhereWithoutTeamInput {
+  data: TeamMembershipUncheckedUpdateManyWithoutMembershipsInput!
+  where: TeamMembershipScalarWhereInput!
+}
+
+input TeamMembershipUpdateManyWithWhereWithoutUserInput {
+  data: TeamMembershipUncheckedUpdateManyWithoutTeamMembershipsInput!
+  where: TeamMembershipScalarWhereInput!
+}
+
+input TeamMembershipUpdateManyWithoutTeamInput {
+  connect: [TeamMembershipWhereUniqueInput]
+  connectOrCreate: [TeamMembershipCreateOrConnectWithoutTeamInput]
+  create: [TeamMembershipCreateWithoutTeamInput]
+  createMany: TeamMembershipCreateManyTeamInputEnvelope
+  delete: [TeamMembershipWhereUniqueInput]
+  deleteMany: [TeamMembershipScalarWhereInput]
+  disconnect: [TeamMembershipWhereUniqueInput]
+  set: [TeamMembershipWhereUniqueInput]
+  update: [TeamMembershipUpdateWithWhereUniqueWithoutTeamInput]
+  updateMany: [TeamMembershipUpdateManyWithWhereWithoutTeamInput]
+  upsert: [TeamMembershipUpsertWithWhereUniqueWithoutTeamInput]
+}
+
+input TeamMembershipUpdateManyWithoutUserInput {
+  connect: [TeamMembershipWhereUniqueInput]
+  connectOrCreate: [TeamMembershipCreateOrConnectWithoutUserInput]
+  create: [TeamMembershipCreateWithoutUserInput]
+  createMany: TeamMembershipCreateManyUserInputEnvelope
+  delete: [TeamMembershipWhereUniqueInput]
+  deleteMany: [TeamMembershipScalarWhereInput]
+  disconnect: [TeamMembershipWhereUniqueInput]
+  set: [TeamMembershipWhereUniqueInput]
+  update: [TeamMembershipUpdateWithWhereUniqueWithoutUserInput]
+  updateMany: [TeamMembershipUpdateManyWithWhereWithoutUserInput]
+  upsert: [TeamMembershipUpsertWithWhereUniqueWithoutUserInput]
+}
+
+input TeamMembershipUpdateWithWhereUniqueWithoutTeamInput {
+  data: TeamMembershipUncheckedUpdateWithoutTeamInput!
+  where: TeamMembershipWhereUniqueInput!
+}
+
+input TeamMembershipUpdateWithWhereUniqueWithoutUserInput {
+  data: TeamMembershipUncheckedUpdateWithoutUserInput!
+  where: TeamMembershipWhereUniqueInput!
+}
+
+input TeamMembershipUpdateWithoutTeamInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  role: EnumTeamRolesFieldUpdateOperationsInput
+  status: EnumMembershipStatusesFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutTeamMembershipsInput
+}
+
+input TeamMembershipUpdateWithoutUserInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  role: EnumTeamRolesFieldUpdateOperationsInput
+  status: EnumMembershipStatusesFieldUpdateOperationsInput
+  team: TeamUpdateOneRequiredWithoutMembershipsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input TeamMembershipUpsertWithWhereUniqueWithoutTeamInput {
+  create: TeamMembershipUncheckedCreateWithoutTeamInput!
+  update: TeamMembershipUncheckedUpdateWithoutTeamInput!
+  where: TeamMembershipWhereUniqueInput!
+}
+
+input TeamMembershipUpsertWithWhereUniqueWithoutUserInput {
+  create: TeamMembershipUncheckedCreateWithoutUserInput!
+  update: TeamMembershipUncheckedUpdateWithoutUserInput!
+  where: TeamMembershipWhereUniqueInput!
+}
+
+input TeamMembershipWhereInput {
+  AND: [TeamMembershipWhereInput]
+  NOT: [TeamMembershipWhereInput]
+  OR: [TeamMembershipWhereInput]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  role: EnumTeamRolesFilter
+  status: EnumMembershipStatusesFilter
+  team: TeamWhereInput
+  teamId: StringFilter
+  updatedAt: DateTimeFilter
+  user: UserWhereInput
+  userId: StringFilter
+}
+
+input TeamMembershipWhereUniqueInput {
+  id: String
+}
+
+type TeamMinAggregateOutputType {
+  createdAt: DateTime
+  id: String
+  name: String
+  updatedAt: DateTime
+}
+
+input TeamOrderByInput {
+  createdAt: SortOrder
+  id: SortOrder
+  name: SortOrder
+  updatedAt: SortOrder
+}
+
+input TeamRelationFilter {
+  is: TeamWhereInput
+  isNot: TeamWhereInput
+}
+
+enum TeamRoles {
+  ADMIN
+  BILLING
+  MEMBER
+}
+
+enum TeamScalarFieldEnum {
+  createdAt
+  id
+  name
+  updatedAt
+}
+
+input TeamScalarWhereWithAggregatesInput {
+  AND: [TeamScalarWhereWithAggregatesInput]
+  NOT: [TeamScalarWhereWithAggregatesInput]
+  OR: [TeamScalarWhereWithAggregatesInput]
+  createdAt: DateTimeWithAggregatesFilter
+  id: StringWithAggregatesFilter
+  name: StringWithAggregatesFilter
+  updatedAt: DateTimeWithAggregatesFilter
+}
+
+input TeamUncheckedCreateInput {
+  createdAt: DateTime
+  id: String
+  memberships: TeamMembershipUncheckedCreateNestedManyWithoutTeamInput
+  name: String!
+  projects: ProjectUncheckedCreateNestedManyWithoutTeamInput
+  updatedAt: DateTime
+}
+
+input TeamUncheckedCreateWithoutMembershipsInput {
+  createdAt: DateTime
+  id: String
+  name: String!
+  projects: ProjectUncheckedCreateNestedManyWithoutTeamInput
+  updatedAt: DateTime
+}
+
+input TeamUncheckedCreateWithoutProjectsInput {
+  createdAt: DateTime
+  id: String
+  memberships: TeamMembershipUncheckedCreateNestedManyWithoutTeamInput
+  name: String!
+  updatedAt: DateTime
+}
+
+input TeamUncheckedUpdateInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  memberships: TeamMembershipUncheckedUpdateManyWithoutTeamInput
+  name: StringFieldUpdateOperationsInput
+  projects: ProjectUncheckedUpdateManyWithoutTeamInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input TeamUncheckedUpdateManyInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input TeamUncheckedUpdateWithoutMembershipsInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  projects: ProjectUncheckedUpdateManyWithoutTeamInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input TeamUncheckedUpdateWithoutProjectsInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  memberships: TeamMembershipUncheckedUpdateManyWithoutTeamInput
+  name: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input TeamUpdateInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  memberships: TeamMembershipUpdateManyWithoutTeamInput
+  name: StringFieldUpdateOperationsInput
+  projects: ProjectUpdateManyWithoutTeamInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input TeamUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input TeamUpdateOneRequiredWithoutMembershipsInput {
+  connect: TeamWhereUniqueInput
+  connectOrCreate: TeamCreateOrConnectWithoutMembershipsInput
+  create: TeamUncheckedCreateWithoutMembershipsInput
+  update: TeamUncheckedUpdateWithoutMembershipsInput
+  upsert: TeamUpsertWithoutMembershipsInput
+}
+
+input TeamUpdateOneRequiredWithoutProjectsInput {
+  connect: TeamWhereUniqueInput
+  connectOrCreate: TeamCreateOrConnectWithoutProjectsInput
+  create: TeamUncheckedCreateWithoutProjectsInput
+  update: TeamUncheckedUpdateWithoutProjectsInput
+  upsert: TeamUpsertWithoutProjectsInput
+}
+
+input TeamUpdateWithoutMembershipsInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  projects: ProjectUpdateManyWithoutTeamInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input TeamUpdateWithoutProjectsInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  memberships: TeamMembershipUpdateManyWithoutTeamInput
+  name: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input TeamUpsertWithoutMembershipsInput {
+  create: TeamUncheckedCreateWithoutMembershipsInput!
+  update: TeamUncheckedUpdateWithoutMembershipsInput!
+}
+
+input TeamUpsertWithoutProjectsInput {
+  create: TeamUncheckedCreateWithoutProjectsInput!
+  update: TeamUncheckedUpdateWithoutProjectsInput!
+}
+
+input TeamWhereInput {
+  AND: [TeamWhereInput]
+  NOT: [TeamWhereInput]
+  OR: [TeamWhereInput]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  memberships: TeamMembershipListRelationFilter
+  name: StringFilter
+  projects: ProjectListRelationFilter
+  updatedAt: DateTimeFilter
+}
+
+input TeamWhereUniqueInput {
+  id: String
+}
+
 type User {
   confirmed: Boolean!
   email: String!
@@ -408,12 +1880,14 @@ type UserCountAggregateOutputType {
 }
 
 input UserCreateInput {
+  ProjectMembersip: ProjectMembersipCreateNestedManyWithoutUserInput
   confirmed: Boolean
   createdAt: DateTime
   email: String!
   emailConfirmation: EmailConfirmationCreateNestedOneWithoutUserInput
   id: String
   profile: UserProfileCreateNestedOneWithoutUserInput
+  teamMemberships: TeamMembershipCreateNestedManyWithoutUserInput
   updatedAt: DateTime
 }
 
@@ -437,6 +1911,18 @@ input UserCreateNestedOneWithoutProfileInput {
   create: UserUncheckedCreateWithoutProfileInput
 }
 
+input UserCreateNestedOneWithoutProjectMembersipInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutProjectMembersipInput
+  create: UserUncheckedCreateWithoutProjectMembersipInput
+}
+
+input UserCreateNestedOneWithoutTeamMembershipsInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutTeamMembershipsInput
+  create: UserUncheckedCreateWithoutTeamMembershipsInput
+}
+
 input UserCreateOrConnectWithoutEmailConfirmationInput {
   create: UserUncheckedCreateWithoutEmailConfirmationInput!
   where: UserWhereUniqueInput!
@@ -447,21 +1933,57 @@ input UserCreateOrConnectWithoutProfileInput {
   where: UserWhereUniqueInput!
 }
 
+input UserCreateOrConnectWithoutProjectMembersipInput {
+  create: UserUncheckedCreateWithoutProjectMembersipInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutTeamMembershipsInput {
+  create: UserUncheckedCreateWithoutTeamMembershipsInput!
+  where: UserWhereUniqueInput!
+}
+
 input UserCreateWithoutEmailConfirmationInput {
+  ProjectMembersip: ProjectMembersipCreateNestedManyWithoutUserInput
   confirmed: Boolean
   createdAt: DateTime
   email: String!
   id: String
   profile: UserProfileCreateNestedOneWithoutUserInput
+  teamMemberships: TeamMembershipCreateNestedManyWithoutUserInput
   updatedAt: DateTime
 }
 
 input UserCreateWithoutProfileInput {
+  ProjectMembersip: ProjectMembersipCreateNestedManyWithoutUserInput
   confirmed: Boolean
   createdAt: DateTime
   email: String!
   emailConfirmation: EmailConfirmationCreateNestedOneWithoutUserInput
   id: String
+  teamMemberships: TeamMembershipCreateNestedManyWithoutUserInput
+  updatedAt: DateTime
+}
+
+input UserCreateWithoutProjectMembersipInput {
+  confirmed: Boolean
+  createdAt: DateTime
+  email: String!
+  emailConfirmation: EmailConfirmationCreateNestedOneWithoutUserInput
+  id: String
+  profile: UserProfileCreateNestedOneWithoutUserInput
+  teamMemberships: TeamMembershipCreateNestedManyWithoutUserInput
+  updatedAt: DateTime
+}
+
+input UserCreateWithoutTeamMembershipsInput {
+  ProjectMembersip: ProjectMembersipCreateNestedManyWithoutUserInput
+  confirmed: Boolean
+  createdAt: DateTime
+  email: String!
+  emailConfirmation: EmailConfirmationCreateNestedOneWithoutUserInput
+  id: String
+  profile: UserProfileCreateNestedOneWithoutUserInput
   updatedAt: DateTime
 }
 
@@ -498,23 +2020,29 @@ type UserProfile {
 
 type UserProfileCountAggregateOutputType {
   _all: Int!
+  createdAt: Int!
   firstName: Int!
   id: Int!
   lastName: Int!
+  updatedAt: Int!
   userId: Int!
 }
 
 input UserProfileCreateInput {
+  createdAt: DateTime
   firstName: String!
   id: String
   lastName: String!
+  updatedAt: DateTime
   user: UserCreateNestedOneWithoutProfileInput!
 }
 
 input UserProfileCreateManyInput {
+  createdAt: DateTime
   firstName: String!
   id: String
   lastName: String!
+  updatedAt: DateTime
   userId: String!
 }
 
@@ -530,29 +2058,37 @@ input UserProfileCreateOrConnectWithoutUserInput {
 }
 
 input UserProfileCreateWithoutUserInput {
+  createdAt: DateTime
   firstName: String!
   id: String
   lastName: String!
+  updatedAt: DateTime
 }
 
 type UserProfileMaxAggregateOutputType {
+  createdAt: DateTime
   firstName: String
   id: String
   lastName: String
+  updatedAt: DateTime
   userId: String
 }
 
 type UserProfileMinAggregateOutputType {
+  createdAt: DateTime
   firstName: String
   id: String
   lastName: String
+  updatedAt: DateTime
   userId: String
 }
 
 input UserProfileOrderByInput {
+  createdAt: SortOrder
   firstName: SortOrder
   id: SortOrder
   lastName: SortOrder
+  updatedAt: SortOrder
   userId: SortOrder
 }
 
@@ -562,9 +2098,11 @@ input UserProfileRelationFilter {
 }
 
 enum UserProfileScalarFieldEnum {
+  createdAt
   firstName
   id
   lastName
+  updatedAt
   userId
 }
 
@@ -572,16 +2110,20 @@ input UserProfileScalarWhereWithAggregatesInput {
   AND: [UserProfileScalarWhereWithAggregatesInput]
   NOT: [UserProfileScalarWhereWithAggregatesInput]
   OR: [UserProfileScalarWhereWithAggregatesInput]
+  createdAt: DateTimeWithAggregatesFilter
   firstName: StringWithAggregatesFilter
   id: StringWithAggregatesFilter
   lastName: StringWithAggregatesFilter
+  updatedAt: DateTimeWithAggregatesFilter
   userId: StringWithAggregatesFilter
 }
 
 input UserProfileUncheckedCreateInput {
+  createdAt: DateTime
   firstName: String!
   id: String
   lastName: String!
+  updatedAt: DateTime
   userId: String!
 }
 
@@ -592,22 +2134,28 @@ input UserProfileUncheckedCreateNestedOneWithoutUserInput {
 }
 
 input UserProfileUncheckedCreateWithoutUserInput {
+  createdAt: DateTime
   firstName: String!
   id: String
   lastName: String!
+  updatedAt: DateTime
 }
 
 input UserProfileUncheckedUpdateInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
   firstName: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   lastName: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
   userId: StringFieldUpdateOperationsInput
 }
 
 input UserProfileUncheckedUpdateManyInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
   firstName: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   lastName: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
   userId: StringFieldUpdateOperationsInput
 }
 
@@ -622,22 +2170,28 @@ input UserProfileUncheckedUpdateOneWithoutUserInput {
 }
 
 input UserProfileUncheckedUpdateWithoutUserInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
   firstName: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   lastName: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input UserProfileUpdateInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
   firstName: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   lastName: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
   user: UserUpdateOneRequiredWithoutProfileInput
 }
 
 input UserProfileUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
   firstName: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   lastName: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input UserProfileUpdateOneWithoutUserInput {
@@ -651,9 +2205,11 @@ input UserProfileUpdateOneWithoutUserInput {
 }
 
 input UserProfileUpdateWithoutUserInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
   firstName: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   lastName: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input UserProfileUpsertWithoutUserInput {
@@ -665,9 +2221,11 @@ input UserProfileWhereInput {
   AND: [UserProfileWhereInput]
   NOT: [UserProfileWhereInput]
   OR: [UserProfileWhereInput]
+  createdAt: DateTimeFilter
   firstName: StringFilter
   id: StringFilter
   lastName: StringFilter
+  updatedAt: DateTimeFilter
   user: UserWhereInput
   userId: StringFilter
 }
@@ -702,40 +2260,70 @@ input UserScalarWhereWithAggregatesInput {
 }
 
 input UserUncheckedCreateInput {
+  ProjectMembersip: ProjectMembersipUncheckedCreateNestedManyWithoutUserInput
   confirmed: Boolean
   createdAt: DateTime
   email: String!
   emailConfirmation: EmailConfirmationUncheckedCreateNestedOneWithoutUserInput
   id: String
   profile: UserProfileUncheckedCreateNestedOneWithoutUserInput
+  teamMemberships: TeamMembershipUncheckedCreateNestedManyWithoutUserInput
   updatedAt: DateTime
 }
 
 input UserUncheckedCreateWithoutEmailConfirmationInput {
+  ProjectMembersip: ProjectMembersipUncheckedCreateNestedManyWithoutUserInput
   confirmed: Boolean
   createdAt: DateTime
   email: String!
   id: String
   profile: UserProfileUncheckedCreateNestedOneWithoutUserInput
+  teamMemberships: TeamMembershipUncheckedCreateNestedManyWithoutUserInput
   updatedAt: DateTime
 }
 
 input UserUncheckedCreateWithoutProfileInput {
+  ProjectMembersip: ProjectMembersipUncheckedCreateNestedManyWithoutUserInput
   confirmed: Boolean
   createdAt: DateTime
   email: String!
   emailConfirmation: EmailConfirmationUncheckedCreateNestedOneWithoutUserInput
   id: String
+  teamMemberships: TeamMembershipUncheckedCreateNestedManyWithoutUserInput
+  updatedAt: DateTime
+}
+
+input UserUncheckedCreateWithoutProjectMembersipInput {
+  confirmed: Boolean
+  createdAt: DateTime
+  email: String!
+  emailConfirmation: EmailConfirmationUncheckedCreateNestedOneWithoutUserInput
+  id: String
+  profile: UserProfileUncheckedCreateNestedOneWithoutUserInput
+  teamMemberships: TeamMembershipUncheckedCreateNestedManyWithoutUserInput
+  updatedAt: DateTime
+}
+
+input UserUncheckedCreateWithoutTeamMembershipsInput {
+  ProjectMembersip: ProjectMembersipUncheckedCreateNestedManyWithoutUserInput
+  confirmed: Boolean
+  createdAt: DateTime
+  email: String!
+  emailConfirmation: EmailConfirmationUncheckedCreateNestedOneWithoutUserInput
+  id: String
+  profile: UserProfileUncheckedCreateNestedOneWithoutUserInput
   updatedAt: DateTime
 }
 
 input UserUncheckedUpdateInput {
+  ProjectMembersip: ProjectMembersipUncheckedUpdateManyWithoutUserInput
   confirmed: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   emailConfirmation: EmailConfirmationUncheckedUpdateOneWithoutUserInput
   id: StringFieldUpdateOperationsInput
   profile: UserProfileUncheckedUpdateOneWithoutUserInput
+  teamMemberships: TeamMembershipUncheckedUpdateManyWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
@@ -748,30 +2336,58 @@ input UserUncheckedUpdateManyInput {
 }
 
 input UserUncheckedUpdateWithoutEmailConfirmationInput {
+  ProjectMembersip: ProjectMembersipUncheckedUpdateManyWithoutUserInput
   confirmed: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   profile: UserProfileUncheckedUpdateOneWithoutUserInput
+  teamMemberships: TeamMembershipUncheckedUpdateManyWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input UserUncheckedUpdateWithoutProfileInput {
+  ProjectMembersip: ProjectMembersipUncheckedUpdateManyWithoutUserInput
   confirmed: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   emailConfirmation: EmailConfirmationUncheckedUpdateOneWithoutUserInput
   id: StringFieldUpdateOperationsInput
+  teamMemberships: TeamMembershipUncheckedUpdateManyWithoutUserInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUncheckedUpdateWithoutProjectMembersipInput {
+  confirmed: BoolFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  emailConfirmation: EmailConfirmationUncheckedUpdateOneWithoutUserInput
+  id: StringFieldUpdateOperationsInput
+  profile: UserProfileUncheckedUpdateOneWithoutUserInput
+  teamMemberships: TeamMembershipUncheckedUpdateManyWithoutUserInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUncheckedUpdateWithoutTeamMembershipsInput {
+  ProjectMembersip: ProjectMembersipUncheckedUpdateManyWithoutUserInput
+  confirmed: BoolFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  emailConfirmation: EmailConfirmationUncheckedUpdateOneWithoutUserInput
+  id: StringFieldUpdateOperationsInput
+  profile: UserProfileUncheckedUpdateOneWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input UserUpdateInput {
+  ProjectMembersip: ProjectMembersipUpdateManyWithoutUserInput
   confirmed: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   emailConfirmation: EmailConfirmationUpdateOneWithoutUserInput
   id: StringFieldUpdateOperationsInput
   profile: UserProfileUpdateOneWithoutUserInput
+  teamMemberships: TeamMembershipUpdateManyWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
@@ -799,21 +2415,63 @@ input UserUpdateOneRequiredWithoutProfileInput {
   upsert: UserUpsertWithoutProfileInput
 }
 
+input UserUpdateOneRequiredWithoutProjectMembersipInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutProjectMembersipInput
+  create: UserUncheckedCreateWithoutProjectMembersipInput
+  update: UserUncheckedUpdateWithoutProjectMembersipInput
+  upsert: UserUpsertWithoutProjectMembersipInput
+}
+
+input UserUpdateOneRequiredWithoutTeamMembershipsInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutTeamMembershipsInput
+  create: UserUncheckedCreateWithoutTeamMembershipsInput
+  update: UserUncheckedUpdateWithoutTeamMembershipsInput
+  upsert: UserUpsertWithoutTeamMembershipsInput
+}
+
 input UserUpdateWithoutEmailConfirmationInput {
+  ProjectMembersip: ProjectMembersipUpdateManyWithoutUserInput
   confirmed: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   profile: UserProfileUpdateOneWithoutUserInput
+  teamMemberships: TeamMembershipUpdateManyWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input UserUpdateWithoutProfileInput {
+  ProjectMembersip: ProjectMembersipUpdateManyWithoutUserInput
   confirmed: BoolFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   emailConfirmation: EmailConfirmationUpdateOneWithoutUserInput
   id: StringFieldUpdateOperationsInput
+  teamMemberships: TeamMembershipUpdateManyWithoutUserInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUpdateWithoutProjectMembersipInput {
+  confirmed: BoolFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  emailConfirmation: EmailConfirmationUpdateOneWithoutUserInput
+  id: StringFieldUpdateOperationsInput
+  profile: UserProfileUpdateOneWithoutUserInput
+  teamMemberships: TeamMembershipUpdateManyWithoutUserInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUpdateWithoutTeamMembershipsInput {
+  ProjectMembersip: ProjectMembersipUpdateManyWithoutUserInput
+  confirmed: BoolFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  emailConfirmation: EmailConfirmationUpdateOneWithoutUserInput
+  id: StringFieldUpdateOperationsInput
+  profile: UserProfileUpdateOneWithoutUserInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
@@ -827,16 +2485,28 @@ input UserUpsertWithoutProfileInput {
   update: UserUncheckedUpdateWithoutProfileInput!
 }
 
+input UserUpsertWithoutProjectMembersipInput {
+  create: UserUncheckedCreateWithoutProjectMembersipInput!
+  update: UserUncheckedUpdateWithoutProjectMembersipInput!
+}
+
+input UserUpsertWithoutTeamMembershipsInput {
+  create: UserUncheckedCreateWithoutTeamMembershipsInput!
+  update: UserUncheckedUpdateWithoutTeamMembershipsInput!
+}
+
 input UserWhereInput {
   AND: [UserWhereInput]
   NOT: [UserWhereInput]
   OR: [UserWhereInput]
+  ProjectMembersip: ProjectMembersipListRelationFilter
   confirmed: BoolFilter
   createdAt: DateTimeFilter
   email: StringFilter
   emailConfirmation: EmailConfirmationWhereInput
   id: StringFilter
   profile: UserProfileWhereInput
+  teamMemberships: TeamMembershipListRelationFilter
   updatedAt: DateTimeFilter
 }
 

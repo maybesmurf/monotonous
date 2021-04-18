@@ -1,5 +1,4 @@
 import "../styles/index.css";
-import "../styles/tailwind.css";
 import { useEffect } from "react";
 import { gql, createClient, defaultExchanges, Provider } from "urql";
 import { devtoolsExchange } from "@urql/devtools";

@@ -202,6 +202,42 @@ export interface NexusGenInputs {
     token?: string | null; // String
     userId?: string | null; // String
   }
+  EnumMembershipStatusesFieldUpdateOperationsInput: { // input type
+    set?: NexusGenEnums['MembershipStatuses'] | null; // MembershipStatuses
+  }
+  EnumMembershipStatusesFilter: { // input type
+    equals?: NexusGenEnums['MembershipStatuses'] | null; // MembershipStatuses
+    in?: Array<NexusGenEnums['MembershipStatuses'] | null> | null; // [MembershipStatuses]
+    not?: NexusGenInputs['NestedEnumMembershipStatusesFilter'] | null; // NestedEnumMembershipStatusesFilter
+    notIn?: Array<NexusGenEnums['MembershipStatuses'] | null> | null; // [MembershipStatuses]
+  }
+  EnumMembershipStatusesWithAggregatesFilter: { // input type
+    count?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
+    equals?: NexusGenEnums['MembershipStatuses'] | null; // MembershipStatuses
+    in?: Array<NexusGenEnums['MembershipStatuses'] | null> | null; // [MembershipStatuses]
+    max?: NexusGenInputs['NestedEnumMembershipStatusesFilter'] | null; // NestedEnumMembershipStatusesFilter
+    min?: NexusGenInputs['NestedEnumMembershipStatusesFilter'] | null; // NestedEnumMembershipStatusesFilter
+    not?: NexusGenInputs['NestedEnumMembershipStatusesWithAggregatesFilter'] | null; // NestedEnumMembershipStatusesWithAggregatesFilter
+    notIn?: Array<NexusGenEnums['MembershipStatuses'] | null> | null; // [MembershipStatuses]
+  }
+  EnumTeamRolesFieldUpdateOperationsInput: { // input type
+    set?: NexusGenEnums['TeamRoles'] | null; // TeamRoles
+  }
+  EnumTeamRolesFilter: { // input type
+    equals?: NexusGenEnums['TeamRoles'] | null; // TeamRoles
+    in?: Array<NexusGenEnums['TeamRoles'] | null> | null; // [TeamRoles]
+    not?: NexusGenInputs['NestedEnumTeamRolesFilter'] | null; // NestedEnumTeamRolesFilter
+    notIn?: Array<NexusGenEnums['TeamRoles'] | null> | null; // [TeamRoles]
+  }
+  EnumTeamRolesWithAggregatesFilter: { // input type
+    count?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
+    equals?: NexusGenEnums['TeamRoles'] | null; // TeamRoles
+    in?: Array<NexusGenEnums['TeamRoles'] | null> | null; // [TeamRoles]
+    max?: NexusGenInputs['NestedEnumTeamRolesFilter'] | null; // NestedEnumTeamRolesFilter
+    min?: NexusGenInputs['NestedEnumTeamRolesFilter'] | null; // NestedEnumTeamRolesFilter
+    not?: NexusGenInputs['NestedEnumTeamRolesWithAggregatesFilter'] | null; // NestedEnumTeamRolesWithAggregatesFilter
+    notIn?: Array<NexusGenEnums['TeamRoles'] | null> | null; // [TeamRoles]
+  }
   NestedBoolFilter: { // input type
     equals?: boolean | null; // Boolean
     not?: NexusGenInputs['NestedBoolFilter'] | null; // NestedBoolFilter
@@ -235,6 +271,36 @@ export interface NexusGenInputs {
     min?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
     not?: NexusGenInputs['NestedDateTimeWithAggregatesFilter'] | null; // NestedDateTimeWithAggregatesFilter
     notIn?: Array<NexusGenScalars['DateTime'] | null> | null; // [DateTime]
+  }
+  NestedEnumMembershipStatusesFilter: { // input type
+    equals?: NexusGenEnums['MembershipStatuses'] | null; // MembershipStatuses
+    in?: Array<NexusGenEnums['MembershipStatuses'] | null> | null; // [MembershipStatuses]
+    not?: NexusGenInputs['NestedEnumMembershipStatusesFilter'] | null; // NestedEnumMembershipStatusesFilter
+    notIn?: Array<NexusGenEnums['MembershipStatuses'] | null> | null; // [MembershipStatuses]
+  }
+  NestedEnumMembershipStatusesWithAggregatesFilter: { // input type
+    count?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
+    equals?: NexusGenEnums['MembershipStatuses'] | null; // MembershipStatuses
+    in?: Array<NexusGenEnums['MembershipStatuses'] | null> | null; // [MembershipStatuses]
+    max?: NexusGenInputs['NestedEnumMembershipStatusesFilter'] | null; // NestedEnumMembershipStatusesFilter
+    min?: NexusGenInputs['NestedEnumMembershipStatusesFilter'] | null; // NestedEnumMembershipStatusesFilter
+    not?: NexusGenInputs['NestedEnumMembershipStatusesWithAggregatesFilter'] | null; // NestedEnumMembershipStatusesWithAggregatesFilter
+    notIn?: Array<NexusGenEnums['MembershipStatuses'] | null> | null; // [MembershipStatuses]
+  }
+  NestedEnumTeamRolesFilter: { // input type
+    equals?: NexusGenEnums['TeamRoles'] | null; // TeamRoles
+    in?: Array<NexusGenEnums['TeamRoles'] | null> | null; // [TeamRoles]
+    not?: NexusGenInputs['NestedEnumTeamRolesFilter'] | null; // NestedEnumTeamRolesFilter
+    notIn?: Array<NexusGenEnums['TeamRoles'] | null> | null; // [TeamRoles]
+  }
+  NestedEnumTeamRolesWithAggregatesFilter: { // input type
+    count?: NexusGenInputs['NestedIntFilter'] | null; // NestedIntFilter
+    equals?: NexusGenEnums['TeamRoles'] | null; // TeamRoles
+    in?: Array<NexusGenEnums['TeamRoles'] | null> | null; // [TeamRoles]
+    max?: NexusGenInputs['NestedEnumTeamRolesFilter'] | null; // NestedEnumTeamRolesFilter
+    min?: NexusGenInputs['NestedEnumTeamRolesFilter'] | null; // NestedEnumTeamRolesFilter
+    not?: NexusGenInputs['NestedEnumTeamRolesWithAggregatesFilter'] | null; // NestedEnumTeamRolesWithAggregatesFilter
+    notIn?: Array<NexusGenEnums['TeamRoles'] | null> | null; // [TeamRoles]
   }
   NestedIntFilter: { // input type
     equals?: number | null; // Int
@@ -275,6 +341,540 @@ export interface NexusGenInputs {
     notIn?: Array<string | null> | null; // [String]
     startsWith?: string | null; // String
   }
+  ProjectCreateInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    memberships?: NexusGenInputs['ProjectMembersipCreateNestedManyWithoutProjectInput'] | null; // ProjectMembersipCreateNestedManyWithoutProjectInput
+    name: string; // String!
+    team: NexusGenInputs['TeamCreateNestedOneWithoutProjectsInput']; // TeamCreateNestedOneWithoutProjectsInput!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  ProjectCreateManyInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    name: string; // String!
+    teamId: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  ProjectCreateManyTeamInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    name: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  ProjectCreateManyTeamInputEnvelope: { // input type
+    data: NexusGenInputs['ProjectCreateManyTeamInput']; // ProjectCreateManyTeamInput!
+    skipDuplicates?: boolean | null; // Boolean
+  }
+  ProjectCreateNestedManyWithoutTeamInput: { // input type
+    connect?: Array<NexusGenInputs['ProjectWhereUniqueInput'] | null> | null; // [ProjectWhereUniqueInput]
+    connectOrCreate?: Array<NexusGenInputs['ProjectCreateOrConnectWithoutTeamInput'] | null> | null; // [ProjectCreateOrConnectWithoutTeamInput]
+    create?: Array<NexusGenInputs['ProjectCreateWithoutTeamInput'] | null> | null; // [ProjectCreateWithoutTeamInput]
+    createMany?: NexusGenInputs['ProjectCreateManyTeamInputEnvelope'] | null; // ProjectCreateManyTeamInputEnvelope
+  }
+  ProjectCreateNestedOneWithoutMembershipsInput: { // input type
+    connect?: NexusGenInputs['ProjectWhereUniqueInput'] | null; // ProjectWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['ProjectCreateOrConnectWithoutMembershipsInput'] | null; // ProjectCreateOrConnectWithoutMembershipsInput
+    create?: NexusGenInputs['ProjectUncheckedCreateWithoutMembershipsInput'] | null; // ProjectUncheckedCreateWithoutMembershipsInput
+  }
+  ProjectCreateOrConnectWithoutMembershipsInput: { // input type
+    create: NexusGenInputs['ProjectUncheckedCreateWithoutMembershipsInput']; // ProjectUncheckedCreateWithoutMembershipsInput!
+    where: NexusGenInputs['ProjectWhereUniqueInput']; // ProjectWhereUniqueInput!
+  }
+  ProjectCreateOrConnectWithoutTeamInput: { // input type
+    create: NexusGenInputs['ProjectUncheckedCreateWithoutTeamInput']; // ProjectUncheckedCreateWithoutTeamInput!
+    where: NexusGenInputs['ProjectWhereUniqueInput']; // ProjectWhereUniqueInput!
+  }
+  ProjectCreateWithoutMembershipsInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    name: string; // String!
+    team: NexusGenInputs['TeamCreateNestedOneWithoutProjectsInput']; // TeamCreateNestedOneWithoutProjectsInput!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  ProjectCreateWithoutTeamInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    memberships?: NexusGenInputs['ProjectMembersipCreateNestedManyWithoutProjectInput'] | null; // ProjectMembersipCreateNestedManyWithoutProjectInput
+    name: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  ProjectListRelationFilter: { // input type
+    every?: NexusGenInputs['ProjectWhereInput'] | null; // ProjectWhereInput
+    none?: NexusGenInputs['ProjectWhereInput'] | null; // ProjectWhereInput
+    some?: NexusGenInputs['ProjectWhereInput'] | null; // ProjectWhereInput
+  }
+  ProjectMembersipCreateInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    project: NexusGenInputs['ProjectCreateNestedOneWithoutMembershipsInput']; // ProjectCreateNestedOneWithoutMembershipsInput!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    user: NexusGenInputs['UserCreateNestedOneWithoutProjectMembersipInput']; // UserCreateNestedOneWithoutProjectMembersipInput!
+  }
+  ProjectMembersipCreateManyInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    projectId: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    userId: string; // String!
+  }
+  ProjectMembersipCreateManyProjectInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    userId: string; // String!
+  }
+  ProjectMembersipCreateManyProjectInputEnvelope: { // input type
+    data: NexusGenInputs['ProjectMembersipCreateManyProjectInput']; // ProjectMembersipCreateManyProjectInput!
+    skipDuplicates?: boolean | null; // Boolean
+  }
+  ProjectMembersipCreateManyUserInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    projectId: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  ProjectMembersipCreateManyUserInputEnvelope: { // input type
+    data: NexusGenInputs['ProjectMembersipCreateManyUserInput']; // ProjectMembersipCreateManyUserInput!
+    skipDuplicates?: boolean | null; // Boolean
+  }
+  ProjectMembersipCreateNestedManyWithoutProjectInput: { // input type
+    connect?: Array<NexusGenInputs['ProjectMembersipWhereUniqueInput'] | null> | null; // [ProjectMembersipWhereUniqueInput]
+    connectOrCreate?: Array<NexusGenInputs['ProjectMembersipCreateOrConnectWithoutProjectInput'] | null> | null; // [ProjectMembersipCreateOrConnectWithoutProjectInput]
+    create?: Array<NexusGenInputs['ProjectMembersipCreateWithoutProjectInput'] | null> | null; // [ProjectMembersipCreateWithoutProjectInput]
+    createMany?: NexusGenInputs['ProjectMembersipCreateManyProjectInputEnvelope'] | null; // ProjectMembersipCreateManyProjectInputEnvelope
+  }
+  ProjectMembersipCreateNestedManyWithoutUserInput: { // input type
+    connect?: Array<NexusGenInputs['ProjectMembersipWhereUniqueInput'] | null> | null; // [ProjectMembersipWhereUniqueInput]
+    connectOrCreate?: Array<NexusGenInputs['ProjectMembersipCreateOrConnectWithoutUserInput'] | null> | null; // [ProjectMembersipCreateOrConnectWithoutUserInput]
+    create?: Array<NexusGenInputs['ProjectMembersipCreateWithoutUserInput'] | null> | null; // [ProjectMembersipCreateWithoutUserInput]
+    createMany?: NexusGenInputs['ProjectMembersipCreateManyUserInputEnvelope'] | null; // ProjectMembersipCreateManyUserInputEnvelope
+  }
+  ProjectMembersipCreateOrConnectWithoutProjectInput: { // input type
+    create: NexusGenInputs['ProjectMembersipUncheckedCreateWithoutProjectInput']; // ProjectMembersipUncheckedCreateWithoutProjectInput!
+    where: NexusGenInputs['ProjectMembersipWhereUniqueInput']; // ProjectMembersipWhereUniqueInput!
+  }
+  ProjectMembersipCreateOrConnectWithoutUserInput: { // input type
+    create: NexusGenInputs['ProjectMembersipUncheckedCreateWithoutUserInput']; // ProjectMembersipUncheckedCreateWithoutUserInput!
+    where: NexusGenInputs['ProjectMembersipWhereUniqueInput']; // ProjectMembersipWhereUniqueInput!
+  }
+  ProjectMembersipCreateWithoutProjectInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    user: NexusGenInputs['UserCreateNestedOneWithoutProjectMembersipInput']; // UserCreateNestedOneWithoutProjectMembersipInput!
+  }
+  ProjectMembersipCreateWithoutUserInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    project: NexusGenInputs['ProjectCreateNestedOneWithoutMembershipsInput']; // ProjectCreateNestedOneWithoutMembershipsInput!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  ProjectMembersipListRelationFilter: { // input type
+    every?: NexusGenInputs['ProjectMembersipWhereInput'] | null; // ProjectMembersipWhereInput
+    none?: NexusGenInputs['ProjectMembersipWhereInput'] | null; // ProjectMembersipWhereInput
+    some?: NexusGenInputs['ProjectMembersipWhereInput'] | null; // ProjectMembersipWhereInput
+  }
+  ProjectMembersipOrderByInput: { // input type
+    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    id?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    projectId?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    userId?: NexusGenEnums['SortOrder'] | null; // SortOrder
+  }
+  ProjectMembersipScalarWhereInput: { // input type
+    AND?: Array<NexusGenInputs['ProjectMembersipScalarWhereInput'] | null> | null; // [ProjectMembersipScalarWhereInput]
+    NOT?: Array<NexusGenInputs['ProjectMembersipScalarWhereInput'] | null> | null; // [ProjectMembersipScalarWhereInput]
+    OR?: Array<NexusGenInputs['ProjectMembersipScalarWhereInput'] | null> | null; // [ProjectMembersipScalarWhereInput]
+    createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    projectId?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    userId?: NexusGenInputs['StringFilter'] | null; // StringFilter
+  }
+  ProjectMembersipScalarWhereWithAggregatesInput: { // input type
+    AND?: Array<NexusGenInputs['ProjectMembersipScalarWhereWithAggregatesInput'] | null> | null; // [ProjectMembersipScalarWhereWithAggregatesInput]
+    NOT?: Array<NexusGenInputs['ProjectMembersipScalarWhereWithAggregatesInput'] | null> | null; // [ProjectMembersipScalarWhereWithAggregatesInput]
+    OR?: Array<NexusGenInputs['ProjectMembersipScalarWhereWithAggregatesInput'] | null> | null; // [ProjectMembersipScalarWhereWithAggregatesInput]
+    createdAt?: NexusGenInputs['DateTimeWithAggregatesFilter'] | null; // DateTimeWithAggregatesFilter
+    id?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
+    projectId?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
+    updatedAt?: NexusGenInputs['DateTimeWithAggregatesFilter'] | null; // DateTimeWithAggregatesFilter
+    userId?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
+  }
+  ProjectMembersipUncheckedCreateInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    projectId: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    userId: string; // String!
+  }
+  ProjectMembersipUncheckedCreateNestedManyWithoutProjectInput: { // input type
+    connect?: Array<NexusGenInputs['ProjectMembersipWhereUniqueInput'] | null> | null; // [ProjectMembersipWhereUniqueInput]
+    connectOrCreate?: Array<NexusGenInputs['ProjectMembersipCreateOrConnectWithoutProjectInput'] | null> | null; // [ProjectMembersipCreateOrConnectWithoutProjectInput]
+    create?: Array<NexusGenInputs['ProjectMembersipCreateWithoutProjectInput'] | null> | null; // [ProjectMembersipCreateWithoutProjectInput]
+    createMany?: NexusGenInputs['ProjectMembersipCreateManyProjectInputEnvelope'] | null; // ProjectMembersipCreateManyProjectInputEnvelope
+  }
+  ProjectMembersipUncheckedCreateNestedManyWithoutUserInput: { // input type
+    connect?: Array<NexusGenInputs['ProjectMembersipWhereUniqueInput'] | null> | null; // [ProjectMembersipWhereUniqueInput]
+    connectOrCreate?: Array<NexusGenInputs['ProjectMembersipCreateOrConnectWithoutUserInput'] | null> | null; // [ProjectMembersipCreateOrConnectWithoutUserInput]
+    create?: Array<NexusGenInputs['ProjectMembersipCreateWithoutUserInput'] | null> | null; // [ProjectMembersipCreateWithoutUserInput]
+    createMany?: NexusGenInputs['ProjectMembersipCreateManyUserInputEnvelope'] | null; // ProjectMembersipCreateManyUserInputEnvelope
+  }
+  ProjectMembersipUncheckedCreateWithoutProjectInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    userId: string; // String!
+  }
+  ProjectMembersipUncheckedCreateWithoutUserInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    projectId: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  ProjectMembersipUncheckedUpdateInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    projectId?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    userId?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+  }
+  ProjectMembersipUncheckedUpdateManyInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    projectId?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    userId?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+  }
+  ProjectMembersipUncheckedUpdateManyWithoutMembershipsInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    userId?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+  }
+  ProjectMembersipUncheckedUpdateManyWithoutProjectInput: { // input type
+    connect?: Array<NexusGenInputs['ProjectMembersipWhereUniqueInput'] | null> | null; // [ProjectMembersipWhereUniqueInput]
+    connectOrCreate?: Array<NexusGenInputs['ProjectMembersipCreateOrConnectWithoutProjectInput'] | null> | null; // [ProjectMembersipCreateOrConnectWithoutProjectInput]
+    create?: Array<NexusGenInputs['ProjectMembersipCreateWithoutProjectInput'] | null> | null; // [ProjectMembersipCreateWithoutProjectInput]
+    createMany?: NexusGenInputs['ProjectMembersipCreateManyProjectInputEnvelope'] | null; // ProjectMembersipCreateManyProjectInputEnvelope
+    delete?: Array<NexusGenInputs['ProjectMembersipWhereUniqueInput'] | null> | null; // [ProjectMembersipWhereUniqueInput]
+    deleteMany?: Array<NexusGenInputs['ProjectMembersipScalarWhereInput'] | null> | null; // [ProjectMembersipScalarWhereInput]
+    disconnect?: Array<NexusGenInputs['ProjectMembersipWhereUniqueInput'] | null> | null; // [ProjectMembersipWhereUniqueInput]
+    set?: Array<NexusGenInputs['ProjectMembersipWhereUniqueInput'] | null> | null; // [ProjectMembersipWhereUniqueInput]
+    update?: Array<NexusGenInputs['ProjectMembersipUpdateWithWhereUniqueWithoutProjectInput'] | null> | null; // [ProjectMembersipUpdateWithWhereUniqueWithoutProjectInput]
+    updateMany?: Array<NexusGenInputs['ProjectMembersipUpdateManyWithWhereWithoutProjectInput'] | null> | null; // [ProjectMembersipUpdateManyWithWhereWithoutProjectInput]
+    upsert?: Array<NexusGenInputs['ProjectMembersipUpsertWithWhereUniqueWithoutProjectInput'] | null> | null; // [ProjectMembersipUpsertWithWhereUniqueWithoutProjectInput]
+  }
+  ProjectMembersipUncheckedUpdateManyWithoutProjectMembersipInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    projectId?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  ProjectMembersipUncheckedUpdateManyWithoutUserInput: { // input type
+    connect?: Array<NexusGenInputs['ProjectMembersipWhereUniqueInput'] | null> | null; // [ProjectMembersipWhereUniqueInput]
+    connectOrCreate?: Array<NexusGenInputs['ProjectMembersipCreateOrConnectWithoutUserInput'] | null> | null; // [ProjectMembersipCreateOrConnectWithoutUserInput]
+    create?: Array<NexusGenInputs['ProjectMembersipCreateWithoutUserInput'] | null> | null; // [ProjectMembersipCreateWithoutUserInput]
+    createMany?: NexusGenInputs['ProjectMembersipCreateManyUserInputEnvelope'] | null; // ProjectMembersipCreateManyUserInputEnvelope
+    delete?: Array<NexusGenInputs['ProjectMembersipWhereUniqueInput'] | null> | null; // [ProjectMembersipWhereUniqueInput]
+    deleteMany?: Array<NexusGenInputs['ProjectMembersipScalarWhereInput'] | null> | null; // [ProjectMembersipScalarWhereInput]
+    disconnect?: Array<NexusGenInputs['ProjectMembersipWhereUniqueInput'] | null> | null; // [ProjectMembersipWhereUniqueInput]
+    set?: Array<NexusGenInputs['ProjectMembersipWhereUniqueInput'] | null> | null; // [ProjectMembersipWhereUniqueInput]
+    update?: Array<NexusGenInputs['ProjectMembersipUpdateWithWhereUniqueWithoutUserInput'] | null> | null; // [ProjectMembersipUpdateWithWhereUniqueWithoutUserInput]
+    updateMany?: Array<NexusGenInputs['ProjectMembersipUpdateManyWithWhereWithoutUserInput'] | null> | null; // [ProjectMembersipUpdateManyWithWhereWithoutUserInput]
+    upsert?: Array<NexusGenInputs['ProjectMembersipUpsertWithWhereUniqueWithoutUserInput'] | null> | null; // [ProjectMembersipUpsertWithWhereUniqueWithoutUserInput]
+  }
+  ProjectMembersipUncheckedUpdateWithoutProjectInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    userId?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+  }
+  ProjectMembersipUncheckedUpdateWithoutUserInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    projectId?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  ProjectMembersipUpdateInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    project?: NexusGenInputs['ProjectUpdateOneRequiredWithoutMembershipsInput'] | null; // ProjectUpdateOneRequiredWithoutMembershipsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    user?: NexusGenInputs['UserUpdateOneRequiredWithoutProjectMembersipInput'] | null; // UserUpdateOneRequiredWithoutProjectMembersipInput
+  }
+  ProjectMembersipUpdateManyMutationInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  ProjectMembersipUpdateManyWithWhereWithoutProjectInput: { // input type
+    data: NexusGenInputs['ProjectMembersipUncheckedUpdateManyWithoutMembershipsInput']; // ProjectMembersipUncheckedUpdateManyWithoutMembershipsInput!
+    where: NexusGenInputs['ProjectMembersipScalarWhereInput']; // ProjectMembersipScalarWhereInput!
+  }
+  ProjectMembersipUpdateManyWithWhereWithoutUserInput: { // input type
+    data: NexusGenInputs['ProjectMembersipUncheckedUpdateManyWithoutProjectMembersipInput']; // ProjectMembersipUncheckedUpdateManyWithoutProjectMembersipInput!
+    where: NexusGenInputs['ProjectMembersipScalarWhereInput']; // ProjectMembersipScalarWhereInput!
+  }
+  ProjectMembersipUpdateManyWithoutProjectInput: { // input type
+    connect?: Array<NexusGenInputs['ProjectMembersipWhereUniqueInput'] | null> | null; // [ProjectMembersipWhereUniqueInput]
+    connectOrCreate?: Array<NexusGenInputs['ProjectMembersipCreateOrConnectWithoutProjectInput'] | null> | null; // [ProjectMembersipCreateOrConnectWithoutProjectInput]
+    create?: Array<NexusGenInputs['ProjectMembersipCreateWithoutProjectInput'] | null> | null; // [ProjectMembersipCreateWithoutProjectInput]
+    createMany?: NexusGenInputs['ProjectMembersipCreateManyProjectInputEnvelope'] | null; // ProjectMembersipCreateManyProjectInputEnvelope
+    delete?: Array<NexusGenInputs['ProjectMembersipWhereUniqueInput'] | null> | null; // [ProjectMembersipWhereUniqueInput]
+    deleteMany?: Array<NexusGenInputs['ProjectMembersipScalarWhereInput'] | null> | null; // [ProjectMembersipScalarWhereInput]
+    disconnect?: Array<NexusGenInputs['ProjectMembersipWhereUniqueInput'] | null> | null; // [ProjectMembersipWhereUniqueInput]
+    set?: Array<NexusGenInputs['ProjectMembersipWhereUniqueInput'] | null> | null; // [ProjectMembersipWhereUniqueInput]
+    update?: Array<NexusGenInputs['ProjectMembersipUpdateWithWhereUniqueWithoutProjectInput'] | null> | null; // [ProjectMembersipUpdateWithWhereUniqueWithoutProjectInput]
+    updateMany?: Array<NexusGenInputs['ProjectMembersipUpdateManyWithWhereWithoutProjectInput'] | null> | null; // [ProjectMembersipUpdateManyWithWhereWithoutProjectInput]
+    upsert?: Array<NexusGenInputs['ProjectMembersipUpsertWithWhereUniqueWithoutProjectInput'] | null> | null; // [ProjectMembersipUpsertWithWhereUniqueWithoutProjectInput]
+  }
+  ProjectMembersipUpdateManyWithoutUserInput: { // input type
+    connect?: Array<NexusGenInputs['ProjectMembersipWhereUniqueInput'] | null> | null; // [ProjectMembersipWhereUniqueInput]
+    connectOrCreate?: Array<NexusGenInputs['ProjectMembersipCreateOrConnectWithoutUserInput'] | null> | null; // [ProjectMembersipCreateOrConnectWithoutUserInput]
+    create?: Array<NexusGenInputs['ProjectMembersipCreateWithoutUserInput'] | null> | null; // [ProjectMembersipCreateWithoutUserInput]
+    createMany?: NexusGenInputs['ProjectMembersipCreateManyUserInputEnvelope'] | null; // ProjectMembersipCreateManyUserInputEnvelope
+    delete?: Array<NexusGenInputs['ProjectMembersipWhereUniqueInput'] | null> | null; // [ProjectMembersipWhereUniqueInput]
+    deleteMany?: Array<NexusGenInputs['ProjectMembersipScalarWhereInput'] | null> | null; // [ProjectMembersipScalarWhereInput]
+    disconnect?: Array<NexusGenInputs['ProjectMembersipWhereUniqueInput'] | null> | null; // [ProjectMembersipWhereUniqueInput]
+    set?: Array<NexusGenInputs['ProjectMembersipWhereUniqueInput'] | null> | null; // [ProjectMembersipWhereUniqueInput]
+    update?: Array<NexusGenInputs['ProjectMembersipUpdateWithWhereUniqueWithoutUserInput'] | null> | null; // [ProjectMembersipUpdateWithWhereUniqueWithoutUserInput]
+    updateMany?: Array<NexusGenInputs['ProjectMembersipUpdateManyWithWhereWithoutUserInput'] | null> | null; // [ProjectMembersipUpdateManyWithWhereWithoutUserInput]
+    upsert?: Array<NexusGenInputs['ProjectMembersipUpsertWithWhereUniqueWithoutUserInput'] | null> | null; // [ProjectMembersipUpsertWithWhereUniqueWithoutUserInput]
+  }
+  ProjectMembersipUpdateWithWhereUniqueWithoutProjectInput: { // input type
+    data: NexusGenInputs['ProjectMembersipUncheckedUpdateWithoutProjectInput']; // ProjectMembersipUncheckedUpdateWithoutProjectInput!
+    where: NexusGenInputs['ProjectMembersipWhereUniqueInput']; // ProjectMembersipWhereUniqueInput!
+  }
+  ProjectMembersipUpdateWithWhereUniqueWithoutUserInput: { // input type
+    data: NexusGenInputs['ProjectMembersipUncheckedUpdateWithoutUserInput']; // ProjectMembersipUncheckedUpdateWithoutUserInput!
+    where: NexusGenInputs['ProjectMembersipWhereUniqueInput']; // ProjectMembersipWhereUniqueInput!
+  }
+  ProjectMembersipUpdateWithoutProjectInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    user?: NexusGenInputs['UserUpdateOneRequiredWithoutProjectMembersipInput'] | null; // UserUpdateOneRequiredWithoutProjectMembersipInput
+  }
+  ProjectMembersipUpdateWithoutUserInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    project?: NexusGenInputs['ProjectUpdateOneRequiredWithoutMembershipsInput'] | null; // ProjectUpdateOneRequiredWithoutMembershipsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  ProjectMembersipUpsertWithWhereUniqueWithoutProjectInput: { // input type
+    create: NexusGenInputs['ProjectMembersipUncheckedCreateWithoutProjectInput']; // ProjectMembersipUncheckedCreateWithoutProjectInput!
+    update: NexusGenInputs['ProjectMembersipUncheckedUpdateWithoutProjectInput']; // ProjectMembersipUncheckedUpdateWithoutProjectInput!
+    where: NexusGenInputs['ProjectMembersipWhereUniqueInput']; // ProjectMembersipWhereUniqueInput!
+  }
+  ProjectMembersipUpsertWithWhereUniqueWithoutUserInput: { // input type
+    create: NexusGenInputs['ProjectMembersipUncheckedCreateWithoutUserInput']; // ProjectMembersipUncheckedCreateWithoutUserInput!
+    update: NexusGenInputs['ProjectMembersipUncheckedUpdateWithoutUserInput']; // ProjectMembersipUncheckedUpdateWithoutUserInput!
+    where: NexusGenInputs['ProjectMembersipWhereUniqueInput']; // ProjectMembersipWhereUniqueInput!
+  }
+  ProjectMembersipWhereInput: { // input type
+    AND?: Array<NexusGenInputs['ProjectMembersipWhereInput'] | null> | null; // [ProjectMembersipWhereInput]
+    NOT?: Array<NexusGenInputs['ProjectMembersipWhereInput'] | null> | null; // [ProjectMembersipWhereInput]
+    OR?: Array<NexusGenInputs['ProjectMembersipWhereInput'] | null> | null; // [ProjectMembersipWhereInput]
+    createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    project?: NexusGenInputs['ProjectWhereInput'] | null; // ProjectWhereInput
+    projectId?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    userId?: NexusGenInputs['StringFilter'] | null; // StringFilter
+  }
+  ProjectMembersipWhereUniqueInput: { // input type
+    id?: string | null; // String
+  }
+  ProjectOrderByInput: { // input type
+    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    id?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    name?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    teamId?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+  }
+  ProjectRelationFilter: { // input type
+    is?: NexusGenInputs['ProjectWhereInput'] | null; // ProjectWhereInput
+    isNot?: NexusGenInputs['ProjectWhereInput'] | null; // ProjectWhereInput
+  }
+  ProjectScalarWhereInput: { // input type
+    AND?: Array<NexusGenInputs['ProjectScalarWhereInput'] | null> | null; // [ProjectScalarWhereInput]
+    NOT?: Array<NexusGenInputs['ProjectScalarWhereInput'] | null> | null; // [ProjectScalarWhereInput]
+    OR?: Array<NexusGenInputs['ProjectScalarWhereInput'] | null> | null; // [ProjectScalarWhereInput]
+    createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    name?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    teamId?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+  }
+  ProjectScalarWhereWithAggregatesInput: { // input type
+    AND?: Array<NexusGenInputs['ProjectScalarWhereWithAggregatesInput'] | null> | null; // [ProjectScalarWhereWithAggregatesInput]
+    NOT?: Array<NexusGenInputs['ProjectScalarWhereWithAggregatesInput'] | null> | null; // [ProjectScalarWhereWithAggregatesInput]
+    OR?: Array<NexusGenInputs['ProjectScalarWhereWithAggregatesInput'] | null> | null; // [ProjectScalarWhereWithAggregatesInput]
+    createdAt?: NexusGenInputs['DateTimeWithAggregatesFilter'] | null; // DateTimeWithAggregatesFilter
+    id?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
+    name?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
+    teamId?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
+    updatedAt?: NexusGenInputs['DateTimeWithAggregatesFilter'] | null; // DateTimeWithAggregatesFilter
+  }
+  ProjectUncheckedCreateInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    memberships?: NexusGenInputs['ProjectMembersipUncheckedCreateNestedManyWithoutProjectInput'] | null; // ProjectMembersipUncheckedCreateNestedManyWithoutProjectInput
+    name: string; // String!
+    teamId: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  ProjectUncheckedCreateNestedManyWithoutTeamInput: { // input type
+    connect?: Array<NexusGenInputs['ProjectWhereUniqueInput'] | null> | null; // [ProjectWhereUniqueInput]
+    connectOrCreate?: Array<NexusGenInputs['ProjectCreateOrConnectWithoutTeamInput'] | null> | null; // [ProjectCreateOrConnectWithoutTeamInput]
+    create?: Array<NexusGenInputs['ProjectCreateWithoutTeamInput'] | null> | null; // [ProjectCreateWithoutTeamInput]
+    createMany?: NexusGenInputs['ProjectCreateManyTeamInputEnvelope'] | null; // ProjectCreateManyTeamInputEnvelope
+  }
+  ProjectUncheckedCreateWithoutMembershipsInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    name: string; // String!
+    teamId: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  ProjectUncheckedCreateWithoutTeamInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    memberships?: NexusGenInputs['ProjectMembersipUncheckedCreateNestedManyWithoutProjectInput'] | null; // ProjectMembersipUncheckedCreateNestedManyWithoutProjectInput
+    name: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  ProjectUncheckedUpdateInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    memberships?: NexusGenInputs['ProjectMembersipUncheckedUpdateManyWithoutProjectInput'] | null; // ProjectMembersipUncheckedUpdateManyWithoutProjectInput
+    name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    teamId?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  ProjectUncheckedUpdateManyInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    teamId?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  ProjectUncheckedUpdateManyWithoutProjectsInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  ProjectUncheckedUpdateManyWithoutTeamInput: { // input type
+    connect?: Array<NexusGenInputs['ProjectWhereUniqueInput'] | null> | null; // [ProjectWhereUniqueInput]
+    connectOrCreate?: Array<NexusGenInputs['ProjectCreateOrConnectWithoutTeamInput'] | null> | null; // [ProjectCreateOrConnectWithoutTeamInput]
+    create?: Array<NexusGenInputs['ProjectCreateWithoutTeamInput'] | null> | null; // [ProjectCreateWithoutTeamInput]
+    createMany?: NexusGenInputs['ProjectCreateManyTeamInputEnvelope'] | null; // ProjectCreateManyTeamInputEnvelope
+    delete?: Array<NexusGenInputs['ProjectWhereUniqueInput'] | null> | null; // [ProjectWhereUniqueInput]
+    deleteMany?: Array<NexusGenInputs['ProjectScalarWhereInput'] | null> | null; // [ProjectScalarWhereInput]
+    disconnect?: Array<NexusGenInputs['ProjectWhereUniqueInput'] | null> | null; // [ProjectWhereUniqueInput]
+    set?: Array<NexusGenInputs['ProjectWhereUniqueInput'] | null> | null; // [ProjectWhereUniqueInput]
+    update?: Array<NexusGenInputs['ProjectUpdateWithWhereUniqueWithoutTeamInput'] | null> | null; // [ProjectUpdateWithWhereUniqueWithoutTeamInput]
+    updateMany?: Array<NexusGenInputs['ProjectUpdateManyWithWhereWithoutTeamInput'] | null> | null; // [ProjectUpdateManyWithWhereWithoutTeamInput]
+    upsert?: Array<NexusGenInputs['ProjectUpsertWithWhereUniqueWithoutTeamInput'] | null> | null; // [ProjectUpsertWithWhereUniqueWithoutTeamInput]
+  }
+  ProjectUncheckedUpdateWithoutMembershipsInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    teamId?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  ProjectUncheckedUpdateWithoutTeamInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    memberships?: NexusGenInputs['ProjectMembersipUncheckedUpdateManyWithoutProjectInput'] | null; // ProjectMembersipUncheckedUpdateManyWithoutProjectInput
+    name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  ProjectUpdateInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    memberships?: NexusGenInputs['ProjectMembersipUpdateManyWithoutProjectInput'] | null; // ProjectMembersipUpdateManyWithoutProjectInput
+    name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    team?: NexusGenInputs['TeamUpdateOneRequiredWithoutProjectsInput'] | null; // TeamUpdateOneRequiredWithoutProjectsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  ProjectUpdateManyMutationInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  ProjectUpdateManyWithWhereWithoutTeamInput: { // input type
+    data: NexusGenInputs['ProjectUncheckedUpdateManyWithoutProjectsInput']; // ProjectUncheckedUpdateManyWithoutProjectsInput!
+    where: NexusGenInputs['ProjectScalarWhereInput']; // ProjectScalarWhereInput!
+  }
+  ProjectUpdateManyWithoutTeamInput: { // input type
+    connect?: Array<NexusGenInputs['ProjectWhereUniqueInput'] | null> | null; // [ProjectWhereUniqueInput]
+    connectOrCreate?: Array<NexusGenInputs['ProjectCreateOrConnectWithoutTeamInput'] | null> | null; // [ProjectCreateOrConnectWithoutTeamInput]
+    create?: Array<NexusGenInputs['ProjectCreateWithoutTeamInput'] | null> | null; // [ProjectCreateWithoutTeamInput]
+    createMany?: NexusGenInputs['ProjectCreateManyTeamInputEnvelope'] | null; // ProjectCreateManyTeamInputEnvelope
+    delete?: Array<NexusGenInputs['ProjectWhereUniqueInput'] | null> | null; // [ProjectWhereUniqueInput]
+    deleteMany?: Array<NexusGenInputs['ProjectScalarWhereInput'] | null> | null; // [ProjectScalarWhereInput]
+    disconnect?: Array<NexusGenInputs['ProjectWhereUniqueInput'] | null> | null; // [ProjectWhereUniqueInput]
+    set?: Array<NexusGenInputs['ProjectWhereUniqueInput'] | null> | null; // [ProjectWhereUniqueInput]
+    update?: Array<NexusGenInputs['ProjectUpdateWithWhereUniqueWithoutTeamInput'] | null> | null; // [ProjectUpdateWithWhereUniqueWithoutTeamInput]
+    updateMany?: Array<NexusGenInputs['ProjectUpdateManyWithWhereWithoutTeamInput'] | null> | null; // [ProjectUpdateManyWithWhereWithoutTeamInput]
+    upsert?: Array<NexusGenInputs['ProjectUpsertWithWhereUniqueWithoutTeamInput'] | null> | null; // [ProjectUpsertWithWhereUniqueWithoutTeamInput]
+  }
+  ProjectUpdateOneRequiredWithoutMembershipsInput: { // input type
+    connect?: NexusGenInputs['ProjectWhereUniqueInput'] | null; // ProjectWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['ProjectCreateOrConnectWithoutMembershipsInput'] | null; // ProjectCreateOrConnectWithoutMembershipsInput
+    create?: NexusGenInputs['ProjectUncheckedCreateWithoutMembershipsInput'] | null; // ProjectUncheckedCreateWithoutMembershipsInput
+    update?: NexusGenInputs['ProjectUncheckedUpdateWithoutMembershipsInput'] | null; // ProjectUncheckedUpdateWithoutMembershipsInput
+    upsert?: NexusGenInputs['ProjectUpsertWithoutMembershipsInput'] | null; // ProjectUpsertWithoutMembershipsInput
+  }
+  ProjectUpdateWithWhereUniqueWithoutTeamInput: { // input type
+    data: NexusGenInputs['ProjectUncheckedUpdateWithoutTeamInput']; // ProjectUncheckedUpdateWithoutTeamInput!
+    where: NexusGenInputs['ProjectWhereUniqueInput']; // ProjectWhereUniqueInput!
+  }
+  ProjectUpdateWithoutMembershipsInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    team?: NexusGenInputs['TeamUpdateOneRequiredWithoutProjectsInput'] | null; // TeamUpdateOneRequiredWithoutProjectsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  ProjectUpdateWithoutTeamInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    memberships?: NexusGenInputs['ProjectMembersipUpdateManyWithoutProjectInput'] | null; // ProjectMembersipUpdateManyWithoutProjectInput
+    name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  ProjectUpsertWithWhereUniqueWithoutTeamInput: { // input type
+    create: NexusGenInputs['ProjectUncheckedCreateWithoutTeamInput']; // ProjectUncheckedCreateWithoutTeamInput!
+    update: NexusGenInputs['ProjectUncheckedUpdateWithoutTeamInput']; // ProjectUncheckedUpdateWithoutTeamInput!
+    where: NexusGenInputs['ProjectWhereUniqueInput']; // ProjectWhereUniqueInput!
+  }
+  ProjectUpsertWithoutMembershipsInput: { // input type
+    create: NexusGenInputs['ProjectUncheckedCreateWithoutMembershipsInput']; // ProjectUncheckedCreateWithoutMembershipsInput!
+    update: NexusGenInputs['ProjectUncheckedUpdateWithoutMembershipsInput']; // ProjectUncheckedUpdateWithoutMembershipsInput!
+  }
+  ProjectWhereInput: { // input type
+    AND?: Array<NexusGenInputs['ProjectWhereInput'] | null> | null; // [ProjectWhereInput]
+    NOT?: Array<NexusGenInputs['ProjectWhereInput'] | null> | null; // [ProjectWhereInput]
+    OR?: Array<NexusGenInputs['ProjectWhereInput'] | null> | null; // [ProjectWhereInput]
+    createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    memberships?: NexusGenInputs['ProjectMembersipListRelationFilter'] | null; // ProjectMembersipListRelationFilter
+    name?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    team?: NexusGenInputs['TeamWhereInput'] | null; // TeamWhereInput
+    teamId?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+  }
+  ProjectWhereUniqueInput: { // input type
+    id?: string | null; // String
+  }
   RegisterInput: { // input type
     email: string; // String!
     firstName: string; // String!
@@ -314,13 +914,524 @@ export interface NexusGenInputs {
     notIn?: Array<string | null> | null; // [String]
     startsWith?: string | null; // String
   }
+  TeamCreateInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    memberships?: NexusGenInputs['TeamMembershipCreateNestedManyWithoutTeamInput'] | null; // TeamMembershipCreateNestedManyWithoutTeamInput
+    name: string; // String!
+    projects?: NexusGenInputs['ProjectCreateNestedManyWithoutTeamInput'] | null; // ProjectCreateNestedManyWithoutTeamInput
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  TeamCreateManyInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    name: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  TeamCreateNestedOneWithoutMembershipsInput: { // input type
+    connect?: NexusGenInputs['TeamWhereUniqueInput'] | null; // TeamWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['TeamCreateOrConnectWithoutMembershipsInput'] | null; // TeamCreateOrConnectWithoutMembershipsInput
+    create?: NexusGenInputs['TeamUncheckedCreateWithoutMembershipsInput'] | null; // TeamUncheckedCreateWithoutMembershipsInput
+  }
+  TeamCreateNestedOneWithoutProjectsInput: { // input type
+    connect?: NexusGenInputs['TeamWhereUniqueInput'] | null; // TeamWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['TeamCreateOrConnectWithoutProjectsInput'] | null; // TeamCreateOrConnectWithoutProjectsInput
+    create?: NexusGenInputs['TeamUncheckedCreateWithoutProjectsInput'] | null; // TeamUncheckedCreateWithoutProjectsInput
+  }
+  TeamCreateOrConnectWithoutMembershipsInput: { // input type
+    create: NexusGenInputs['TeamUncheckedCreateWithoutMembershipsInput']; // TeamUncheckedCreateWithoutMembershipsInput!
+    where: NexusGenInputs['TeamWhereUniqueInput']; // TeamWhereUniqueInput!
+  }
+  TeamCreateOrConnectWithoutProjectsInput: { // input type
+    create: NexusGenInputs['TeamUncheckedCreateWithoutProjectsInput']; // TeamUncheckedCreateWithoutProjectsInput!
+    where: NexusGenInputs['TeamWhereUniqueInput']; // TeamWhereUniqueInput!
+  }
+  TeamCreateWithoutMembershipsInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    name: string; // String!
+    projects?: NexusGenInputs['ProjectCreateNestedManyWithoutTeamInput'] | null; // ProjectCreateNestedManyWithoutTeamInput
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  TeamCreateWithoutProjectsInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    memberships?: NexusGenInputs['TeamMembershipCreateNestedManyWithoutTeamInput'] | null; // TeamMembershipCreateNestedManyWithoutTeamInput
+    name: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  TeamMembershipCreateInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    role?: NexusGenEnums['TeamRoles'] | null; // TeamRoles
+    status?: NexusGenEnums['MembershipStatuses'] | null; // MembershipStatuses
+    team: NexusGenInputs['TeamCreateNestedOneWithoutMembershipsInput']; // TeamCreateNestedOneWithoutMembershipsInput!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    user: NexusGenInputs['UserCreateNestedOneWithoutTeamMembershipsInput']; // UserCreateNestedOneWithoutTeamMembershipsInput!
+  }
+  TeamMembershipCreateManyInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    role?: NexusGenEnums['TeamRoles'] | null; // TeamRoles
+    status?: NexusGenEnums['MembershipStatuses'] | null; // MembershipStatuses
+    teamId: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    userId: string; // String!
+  }
+  TeamMembershipCreateManyTeamInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    role?: NexusGenEnums['TeamRoles'] | null; // TeamRoles
+    status?: NexusGenEnums['MembershipStatuses'] | null; // MembershipStatuses
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    userId: string; // String!
+  }
+  TeamMembershipCreateManyTeamInputEnvelope: { // input type
+    data: NexusGenInputs['TeamMembershipCreateManyTeamInput']; // TeamMembershipCreateManyTeamInput!
+    skipDuplicates?: boolean | null; // Boolean
+  }
+  TeamMembershipCreateManyUserInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    role?: NexusGenEnums['TeamRoles'] | null; // TeamRoles
+    status?: NexusGenEnums['MembershipStatuses'] | null; // MembershipStatuses
+    teamId: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  TeamMembershipCreateManyUserInputEnvelope: { // input type
+    data: NexusGenInputs['TeamMembershipCreateManyUserInput']; // TeamMembershipCreateManyUserInput!
+    skipDuplicates?: boolean | null; // Boolean
+  }
+  TeamMembershipCreateNestedManyWithoutTeamInput: { // input type
+    connect?: Array<NexusGenInputs['TeamMembershipWhereUniqueInput'] | null> | null; // [TeamMembershipWhereUniqueInput]
+    connectOrCreate?: Array<NexusGenInputs['TeamMembershipCreateOrConnectWithoutTeamInput'] | null> | null; // [TeamMembershipCreateOrConnectWithoutTeamInput]
+    create?: Array<NexusGenInputs['TeamMembershipCreateWithoutTeamInput'] | null> | null; // [TeamMembershipCreateWithoutTeamInput]
+    createMany?: NexusGenInputs['TeamMembershipCreateManyTeamInputEnvelope'] | null; // TeamMembershipCreateManyTeamInputEnvelope
+  }
+  TeamMembershipCreateNestedManyWithoutUserInput: { // input type
+    connect?: Array<NexusGenInputs['TeamMembershipWhereUniqueInput'] | null> | null; // [TeamMembershipWhereUniqueInput]
+    connectOrCreate?: Array<NexusGenInputs['TeamMembershipCreateOrConnectWithoutUserInput'] | null> | null; // [TeamMembershipCreateOrConnectWithoutUserInput]
+    create?: Array<NexusGenInputs['TeamMembershipCreateWithoutUserInput'] | null> | null; // [TeamMembershipCreateWithoutUserInput]
+    createMany?: NexusGenInputs['TeamMembershipCreateManyUserInputEnvelope'] | null; // TeamMembershipCreateManyUserInputEnvelope
+  }
+  TeamMembershipCreateOrConnectWithoutTeamInput: { // input type
+    create: NexusGenInputs['TeamMembershipUncheckedCreateWithoutTeamInput']; // TeamMembershipUncheckedCreateWithoutTeamInput!
+    where: NexusGenInputs['TeamMembershipWhereUniqueInput']; // TeamMembershipWhereUniqueInput!
+  }
+  TeamMembershipCreateOrConnectWithoutUserInput: { // input type
+    create: NexusGenInputs['TeamMembershipUncheckedCreateWithoutUserInput']; // TeamMembershipUncheckedCreateWithoutUserInput!
+    where: NexusGenInputs['TeamMembershipWhereUniqueInput']; // TeamMembershipWhereUniqueInput!
+  }
+  TeamMembershipCreateWithoutTeamInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    role?: NexusGenEnums['TeamRoles'] | null; // TeamRoles
+    status?: NexusGenEnums['MembershipStatuses'] | null; // MembershipStatuses
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    user: NexusGenInputs['UserCreateNestedOneWithoutTeamMembershipsInput']; // UserCreateNestedOneWithoutTeamMembershipsInput!
+  }
+  TeamMembershipCreateWithoutUserInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    role?: NexusGenEnums['TeamRoles'] | null; // TeamRoles
+    status?: NexusGenEnums['MembershipStatuses'] | null; // MembershipStatuses
+    team: NexusGenInputs['TeamCreateNestedOneWithoutMembershipsInput']; // TeamCreateNestedOneWithoutMembershipsInput!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  TeamMembershipListRelationFilter: { // input type
+    every?: NexusGenInputs['TeamMembershipWhereInput'] | null; // TeamMembershipWhereInput
+    none?: NexusGenInputs['TeamMembershipWhereInput'] | null; // TeamMembershipWhereInput
+    some?: NexusGenInputs['TeamMembershipWhereInput'] | null; // TeamMembershipWhereInput
+  }
+  TeamMembershipOrderByInput: { // input type
+    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    id?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    role?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    status?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    teamId?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    userId?: NexusGenEnums['SortOrder'] | null; // SortOrder
+  }
+  TeamMembershipScalarWhereInput: { // input type
+    AND?: Array<NexusGenInputs['TeamMembershipScalarWhereInput'] | null> | null; // [TeamMembershipScalarWhereInput]
+    NOT?: Array<NexusGenInputs['TeamMembershipScalarWhereInput'] | null> | null; // [TeamMembershipScalarWhereInput]
+    OR?: Array<NexusGenInputs['TeamMembershipScalarWhereInput'] | null> | null; // [TeamMembershipScalarWhereInput]
+    createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    role?: NexusGenInputs['EnumTeamRolesFilter'] | null; // EnumTeamRolesFilter
+    status?: NexusGenInputs['EnumMembershipStatusesFilter'] | null; // EnumMembershipStatusesFilter
+    teamId?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    userId?: NexusGenInputs['StringFilter'] | null; // StringFilter
+  }
+  TeamMembershipScalarWhereWithAggregatesInput: { // input type
+    AND?: Array<NexusGenInputs['TeamMembershipScalarWhereWithAggregatesInput'] | null> | null; // [TeamMembershipScalarWhereWithAggregatesInput]
+    NOT?: Array<NexusGenInputs['TeamMembershipScalarWhereWithAggregatesInput'] | null> | null; // [TeamMembershipScalarWhereWithAggregatesInput]
+    OR?: Array<NexusGenInputs['TeamMembershipScalarWhereWithAggregatesInput'] | null> | null; // [TeamMembershipScalarWhereWithAggregatesInput]
+    createdAt?: NexusGenInputs['DateTimeWithAggregatesFilter'] | null; // DateTimeWithAggregatesFilter
+    id?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
+    role?: NexusGenInputs['EnumTeamRolesWithAggregatesFilter'] | null; // EnumTeamRolesWithAggregatesFilter
+    status?: NexusGenInputs['EnumMembershipStatusesWithAggregatesFilter'] | null; // EnumMembershipStatusesWithAggregatesFilter
+    teamId?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
+    updatedAt?: NexusGenInputs['DateTimeWithAggregatesFilter'] | null; // DateTimeWithAggregatesFilter
+    userId?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
+  }
+  TeamMembershipUncheckedCreateInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    role?: NexusGenEnums['TeamRoles'] | null; // TeamRoles
+    status?: NexusGenEnums['MembershipStatuses'] | null; // MembershipStatuses
+    teamId: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    userId: string; // String!
+  }
+  TeamMembershipUncheckedCreateNestedManyWithoutTeamInput: { // input type
+    connect?: Array<NexusGenInputs['TeamMembershipWhereUniqueInput'] | null> | null; // [TeamMembershipWhereUniqueInput]
+    connectOrCreate?: Array<NexusGenInputs['TeamMembershipCreateOrConnectWithoutTeamInput'] | null> | null; // [TeamMembershipCreateOrConnectWithoutTeamInput]
+    create?: Array<NexusGenInputs['TeamMembershipCreateWithoutTeamInput'] | null> | null; // [TeamMembershipCreateWithoutTeamInput]
+    createMany?: NexusGenInputs['TeamMembershipCreateManyTeamInputEnvelope'] | null; // TeamMembershipCreateManyTeamInputEnvelope
+  }
+  TeamMembershipUncheckedCreateNestedManyWithoutUserInput: { // input type
+    connect?: Array<NexusGenInputs['TeamMembershipWhereUniqueInput'] | null> | null; // [TeamMembershipWhereUniqueInput]
+    connectOrCreate?: Array<NexusGenInputs['TeamMembershipCreateOrConnectWithoutUserInput'] | null> | null; // [TeamMembershipCreateOrConnectWithoutUserInput]
+    create?: Array<NexusGenInputs['TeamMembershipCreateWithoutUserInput'] | null> | null; // [TeamMembershipCreateWithoutUserInput]
+    createMany?: NexusGenInputs['TeamMembershipCreateManyUserInputEnvelope'] | null; // TeamMembershipCreateManyUserInputEnvelope
+  }
+  TeamMembershipUncheckedCreateWithoutTeamInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    role?: NexusGenEnums['TeamRoles'] | null; // TeamRoles
+    status?: NexusGenEnums['MembershipStatuses'] | null; // MembershipStatuses
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    userId: string; // String!
+  }
+  TeamMembershipUncheckedCreateWithoutUserInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    role?: NexusGenEnums['TeamRoles'] | null; // TeamRoles
+    status?: NexusGenEnums['MembershipStatuses'] | null; // MembershipStatuses
+    teamId: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  TeamMembershipUncheckedUpdateInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    role?: NexusGenInputs['EnumTeamRolesFieldUpdateOperationsInput'] | null; // EnumTeamRolesFieldUpdateOperationsInput
+    status?: NexusGenInputs['EnumMembershipStatusesFieldUpdateOperationsInput'] | null; // EnumMembershipStatusesFieldUpdateOperationsInput
+    teamId?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    userId?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+  }
+  TeamMembershipUncheckedUpdateManyInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    role?: NexusGenInputs['EnumTeamRolesFieldUpdateOperationsInput'] | null; // EnumTeamRolesFieldUpdateOperationsInput
+    status?: NexusGenInputs['EnumMembershipStatusesFieldUpdateOperationsInput'] | null; // EnumMembershipStatusesFieldUpdateOperationsInput
+    teamId?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    userId?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+  }
+  TeamMembershipUncheckedUpdateManyWithoutMembershipsInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    role?: NexusGenInputs['EnumTeamRolesFieldUpdateOperationsInput'] | null; // EnumTeamRolesFieldUpdateOperationsInput
+    status?: NexusGenInputs['EnumMembershipStatusesFieldUpdateOperationsInput'] | null; // EnumMembershipStatusesFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    userId?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+  }
+  TeamMembershipUncheckedUpdateManyWithoutTeamInput: { // input type
+    connect?: Array<NexusGenInputs['TeamMembershipWhereUniqueInput'] | null> | null; // [TeamMembershipWhereUniqueInput]
+    connectOrCreate?: Array<NexusGenInputs['TeamMembershipCreateOrConnectWithoutTeamInput'] | null> | null; // [TeamMembershipCreateOrConnectWithoutTeamInput]
+    create?: Array<NexusGenInputs['TeamMembershipCreateWithoutTeamInput'] | null> | null; // [TeamMembershipCreateWithoutTeamInput]
+    createMany?: NexusGenInputs['TeamMembershipCreateManyTeamInputEnvelope'] | null; // TeamMembershipCreateManyTeamInputEnvelope
+    delete?: Array<NexusGenInputs['TeamMembershipWhereUniqueInput'] | null> | null; // [TeamMembershipWhereUniqueInput]
+    deleteMany?: Array<NexusGenInputs['TeamMembershipScalarWhereInput'] | null> | null; // [TeamMembershipScalarWhereInput]
+    disconnect?: Array<NexusGenInputs['TeamMembershipWhereUniqueInput'] | null> | null; // [TeamMembershipWhereUniqueInput]
+    set?: Array<NexusGenInputs['TeamMembershipWhereUniqueInput'] | null> | null; // [TeamMembershipWhereUniqueInput]
+    update?: Array<NexusGenInputs['TeamMembershipUpdateWithWhereUniqueWithoutTeamInput'] | null> | null; // [TeamMembershipUpdateWithWhereUniqueWithoutTeamInput]
+    updateMany?: Array<NexusGenInputs['TeamMembershipUpdateManyWithWhereWithoutTeamInput'] | null> | null; // [TeamMembershipUpdateManyWithWhereWithoutTeamInput]
+    upsert?: Array<NexusGenInputs['TeamMembershipUpsertWithWhereUniqueWithoutTeamInput'] | null> | null; // [TeamMembershipUpsertWithWhereUniqueWithoutTeamInput]
+  }
+  TeamMembershipUncheckedUpdateManyWithoutTeamMembershipsInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    role?: NexusGenInputs['EnumTeamRolesFieldUpdateOperationsInput'] | null; // EnumTeamRolesFieldUpdateOperationsInput
+    status?: NexusGenInputs['EnumMembershipStatusesFieldUpdateOperationsInput'] | null; // EnumMembershipStatusesFieldUpdateOperationsInput
+    teamId?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  TeamMembershipUncheckedUpdateManyWithoutUserInput: { // input type
+    connect?: Array<NexusGenInputs['TeamMembershipWhereUniqueInput'] | null> | null; // [TeamMembershipWhereUniqueInput]
+    connectOrCreate?: Array<NexusGenInputs['TeamMembershipCreateOrConnectWithoutUserInput'] | null> | null; // [TeamMembershipCreateOrConnectWithoutUserInput]
+    create?: Array<NexusGenInputs['TeamMembershipCreateWithoutUserInput'] | null> | null; // [TeamMembershipCreateWithoutUserInput]
+    createMany?: NexusGenInputs['TeamMembershipCreateManyUserInputEnvelope'] | null; // TeamMembershipCreateManyUserInputEnvelope
+    delete?: Array<NexusGenInputs['TeamMembershipWhereUniqueInput'] | null> | null; // [TeamMembershipWhereUniqueInput]
+    deleteMany?: Array<NexusGenInputs['TeamMembershipScalarWhereInput'] | null> | null; // [TeamMembershipScalarWhereInput]
+    disconnect?: Array<NexusGenInputs['TeamMembershipWhereUniqueInput'] | null> | null; // [TeamMembershipWhereUniqueInput]
+    set?: Array<NexusGenInputs['TeamMembershipWhereUniqueInput'] | null> | null; // [TeamMembershipWhereUniqueInput]
+    update?: Array<NexusGenInputs['TeamMembershipUpdateWithWhereUniqueWithoutUserInput'] | null> | null; // [TeamMembershipUpdateWithWhereUniqueWithoutUserInput]
+    updateMany?: Array<NexusGenInputs['TeamMembershipUpdateManyWithWhereWithoutUserInput'] | null> | null; // [TeamMembershipUpdateManyWithWhereWithoutUserInput]
+    upsert?: Array<NexusGenInputs['TeamMembershipUpsertWithWhereUniqueWithoutUserInput'] | null> | null; // [TeamMembershipUpsertWithWhereUniqueWithoutUserInput]
+  }
+  TeamMembershipUncheckedUpdateWithoutTeamInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    role?: NexusGenInputs['EnumTeamRolesFieldUpdateOperationsInput'] | null; // EnumTeamRolesFieldUpdateOperationsInput
+    status?: NexusGenInputs['EnumMembershipStatusesFieldUpdateOperationsInput'] | null; // EnumMembershipStatusesFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    userId?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+  }
+  TeamMembershipUncheckedUpdateWithoutUserInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    role?: NexusGenInputs['EnumTeamRolesFieldUpdateOperationsInput'] | null; // EnumTeamRolesFieldUpdateOperationsInput
+    status?: NexusGenInputs['EnumMembershipStatusesFieldUpdateOperationsInput'] | null; // EnumMembershipStatusesFieldUpdateOperationsInput
+    teamId?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  TeamMembershipUpdateInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    role?: NexusGenInputs['EnumTeamRolesFieldUpdateOperationsInput'] | null; // EnumTeamRolesFieldUpdateOperationsInput
+    status?: NexusGenInputs['EnumMembershipStatusesFieldUpdateOperationsInput'] | null; // EnumMembershipStatusesFieldUpdateOperationsInput
+    team?: NexusGenInputs['TeamUpdateOneRequiredWithoutMembershipsInput'] | null; // TeamUpdateOneRequiredWithoutMembershipsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    user?: NexusGenInputs['UserUpdateOneRequiredWithoutTeamMembershipsInput'] | null; // UserUpdateOneRequiredWithoutTeamMembershipsInput
+  }
+  TeamMembershipUpdateManyMutationInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    role?: NexusGenInputs['EnumTeamRolesFieldUpdateOperationsInput'] | null; // EnumTeamRolesFieldUpdateOperationsInput
+    status?: NexusGenInputs['EnumMembershipStatusesFieldUpdateOperationsInput'] | null; // EnumMembershipStatusesFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  TeamMembershipUpdateManyWithWhereWithoutTeamInput: { // input type
+    data: NexusGenInputs['TeamMembershipUncheckedUpdateManyWithoutMembershipsInput']; // TeamMembershipUncheckedUpdateManyWithoutMembershipsInput!
+    where: NexusGenInputs['TeamMembershipScalarWhereInput']; // TeamMembershipScalarWhereInput!
+  }
+  TeamMembershipUpdateManyWithWhereWithoutUserInput: { // input type
+    data: NexusGenInputs['TeamMembershipUncheckedUpdateManyWithoutTeamMembershipsInput']; // TeamMembershipUncheckedUpdateManyWithoutTeamMembershipsInput!
+    where: NexusGenInputs['TeamMembershipScalarWhereInput']; // TeamMembershipScalarWhereInput!
+  }
+  TeamMembershipUpdateManyWithoutTeamInput: { // input type
+    connect?: Array<NexusGenInputs['TeamMembershipWhereUniqueInput'] | null> | null; // [TeamMembershipWhereUniqueInput]
+    connectOrCreate?: Array<NexusGenInputs['TeamMembershipCreateOrConnectWithoutTeamInput'] | null> | null; // [TeamMembershipCreateOrConnectWithoutTeamInput]
+    create?: Array<NexusGenInputs['TeamMembershipCreateWithoutTeamInput'] | null> | null; // [TeamMembershipCreateWithoutTeamInput]
+    createMany?: NexusGenInputs['TeamMembershipCreateManyTeamInputEnvelope'] | null; // TeamMembershipCreateManyTeamInputEnvelope
+    delete?: Array<NexusGenInputs['TeamMembershipWhereUniqueInput'] | null> | null; // [TeamMembershipWhereUniqueInput]
+    deleteMany?: Array<NexusGenInputs['TeamMembershipScalarWhereInput'] | null> | null; // [TeamMembershipScalarWhereInput]
+    disconnect?: Array<NexusGenInputs['TeamMembershipWhereUniqueInput'] | null> | null; // [TeamMembershipWhereUniqueInput]
+    set?: Array<NexusGenInputs['TeamMembershipWhereUniqueInput'] | null> | null; // [TeamMembershipWhereUniqueInput]
+    update?: Array<NexusGenInputs['TeamMembershipUpdateWithWhereUniqueWithoutTeamInput'] | null> | null; // [TeamMembershipUpdateWithWhereUniqueWithoutTeamInput]
+    updateMany?: Array<NexusGenInputs['TeamMembershipUpdateManyWithWhereWithoutTeamInput'] | null> | null; // [TeamMembershipUpdateManyWithWhereWithoutTeamInput]
+    upsert?: Array<NexusGenInputs['TeamMembershipUpsertWithWhereUniqueWithoutTeamInput'] | null> | null; // [TeamMembershipUpsertWithWhereUniqueWithoutTeamInput]
+  }
+  TeamMembershipUpdateManyWithoutUserInput: { // input type
+    connect?: Array<NexusGenInputs['TeamMembershipWhereUniqueInput'] | null> | null; // [TeamMembershipWhereUniqueInput]
+    connectOrCreate?: Array<NexusGenInputs['TeamMembershipCreateOrConnectWithoutUserInput'] | null> | null; // [TeamMembershipCreateOrConnectWithoutUserInput]
+    create?: Array<NexusGenInputs['TeamMembershipCreateWithoutUserInput'] | null> | null; // [TeamMembershipCreateWithoutUserInput]
+    createMany?: NexusGenInputs['TeamMembershipCreateManyUserInputEnvelope'] | null; // TeamMembershipCreateManyUserInputEnvelope
+    delete?: Array<NexusGenInputs['TeamMembershipWhereUniqueInput'] | null> | null; // [TeamMembershipWhereUniqueInput]
+    deleteMany?: Array<NexusGenInputs['TeamMembershipScalarWhereInput'] | null> | null; // [TeamMembershipScalarWhereInput]
+    disconnect?: Array<NexusGenInputs['TeamMembershipWhereUniqueInput'] | null> | null; // [TeamMembershipWhereUniqueInput]
+    set?: Array<NexusGenInputs['TeamMembershipWhereUniqueInput'] | null> | null; // [TeamMembershipWhereUniqueInput]
+    update?: Array<NexusGenInputs['TeamMembershipUpdateWithWhereUniqueWithoutUserInput'] | null> | null; // [TeamMembershipUpdateWithWhereUniqueWithoutUserInput]
+    updateMany?: Array<NexusGenInputs['TeamMembershipUpdateManyWithWhereWithoutUserInput'] | null> | null; // [TeamMembershipUpdateManyWithWhereWithoutUserInput]
+    upsert?: Array<NexusGenInputs['TeamMembershipUpsertWithWhereUniqueWithoutUserInput'] | null> | null; // [TeamMembershipUpsertWithWhereUniqueWithoutUserInput]
+  }
+  TeamMembershipUpdateWithWhereUniqueWithoutTeamInput: { // input type
+    data: NexusGenInputs['TeamMembershipUncheckedUpdateWithoutTeamInput']; // TeamMembershipUncheckedUpdateWithoutTeamInput!
+    where: NexusGenInputs['TeamMembershipWhereUniqueInput']; // TeamMembershipWhereUniqueInput!
+  }
+  TeamMembershipUpdateWithWhereUniqueWithoutUserInput: { // input type
+    data: NexusGenInputs['TeamMembershipUncheckedUpdateWithoutUserInput']; // TeamMembershipUncheckedUpdateWithoutUserInput!
+    where: NexusGenInputs['TeamMembershipWhereUniqueInput']; // TeamMembershipWhereUniqueInput!
+  }
+  TeamMembershipUpdateWithoutTeamInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    role?: NexusGenInputs['EnumTeamRolesFieldUpdateOperationsInput'] | null; // EnumTeamRolesFieldUpdateOperationsInput
+    status?: NexusGenInputs['EnumMembershipStatusesFieldUpdateOperationsInput'] | null; // EnumMembershipStatusesFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    user?: NexusGenInputs['UserUpdateOneRequiredWithoutTeamMembershipsInput'] | null; // UserUpdateOneRequiredWithoutTeamMembershipsInput
+  }
+  TeamMembershipUpdateWithoutUserInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    role?: NexusGenInputs['EnumTeamRolesFieldUpdateOperationsInput'] | null; // EnumTeamRolesFieldUpdateOperationsInput
+    status?: NexusGenInputs['EnumMembershipStatusesFieldUpdateOperationsInput'] | null; // EnumMembershipStatusesFieldUpdateOperationsInput
+    team?: NexusGenInputs['TeamUpdateOneRequiredWithoutMembershipsInput'] | null; // TeamUpdateOneRequiredWithoutMembershipsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  TeamMembershipUpsertWithWhereUniqueWithoutTeamInput: { // input type
+    create: NexusGenInputs['TeamMembershipUncheckedCreateWithoutTeamInput']; // TeamMembershipUncheckedCreateWithoutTeamInput!
+    update: NexusGenInputs['TeamMembershipUncheckedUpdateWithoutTeamInput']; // TeamMembershipUncheckedUpdateWithoutTeamInput!
+    where: NexusGenInputs['TeamMembershipWhereUniqueInput']; // TeamMembershipWhereUniqueInput!
+  }
+  TeamMembershipUpsertWithWhereUniqueWithoutUserInput: { // input type
+    create: NexusGenInputs['TeamMembershipUncheckedCreateWithoutUserInput']; // TeamMembershipUncheckedCreateWithoutUserInput!
+    update: NexusGenInputs['TeamMembershipUncheckedUpdateWithoutUserInput']; // TeamMembershipUncheckedUpdateWithoutUserInput!
+    where: NexusGenInputs['TeamMembershipWhereUniqueInput']; // TeamMembershipWhereUniqueInput!
+  }
+  TeamMembershipWhereInput: { // input type
+    AND?: Array<NexusGenInputs['TeamMembershipWhereInput'] | null> | null; // [TeamMembershipWhereInput]
+    NOT?: Array<NexusGenInputs['TeamMembershipWhereInput'] | null> | null; // [TeamMembershipWhereInput]
+    OR?: Array<NexusGenInputs['TeamMembershipWhereInput'] | null> | null; // [TeamMembershipWhereInput]
+    createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    role?: NexusGenInputs['EnumTeamRolesFilter'] | null; // EnumTeamRolesFilter
+    status?: NexusGenInputs['EnumMembershipStatusesFilter'] | null; // EnumMembershipStatusesFilter
+    team?: NexusGenInputs['TeamWhereInput'] | null; // TeamWhereInput
+    teamId?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    userId?: NexusGenInputs['StringFilter'] | null; // StringFilter
+  }
+  TeamMembershipWhereUniqueInput: { // input type
+    id?: string | null; // String
+  }
+  TeamOrderByInput: { // input type
+    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    id?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    name?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+  }
+  TeamRelationFilter: { // input type
+    is?: NexusGenInputs['TeamWhereInput'] | null; // TeamWhereInput
+    isNot?: NexusGenInputs['TeamWhereInput'] | null; // TeamWhereInput
+  }
+  TeamScalarWhereWithAggregatesInput: { // input type
+    AND?: Array<NexusGenInputs['TeamScalarWhereWithAggregatesInput'] | null> | null; // [TeamScalarWhereWithAggregatesInput]
+    NOT?: Array<NexusGenInputs['TeamScalarWhereWithAggregatesInput'] | null> | null; // [TeamScalarWhereWithAggregatesInput]
+    OR?: Array<NexusGenInputs['TeamScalarWhereWithAggregatesInput'] | null> | null; // [TeamScalarWhereWithAggregatesInput]
+    createdAt?: NexusGenInputs['DateTimeWithAggregatesFilter'] | null; // DateTimeWithAggregatesFilter
+    id?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
+    name?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
+    updatedAt?: NexusGenInputs['DateTimeWithAggregatesFilter'] | null; // DateTimeWithAggregatesFilter
+  }
+  TeamUncheckedCreateInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    memberships?: NexusGenInputs['TeamMembershipUncheckedCreateNestedManyWithoutTeamInput'] | null; // TeamMembershipUncheckedCreateNestedManyWithoutTeamInput
+    name: string; // String!
+    projects?: NexusGenInputs['ProjectUncheckedCreateNestedManyWithoutTeamInput'] | null; // ProjectUncheckedCreateNestedManyWithoutTeamInput
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  TeamUncheckedCreateWithoutMembershipsInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    name: string; // String!
+    projects?: NexusGenInputs['ProjectUncheckedCreateNestedManyWithoutTeamInput'] | null; // ProjectUncheckedCreateNestedManyWithoutTeamInput
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  TeamUncheckedCreateWithoutProjectsInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    memberships?: NexusGenInputs['TeamMembershipUncheckedCreateNestedManyWithoutTeamInput'] | null; // TeamMembershipUncheckedCreateNestedManyWithoutTeamInput
+    name: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  TeamUncheckedUpdateInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    memberships?: NexusGenInputs['TeamMembershipUncheckedUpdateManyWithoutTeamInput'] | null; // TeamMembershipUncheckedUpdateManyWithoutTeamInput
+    name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    projects?: NexusGenInputs['ProjectUncheckedUpdateManyWithoutTeamInput'] | null; // ProjectUncheckedUpdateManyWithoutTeamInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  TeamUncheckedUpdateManyInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  TeamUncheckedUpdateWithoutMembershipsInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    projects?: NexusGenInputs['ProjectUncheckedUpdateManyWithoutTeamInput'] | null; // ProjectUncheckedUpdateManyWithoutTeamInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  TeamUncheckedUpdateWithoutProjectsInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    memberships?: NexusGenInputs['TeamMembershipUncheckedUpdateManyWithoutTeamInput'] | null; // TeamMembershipUncheckedUpdateManyWithoutTeamInput
+    name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  TeamUpdateInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    memberships?: NexusGenInputs['TeamMembershipUpdateManyWithoutTeamInput'] | null; // TeamMembershipUpdateManyWithoutTeamInput
+    name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    projects?: NexusGenInputs['ProjectUpdateManyWithoutTeamInput'] | null; // ProjectUpdateManyWithoutTeamInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  TeamUpdateManyMutationInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  TeamUpdateOneRequiredWithoutMembershipsInput: { // input type
+    connect?: NexusGenInputs['TeamWhereUniqueInput'] | null; // TeamWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['TeamCreateOrConnectWithoutMembershipsInput'] | null; // TeamCreateOrConnectWithoutMembershipsInput
+    create?: NexusGenInputs['TeamUncheckedCreateWithoutMembershipsInput'] | null; // TeamUncheckedCreateWithoutMembershipsInput
+    update?: NexusGenInputs['TeamUncheckedUpdateWithoutMembershipsInput'] | null; // TeamUncheckedUpdateWithoutMembershipsInput
+    upsert?: NexusGenInputs['TeamUpsertWithoutMembershipsInput'] | null; // TeamUpsertWithoutMembershipsInput
+  }
+  TeamUpdateOneRequiredWithoutProjectsInput: { // input type
+    connect?: NexusGenInputs['TeamWhereUniqueInput'] | null; // TeamWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['TeamCreateOrConnectWithoutProjectsInput'] | null; // TeamCreateOrConnectWithoutProjectsInput
+    create?: NexusGenInputs['TeamUncheckedCreateWithoutProjectsInput'] | null; // TeamUncheckedCreateWithoutProjectsInput
+    update?: NexusGenInputs['TeamUncheckedUpdateWithoutProjectsInput'] | null; // TeamUncheckedUpdateWithoutProjectsInput
+    upsert?: NexusGenInputs['TeamUpsertWithoutProjectsInput'] | null; // TeamUpsertWithoutProjectsInput
+  }
+  TeamUpdateWithoutMembershipsInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    projects?: NexusGenInputs['ProjectUpdateManyWithoutTeamInput'] | null; // ProjectUpdateManyWithoutTeamInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  TeamUpdateWithoutProjectsInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    memberships?: NexusGenInputs['TeamMembershipUpdateManyWithoutTeamInput'] | null; // TeamMembershipUpdateManyWithoutTeamInput
+    name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  TeamUpsertWithoutMembershipsInput: { // input type
+    create: NexusGenInputs['TeamUncheckedCreateWithoutMembershipsInput']; // TeamUncheckedCreateWithoutMembershipsInput!
+    update: NexusGenInputs['TeamUncheckedUpdateWithoutMembershipsInput']; // TeamUncheckedUpdateWithoutMembershipsInput!
+  }
+  TeamUpsertWithoutProjectsInput: { // input type
+    create: NexusGenInputs['TeamUncheckedCreateWithoutProjectsInput']; // TeamUncheckedCreateWithoutProjectsInput!
+    update: NexusGenInputs['TeamUncheckedUpdateWithoutProjectsInput']; // TeamUncheckedUpdateWithoutProjectsInput!
+  }
+  TeamWhereInput: { // input type
+    AND?: Array<NexusGenInputs['TeamWhereInput'] | null> | null; // [TeamWhereInput]
+    NOT?: Array<NexusGenInputs['TeamWhereInput'] | null> | null; // [TeamWhereInput]
+    OR?: Array<NexusGenInputs['TeamWhereInput'] | null> | null; // [TeamWhereInput]
+    createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    memberships?: NexusGenInputs['TeamMembershipListRelationFilter'] | null; // TeamMembershipListRelationFilter
+    name?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    projects?: NexusGenInputs['ProjectListRelationFilter'] | null; // ProjectListRelationFilter
+    updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+  }
+  TeamWhereUniqueInput: { // input type
+    id?: string | null; // String
+  }
   UserCreateInput: { // input type
+    ProjectMembersip?: NexusGenInputs['ProjectMembersipCreateNestedManyWithoutUserInput'] | null; // ProjectMembersipCreateNestedManyWithoutUserInput
     confirmed?: boolean | null; // Boolean
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     email: string; // String!
     emailConfirmation?: NexusGenInputs['EmailConfirmationCreateNestedOneWithoutUserInput'] | null; // EmailConfirmationCreateNestedOneWithoutUserInput
     id?: string | null; // String
     profile?: NexusGenInputs['UserProfileCreateNestedOneWithoutUserInput'] | null; // UserProfileCreateNestedOneWithoutUserInput
+    teamMemberships?: NexusGenInputs['TeamMembershipCreateNestedManyWithoutUserInput'] | null; // TeamMembershipCreateNestedManyWithoutUserInput
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
   UserCreateManyInput: { // input type
@@ -340,6 +1451,16 @@ export interface NexusGenInputs {
     connectOrCreate?: NexusGenInputs['UserCreateOrConnectWithoutProfileInput'] | null; // UserCreateOrConnectWithoutProfileInput
     create?: NexusGenInputs['UserUncheckedCreateWithoutProfileInput'] | null; // UserUncheckedCreateWithoutProfileInput
   }
+  UserCreateNestedOneWithoutProjectMembersipInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['UserCreateOrConnectWithoutProjectMembersipInput'] | null; // UserCreateOrConnectWithoutProjectMembersipInput
+    create?: NexusGenInputs['UserUncheckedCreateWithoutProjectMembersipInput'] | null; // UserUncheckedCreateWithoutProjectMembersipInput
+  }
+  UserCreateNestedOneWithoutTeamMembershipsInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['UserCreateOrConnectWithoutTeamMembershipsInput'] | null; // UserCreateOrConnectWithoutTeamMembershipsInput
+    create?: NexusGenInputs['UserUncheckedCreateWithoutTeamMembershipsInput'] | null; // UserUncheckedCreateWithoutTeamMembershipsInput
+  }
   UserCreateOrConnectWithoutEmailConfirmationInput: { // input type
     create: NexusGenInputs['UserUncheckedCreateWithoutEmailConfirmationInput']; // UserUncheckedCreateWithoutEmailConfirmationInput!
     where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
@@ -348,20 +1469,52 @@ export interface NexusGenInputs {
     create: NexusGenInputs['UserUncheckedCreateWithoutProfileInput']; // UserUncheckedCreateWithoutProfileInput!
     where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
   }
+  UserCreateOrConnectWithoutProjectMembersipInput: { // input type
+    create: NexusGenInputs['UserUncheckedCreateWithoutProjectMembersipInput']; // UserUncheckedCreateWithoutProjectMembersipInput!
+    where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+  }
+  UserCreateOrConnectWithoutTeamMembershipsInput: { // input type
+    create: NexusGenInputs['UserUncheckedCreateWithoutTeamMembershipsInput']; // UserUncheckedCreateWithoutTeamMembershipsInput!
+    where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+  }
   UserCreateWithoutEmailConfirmationInput: { // input type
+    ProjectMembersip?: NexusGenInputs['ProjectMembersipCreateNestedManyWithoutUserInput'] | null; // ProjectMembersipCreateNestedManyWithoutUserInput
     confirmed?: boolean | null; // Boolean
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     email: string; // String!
     id?: string | null; // String
     profile?: NexusGenInputs['UserProfileCreateNestedOneWithoutUserInput'] | null; // UserProfileCreateNestedOneWithoutUserInput
+    teamMemberships?: NexusGenInputs['TeamMembershipCreateNestedManyWithoutUserInput'] | null; // TeamMembershipCreateNestedManyWithoutUserInput
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
   UserCreateWithoutProfileInput: { // input type
+    ProjectMembersip?: NexusGenInputs['ProjectMembersipCreateNestedManyWithoutUserInput'] | null; // ProjectMembersipCreateNestedManyWithoutUserInput
     confirmed?: boolean | null; // Boolean
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     email: string; // String!
     emailConfirmation?: NexusGenInputs['EmailConfirmationCreateNestedOneWithoutUserInput'] | null; // EmailConfirmationCreateNestedOneWithoutUserInput
     id?: string | null; // String
+    teamMemberships?: NexusGenInputs['TeamMembershipCreateNestedManyWithoutUserInput'] | null; // TeamMembershipCreateNestedManyWithoutUserInput
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  UserCreateWithoutProjectMembersipInput: { // input type
+    confirmed?: boolean | null; // Boolean
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    email: string; // String!
+    emailConfirmation?: NexusGenInputs['EmailConfirmationCreateNestedOneWithoutUserInput'] | null; // EmailConfirmationCreateNestedOneWithoutUserInput
+    id?: string | null; // String
+    profile?: NexusGenInputs['UserProfileCreateNestedOneWithoutUserInput'] | null; // UserProfileCreateNestedOneWithoutUserInput
+    teamMemberships?: NexusGenInputs['TeamMembershipCreateNestedManyWithoutUserInput'] | null; // TeamMembershipCreateNestedManyWithoutUserInput
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  UserCreateWithoutTeamMembershipsInput: { // input type
+    ProjectMembersip?: NexusGenInputs['ProjectMembersipCreateNestedManyWithoutUserInput'] | null; // ProjectMembersipCreateNestedManyWithoutUserInput
+    confirmed?: boolean | null; // Boolean
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    email: string; // String!
+    emailConfirmation?: NexusGenInputs['EmailConfirmationCreateNestedOneWithoutUserInput'] | null; // EmailConfirmationCreateNestedOneWithoutUserInput
+    id?: string | null; // String
+    profile?: NexusGenInputs['UserProfileCreateNestedOneWithoutUserInput'] | null; // UserProfileCreateNestedOneWithoutUserInput
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
   UserOrderByInput: { // input type
@@ -372,15 +1525,19 @@ export interface NexusGenInputs {
     updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
   }
   UserProfileCreateInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     firstName: string; // String!
     id?: string | null; // String
     lastName: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     user: NexusGenInputs['UserCreateNestedOneWithoutProfileInput']; // UserCreateNestedOneWithoutProfileInput!
   }
   UserProfileCreateManyInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     firstName: string; // String!
     id?: string | null; // String
     lastName: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     userId: string; // String!
   }
   UserProfileCreateNestedOneWithoutUserInput: { // input type
@@ -393,14 +1550,18 @@ export interface NexusGenInputs {
     where: NexusGenInputs['UserProfileWhereUniqueInput']; // UserProfileWhereUniqueInput!
   }
   UserProfileCreateWithoutUserInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     firstName: string; // String!
     id?: string | null; // String
     lastName: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
   UserProfileOrderByInput: { // input type
+    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
     firstName?: NexusGenEnums['SortOrder'] | null; // SortOrder
     id?: NexusGenEnums['SortOrder'] | null; // SortOrder
     lastName?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
     userId?: NexusGenEnums['SortOrder'] | null; // SortOrder
   }
   UserProfileRelationFilter: { // input type
@@ -411,15 +1572,19 @@ export interface NexusGenInputs {
     AND?: Array<NexusGenInputs['UserProfileScalarWhereWithAggregatesInput'] | null> | null; // [UserProfileScalarWhereWithAggregatesInput]
     NOT?: Array<NexusGenInputs['UserProfileScalarWhereWithAggregatesInput'] | null> | null; // [UserProfileScalarWhereWithAggregatesInput]
     OR?: Array<NexusGenInputs['UserProfileScalarWhereWithAggregatesInput'] | null> | null; // [UserProfileScalarWhereWithAggregatesInput]
+    createdAt?: NexusGenInputs['DateTimeWithAggregatesFilter'] | null; // DateTimeWithAggregatesFilter
     firstName?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
     id?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
     lastName?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
+    updatedAt?: NexusGenInputs['DateTimeWithAggregatesFilter'] | null; // DateTimeWithAggregatesFilter
     userId?: NexusGenInputs['StringWithAggregatesFilter'] | null; // StringWithAggregatesFilter
   }
   UserProfileUncheckedCreateInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     firstName: string; // String!
     id?: string | null; // String
     lastName: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     userId: string; // String!
   }
   UserProfileUncheckedCreateNestedOneWithoutUserInput: { // input type
@@ -428,20 +1593,26 @@ export interface NexusGenInputs {
     create?: NexusGenInputs['UserProfileUncheckedCreateWithoutUserInput'] | null; // UserProfileUncheckedCreateWithoutUserInput
   }
   UserProfileUncheckedCreateWithoutUserInput: { // input type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     firstName: string; // String!
     id?: string | null; // String
     lastName: string; // String!
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
   UserProfileUncheckedUpdateInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     firstName?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     lastName?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     userId?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
   }
   UserProfileUncheckedUpdateManyInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     firstName?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     lastName?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     userId?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
   }
   UserProfileUncheckedUpdateOneWithoutUserInput: { // input type
@@ -454,20 +1625,26 @@ export interface NexusGenInputs {
     upsert?: NexusGenInputs['UserProfileUpsertWithoutUserInput'] | null; // UserProfileUpsertWithoutUserInput
   }
   UserProfileUncheckedUpdateWithoutUserInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     firstName?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     lastName?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
   UserProfileUpdateInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     firstName?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     lastName?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     user?: NexusGenInputs['UserUpdateOneRequiredWithoutProfileInput'] | null; // UserUpdateOneRequiredWithoutProfileInput
   }
   UserProfileUpdateManyMutationInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     firstName?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     lastName?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
   UserProfileUpdateOneWithoutUserInput: { // input type
     connect?: NexusGenInputs['UserProfileWhereUniqueInput'] | null; // UserProfileWhereUniqueInput
@@ -479,9 +1656,11 @@ export interface NexusGenInputs {
     upsert?: NexusGenInputs['UserProfileUpsertWithoutUserInput'] | null; // UserProfileUpsertWithoutUserInput
   }
   UserProfileUpdateWithoutUserInput: { // input type
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     firstName?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     lastName?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
   UserProfileUpsertWithoutUserInput: { // input type
     create: NexusGenInputs['UserProfileUncheckedCreateWithoutUserInput']; // UserProfileUncheckedCreateWithoutUserInput!
@@ -491,9 +1670,11 @@ export interface NexusGenInputs {
     AND?: Array<NexusGenInputs['UserProfileWhereInput'] | null> | null; // [UserProfileWhereInput]
     NOT?: Array<NexusGenInputs['UserProfileWhereInput'] | null> | null; // [UserProfileWhereInput]
     OR?: Array<NexusGenInputs['UserProfileWhereInput'] | null> | null; // [UserProfileWhereInput]
+    createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     firstName?: NexusGenInputs['StringFilter'] | null; // StringFilter
     id?: NexusGenInputs['StringFilter'] | null; // StringFilter
     lastName?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     userId?: NexusGenInputs['StringFilter'] | null; // StringFilter
   }
@@ -516,37 +1697,65 @@ export interface NexusGenInputs {
     updatedAt?: NexusGenInputs['DateTimeWithAggregatesFilter'] | null; // DateTimeWithAggregatesFilter
   }
   UserUncheckedCreateInput: { // input type
+    ProjectMembersip?: NexusGenInputs['ProjectMembersipUncheckedCreateNestedManyWithoutUserInput'] | null; // ProjectMembersipUncheckedCreateNestedManyWithoutUserInput
     confirmed?: boolean | null; // Boolean
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     email: string; // String!
     emailConfirmation?: NexusGenInputs['EmailConfirmationUncheckedCreateNestedOneWithoutUserInput'] | null; // EmailConfirmationUncheckedCreateNestedOneWithoutUserInput
     id?: string | null; // String
     profile?: NexusGenInputs['UserProfileUncheckedCreateNestedOneWithoutUserInput'] | null; // UserProfileUncheckedCreateNestedOneWithoutUserInput
+    teamMemberships?: NexusGenInputs['TeamMembershipUncheckedCreateNestedManyWithoutUserInput'] | null; // TeamMembershipUncheckedCreateNestedManyWithoutUserInput
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
   UserUncheckedCreateWithoutEmailConfirmationInput: { // input type
+    ProjectMembersip?: NexusGenInputs['ProjectMembersipUncheckedCreateNestedManyWithoutUserInput'] | null; // ProjectMembersipUncheckedCreateNestedManyWithoutUserInput
     confirmed?: boolean | null; // Boolean
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     email: string; // String!
     id?: string | null; // String
     profile?: NexusGenInputs['UserProfileUncheckedCreateNestedOneWithoutUserInput'] | null; // UserProfileUncheckedCreateNestedOneWithoutUserInput
+    teamMemberships?: NexusGenInputs['TeamMembershipUncheckedCreateNestedManyWithoutUserInput'] | null; // TeamMembershipUncheckedCreateNestedManyWithoutUserInput
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
   UserUncheckedCreateWithoutProfileInput: { // input type
+    ProjectMembersip?: NexusGenInputs['ProjectMembersipUncheckedCreateNestedManyWithoutUserInput'] | null; // ProjectMembersipUncheckedCreateNestedManyWithoutUserInput
     confirmed?: boolean | null; // Boolean
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     email: string; // String!
     emailConfirmation?: NexusGenInputs['EmailConfirmationUncheckedCreateNestedOneWithoutUserInput'] | null; // EmailConfirmationUncheckedCreateNestedOneWithoutUserInput
     id?: string | null; // String
+    teamMemberships?: NexusGenInputs['TeamMembershipUncheckedCreateNestedManyWithoutUserInput'] | null; // TeamMembershipUncheckedCreateNestedManyWithoutUserInput
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  UserUncheckedCreateWithoutProjectMembersipInput: { // input type
+    confirmed?: boolean | null; // Boolean
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    email: string; // String!
+    emailConfirmation?: NexusGenInputs['EmailConfirmationUncheckedCreateNestedOneWithoutUserInput'] | null; // EmailConfirmationUncheckedCreateNestedOneWithoutUserInput
+    id?: string | null; // String
+    profile?: NexusGenInputs['UserProfileUncheckedCreateNestedOneWithoutUserInput'] | null; // UserProfileUncheckedCreateNestedOneWithoutUserInput
+    teamMemberships?: NexusGenInputs['TeamMembershipUncheckedCreateNestedManyWithoutUserInput'] | null; // TeamMembershipUncheckedCreateNestedManyWithoutUserInput
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  UserUncheckedCreateWithoutTeamMembershipsInput: { // input type
+    ProjectMembersip?: NexusGenInputs['ProjectMembersipUncheckedCreateNestedManyWithoutUserInput'] | null; // ProjectMembersipUncheckedCreateNestedManyWithoutUserInput
+    confirmed?: boolean | null; // Boolean
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    email: string; // String!
+    emailConfirmation?: NexusGenInputs['EmailConfirmationUncheckedCreateNestedOneWithoutUserInput'] | null; // EmailConfirmationUncheckedCreateNestedOneWithoutUserInput
+    id?: string | null; // String
+    profile?: NexusGenInputs['UserProfileUncheckedCreateNestedOneWithoutUserInput'] | null; // UserProfileUncheckedCreateNestedOneWithoutUserInput
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
   UserUncheckedUpdateInput: { // input type
+    ProjectMembersip?: NexusGenInputs['ProjectMembersipUncheckedUpdateManyWithoutUserInput'] | null; // ProjectMembersipUncheckedUpdateManyWithoutUserInput
     confirmed?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     emailConfirmation?: NexusGenInputs['EmailConfirmationUncheckedUpdateOneWithoutUserInput'] | null; // EmailConfirmationUncheckedUpdateOneWithoutUserInput
     id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     profile?: NexusGenInputs['UserProfileUncheckedUpdateOneWithoutUserInput'] | null; // UserProfileUncheckedUpdateOneWithoutUserInput
+    teamMemberships?: NexusGenInputs['TeamMembershipUncheckedUpdateManyWithoutUserInput'] | null; // TeamMembershipUncheckedUpdateManyWithoutUserInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
   UserUncheckedUpdateManyInput: { // input type
@@ -557,28 +1766,54 @@ export interface NexusGenInputs {
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
   UserUncheckedUpdateWithoutEmailConfirmationInput: { // input type
+    ProjectMembersip?: NexusGenInputs['ProjectMembersipUncheckedUpdateManyWithoutUserInput'] | null; // ProjectMembersipUncheckedUpdateManyWithoutUserInput
     confirmed?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     profile?: NexusGenInputs['UserProfileUncheckedUpdateOneWithoutUserInput'] | null; // UserProfileUncheckedUpdateOneWithoutUserInput
+    teamMemberships?: NexusGenInputs['TeamMembershipUncheckedUpdateManyWithoutUserInput'] | null; // TeamMembershipUncheckedUpdateManyWithoutUserInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
   UserUncheckedUpdateWithoutProfileInput: { // input type
+    ProjectMembersip?: NexusGenInputs['ProjectMembersipUncheckedUpdateManyWithoutUserInput'] | null; // ProjectMembersipUncheckedUpdateManyWithoutUserInput
     confirmed?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     emailConfirmation?: NexusGenInputs['EmailConfirmationUncheckedUpdateOneWithoutUserInput'] | null; // EmailConfirmationUncheckedUpdateOneWithoutUserInput
     id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    teamMemberships?: NexusGenInputs['TeamMembershipUncheckedUpdateManyWithoutUserInput'] | null; // TeamMembershipUncheckedUpdateManyWithoutUserInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  UserUncheckedUpdateWithoutProjectMembersipInput: { // input type
+    confirmed?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    emailConfirmation?: NexusGenInputs['EmailConfirmationUncheckedUpdateOneWithoutUserInput'] | null; // EmailConfirmationUncheckedUpdateOneWithoutUserInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    profile?: NexusGenInputs['UserProfileUncheckedUpdateOneWithoutUserInput'] | null; // UserProfileUncheckedUpdateOneWithoutUserInput
+    teamMemberships?: NexusGenInputs['TeamMembershipUncheckedUpdateManyWithoutUserInput'] | null; // TeamMembershipUncheckedUpdateManyWithoutUserInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  UserUncheckedUpdateWithoutTeamMembershipsInput: { // input type
+    ProjectMembersip?: NexusGenInputs['ProjectMembersipUncheckedUpdateManyWithoutUserInput'] | null; // ProjectMembersipUncheckedUpdateManyWithoutUserInput
+    confirmed?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    emailConfirmation?: NexusGenInputs['EmailConfirmationUncheckedUpdateOneWithoutUserInput'] | null; // EmailConfirmationUncheckedUpdateOneWithoutUserInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    profile?: NexusGenInputs['UserProfileUncheckedUpdateOneWithoutUserInput'] | null; // UserProfileUncheckedUpdateOneWithoutUserInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
   UserUpdateInput: { // input type
+    ProjectMembersip?: NexusGenInputs['ProjectMembersipUpdateManyWithoutUserInput'] | null; // ProjectMembersipUpdateManyWithoutUserInput
     confirmed?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     emailConfirmation?: NexusGenInputs['EmailConfirmationUpdateOneWithoutUserInput'] | null; // EmailConfirmationUpdateOneWithoutUserInput
     id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     profile?: NexusGenInputs['UserProfileUpdateOneWithoutUserInput'] | null; // UserProfileUpdateOneWithoutUserInput
+    teamMemberships?: NexusGenInputs['TeamMembershipUpdateManyWithoutUserInput'] | null; // TeamMembershipUpdateManyWithoutUserInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
   UserUpdateManyMutationInput: { // input type
@@ -602,20 +1837,58 @@ export interface NexusGenInputs {
     update?: NexusGenInputs['UserUncheckedUpdateWithoutProfileInput'] | null; // UserUncheckedUpdateWithoutProfileInput
     upsert?: NexusGenInputs['UserUpsertWithoutProfileInput'] | null; // UserUpsertWithoutProfileInput
   }
+  UserUpdateOneRequiredWithoutProjectMembersipInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['UserCreateOrConnectWithoutProjectMembersipInput'] | null; // UserCreateOrConnectWithoutProjectMembersipInput
+    create?: NexusGenInputs['UserUncheckedCreateWithoutProjectMembersipInput'] | null; // UserUncheckedCreateWithoutProjectMembersipInput
+    update?: NexusGenInputs['UserUncheckedUpdateWithoutProjectMembersipInput'] | null; // UserUncheckedUpdateWithoutProjectMembersipInput
+    upsert?: NexusGenInputs['UserUpsertWithoutProjectMembersipInput'] | null; // UserUpsertWithoutProjectMembersipInput
+  }
+  UserUpdateOneRequiredWithoutTeamMembershipsInput: { // input type
+    connect?: NexusGenInputs['UserWhereUniqueInput'] | null; // UserWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['UserCreateOrConnectWithoutTeamMembershipsInput'] | null; // UserCreateOrConnectWithoutTeamMembershipsInput
+    create?: NexusGenInputs['UserUncheckedCreateWithoutTeamMembershipsInput'] | null; // UserUncheckedCreateWithoutTeamMembershipsInput
+    update?: NexusGenInputs['UserUncheckedUpdateWithoutTeamMembershipsInput'] | null; // UserUncheckedUpdateWithoutTeamMembershipsInput
+    upsert?: NexusGenInputs['UserUpsertWithoutTeamMembershipsInput'] | null; // UserUpsertWithoutTeamMembershipsInput
+  }
   UserUpdateWithoutEmailConfirmationInput: { // input type
+    ProjectMembersip?: NexusGenInputs['ProjectMembersipUpdateManyWithoutUserInput'] | null; // ProjectMembersipUpdateManyWithoutUserInput
     confirmed?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     profile?: NexusGenInputs['UserProfileUpdateOneWithoutUserInput'] | null; // UserProfileUpdateOneWithoutUserInput
+    teamMemberships?: NexusGenInputs['TeamMembershipUpdateManyWithoutUserInput'] | null; // TeamMembershipUpdateManyWithoutUserInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
   UserUpdateWithoutProfileInput: { // input type
+    ProjectMembersip?: NexusGenInputs['ProjectMembersipUpdateManyWithoutUserInput'] | null; // ProjectMembersipUpdateManyWithoutUserInput
     confirmed?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     emailConfirmation?: NexusGenInputs['EmailConfirmationUpdateOneWithoutUserInput'] | null; // EmailConfirmationUpdateOneWithoutUserInput
     id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    teamMemberships?: NexusGenInputs['TeamMembershipUpdateManyWithoutUserInput'] | null; // TeamMembershipUpdateManyWithoutUserInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  UserUpdateWithoutProjectMembersipInput: { // input type
+    confirmed?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    emailConfirmation?: NexusGenInputs['EmailConfirmationUpdateOneWithoutUserInput'] | null; // EmailConfirmationUpdateOneWithoutUserInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    profile?: NexusGenInputs['UserProfileUpdateOneWithoutUserInput'] | null; // UserProfileUpdateOneWithoutUserInput
+    teamMemberships?: NexusGenInputs['TeamMembershipUpdateManyWithoutUserInput'] | null; // TeamMembershipUpdateManyWithoutUserInput
+    updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+  }
+  UserUpdateWithoutTeamMembershipsInput: { // input type
+    ProjectMembersip?: NexusGenInputs['ProjectMembersipUpdateManyWithoutUserInput'] | null; // ProjectMembersipUpdateManyWithoutUserInput
+    confirmed?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
+    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
+    email?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    emailConfirmation?: NexusGenInputs['EmailConfirmationUpdateOneWithoutUserInput'] | null; // EmailConfirmationUpdateOneWithoutUserInput
+    id?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    profile?: NexusGenInputs['UserProfileUpdateOneWithoutUserInput'] | null; // UserProfileUpdateOneWithoutUserInput
     updatedAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
   }
   UserUpsertWithoutEmailConfirmationInput: { // input type
@@ -626,16 +1899,26 @@ export interface NexusGenInputs {
     create: NexusGenInputs['UserUncheckedCreateWithoutProfileInput']; // UserUncheckedCreateWithoutProfileInput!
     update: NexusGenInputs['UserUncheckedUpdateWithoutProfileInput']; // UserUncheckedUpdateWithoutProfileInput!
   }
+  UserUpsertWithoutProjectMembersipInput: { // input type
+    create: NexusGenInputs['UserUncheckedCreateWithoutProjectMembersipInput']; // UserUncheckedCreateWithoutProjectMembersipInput!
+    update: NexusGenInputs['UserUncheckedUpdateWithoutProjectMembersipInput']; // UserUncheckedUpdateWithoutProjectMembersipInput!
+  }
+  UserUpsertWithoutTeamMembershipsInput: { // input type
+    create: NexusGenInputs['UserUncheckedCreateWithoutTeamMembershipsInput']; // UserUncheckedCreateWithoutTeamMembershipsInput!
+    update: NexusGenInputs['UserUncheckedUpdateWithoutTeamMembershipsInput']; // UserUncheckedUpdateWithoutTeamMembershipsInput!
+  }
   UserWhereInput: { // input type
     AND?: Array<NexusGenInputs['UserWhereInput'] | null> | null; // [UserWhereInput]
     NOT?: Array<NexusGenInputs['UserWhereInput'] | null> | null; // [UserWhereInput]
     OR?: Array<NexusGenInputs['UserWhereInput'] | null> | null; // [UserWhereInput]
+    ProjectMembersip?: NexusGenInputs['ProjectMembersipListRelationFilter'] | null; // ProjectMembersipListRelationFilter
     confirmed?: NexusGenInputs['BoolFilter'] | null; // BoolFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     email?: NexusGenInputs['StringFilter'] | null; // StringFilter
     emailConfirmation?: NexusGenInputs['EmailConfirmationWhereInput'] | null; // EmailConfirmationWhereInput
     id?: NexusGenInputs['StringFilter'] | null; // StringFilter
     profile?: NexusGenInputs['UserProfileWhereInput'] | null; // UserProfileWhereInput
+    teamMemberships?: NexusGenInputs['TeamMembershipListRelationFilter'] | null; // TeamMembershipListRelationFilter
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
   }
   UserWhereUniqueInput: { // input type
@@ -646,9 +1929,15 @@ export interface NexusGenInputs {
 
 export interface NexusGenEnums {
   EmailConfirmationScalarFieldEnum: "createdAt" | "token" | "userId"
+  MembershipStatuses: "ACCEPTED" | "BANNED" | "PENDING"
+  ProjectMembersipScalarFieldEnum: "createdAt" | "id" | "projectId" | "updatedAt" | "userId"
+  ProjectScalarFieldEnum: "createdAt" | "id" | "name" | "teamId" | "updatedAt"
   QueryMode: "default" | "insensitive"
   SortOrder: "asc" | "desc"
-  UserProfileScalarFieldEnum: "firstName" | "id" | "lastName" | "userId"
+  TeamMembershipScalarFieldEnum: "createdAt" | "id" | "role" | "status" | "teamId" | "updatedAt" | "userId"
+  TeamRoles: "ADMIN" | "BILLING" | "MEMBER"
+  TeamScalarFieldEnum: "createdAt" | "id" | "name" | "updatedAt"
+  UserProfileScalarFieldEnum: "createdAt" | "firstName" | "id" | "lastName" | "updatedAt" | "userId"
   UserScalarFieldEnum: "confirmed" | "createdAt" | "email" | "id" | "updatedAt"
 }
 
@@ -668,6 +1957,26 @@ export interface NexusGenObjects {
     count?: NexusGenRootTypes['EmailConfirmationCountAggregateOutputType'] | null; // EmailConfirmationCountAggregateOutputType
     max?: NexusGenRootTypes['EmailConfirmationMaxAggregateOutputType'] | null; // EmailConfirmationMaxAggregateOutputType
     min?: NexusGenRootTypes['EmailConfirmationMinAggregateOutputType'] | null; // EmailConfirmationMinAggregateOutputType
+  }
+  AggregateProject: { // root type
+    count?: NexusGenRootTypes['ProjectCountAggregateOutputType'] | null; // ProjectCountAggregateOutputType
+    max?: NexusGenRootTypes['ProjectMaxAggregateOutputType'] | null; // ProjectMaxAggregateOutputType
+    min?: NexusGenRootTypes['ProjectMinAggregateOutputType'] | null; // ProjectMinAggregateOutputType
+  }
+  AggregateProjectMembersip: { // root type
+    count?: NexusGenRootTypes['ProjectMembersipCountAggregateOutputType'] | null; // ProjectMembersipCountAggregateOutputType
+    max?: NexusGenRootTypes['ProjectMembersipMaxAggregateOutputType'] | null; // ProjectMembersipMaxAggregateOutputType
+    min?: NexusGenRootTypes['ProjectMembersipMinAggregateOutputType'] | null; // ProjectMembersipMinAggregateOutputType
+  }
+  AggregateTeam: { // root type
+    count?: NexusGenRootTypes['TeamCountAggregateOutputType'] | null; // TeamCountAggregateOutputType
+    max?: NexusGenRootTypes['TeamMaxAggregateOutputType'] | null; // TeamMaxAggregateOutputType
+    min?: NexusGenRootTypes['TeamMinAggregateOutputType'] | null; // TeamMinAggregateOutputType
+  }
+  AggregateTeamMembership: { // root type
+    count?: NexusGenRootTypes['TeamMembershipCountAggregateOutputType'] | null; // TeamMembershipCountAggregateOutputType
+    max?: NexusGenRootTypes['TeamMembershipMaxAggregateOutputType'] | null; // TeamMembershipMaxAggregateOutputType
+    min?: NexusGenRootTypes['TeamMembershipMinAggregateOutputType'] | null; // TeamMembershipMinAggregateOutputType
   }
   AggregateUser: { // root type
     count?: NexusGenRootTypes['UserCountAggregateOutputType'] | null; // UserCountAggregateOutputType
@@ -699,9 +2008,123 @@ export interface NexusGenObjects {
     userId?: string | null; // String
   }
   Mutation: {};
+  Project: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // ID!
+    name: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
+  ProjectCountAggregateOutputType: { // root type
+    _all: number; // Int!
+    createdAt: number; // Int!
+    id: number; // Int!
+    name: number; // Int!
+    teamId: number; // Int!
+    updatedAt: number; // Int!
+  }
+  ProjectMaxAggregateOutputType: { // root type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    name?: string | null; // String
+    teamId?: string | null; // String
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  ProjectMembersipCountAggregateOutputType: { // root type
+    _all: number; // Int!
+    createdAt: number; // Int!
+    id: number; // Int!
+    projectId: number; // Int!
+    updatedAt: number; // Int!
+    userId: number; // Int!
+  }
+  ProjectMembersipMaxAggregateOutputType: { // root type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    projectId?: string | null; // String
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    userId?: string | null; // String
+  }
+  ProjectMembersipMinAggregateOutputType: { // root type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    projectId?: string | null; // String
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    userId?: string | null; // String
+  }
+  ProjectMinAggregateOutputType: { // root type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    name?: string | null; // String
+    teamId?: string | null; // String
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
   Query: {};
   SuccessResponse: { // root type
     success: boolean; // Boolean!
+  }
+  Team: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // ID!
+    memberships?: NexusGenRootTypes['TeamMembership'] | null; // TeamMembership
+    name: string; // String!
+    projects?: NexusGenRootTypes['Project'] | null; // Project
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
+  TeamCountAggregateOutputType: { // root type
+    _all: number; // Int!
+    createdAt: number; // Int!
+    id: number; // Int!
+    name: number; // Int!
+    updatedAt: number; // Int!
+  }
+  TeamMaxAggregateOutputType: { // root type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    name?: string | null; // String
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  TeamMembership: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // ID!
+    role: NexusGenEnums['TeamRoles']; // TeamRoles!
+    status: NexusGenEnums['MembershipStatuses']; // MembershipStatuses!
+    team?: NexusGenRootTypes['Team'] | null; // Team
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    user?: NexusGenRootTypes['User'] | null; // User
+  }
+  TeamMembershipCountAggregateOutputType: { // root type
+    _all: number; // Int!
+    createdAt: number; // Int!
+    id: number; // Int!
+    role: number; // Int!
+    status: number; // Int!
+    teamId: number; // Int!
+    updatedAt: number; // Int!
+    userId: number; // Int!
+  }
+  TeamMembershipMaxAggregateOutputType: { // root type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    role?: NexusGenEnums['TeamRoles'] | null; // TeamRoles
+    status?: NexusGenEnums['MembershipStatuses'] | null; // MembershipStatuses
+    teamId?: string | null; // String
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    userId?: string | null; // String
+  }
+  TeamMembershipMinAggregateOutputType: { // root type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    role?: NexusGenEnums['TeamRoles'] | null; // TeamRoles
+    status?: NexusGenEnums['MembershipStatuses'] | null; // MembershipStatuses
+    teamId?: string | null; // String
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    userId?: string | null; // String
+  }
+  TeamMinAggregateOutputType: { // root type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    name?: string | null; // String
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
   User: { // root type
     confirmed: boolean; // Boolean!
@@ -738,21 +2161,27 @@ export interface NexusGenObjects {
   }
   UserProfileCountAggregateOutputType: { // root type
     _all: number; // Int!
+    createdAt: number; // Int!
     firstName: number; // Int!
     id: number; // Int!
     lastName: number; // Int!
+    updatedAt: number; // Int!
     userId: number; // Int!
   }
   UserProfileMaxAggregateOutputType: { // root type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     firstName?: string | null; // String
     id?: string | null; // String
     lastName?: string | null; // String
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     userId?: string | null; // String
   }
   UserProfileMinAggregateOutputType: { // root type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     firstName?: string | null; // String
     id?: string | null; // String
     lastName?: string | null; // String
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
     userId?: string | null; // String
   }
 }
@@ -772,6 +2201,26 @@ export interface NexusGenFieldTypes {
     count: NexusGenRootTypes['EmailConfirmationCountAggregateOutputType'] | null; // EmailConfirmationCountAggregateOutputType
     max: NexusGenRootTypes['EmailConfirmationMaxAggregateOutputType'] | null; // EmailConfirmationMaxAggregateOutputType
     min: NexusGenRootTypes['EmailConfirmationMinAggregateOutputType'] | null; // EmailConfirmationMinAggregateOutputType
+  }
+  AggregateProject: { // field return type
+    count: NexusGenRootTypes['ProjectCountAggregateOutputType'] | null; // ProjectCountAggregateOutputType
+    max: NexusGenRootTypes['ProjectMaxAggregateOutputType'] | null; // ProjectMaxAggregateOutputType
+    min: NexusGenRootTypes['ProjectMinAggregateOutputType'] | null; // ProjectMinAggregateOutputType
+  }
+  AggregateProjectMembersip: { // field return type
+    count: NexusGenRootTypes['ProjectMembersipCountAggregateOutputType'] | null; // ProjectMembersipCountAggregateOutputType
+    max: NexusGenRootTypes['ProjectMembersipMaxAggregateOutputType'] | null; // ProjectMembersipMaxAggregateOutputType
+    min: NexusGenRootTypes['ProjectMembersipMinAggregateOutputType'] | null; // ProjectMembersipMinAggregateOutputType
+  }
+  AggregateTeam: { // field return type
+    count: NexusGenRootTypes['TeamCountAggregateOutputType'] | null; // TeamCountAggregateOutputType
+    max: NexusGenRootTypes['TeamMaxAggregateOutputType'] | null; // TeamMaxAggregateOutputType
+    min: NexusGenRootTypes['TeamMinAggregateOutputType'] | null; // TeamMinAggregateOutputType
+  }
+  AggregateTeamMembership: { // field return type
+    count: NexusGenRootTypes['TeamMembershipCountAggregateOutputType'] | null; // TeamMembershipCountAggregateOutputType
+    max: NexusGenRootTypes['TeamMembershipMaxAggregateOutputType'] | null; // TeamMembershipMaxAggregateOutputType
+    min: NexusGenRootTypes['TeamMembershipMinAggregateOutputType'] | null; // TeamMembershipMinAggregateOutputType
   }
   AggregateUser: { // field return type
     count: NexusGenRootTypes['UserCountAggregateOutputType'] | null; // UserCountAggregateOutputType
@@ -804,16 +2253,134 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     confirmEmail: NexusGenRootTypes['User'] | null; // User
+    createTeam: NexusGenRootTypes['Team']; // Team!
     login: NexusGenRootTypes['User'] | null; // User
     logout: NexusGenRootTypes['SuccessResponse'] | null; // SuccessResponse
     register: NexusGenRootTypes['User'] | null; // User
     requestLogin: NexusGenRootTypes['SuccessResponse'] | null; // SuccessResponse
   }
+  Project: { // field return type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // ID!
+    name: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
+  ProjectCountAggregateOutputType: { // field return type
+    _all: number; // Int!
+    createdAt: number; // Int!
+    id: number; // Int!
+    name: number; // Int!
+    teamId: number; // Int!
+    updatedAt: number; // Int!
+  }
+  ProjectMaxAggregateOutputType: { // field return type
+    createdAt: NexusGenScalars['DateTime'] | null; // DateTime
+    id: string | null; // String
+    name: string | null; // String
+    teamId: string | null; // String
+    updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  ProjectMembersipCountAggregateOutputType: { // field return type
+    _all: number; // Int!
+    createdAt: number; // Int!
+    id: number; // Int!
+    projectId: number; // Int!
+    updatedAt: number; // Int!
+    userId: number; // Int!
+  }
+  ProjectMembersipMaxAggregateOutputType: { // field return type
+    createdAt: NexusGenScalars['DateTime'] | null; // DateTime
+    id: string | null; // String
+    projectId: string | null; // String
+    updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
+    userId: string | null; // String
+  }
+  ProjectMembersipMinAggregateOutputType: { // field return type
+    createdAt: NexusGenScalars['DateTime'] | null; // DateTime
+    id: string | null; // String
+    projectId: string | null; // String
+    updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
+    userId: string | null; // String
+  }
+  ProjectMinAggregateOutputType: { // field return type
+    createdAt: NexusGenScalars['DateTime'] | null; // DateTime
+    id: string | null; // String
+    name: string | null; // String
+    teamId: string | null; // String
+    updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
+  }
   Query: { // field return type
+    listTeamMembersips: Array<NexusGenRootTypes['TeamMembership'] | null>; // [TeamMembership]!
+    listTeams: Array<NexusGenRootTypes['Team'] | null>; // [Team]!
     me: NexusGenRootTypes['User'] | null; // User
+    teamMembership: NexusGenRootTypes['TeamMembership']; // TeamMembership!
   }
   SuccessResponse: { // field return type
     success: boolean; // Boolean!
+  }
+  Team: { // field return type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // ID!
+    memberships: NexusGenRootTypes['TeamMembership'] | null; // TeamMembership
+    name: string; // String!
+    projects: NexusGenRootTypes['Project'] | null; // Project
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
+  TeamCountAggregateOutputType: { // field return type
+    _all: number; // Int!
+    createdAt: number; // Int!
+    id: number; // Int!
+    name: number; // Int!
+    updatedAt: number; // Int!
+  }
+  TeamMaxAggregateOutputType: { // field return type
+    createdAt: NexusGenScalars['DateTime'] | null; // DateTime
+    id: string | null; // String
+    name: string | null; // String
+    updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  TeamMembership: { // field return type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // ID!
+    role: NexusGenEnums['TeamRoles']; // TeamRoles!
+    status: NexusGenEnums['MembershipStatuses']; // MembershipStatuses!
+    team: NexusGenRootTypes['Team'] | null; // Team
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    user: NexusGenRootTypes['User'] | null; // User
+  }
+  TeamMembershipCountAggregateOutputType: { // field return type
+    _all: number; // Int!
+    createdAt: number; // Int!
+    id: number; // Int!
+    role: number; // Int!
+    status: number; // Int!
+    teamId: number; // Int!
+    updatedAt: number; // Int!
+    userId: number; // Int!
+  }
+  TeamMembershipMaxAggregateOutputType: { // field return type
+    createdAt: NexusGenScalars['DateTime'] | null; // DateTime
+    id: string | null; // String
+    role: NexusGenEnums['TeamRoles'] | null; // TeamRoles
+    status: NexusGenEnums['MembershipStatuses'] | null; // MembershipStatuses
+    teamId: string | null; // String
+    updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
+    userId: string | null; // String
+  }
+  TeamMembershipMinAggregateOutputType: { // field return type
+    createdAt: NexusGenScalars['DateTime'] | null; // DateTime
+    id: string | null; // String
+    role: NexusGenEnums['TeamRoles'] | null; // TeamRoles
+    status: NexusGenEnums['MembershipStatuses'] | null; // MembershipStatuses
+    teamId: string | null; // String
+    updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
+    userId: string | null; // String
+  }
+  TeamMinAggregateOutputType: { // field return type
+    createdAt: NexusGenScalars['DateTime'] | null; // DateTime
+    id: string | null; // String
+    name: string | null; // String
+    updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
   }
   User: { // field return type
     confirmed: boolean; // Boolean!
@@ -851,21 +2418,27 @@ export interface NexusGenFieldTypes {
   }
   UserProfileCountAggregateOutputType: { // field return type
     _all: number; // Int!
+    createdAt: number; // Int!
     firstName: number; // Int!
     id: number; // Int!
     lastName: number; // Int!
+    updatedAt: number; // Int!
     userId: number; // Int!
   }
   UserProfileMaxAggregateOutputType: { // field return type
+    createdAt: NexusGenScalars['DateTime'] | null; // DateTime
     firstName: string | null; // String
     id: string | null; // String
     lastName: string | null; // String
+    updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
     userId: string | null; // String
   }
   UserProfileMinAggregateOutputType: { // field return type
+    createdAt: NexusGenScalars['DateTime'] | null; // DateTime
     firstName: string | null; // String
     id: string | null; // String
     lastName: string | null; // String
+    updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
     userId: string | null; // String
   }
 }
@@ -875,6 +2448,26 @@ export interface NexusGenFieldTypeNames {
     count: 'EmailConfirmationCountAggregateOutputType'
     max: 'EmailConfirmationMaxAggregateOutputType'
     min: 'EmailConfirmationMinAggregateOutputType'
+  }
+  AggregateProject: { // field return type name
+    count: 'ProjectCountAggregateOutputType'
+    max: 'ProjectMaxAggregateOutputType'
+    min: 'ProjectMinAggregateOutputType'
+  }
+  AggregateProjectMembersip: { // field return type name
+    count: 'ProjectMembersipCountAggregateOutputType'
+    max: 'ProjectMembersipMaxAggregateOutputType'
+    min: 'ProjectMembersipMinAggregateOutputType'
+  }
+  AggregateTeam: { // field return type name
+    count: 'TeamCountAggregateOutputType'
+    max: 'TeamMaxAggregateOutputType'
+    min: 'TeamMinAggregateOutputType'
+  }
+  AggregateTeamMembership: { // field return type name
+    count: 'TeamMembershipCountAggregateOutputType'
+    max: 'TeamMembershipMaxAggregateOutputType'
+    min: 'TeamMembershipMinAggregateOutputType'
   }
   AggregateUser: { // field return type name
     count: 'UserCountAggregateOutputType'
@@ -907,16 +2500,134 @@ export interface NexusGenFieldTypeNames {
   }
   Mutation: { // field return type name
     confirmEmail: 'User'
+    createTeam: 'Team'
     login: 'User'
     logout: 'SuccessResponse'
     register: 'User'
     requestLogin: 'SuccessResponse'
   }
+  Project: { // field return type name
+    createdAt: 'DateTime'
+    id: 'ID'
+    name: 'String'
+    updatedAt: 'DateTime'
+  }
+  ProjectCountAggregateOutputType: { // field return type name
+    _all: 'Int'
+    createdAt: 'Int'
+    id: 'Int'
+    name: 'Int'
+    teamId: 'Int'
+    updatedAt: 'Int'
+  }
+  ProjectMaxAggregateOutputType: { // field return type name
+    createdAt: 'DateTime'
+    id: 'String'
+    name: 'String'
+    teamId: 'String'
+    updatedAt: 'DateTime'
+  }
+  ProjectMembersipCountAggregateOutputType: { // field return type name
+    _all: 'Int'
+    createdAt: 'Int'
+    id: 'Int'
+    projectId: 'Int'
+    updatedAt: 'Int'
+    userId: 'Int'
+  }
+  ProjectMembersipMaxAggregateOutputType: { // field return type name
+    createdAt: 'DateTime'
+    id: 'String'
+    projectId: 'String'
+    updatedAt: 'DateTime'
+    userId: 'String'
+  }
+  ProjectMembersipMinAggregateOutputType: { // field return type name
+    createdAt: 'DateTime'
+    id: 'String'
+    projectId: 'String'
+    updatedAt: 'DateTime'
+    userId: 'String'
+  }
+  ProjectMinAggregateOutputType: { // field return type name
+    createdAt: 'DateTime'
+    id: 'String'
+    name: 'String'
+    teamId: 'String'
+    updatedAt: 'DateTime'
+  }
   Query: { // field return type name
+    listTeamMembersips: 'TeamMembership'
+    listTeams: 'Team'
     me: 'User'
+    teamMembership: 'TeamMembership'
   }
   SuccessResponse: { // field return type name
     success: 'Boolean'
+  }
+  Team: { // field return type name
+    createdAt: 'DateTime'
+    id: 'ID'
+    memberships: 'TeamMembership'
+    name: 'String'
+    projects: 'Project'
+    updatedAt: 'DateTime'
+  }
+  TeamCountAggregateOutputType: { // field return type name
+    _all: 'Int'
+    createdAt: 'Int'
+    id: 'Int'
+    name: 'Int'
+    updatedAt: 'Int'
+  }
+  TeamMaxAggregateOutputType: { // field return type name
+    createdAt: 'DateTime'
+    id: 'String'
+    name: 'String'
+    updatedAt: 'DateTime'
+  }
+  TeamMembership: { // field return type name
+    createdAt: 'DateTime'
+    id: 'ID'
+    role: 'TeamRoles'
+    status: 'MembershipStatuses'
+    team: 'Team'
+    updatedAt: 'DateTime'
+    user: 'User'
+  }
+  TeamMembershipCountAggregateOutputType: { // field return type name
+    _all: 'Int'
+    createdAt: 'Int'
+    id: 'Int'
+    role: 'Int'
+    status: 'Int'
+    teamId: 'Int'
+    updatedAt: 'Int'
+    userId: 'Int'
+  }
+  TeamMembershipMaxAggregateOutputType: { // field return type name
+    createdAt: 'DateTime'
+    id: 'String'
+    role: 'TeamRoles'
+    status: 'MembershipStatuses'
+    teamId: 'String'
+    updatedAt: 'DateTime'
+    userId: 'String'
+  }
+  TeamMembershipMinAggregateOutputType: { // field return type name
+    createdAt: 'DateTime'
+    id: 'String'
+    role: 'TeamRoles'
+    status: 'MembershipStatuses'
+    teamId: 'String'
+    updatedAt: 'DateTime'
+    userId: 'String'
+  }
+  TeamMinAggregateOutputType: { // field return type name
+    createdAt: 'DateTime'
+    id: 'String'
+    name: 'String'
+    updatedAt: 'DateTime'
   }
   User: { // field return type name
     confirmed: 'Boolean'
@@ -954,21 +2665,27 @@ export interface NexusGenFieldTypeNames {
   }
   UserProfileCountAggregateOutputType: { // field return type name
     _all: 'Int'
+    createdAt: 'Int'
     firstName: 'Int'
     id: 'Int'
     lastName: 'Int'
+    updatedAt: 'Int'
     userId: 'Int'
   }
   UserProfileMaxAggregateOutputType: { // field return type name
+    createdAt: 'DateTime'
     firstName: 'String'
     id: 'String'
     lastName: 'String'
+    updatedAt: 'DateTime'
     userId: 'String'
   }
   UserProfileMinAggregateOutputType: { // field return type name
+    createdAt: 'DateTime'
     firstName: 'String'
     id: 'String'
     lastName: 'String'
+    updatedAt: 'DateTime'
     userId: 'String'
   }
 }
@@ -978,6 +2695,9 @@ export interface NexusGenArgTypes {
     confirmEmail: { // args
       email: string; // String!
       token: string; // String!
+    }
+    createTeam: { // args
+      name: string; // String!
     }
     login: { // args
       code: string; // String!
@@ -990,6 +2710,11 @@ export interface NexusGenArgTypes {
     }
     requestLogin: { // args
       email: string; // String!
+    }
+  }
+  Query: {
+    teamMembership: { // args
+      id: string; // String!
     }
   }
 }
