@@ -31,6 +31,7 @@ gql`
 
 const client = createClient({
   url: "/graphql",
+  requestPolicy: "cache-and-network",
   exchanges: [devtoolsExchange, dedupExchange, graphcache, fetchExchange],
   fetchOptions: {
     credentials: "include",
