@@ -6,9 +6,9 @@ const schema = (introspectedSchema as unknown) as IntrospectionData;
 
 export const graphcache = cacheExchange({
   schema,
-  // resolvers: {
-  //   Query: {
-  //     team: (_, args: { id: string }) => ({ __typename: "Team", ...args }),
-  //   },
-  // },
+  resolvers: {
+    Query: {
+      team: (_, args: { id: string }) => ({ __typename: "Team", ...args }),
+    },
+  },
 });
