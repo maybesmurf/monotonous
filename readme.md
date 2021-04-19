@@ -10,17 +10,9 @@ A typescript monorepo template to create organized, flexible apps.
 - `mercurius`
 - `nexus`
 - `prisma`
-- `paljs`
 
 ### Web
 
 - `next`
 - `tailwind`
 - `urql`
-
-## Todo
-
-- [ ] Base resolvers
-- [ ] Passwordless authentication
-- [ ] Authorization rules
-- [ ] Basic Stripe integration

@@ -1,7 +1,6 @@
 import { resolve } from "path";
 import { makeSchema } from "nexus";
 import { allow, nexusShield } from "nexus-shield";
-import { paljs } from "@paljs/nexus";
 import { config } from "@monotonous/conf";
 
 import * as MiscResponses from "./misc_types";
@@ -12,7 +11,6 @@ export const schema = makeSchema({
   types: [MiscResponses, Models, Services],
 
   plugins: [
-    paljs(),
     nexusShield({
       defaultError: new Error("Not allowed"),
       defaultRule: allow,
