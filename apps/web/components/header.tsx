@@ -26,7 +26,12 @@ export const Header = () => {
 
       <nav className="ml-auto space-x-3">
         {loggedIn ? (
-          <button onClick={handleLogout}>Logout</button>
+          <>
+            <Link href="/teams">
+              <a>Teams</a>
+            </Link>
+            <button onClick={handleLogout}>Logout</button>
+          </>
         ) : (
           <>
             <Link href="/signup">

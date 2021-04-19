@@ -20,9 +20,12 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      await requestLogin({ email });
-      setAttemptsLeft(3);
-      setShowCode(true);
+      const { error } = await requestLogin({ email });
+
+      if (!error) {
+        setAttemptsLeft(3);
+        setShowCode(true);
+      }
     } catch (e) {
       console.error(e);
     }

@@ -2054,6 +2054,13 @@ export interface NexusGenObjects {
     teamId?: string | null; // String
     updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
+  ProjectMembership: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // ID!
+    name: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    user?: NexusGenRootTypes['User'] | null; // User
+  }
   ProjectMembersipCountAggregateOutputType: { // root type
     _all: number; // Int!
     createdAt: number; // Int!
@@ -2278,6 +2285,7 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     confirmEmail: NexusGenRootTypes['User'] | null; // User
+    createProject: NexusGenRootTypes['Project']; // Project!
     createTeam: NexusGenRootTypes['Team']; // Team!
     login: NexusGenRootTypes['User'] | null; // User
     logout: NexusGenRootTypes['SuccessResponse'] | null; // SuccessResponse
@@ -2309,6 +2317,13 @@ export interface NexusGenFieldTypes {
     name: string | null; // String
     teamId: string | null; // String
     updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
+  }
+  ProjectMembership: { // field return type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // ID!
+    name: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    user: NexusGenRootTypes['User'] | null; // User
   }
   ProjectMembersipCountAggregateOutputType: { // field return type
     _all: number; // Int!
@@ -2531,6 +2546,7 @@ export interface NexusGenFieldTypeNames {
   }
   Mutation: { // field return type name
     confirmEmail: 'User'
+    createProject: 'Project'
     createTeam: 'Team'
     login: 'User'
     logout: 'SuccessResponse'
@@ -2562,6 +2578,13 @@ export interface NexusGenFieldTypeNames {
     name: 'String'
     teamId: 'String'
     updatedAt: 'DateTime'
+  }
+  ProjectMembership: { // field return type name
+    createdAt: 'DateTime'
+    id: 'ID'
+    name: 'String'
+    updatedAt: 'DateTime'
+    user: 'User'
   }
   ProjectMembersipCountAggregateOutputType: { // field return type name
     _all: 'Int'
@@ -2732,6 +2755,10 @@ export interface NexusGenArgTypes {
     confirmEmail: { // args
       email: string; // String!
       token: string; // String!
+    }
+    createProject: { // args
+      name: string; // String!
+      teamId: string; // ID!
     }
     createTeam: { // args
       name: string; // String!

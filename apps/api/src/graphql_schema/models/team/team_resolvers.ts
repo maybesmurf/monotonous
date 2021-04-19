@@ -50,9 +50,16 @@ export const getTeam: FieldResolver<"Query", "team"> = async (
 export const listTeams: FieldResolver<"Query", "listTeams"> = async (
   _root,
   { cursor, take, skip },
-  { prisma }
+  { currentUser, prisma }
 ) => {
   return prisma.team.findMany({
+    where: {
+      memberships: {
+        some: {
+          userId: { equals: currentUser?.id },
+        },
+      },
+    },
     cursor: cursor ? { id: cursor } : undefined,
     take: take ?? 10,
     skip: skip ?? 0,

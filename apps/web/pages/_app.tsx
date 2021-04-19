@@ -28,7 +28,13 @@ const schema = (introspectedSchema as unknown) as IntrospectionData;
 
 const client = createClient({
   url: "/graphql",
-  exchanges: [devtoolsExchange, cacheExchange({ schema }), ...defaultExchanges],
+  exchanges: [
+    devtoolsExchange,
+    cacheExchange({
+      schema,
+    }),
+    ...defaultExchanges,
+  ],
 });
 
 export default function App({ Component, pageProps }) {
