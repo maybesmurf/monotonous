@@ -17,4 +17,3 @@ generates:
       - "introspection"
     config:
       minify: true
-      nonOptionalTypename: true

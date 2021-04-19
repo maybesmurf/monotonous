@@ -2,12 +2,14 @@ import React, { FormEvent, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { gql } from "@urql/core";
-import { useCreateTeamMutation, useListTeamsQuery } from "graphql_client";
+import { useCreateTeamMutation, useTeamIndexQuery } from "graphql_client";
 
 gql`
-  query ListTeams {
+  query TeamIndex {
     listTeams {
       id
+      createdAt
+      updatedAt
       name
     }
   }
@@ -15,16 +17,14 @@ gql`
 
 export default function TeamIndex() {
   const router = useRouter();
-  const [{ data, fetching }] = useListTeamsQuery();
+  const [{ data, fetching }] = useTeamIndexQuery();
   const [createMeta, createTeam] = useCreateTeamMutation();
   const [name, setName] = useState("");
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
-    if (!name) {
-      return;
-    }
+    if (!name) return;
 
     try {
       const { data } = await createTeam({ name });
@@ -47,7 +47,7 @@ export default function TeamIndex() {
         <h1>Teams</h1>
 
         {data && data.listTeams.length > 0 && (
-          <ul>
+          <ul className="list-decimal">
             {data.listTeams.map((team) => {
               return (
                 <li key={team.id}>

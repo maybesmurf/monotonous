@@ -1,16 +1,21 @@
 import "../styles/index.css";
 import { useEffect } from "react";
-import { gql, createClient, defaultExchanges, Provider } from "urql";
+import {
+  gql,
+  createClient,
+  defaultExchanges,
+  Provider,
+  dedupExchange,
+  fetchExchange,
+} from "urql";
 import { devtoolsExchange } from "@urql/devtools";
-import { cacheExchange } from "@urql/exchange-graphcache";
-import { IntrospectionData } from "@urql/exchange-graphcache/dist/types/ast";
 import shallow from "zustand/shallow";
 
 import { Header } from "components/header";
 import { Footer } from "components/footer";
 import { useMeQuery } from "graphql_client";
 import { useAuth } from "hooks/use_auth";
-import introspectedSchema from "schema_introspection.json";
+import { graphcache } from "lib/graphcache";
 
 gql`
   query Me {
@@ -24,17 +29,12 @@ gql`
   }
 `;
 
-const schema = (introspectedSchema as unknown) as IntrospectionData;
-
 const client = createClient({
   url: "/graphql",
-  exchanges: [
-    devtoolsExchange,
-    cacheExchange({
-      schema,
-    }),
-    ...defaultExchanges,
-  ],
+  exchanges: [devtoolsExchange, dedupExchange, graphcache, fetchExchange],
+  fetchOptions: {
+    credentials: "include",
+  },
 });
 
 export default function App({ Component, pageProps }) {

@@ -2766,31 +2766,6 @@ export type CreateTeamMutation = (
   ) }
 );
 
-export type TeamQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-
-export type TeamQuery = (
-  { __typename: 'Query' }
-  & { team: (
-    { __typename: 'Team' }
-    & Pick<Team, 'id' | 'createdAt' | 'updatedAt' | 'name'>
-    & { memberships?: Maybe<(
-      { __typename: 'TeamMembership' }
-      & Pick<TeamMembership, 'id'>
-      & { user?: Maybe<(
-        { __typename: 'User' }
-        & Pick<User, 'id'>
-        & { profile?: Maybe<(
-          { __typename: 'UserProfile' }
-          & Pick<UserProfile, 'id' | 'firstName' | 'lastName'>
-        )> }
-      )> }
-    )> }
-  ) }
-);
-
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2806,14 +2781,39 @@ export type MeQuery = (
   )> }
 );
 
-export type ListTeamsQueryVariables = Exact<{ [key: string]: never; }>;
+export type TeamShowQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
 
 
-export type ListTeamsQuery = (
+export type TeamShowQuery = (
+  { __typename: 'Query' }
+  & { team: (
+    { __typename: 'Team' }
+    & Pick<Team, 'id' | 'createdAt' | 'updatedAt' | 'name'>
+    & { memberships?: Maybe<(
+      { __typename: 'TeamMembership' }
+      & Pick<TeamMembership, 'id' | 'role' | 'status'>
+      & { user?: Maybe<(
+        { __typename: 'User' }
+        & Pick<User, 'id'>
+        & { profile?: Maybe<(
+          { __typename: 'UserProfile' }
+          & Pick<UserProfile, 'id' | 'firstName' | 'lastName'>
+        )> }
+      )> }
+    )> }
+  ) }
+);
+
+export type TeamIndexQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TeamIndexQuery = (
   { __typename: 'Query' }
   & { listTeams: Array<Maybe<(
     { __typename: 'Team' }
-    & Pick<Team, 'id' | 'name'>
+    & Pick<Team, 'id' | 'createdAt' | 'updatedAt' | 'name'>
   )>> }
 );
 
@@ -2920,31 +2920,6 @@ export const CreateTeamDocument = gql`
 export function useCreateTeamMutation() {
   return Urql.useMutation<CreateTeamMutation, CreateTeamMutationVariables>(CreateTeamDocument);
 };
-export const TeamDocument = gql`
-    query Team($id: ID!) {
-  team(id: $id) {
-    id
-    createdAt
-    updatedAt
-    name
-    memberships {
-      id
-      user {
-        id
-        profile {
-          id
-          firstName
-          lastName
-        }
-      }
-    }
-  }
-}
-    `;
-
-export function useTeamQuery(options: Omit<Urql.UseQueryArgs<TeamQueryVariables>, 'query'> = {}) {
-  return Urql.useQuery<TeamQuery>({ query: TeamDocument, ...options });
-};
 export const MeDocument = gql`
     query Me {
   me {
@@ -2960,15 +2935,44 @@ export const MeDocument = gql`
 export function useMeQuery(options: Omit<Urql.UseQueryArgs<MeQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<MeQuery>({ query: MeDocument, ...options });
 };
-export const ListTeamsDocument = gql`
-    query ListTeams {
+export const TeamShowDocument = gql`
+    query TeamShow($id: ID!) {
+  team(id: $id) {
+    id
+    createdAt
+    updatedAt
+    name
+    memberships {
+      id
+      role
+      status
+      user {
+        id
+        profile {
+          id
+          firstName
+          lastName
+        }
+      }
+    }
+  }
+}
+    `;
+
+export function useTeamShowQuery(options: Omit<Urql.UseQueryArgs<TeamShowQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<TeamShowQuery>({ query: TeamShowDocument, ...options });
+};
+export const TeamIndexDocument = gql`
+    query TeamIndex {
   listTeams {
     id
+    createdAt
+    updatedAt
     name
   }
 }
     `;
 
-export function useListTeamsQuery(options: Omit<Urql.UseQueryArgs<ListTeamsQueryVariables>, 'query'> = {}) {
-  return Urql.useQuery<ListTeamsQuery>({ query: ListTeamsDocument, ...options });
+export function useTeamIndexQuery(options: Omit<Urql.UseQueryArgs<TeamIndexQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<TeamIndexQuery>({ query: TeamIndexDocument, ...options });
 };

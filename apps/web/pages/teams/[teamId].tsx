@@ -1,11 +1,36 @@
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { useCreateProjectMutation, useTeamQuery } from "graphql_client";
+import { useCreateProjectMutation, useTeamShowQuery } from "graphql_client";
+import { gql } from "@urql/core";
+
+gql`
+  query TeamShow($id: ID!) {
+    team(id: $id) {
+      id
+      createdAt
+      updatedAt
+      name
+      memberships {
+        id
+        role
+        status
+        user {
+          id
+          profile {
+            id
+            firstName
+            lastName
+          }
+        }
+      }
+    }
+  }
+`;
 
 export default function TeamShow() {
   const router = useRouter();
   const { teamId } = router.query as { teamId: string };
-  const [{ data }, getTeam] = useTeamQuery({
+  const [{ data }, getTeam] = useTeamShowQuery({
     requestPolicy: "cache-and-network",
     variables: { id: teamId },
     pause: !teamId,
@@ -30,7 +55,7 @@ export default function TeamShow() {
   return (
     <div className="container flex">
       <div className="w-2/3">
-        <h1>{data?.team.name}</h1>
+        <h1>{data?.team?.name}</h1>
       </div>
       <form className="flex-1" onSubmit={handleSubmit}>
         <h2 className="text-sm mb-10">Create Project</h2>
