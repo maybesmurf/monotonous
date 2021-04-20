@@ -1,30 +1,26 @@
-import { Team, TeamMembership, User } from "@prisma/client";
+import { TeamMembership } from "@prisma/client";
 import { Loader } from "mercurius";
 import { Context } from "../../custom_context";
 
-const user: Loader<TeamMembership, {}, Context> = async (
-  queries,
-  { prisma }
-) => {
-  return prisma.user.findMany({
-    where: {
-      id: { in: queries.map((query) => query.obj.userId) },
-    },
-  });
+type TeamMembershipLoader = {
+  user: Loader<TeamMembership, {}, Context>;
+  team: Loader<TeamMembership, {}, Context>;
 };
 
-const team: Loader<TeamMembership, {}, Context> = async (
-  queries,
-  { prisma }
-) => {
-  return prisma.team.findMany({
-    where: {
-      id: { in: queries.map((query) => query.obj.teamId) },
-    },
-  });
-};
+export const TeamMembershipLoader: TeamMembershipLoader = {
+  user: async (queries, { prisma }) => {
+    return prisma.user.findMany({
+      where: {
+        id: { in: queries.map((query) => query.obj.userId) },
+      },
+    });
+  },
 
-export const TeamMembershipLoader = {
-  user,
-  team,
+  team: async (queries, { prisma }) => {
+    return prisma.team.findMany({
+      where: {
+        id: { in: queries.map((query) => query.obj.teamId) },
+      },
+    });
+  },
 };

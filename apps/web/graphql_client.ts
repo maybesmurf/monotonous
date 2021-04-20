@@ -281,13 +281,13 @@ export type CreateTeamMutation = (
     & Pick<Team, 'id' | 'createdAt' | 'updatedAt' | 'name'>
     & { memberships?: Maybe<Array<Maybe<(
       { __typename: 'TeamMembership' }
-      & Pick<TeamMembership, 'id'>
+      & Pick<TeamMembership, 'id' | 'role' | 'status'>
       & { user?: Maybe<(
         { __typename: 'User' }
         & Pick<User, 'id'>
         & { profile?: Maybe<(
           { __typename: 'UserProfile' }
-          & Pick<UserProfile, 'id' | 'firstName' | 'lastName'>
+          & Pick<UserProfile, 'id' | 'fullName'>
         )> }
       )> }
     )>>> }
@@ -435,12 +435,13 @@ export const CreateTeamDocument = gql`
     name
     memberships {
       id
+      role
+      status
       user {
         id
         profile {
           id
-          firstName
-          lastName
+          fullName
         }
       }
     }

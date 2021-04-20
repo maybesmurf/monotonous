@@ -2,31 +2,27 @@ import { Team } from "@prisma/client";
 import { Loader } from "mercurius";
 import { Context } from "../../custom_context";
 
-const memberships: Loader<Team, {}, Context> = async (queries, { prisma }) => {
-  return [
-    await prisma.teamMembership.findMany({
-      where: {
-        team: {
-          id: { in: queries.map((query) => query.obj.id) },
-        },
-      },
-    }),
-  ];
+type TeamLoader = {
+  memberships: Loader<Team, {}, Context>;
+  projects: Loader<Team, {}, Context>;
 };
 
-const projects: Loader<Team, {}, Context> = async (queries, { prisma }) => {
-  return [
-    await prisma.project.findMany({
-      where: {
-        team: {
-          id: { in: queries.map((query) => query.obj.id) },
-        },
-      },
-    }),
-  ];
-};
+export const TeamLoader: TeamLoader = {
+  memberships: async (queries, { prisma }) => {
+    const ids = queries.map((q) => q.obj.id);
+    const records = await prisma.teamMembership.findMany({
+      where: { team: { id: { in: ids } } },
+    });
 
-export const TeamLoader = {
-  memberships,
-  projects,
+    return queries.map((q) => records.filter((r) => r.teamId === q.obj.id));
+  },
+
+  projects: async (queries, { prisma }) => {
+    const ids = queries.map((q) => q.obj.id);
+    const records = await prisma.project.findMany({
+      where: { team: { id: { in: ids } } },
+    });
+
+    return queries.map((q) => records.filter((r) => r.teamId === q.obj.id));
+  },
 };

@@ -6,12 +6,13 @@ mutation CreateTeam($name: String!) {
     name
     memberships {
       id
+      role
+      status
       user {
         id
         profile {
           id
-          firstName
-          lastName
+          fullName
         }
       }
     }
