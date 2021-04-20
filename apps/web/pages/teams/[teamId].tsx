@@ -50,6 +50,7 @@ export default function TeamShow() {
 
     try {
       await createProject({ teamId, name });
+      setName("");
     } catch (e) {
       console.log(e);
     }

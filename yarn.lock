@@ -1888,7 +1888,7 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@urql/core@>=2.0.0", "@urql/core@^2.0.0":
+"@urql/core@>=1.14.0", "@urql/core@>=2.0.0", "@urql/core@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@urql/core/-/core-2.0.0.tgz#b4936dd51fe84cb570506d9ee2579149689f7535"
   integrity sha512-Qj24CG8ullqZZsYmjrSH0JhH+nY7kj8GbVbA9si3KUjlYs75A/MBQU3i97j6oWyGldDBapyis2CfaQeXKbv8rA==
@@ -1909,6 +1909,14 @@
   integrity sha512-UuLyR2tuy28KFmcMzD0aU3hWEa62H8Yfo9rBVAaXPxvGUD8g0Bq3NXUGLBvXxKMZcodn7AjYeVBlfPCHth9awA==
   dependencies:
     "@urql/core" ">=2.0.0"
+    wonka "^4.0.14"
+
+"@urql/exchange-populate@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@urql/exchange-populate/-/exchange-populate-0.2.1.tgz#be337512fdbc084d4d315097646d841cb4730b48"
+  integrity sha512-VsTv75TPUps/UJumc0juCkED7OzNtqN1Xe1Zv1gsgiqRB/aRvZZwqYmkXe5y153Ap5HHEw+bwaFsfjhT5Dd2mg==
+  dependencies:
+    "@urql/core" ">=1.14.0"
     wonka "^4.0.14"
 
 "@webassemblyjs/ast@1.11.0":

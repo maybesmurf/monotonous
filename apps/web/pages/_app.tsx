@@ -3,19 +3,19 @@ import { useEffect } from "react";
 import {
   gql,
   createClient,
-  defaultExchanges,
   Provider,
   dedupExchange,
   fetchExchange,
 } from "urql";
 import { devtoolsExchange } from "@urql/devtools";
+import { populateExchange } from "@urql/exchange-populate";
 import shallow from "zustand/shallow";
 
 import { Header } from "components/header";
 import { Footer } from "components/footer";
 import { useMeQuery } from "graphql_client";
 import { useAuth } from "hooks/use_auth";
-import { graphcache } from "lib/graphcache";
+import { graphcache } from "lib/cache_exchange";
 
 gql`
   query Me {
