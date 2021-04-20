@@ -43,6 +43,8 @@ export function createServer(params: { prisma: PrismaClient; logger: Logger }) {
     schema,
     loaders,
     graphiql: process.env.NODE_ENV !== "production" ? "playground" : false,
+    jit: 1,
+    cache: true,
   });
 
   server.addHook("onClose", async (_instance, done) => {
