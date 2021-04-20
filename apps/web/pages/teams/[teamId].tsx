@@ -10,6 +10,10 @@ gql`
       createdAt
       updatedAt
       name
+      projects {
+        id
+        name
+      }
       memberships {
         id
         role
@@ -18,8 +22,7 @@ gql`
           id
           profile {
             id
-            firstName
-            lastName
+            fullName
           }
         }
       }
@@ -55,7 +58,37 @@ export default function TeamShow() {
   return (
     <div className="container flex">
       <div className="w-2/3">
-        <h1>{data?.team?.name}</h1>
+        <h1 className="text-2xl mb-10">{data?.team?.name}</h1>
+
+        {data?.team?.projects && (
+          <div className="mt-10">
+            <h2 className="font-bold">Projects</h2>
+            <ul>
+              {data.team.projects.map((project) => {
+                return (
+                  <li key={project.id}>
+                    <h3>{project.name}</h3>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+
+        {data?.team?.memberships && (
+          <div className="mt-10">
+            <h2 className="font-bold">Team Members</h2>
+            <ul>
+              {data.team.memberships.map((membership) => {
+                return (
+                  <li key={membership.id}>
+                    <p>{membership.user?.profile.fullName}</p>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
       </div>
       <form className="flex-1" onSubmit={handleSubmit}>
         <h2 className="text-sm mb-10">Create Project</h2>

@@ -1,4 +1,4 @@
-import { extendType, idArg, nonNull, objectType, stringArg } from "nexus";
+import { extendType, idArg, list, nonNull, objectType, stringArg } from "nexus";
 import * as resolvers from "./project_resolvers";
 
 export const Project = objectType({
@@ -8,7 +8,7 @@ export const Project = objectType({
     t.nonNull.date("createdAt");
     t.nonNull.date("updatedAt");
     t.nonNull.string("name");
-    // t.field('memberships', { type: 'ProjectMembership' })
+    t.field("memberships", { type: list("ProjectMembership") });
   },
 });
 

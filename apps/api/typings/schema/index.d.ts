@@ -62,6 +62,7 @@ export interface NexusGenObjects {
   Project: { // root type
     createdAt: NexusGenScalars['Date']; // Date!
     id: string; // ID!
+    memberships?: Array<NexusGenRootTypes['ProjectMembership'] | null> | null; // [ProjectMembership]
     name: string; // String!
     updatedAt: NexusGenScalars['Date']; // Date!
   }
@@ -79,9 +80,9 @@ export interface NexusGenObjects {
   Team: { // root type
     createdAt: NexusGenScalars['Date']; // Date!
     id: string; // ID!
-    memberships?: NexusGenRootTypes['TeamMembership'] | null; // TeamMembership
+    memberships?: Array<NexusGenRootTypes['TeamMembership'] | null> | null; // [TeamMembership]
     name: string; // String!
-    projects?: NexusGenRootTypes['Project'] | null; // Project
+    projects?: Array<NexusGenRootTypes['Project'] | null> | null; // [Project]
     updatedAt: NexusGenScalars['Date']; // Date!
   }
   TeamMembership: { // root type
@@ -134,6 +135,7 @@ export interface NexusGenFieldTypes {
   Project: { // field return type
     createdAt: NexusGenScalars['Date']; // Date!
     id: string; // ID!
+    memberships: Array<NexusGenRootTypes['ProjectMembership'] | null> | null; // [ProjectMembership]
     name: string; // String!
     updatedAt: NexusGenScalars['Date']; // Date!
   }
@@ -157,9 +159,9 @@ export interface NexusGenFieldTypes {
   Team: { // field return type
     createdAt: NexusGenScalars['Date']; // Date!
     id: string; // ID!
-    memberships: NexusGenRootTypes['TeamMembership'] | null; // TeamMembership
+    memberships: Array<NexusGenRootTypes['TeamMembership'] | null> | null; // [TeamMembership]
     name: string; // String!
-    projects: NexusGenRootTypes['Project'] | null; // Project
+    projects: Array<NexusGenRootTypes['Project'] | null> | null; // [Project]
     updatedAt: NexusGenScalars['Date']; // Date!
   }
   TeamMembership: { // field return type
@@ -203,6 +205,7 @@ export interface NexusGenFieldTypeNames {
   Project: { // field return type name
     createdAt: 'Date'
     id: 'ID'
+    memberships: 'ProjectMembership'
     name: 'String'
     updatedAt: 'Date'
   }

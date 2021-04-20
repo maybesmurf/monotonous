@@ -13,7 +13,6 @@ export const graphcache = cacheExchange({
   resolvers: {
     Query: {
       team: resolveId("Team"),
-      project: resolveId("Project"),
     },
   },
 });

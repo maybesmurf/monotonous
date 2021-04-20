@@ -8,8 +8,8 @@ export const Team = objectType({
     t.nonNull.date("createdAt");
     t.nonNull.date("updatedAt");
     t.nonNull.string("name");
-    t.field("memberships", { type: "TeamMembership" });
-    t.field("projects", { type: "Project" });
+    t.field("memberships", { type: list("TeamMembership") });
+    t.field("projects", { type: list("Project") });
   },
 });
 

@@ -32,6 +32,7 @@ type PaginationParams {
 type Project {
   createdAt: Date!
   id: ID!
+  memberships: [ProjectMembership]
   name: String!
   updatedAt: Date!
 }
@@ -71,9 +72,9 @@ type SuccessResponse {
 type Team {
   createdAt: Date!
   id: ID!
-  memberships: TeamMembership
+  memberships: [TeamMembership]
   name: String!
-  projects: Project
+  projects: [Project]
   updatedAt: Date!
 }
 

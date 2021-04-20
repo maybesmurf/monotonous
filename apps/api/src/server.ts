@@ -42,11 +42,7 @@ export function createServer(params: { prisma: PrismaClient; logger: Logger }) {
     },
     schema,
     loaders,
-    persistedQueryProvider: merc.persistedQueryDefaults.automatic(5000),
-    allowBatchedQueries: true,
-    subscription: true,
     graphiql: process.env.NODE_ENV !== "production" ? "playground" : false,
-    jit: 1,
   });
 
   server.addHook("onClose", async (_instance, done) => {

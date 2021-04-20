@@ -80,6 +80,7 @@ export type Project = {
   __typename: 'Project';
   createdAt: Scalars['Date'];
   id: Scalars['ID'];
+  memberships?: Maybe<Array<Maybe<ProjectMembership>>>;
   name: Scalars['String'];
   updatedAt: Scalars['Date'];
 };
@@ -140,9 +141,9 @@ export type Team = {
   __typename: 'Team';
   createdAt: Scalars['Date'];
   id: Scalars['ID'];
-  memberships?: Maybe<TeamMembership>;
+  memberships?: Maybe<Array<Maybe<TeamMembership>>>;
   name: Scalars['String'];
-  projects?: Maybe<Project>;
+  projects?: Maybe<Array<Maybe<Project>>>;
   updatedAt: Scalars['Date'];
 };
 
@@ -278,7 +279,7 @@ export type CreateTeamMutation = (
   & { createTeam: (
     { __typename: 'Team' }
     & Pick<Team, 'id' | 'createdAt' | 'updatedAt' | 'name'>
-    & { memberships?: Maybe<(
+    & { memberships?: Maybe<Array<Maybe<(
       { __typename: 'TeamMembership' }
       & Pick<TeamMembership, 'id'>
       & { user?: Maybe<(
@@ -289,7 +290,7 @@ export type CreateTeamMutation = (
           & Pick<UserProfile, 'id' | 'firstName' | 'lastName'>
         )> }
       )> }
-    )> }
+    )>>> }
   ) }
 );
 
@@ -318,7 +319,10 @@ export type TeamShowQuery = (
   & { team: (
     { __typename: 'Team' }
     & Pick<Team, 'id' | 'createdAt' | 'updatedAt' | 'name'>
-    & { memberships?: Maybe<(
+    & { projects?: Maybe<Array<Maybe<(
+      { __typename: 'Project' }
+      & Pick<Project, 'id' | 'name'>
+    )>>>, memberships?: Maybe<Array<Maybe<(
       { __typename: 'TeamMembership' }
       & Pick<TeamMembership, 'id' | 'role' | 'status'>
       & { user?: Maybe<(
@@ -326,10 +330,10 @@ export type TeamShowQuery = (
         & Pick<User, 'id'>
         & { profile?: Maybe<(
           { __typename: 'UserProfile' }
-          & Pick<UserProfile, 'id' | 'firstName' | 'lastName'>
+          & Pick<UserProfile, 'id' | 'fullName'>
         )> }
       )> }
-    )> }
+    )>>> }
   ) }
 );
 
@@ -469,6 +473,10 @@ export const TeamShowDocument = gql`
     createdAt
     updatedAt
     name
+    projects {
+      id
+      name
+    }
     memberships {
       id
       role
@@ -477,8 +485,7 @@ export const TeamShowDocument = gql`
         id
         profile {
           id
-          firstName
-          lastName
+          fullName
         }
       }
     }

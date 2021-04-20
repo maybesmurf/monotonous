@@ -8,7 +8,7 @@ import { FieldResolver } from "nexus";
 export const createTeam: FieldResolver<"Mutation", "createTeam"> = async (
   _root,
   { name },
-  { currentUser, prisma, GqlError }
+  { select, currentUser, prisma, GqlError }
 ) => {
   if (!currentUser) {
     throw GqlError("Unauthorized");
@@ -35,10 +35,17 @@ export const createTeam: FieldResolver<"Mutation", "createTeam"> = async (
 export const getTeam: FieldResolver<"Query", "team"> = async (
   _root,
   { id },
-  { prisma }
+  { currentUser, prisma }
 ) => {
   return prisma.team.findFirst({
-    where: { id },
+    where: {
+      id,
+      memberships: {
+        some: {
+          userId: { equals: currentUser?.id },
+        },
+      },
+    },
     rejectOnNotFound: true,
   });
 };
