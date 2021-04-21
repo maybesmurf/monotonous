@@ -19,3 +19,14 @@ export const createProject: FieldResolver<"Mutation", "createProject"> = async (
     },
   });
 };
+
+export const getProject: FieldResolver<"Query", "getProject"> = async (
+  _root,
+  { id },
+  { prisma }
+) => {
+  return prisma.project.findFirst({
+    where: { id },
+    rejectOnNotFound: true,
+  });
+};

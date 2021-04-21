@@ -9,7 +9,7 @@ type ProjectLoader = {
 export const ProjectLoader: ProjectLoader = {
   memberships: async (queries, { prisma }) => {
     const ids = queries.map((q) => q.obj.id);
-    const records = await prisma.projectMembersip.findMany({
+    const records = await prisma.projectMembership.findMany({
       where: { project: { id: { in: ids } } },
     });
 

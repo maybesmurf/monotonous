@@ -2,6 +2,7 @@ import { Job, Queue, Worker } from "bullmq";
 import {
   EmailDispatcher,
   ISendEmailConfirmation,
+  ISendInviteLink,
   ISendLoginLink,
 } from "@monotonous/email";
 import { logger } from "../lib/logger";
@@ -11,12 +12,16 @@ const queue = new Queue(queueName);
 
 const JobNames = {
   EMAIL_CONFIRMATION: "email_confirmation",
+  INVITE_LINK: "invite_link",
   LOGIN_LINK: "login_link",
 };
 
 const jobs = {
   [JobNames.EMAIL_CONFIRMATION]: async (job: Job<ISendEmailConfirmation>) => {
     await EmailDispatcher.sendEmailConfirmation(job.data);
+  },
+  [JobNames.INVITE_LINK]: async (job: Job<ISendInviteLink>) => {
+    await EmailDispatcher.sendInviteLink(job.data);
   },
   [JobNames.LOGIN_LINK]: async (job: Job<ISendLoginLink>) => {
     await EmailDispatcher.sendLoginLink(job.data);
@@ -45,6 +50,14 @@ export function initWorker() {
 export async function queueEmailConfirmation(data: ISendEmailConfirmation) {
   logger.debug({ emailName: JobNames.EMAIL_CONFIRMATION, data });
   await queue.add(JobNames.EMAIL_CONFIRMATION, data);
+}
+/**
+ * @name queueInviteLink
+ * Queue up a invite link email.
+ */
+export async function queueInviteLink(data: ISendInviteLink) {
+  logger.debug({ emailName: JobNames.LOGIN_LINK, data });
+  await queue.add(JobNames.LOGIN_LINK, data);
 }
 
 /**

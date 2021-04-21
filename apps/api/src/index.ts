@@ -8,7 +8,7 @@ async function init() {
 
     server.listen(config.api.port, config.api.host, (err, address) => {
       if (err) {
-        server.log.error(err.toString());
+        console.log(err);
         process.exit(1);
       }
 

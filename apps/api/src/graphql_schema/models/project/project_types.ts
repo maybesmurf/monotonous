@@ -12,6 +12,19 @@ export const Project = objectType({
   },
 });
 
+export const ProjectQueries = extendType({
+  type: "Query",
+  definition(t) {
+    t.nonNull.field("project", {
+      type: "Project",
+      args: {
+        id: nonNull(idArg()),
+      },
+      resolve: resolvers.getProject,
+    });
+  },
+});
+
 export const ProjectMutations = extendType({
   type: "Mutation",
   definition(t) {

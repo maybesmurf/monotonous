@@ -53,6 +53,13 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  Invite: { // root type
+    createdAt: NexusGenScalars['Date']; // Date!
+    email: string; // String!
+    id: string; // ID!
+    project?: NexusGenRootTypes['Project'] | null; // Project
+    team?: NexusGenRootTypes['Team'] | null; // Team
+  }
   Mutation: {};
   PaginationParams: { // root type
     cursor?: string | null; // ID
@@ -118,8 +125,16 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
+  Invite: { // field return type
+    createdAt: NexusGenScalars['Date']; // Date!
+    email: string; // String!
+    id: string; // ID!
+    project: NexusGenRootTypes['Project'] | null; // Project
+    team: NexusGenRootTypes['Team'] | null; // Team
+  }
   Mutation: { // field return type
     confirmEmail: NexusGenRootTypes['User'] | null; // User
+    createInvite: NexusGenRootTypes['Invite']; // Invite!
     createProject: NexusGenRootTypes['Project']; // Project!
     createTeam: NexusGenRootTypes['Team']; // Team!
     login: NexusGenRootTypes['User'] | null; // User
@@ -147,9 +162,10 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
-    listTeamMembersips: Array<NexusGenRootTypes['TeamMembership'] | null>; // [TeamMembership]!
+    listTeamMemberships: Array<NexusGenRootTypes['TeamMembership'] | null>; // [TeamMembership]!
     listTeams: Array<NexusGenRootTypes['Team'] | null>; // [Team]!
     me: NexusGenRootTypes['User'] | null; // User
+    project: NexusGenRootTypes['Project']; // Project!
     team: NexusGenRootTypes['Team']; // Team!
     teamMembership: NexusGenRootTypes['TeamMembership']; // TeamMembership!
   }
@@ -188,8 +204,16 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
+  Invite: { // field return type name
+    createdAt: 'Date'
+    email: 'String'
+    id: 'ID'
+    project: 'Project'
+    team: 'Team'
+  }
   Mutation: { // field return type name
     confirmEmail: 'User'
+    createInvite: 'Invite'
     createProject: 'Project'
     createTeam: 'Team'
     login: 'User'
@@ -217,9 +241,10 @@ export interface NexusGenFieldTypeNames {
     user: 'User'
   }
   Query: { // field return type name
-    listTeamMembersips: 'TeamMembership'
+    listTeamMemberships: 'TeamMembership'
     listTeams: 'Team'
     me: 'User'
+    project: 'Project'
     team: 'Team'
     teamMembership: 'TeamMembership'
   }
@@ -263,6 +288,11 @@ export interface NexusGenArgTypes {
       email: string; // String!
       token: string; // String!
     }
+    createInvite: { // args
+      email: string; // String!
+      projectId?: string | null; // ID
+      teamId?: string | null; // ID
+    }
     createProject: { // args
       name: string; // String!
       teamId: string; // ID!
@@ -288,6 +318,9 @@ export interface NexusGenArgTypes {
       cursor?: string | null; // ID
       skip?: number | null; // Int
       take?: number | null; // Int
+    }
+    project: { // args
+      id: string; // ID!
     }
     team: { // args
       id: string; // ID!

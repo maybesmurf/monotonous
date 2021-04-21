@@ -1,7 +1,9 @@
-import { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { useCreateProjectMutation, useTeamShowQuery } from "graphql_client";
+import Link from "next/link";
 import { gql } from "@urql/core";
+
+import { useCreateProjectMutation, useTeamShowQuery } from "graphql_client";
 
 gql`
   query TeamShow($id: ID!) {
@@ -34,7 +36,6 @@ export default function TeamShow() {
   const router = useRouter();
   const { teamId } = router.query as { teamId: string };
   const [{ data }, getTeam] = useTeamShowQuery({
-    requestPolicy: "cache-and-network",
     variables: { id: teamId },
     pause: !teamId,
   });
@@ -69,7 +70,11 @@ export default function TeamShow() {
               {data.team.projects.map((project) => {
                 return (
                   <li key={project.id}>
-                    <h3>{project.name}</h3>
+                    <h3>
+                      <Link href={`/projects/${project.id}`}>
+                        {project.name}
+                      </Link>
+                    </h3>
                   </li>
                 );
               })}

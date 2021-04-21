@@ -5,7 +5,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "clean": "rm -rf ./build ./node_modules",
-    "dev": "ts-node-dev --exit-child --transpile-only --no-notify --quiet -- ./src/index.ts",
+    "dev": "ts-node-dev --exit-child --transpile-only --no-notify -- ./src/index.ts",
     "build": "tsc -b",
     "start": "NODE_ENV=production node ./build/src/index.js",
     "test": "NODE_ENV=test jest --silent --forceExit"

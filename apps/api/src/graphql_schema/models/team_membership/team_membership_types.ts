@@ -25,7 +25,7 @@ export const TeamMembershipQuery = extendType({
       resolve: resolvers.getTeamMembership,
     });
 
-    t.nonNull.field("listTeamMembersips", {
+    t.nonNull.field("listTeamMemberships", {
       type: list("TeamMembership"),
       resolve: resolvers.listTeamMemberships,
     });

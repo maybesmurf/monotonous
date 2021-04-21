@@ -1,5 +1,4 @@
 import { cacheExchange, Data, ResolverConfig } from "@urql/exchange-graphcache";
-import { TeamShowDocument } from "graphql_client";
 import { schema } from "./schema";
 
 function resolveId(__typename: string) {
@@ -9,6 +8,7 @@ function resolveId(__typename: string) {
 const resolvers: ResolverConfig = {
   Query: {
     team: resolveId("Team"),
+    project: resolveId("Project"),
   },
 };
 

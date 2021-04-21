@@ -17,6 +17,15 @@ export type Scalars = {
 };
 
 
+export type Invite = {
+  __typename: 'Invite';
+  createdAt: Scalars['Date'];
+  email: Scalars['String'];
+  id: Scalars['ID'];
+  project?: Maybe<Project>;
+  team?: Maybe<Team>;
+};
+
 export enum MembershipStatuses {
   Accepted = 'ACCEPTED',
   Banned = 'BANNED',
@@ -26,6 +35,7 @@ export enum MembershipStatuses {
 export type Mutation = {
   __typename: 'Mutation';
   confirmEmail?: Maybe<User>;
+  createInvite: Invite;
   createProject: Project;
   createTeam: Team;
   login?: Maybe<User>;
@@ -38,6 +48,13 @@ export type Mutation = {
 export type MutationConfirmEmailArgs = {
   email: Scalars['String'];
   token: Scalars['String'];
+};
+
+
+export type MutationCreateInviteArgs = {
+  email: Scalars['String'];
+  projectId?: Maybe<Scalars['ID']>;
+  teamId?: Maybe<Scalars['ID']>;
 };
 
 
@@ -102,9 +119,10 @@ export enum ProjectRoles {
 
 export type Query = {
   __typename: 'Query';
-  listTeamMembersips: Array<Maybe<TeamMembership>>;
+  listTeamMemberships: Array<Maybe<TeamMembership>>;
   listTeams: Array<Maybe<Team>>;
   me?: Maybe<User>;
+  project: Project;
   team: Team;
   teamMembership: TeamMembership;
 };
@@ -114,6 +132,11 @@ export type QueryListTeamsArgs = {
   cursor?: Maybe<Scalars['ID']>;
   skip?: Maybe<Scalars['Int']>;
   take?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryProjectArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -309,6 +332,31 @@ export type MeQuery = (
   )> }
 );
 
+export type ProjectShowQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type ProjectShowQuery = (
+  { __typename: 'Query' }
+  & { project: (
+    { __typename: 'Project' }
+    & Pick<Project, 'id' | 'createdAt' | 'updatedAt' | 'name'>
+    & { memberships?: Maybe<Array<Maybe<(
+      { __typename: 'ProjectMembership' }
+      & Pick<ProjectMembership, 'id'>
+      & { user?: Maybe<(
+        { __typename: 'User' }
+        & Pick<User, 'id'>
+        & { profile?: Maybe<(
+          { __typename: 'UserProfile' }
+          & Pick<UserProfile, 'id' | 'fullName'>
+        )> }
+      )> }
+    )>>> }
+  ) }
+);
+
 export type TeamShowQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -466,6 +514,30 @@ export const MeDocument = gql`
 
 export function useMeQuery(options: Omit<Urql.UseQueryArgs<MeQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<MeQuery>({ query: MeDocument, ...options });
+};
+export const ProjectShowDocument = gql`
+    query ProjectShow($id: ID!) {
+  project(id: $id) {
+    id
+    createdAt
+    updatedAt
+    name
+    memberships {
+      id
+      user {
+        id
+        profile {
+          id
+          fullName
+        }
+      }
+    }
+  }
+}
+    `;
+
+export function useProjectShowQuery(options: Omit<Urql.UseQueryArgs<ProjectShowQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<ProjectShowQuery>({ query: ProjectShowDocument, ...options });
 };
 export const TeamShowDocument = gql`
     query TeamShow($id: ID!) {
