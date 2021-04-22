@@ -137,6 +137,7 @@ export interface NexusGenFieldTypes {
     createInvite: NexusGenRootTypes['Invite']; // Invite!
     createProject: NexusGenRootTypes['Project']; // Project!
     createTeam: NexusGenRootTypes['Team']; // Team!
+    deleteInvite: NexusGenRootTypes['SuccessResponse']; // SuccessResponse!
     login: NexusGenRootTypes['User'] | null; // User
     logout: NexusGenRootTypes['SuccessResponse'] | null; // SuccessResponse
     register: NexusGenRootTypes['User'] | null; // User
@@ -162,6 +163,7 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
+    listInvites: Array<NexusGenRootTypes['Invite'] | null>; // [Invite]!
     listTeamMemberships: Array<NexusGenRootTypes['TeamMembership'] | null>; // [TeamMembership]!
     listTeams: Array<NexusGenRootTypes['Team'] | null>; // [Team]!
     me: NexusGenRootTypes['User'] | null; // User
@@ -216,6 +218,7 @@ export interface NexusGenFieldTypeNames {
     createInvite: 'Invite'
     createProject: 'Project'
     createTeam: 'Team'
+    deleteInvite: 'SuccessResponse'
     login: 'User'
     logout: 'SuccessResponse'
     register: 'User'
@@ -241,6 +244,7 @@ export interface NexusGenFieldTypeNames {
     user: 'User'
   }
   Query: { // field return type name
+    listInvites: 'Invite'
     listTeamMemberships: 'TeamMembership'
     listTeams: 'Team'
     me: 'User'
@@ -300,6 +304,9 @@ export interface NexusGenArgTypes {
     createTeam: { // args
       name: string; // String!
     }
+    deleteInvite: { // args
+      id: string; // ID!
+    }
     login: { // args
       code: string; // String!
       email: string; // String!
@@ -314,6 +321,11 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    listInvites: { // args
+      email?: string | null; // String
+      projectId?: string | null; // ID
+      teamId?: string | null; // ID
+    }
     listTeams: { // args
       cursor?: string | null; // ID
       skip?: number | null; // Int

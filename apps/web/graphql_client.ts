@@ -38,6 +38,7 @@ export type Mutation = {
   createInvite: Invite;
   createProject: Project;
   createTeam: Team;
+  deleteInvite: SuccessResponse;
   login?: Maybe<User>;
   logout?: Maybe<SuccessResponse>;
   register?: Maybe<User>;
@@ -66,6 +67,11 @@ export type MutationCreateProjectArgs = {
 
 export type MutationCreateTeamArgs = {
   name: Scalars['String'];
+};
+
+
+export type MutationDeleteInviteArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -119,12 +125,20 @@ export enum ProjectRoles {
 
 export type Query = {
   __typename: 'Query';
+  listInvites: Array<Maybe<Invite>>;
   listTeamMemberships: Array<Maybe<TeamMembership>>;
   listTeams: Array<Maybe<Team>>;
   me?: Maybe<User>;
   project: Project;
   team: Team;
   teamMembership: TeamMembership;
+};
+
+
+export type QueryListInvitesArgs = {
+  email?: Maybe<Scalars['String']>;
+  projectId?: Maybe<Scalars['ID']>;
+  teamId?: Maybe<Scalars['ID']>;
 };
 
 
@@ -278,6 +292,34 @@ export type SignupMutation = (
   )> }
 );
 
+export type CreateInviteMutationVariables = Exact<{
+  email: Scalars['String'];
+  teamId?: Maybe<Scalars['ID']>;
+  projectId?: Maybe<Scalars['ID']>;
+}>;
+
+
+export type CreateInviteMutation = (
+  { __typename: 'Mutation' }
+  & { createInvite: (
+    { __typename: 'Invite' }
+    & Pick<Invite, 'id'>
+  ) }
+);
+
+export type DeleteInviteMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type DeleteInviteMutation = (
+  { __typename: 'Mutation' }
+  & { deleteInvite: (
+    { __typename: 'SuccessResponse' }
+    & Pick<SuccessResponse, 'success'>
+  ) }
+);
+
 export type CreateProjectMutationVariables = Exact<{
   teamId: Scalars['ID'];
   name: Scalars['String'];
@@ -385,6 +427,19 @@ export type TeamShowQuery = (
   ) }
 );
 
+export type TeamInvitesQueryVariables = Exact<{
+  teamId?: Maybe<Scalars['ID']>;
+}>;
+
+
+export type TeamInvitesQuery = (
+  { __typename: 'Query' }
+  & { listInvites: Array<Maybe<(
+    { __typename: 'Invite' }
+    & Pick<Invite, 'id' | 'createdAt' | 'email'>
+  )>> }
+);
+
 export type TeamIndexQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -459,6 +514,28 @@ export const SignupDocument = gql`
 
 export function useSignupMutation() {
   return Urql.useMutation<SignupMutation, SignupMutationVariables>(SignupDocument);
+};
+export const CreateInviteDocument = gql`
+    mutation CreateInvite($email: String!, $teamId: ID, $projectId: ID) {
+  createInvite(email: $email, teamId: $teamId, projectId: $projectId) {
+    id
+  }
+}
+    `;
+
+export function useCreateInviteMutation() {
+  return Urql.useMutation<CreateInviteMutation, CreateInviteMutationVariables>(CreateInviteDocument);
+};
+export const DeleteInviteDocument = gql`
+    mutation DeleteInvite($id: ID!) {
+  deleteInvite(id: $id) {
+    success
+  }
+}
+    `;
+
+export function useDeleteInviteMutation() {
+  return Urql.useMutation<DeleteInviteMutation, DeleteInviteMutationVariables>(DeleteInviteDocument);
 };
 export const CreateProjectDocument = gql`
     mutation CreateProject($teamId: ID!, $name: String!) {
@@ -568,6 +645,19 @@ export const TeamShowDocument = gql`
 
 export function useTeamShowQuery(options: Omit<Urql.UseQueryArgs<TeamShowQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<TeamShowQuery>({ query: TeamShowDocument, ...options });
+};
+export const TeamInvitesDocument = gql`
+    query TeamInvites($teamId: ID) {
+  listInvites(teamId: $teamId) {
+    id
+    createdAt
+    email
+  }
+}
+    `;
+
+export function useTeamInvitesQuery(options: Omit<Urql.UseQueryArgs<TeamInvitesQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<TeamInvitesQuery>({ query: TeamInvitesDocument, ...options });
 };
 export const TeamIndexDocument = gql`
     query TeamIndex {

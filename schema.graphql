@@ -26,6 +26,7 @@ type Mutation {
   createInvite(email: String!, projectId: ID, teamId: ID): Invite!
   createProject(name: String!, teamId: ID!): Project!
   createTeam(name: String!): Team!
+  deleteInvite(id: ID!): SuccessResponse!
   login(code: String!, email: String!): User
   logout: SuccessResponse
   register(email: String!, firstName: String!, lastName: String!): User
@@ -61,6 +62,7 @@ enum ProjectRoles {
 }
 
 type Query {
+  listInvites(email: String, projectId: ID, teamId: ID): [Invite]!
   listTeamMemberships: [TeamMembership]!
   listTeams(cursor: ID, skip: Int, take: Int): [Team]!
   me: User

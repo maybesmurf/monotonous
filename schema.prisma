@@ -126,4 +126,8 @@ model Invite {
   projectId   String?
   team        Team?    @relation(fields: [teamId], references: [id])
   teamId      String?
+
+  @@unique([email, teamId])
+  @@unique([email, projectId])
+  @@index([email])
 }

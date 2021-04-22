@@ -61,6 +61,10 @@ export default function TeamShow() {
   return (
     <div className="container flex">
       <div className="w-2/3">
+        <nav className="mb-10 bg-gray-800">
+          <Link href={`/teams/${teamId}/invites`}>Invites</Link>
+        </nav>
+
         <h1 className="text-2xl mb-10">{data?.team?.name}</h1>
 
         {data?.team?.projects && (
@@ -89,11 +93,15 @@ export default function TeamShow() {
               {data.team.memberships.map((membership) => {
                 return (
                   <li key={membership.id}>
-                    <p>{membership.user?.profile.fullName}</p>
+                    <p>{membership.user?.profile?.fullName}</p>
                   </li>
                 );
               })}
             </ul>
+
+            <Link href={`/teams/${teamId}/invites/new`}>
+              Invite a new member
+            </Link>
           </div>
         )}
       </div>
