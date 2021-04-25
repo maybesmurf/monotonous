@@ -9,8 +9,11 @@ export default function Login() {
   const setUser = useAuth((s) => s.setUser);
   const initialEmail = useSearchParams("email");
   const initialCode = useSearchParams("code");
-  const [{ fetching: fetching1 }, requestLogin] = useRequestLoginMutation();
-  const [{ fetching: fetching2 }, login] = useLoginMutation();
+  const [
+    requestLogin,
+    { loading: loadingRequestLogin },
+  ] = useRequestLoginMutation();
+  const [login, { loading: loadingLogin }] = useLoginMutation();
   const [email, setEmail] = useState(initialEmail || "");
   const [code, setCode] = useState(initialCode || "");
   const [showCode, setShowCode] = useState(false);
@@ -20,9 +23,11 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const { error } = await requestLogin({ email });
+      const { errors } = await requestLogin({
+        variables: { email },
+      });
 
-      if (!error) {
+      if (!errors) {
         setAttemptsLeft(3);
         setShowCode(true);
       }
@@ -34,7 +39,9 @@ export default function Login() {
   async function handleLogin(e: FormEvent) {
     try {
       e.preventDefault();
-      const { data, error } = await login({ email, code });
+      const { data, errors } = await login({
+        variables: { email, code },
+      });
 
       if (data?.login) {
         const user = {
@@ -47,8 +54,8 @@ export default function Login() {
         router.replace("/");
       }
 
-      if (error) {
-        error.graphQLErrors.forEach((err) => {
+      if (errors) {
+        errors.forEach((err) => {
           const attemptsLeft = err.extensions?.attemptsLeft;
 
           if (attemptsLeft) {
@@ -93,7 +100,7 @@ export default function Login() {
           </p>
         )}
 
-        <button type="submit" disabled={fetching1 || fetching2}>
+        <button type="submit" disabled={loadingRequestLogin || loadingLogin}>
           Submit
         </button>
       </form>

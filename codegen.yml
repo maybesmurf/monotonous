@@ -8,7 +8,7 @@ generates:
     plugins:
       - "typescript"
       - "typescript-operations"
-      - "typescript-urql"
+      - "typescript-react-apollo"
     config:
       maybeValue: T
       nonOptionalTypename: true

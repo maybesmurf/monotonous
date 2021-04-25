@@ -15,4 +15,4 @@ A typescript monorepo template to create organized, flexible apps.
 
 - `next`
 - `tailwind`
-- `urql`
+- `apollo`

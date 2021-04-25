@@ -1,10 +1,10 @@
 import React, { FormEvent, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { gql } from "@urql/core";
-import { useCreateTeamMutation, useTeamIndexQuery } from "graphql_client";
+import { TeamIndexQuery, useCreateTeamMutation } from "graphql_client";
+import { gql, useQuery } from "@apollo/client";
 
-gql`
+const query = gql`
   query TeamIndex {
     listTeams {
       id
@@ -17,8 +17,8 @@ gql`
 
 export default function TeamIndex() {
   const router = useRouter();
-  const [{ data, fetching }] = useTeamIndexQuery();
-  const [createMeta, createTeam] = useCreateTeamMutation();
+  const { data, loading } = useQuery<TeamIndexQuery>(query);
+  const [createTeam, createMeta] = useCreateTeamMutation();
   const [name, setName] = useState("");
 
   async function handleSubmit(e: FormEvent) {
@@ -27,17 +27,19 @@ export default function TeamIndex() {
     if (!name) return;
 
     try {
-      const { data } = await createTeam({ name });
+      const res = await createTeam({
+        variables: { name },
+      });
 
-      if (data?.createTeam.id) {
-        router.push(`/teams/${data.createTeam.id}`);
+      if (res.data?.createTeam.id) {
+        router.push(`/teams/${res.data.createTeam.id}`);
       }
     } catch (e) {
       console.error(e);
     }
   }
 
-  if (!data && fetching) {
+  if (!data && loading) {
     return <p>loading</p>;
   }
 
@@ -71,7 +73,7 @@ export default function TeamIndex() {
           />
         </p>
 
-        <button type="submit" disabled={createMeta.fetching}>
+        <button type="submit" disabled={createMeta.loading}>
           Create Team
         </button>
       </form>

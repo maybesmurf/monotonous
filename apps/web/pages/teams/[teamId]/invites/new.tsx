@@ -5,14 +5,16 @@ import { FormEvent, useState } from "react";
 export default function Team_TeamId_Members_New() {
   const router = useRouter();
   const { teamId } = router.query as { teamId: string };
-  const [{ data, fetching }, createInvite] = useCreateInviteMutation();
+  const [createInvite, { data, loading }] = useCreateInviteMutation();
   const [email, setEmail] = useState("");
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
     try {
-      await createInvite({ email, teamId });
+      await createInvite({
+        variables: { email, teamId },
+      });
     } catch (e) {
       console.log(e);
     }
@@ -36,7 +38,7 @@ export default function Team_TeamId_Members_New() {
         />
       </p>
 
-      <button disabled={fetching}>Submit</button>
+      <button disabled={loading}>Submit</button>
     </form>
   );
 }
