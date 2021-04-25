@@ -1,8 +1,7 @@
-import { gql } from "@urql/core";
-import { useProjectShowQuery } from "graphql_client";
+import { useQuery, gql } from "@apollo/client";
 import { useRouter } from "next/router";
 
-gql`
+const query = gql`
   query ProjectShow($id: ID!) {
     project(id: $id) {
       id
@@ -26,12 +25,12 @@ gql`
 export default function Projects_ProjectId() {
   const router = useRouter();
   const { projectId } = router.query as { projectId: string };
-  const [{ data, fetching }] = useProjectShowQuery({
+  const { data, loading } = useQuery(query, {
     variables: { id: projectId },
-    pause: !projectId,
+    skip: !projectId,
   });
 
-  if (!data || fetching) {
+  if (!data || loading) {
     <div>loading...</div>;
   }
 

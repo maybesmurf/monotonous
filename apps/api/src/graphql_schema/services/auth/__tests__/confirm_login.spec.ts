@@ -1,4 +1,4 @@
-import { gql } from "@urql/core";
+import { gql } from "@apollo/client";
 import { createTestContext } from "../../../../../tests/__helpers";
 
 const query = gql`

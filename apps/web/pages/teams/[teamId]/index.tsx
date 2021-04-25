@@ -1,11 +1,11 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { gql } from "@urql/core";
 
-import { useCreateProjectMutation, useTeamShowQuery } from "graphql_client";
+import { TeamShowQuery, useCreateProjectMutation } from "graphql_client";
+import { gql, useQuery } from "@apollo/client";
 
-gql`
+const query = gql`
   query TeamShow($id: ID!) {
     team(id: $id) {
       id
@@ -35,24 +35,27 @@ gql`
 export default function TeamShow() {
   const router = useRouter();
   const { teamId } = router.query as { teamId: string };
-  const [{ data }, getTeam] = useTeamShowQuery({
+  const { data, refetch } = useQuery<TeamShowQuery>(query, {
     variables: { id: teamId },
-    pause: !teamId,
+    skip: !teamId,
   });
-  const [createMeta, createProject] = useCreateProjectMutation();
+  const [createProject, createMeta] = useCreateProjectMutation();
   const [name, setName] = useState("");
 
   useEffect(() => {
-    if (teamId) getTeam({ id: teamId });
+    if (teamId) refetch({ id: teamId });
   }, [teamId]);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
     try {
-      await createProject({ teamId, name });
+      await createProject({
+        variables: { teamId, name },
+      });
+
       setName("");
-      getTeam();
+      refetch();
     } catch (e) {
       console.log(e);
     }
@@ -117,7 +120,7 @@ export default function TeamShow() {
           />
         </p>
 
-        <button type="submit" disabled={createMeta.fetching}>
+        <button type="submit" disabled={createMeta.loading}>
           Create Project
         </button>
       </form>

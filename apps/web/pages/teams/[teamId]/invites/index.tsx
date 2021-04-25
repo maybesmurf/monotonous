@@ -1,8 +1,8 @@
-import { gql } from "@urql/core";
-import { useDeleteInviteMutation, useTeamInvitesQuery } from "graphql_client";
+import { gql, useQuery } from "@apollo/client";
+import { TeamInvitesQuery, useDeleteInviteMutation } from "graphql_client";
 import { useRouter } from "next/router";
 
-gql`
+const query = gql`
   query TeamInvites($teamId: ID) {
     listInvites(teamId: $teamId) {
       id
@@ -15,22 +15,24 @@ gql`
 export default function Teams_TeamId_Invites() {
   const router = useRouter();
   const { teamId } = router.query as { teamId: string };
-  const [{ data, fetching }, getInvites] = useTeamInvitesQuery({
+  const { data, loading, refetch } = useQuery<TeamInvitesQuery>(query, {
     variables: { teamId },
-    pause: !teamId,
+    skip: !teamId,
   });
-  const [_, deleteInvite] = useDeleteInviteMutation();
+  const [deleteInvite] = useDeleteInviteMutation();
 
   async function handleDelete(id: string) {
     try {
-      await deleteInvite({ id });
-      getInvites();
+      await deleteInvite({
+        variables: { id },
+      });
+      refetch();
     } catch (e) {
       console.error(e);
     }
   }
 
-  if (!data && fetching) {
+  if (!data && loading) {
     return <p>loading...</p>;
   }
 

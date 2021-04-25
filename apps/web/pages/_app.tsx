@@ -1,23 +1,20 @@
 import "../styles/index.css";
 import { useEffect } from "react";
-import {
-  gql,
-  createClient,
-  Provider,
-  dedupExchange,
-  fetchExchange,
-} from "urql";
-import { devtoolsExchange } from "@urql/devtools";
-import { populateExchange } from "@urql/exchange-populate";
 import shallow from "zustand/shallow";
+import {
+  ApolloClient,
+  ApolloProvider,
+  gql,
+  InMemoryCache,
+  useQuery,
+} from "@apollo/client";
 
 import { Header } from "components/header";
 import { Footer } from "components/footer";
-import { useMeQuery } from "graphql_client";
 import { useAuth } from "hooks/use_auth";
-import { graphcache } from "lib/cache_exchange";
+import { MeQuery } from "graphql_client";
 
-gql`
+const query = gql`
   query Me {
     me {
       id
@@ -29,18 +26,14 @@ gql`
   }
 `;
 
-const client = createClient({
-  url: "/graphql",
-  requestPolicy: "cache-and-network",
-  exchanges: [devtoolsExchange, dedupExchange, graphcache, fetchExchange],
-  fetchOptions: {
-    credentials: "include",
-  },
+const client = new ApolloClient({
+  uri: "/graphql",
+  cache: new InMemoryCache(),
 });
 
 export default function App({ Component, pageProps }) {
   const [setUser] = useAuth((s) => [s.setUser], shallow);
-  const [{ fetching, data }] = useMeQuery();
+  const { loading, data } = useQuery<MeQuery>(query);
 
   useEffect(() => {
     if (data?.me && data.me.profile) {
@@ -52,12 +45,12 @@ export default function App({ Component, pageProps }) {
     }
   }, [data]);
 
-  if (fetching && !data) {
+  if (loading && !data) {
     return <p>loading...</p>;
   }
 
   return (
-    <Provider value={client}>
+    <ApolloProvider client={client}>
       <div className="min-h-screen flex flex-col">
         <Header />
 
@@ -67,6 +60,6 @@ export default function App({ Component, pageProps }) {
           <Footer />
         </div>
       </div>
-    </Provider>
+    </ApolloProvider>
   );
 }

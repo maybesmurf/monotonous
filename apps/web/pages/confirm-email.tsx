@@ -9,7 +9,7 @@ export default function ConfirmEmail() {
   const setUser = useAuth((s) => s.setUser);
   const initialToken = useSearchParams("token");
   const initialEmail = useSearchParams("email") || "";
-  const [{ fetching }, confirmEmail] = useConfirmEmailMutation();
+  const [confirmEmail, { loading }] = useConfirmEmailMutation();
   const [token, setToken] = useState(initialToken || "");
   const [email, setEmail] = useState(initialEmail || "");
 
@@ -17,7 +17,9 @@ export default function ConfirmEmail() {
     e.preventDefault();
 
     try {
-      const result = await confirmEmail({ email, token });
+      const result = await confirmEmail({
+        variables: { email, token },
+      });
 
       if (result.data) {
         const user = {
@@ -59,7 +61,7 @@ export default function ConfirmEmail() {
         />
       </p>
 
-      <button disabled={fetching}>Submit</button>
+      <button disabled={loading}>Submit</button>
     </form>
   );
 }
