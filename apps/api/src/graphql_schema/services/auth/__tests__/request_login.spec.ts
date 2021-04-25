@@ -1,5 +1,5 @@
 import { createMercuriusTestClient } from "mercurius-integration-testing";
-import { gql } from "urql";
+import { gql } from "@apollo/client";
 import { createTestContext } from "../../../../../tests/__helpers";
 
 const query = gql`
