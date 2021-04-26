@@ -6,7 +6,7 @@ import { useAuth } from "hooks/use_auth";
 export default function Signup() {
   const router = useRouter();
   const loggedIn = useAuth((s) => s.loggedIn);
-  const [{ data, fetching }, signup] = useSignupMutation();
+  const [signup, { data, loading }] = useSignupMutation();
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -19,7 +19,7 @@ export default function Signup() {
     e.preventDefault();
 
     try {
-      await signup({ email, firstName, lastName });
+      await signup({ variables: { email, firstName, lastName } });
     } catch (e) {
       console.error(e);
     }
@@ -65,7 +65,7 @@ export default function Signup() {
         />
       </p>
 
-      <button type="submit" disabled={fetching}>
+      <button type="submit" disabled={loading}>
         Submit
       </button>
     </form>

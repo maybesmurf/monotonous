@@ -3,7 +3,7 @@ import { config as dotenv } from "dotenv";
 import { resolve } from "path";
 
 const mode = process.env.NODE_ENV || "development";
-const rootPath = resolve(__dirname, "../..").replace("/build", "");
+const rootPath = resolve(__dirname, "../../../../");
 dotenv({ path: `${rootPath}/.env` });
 
 export const config = {

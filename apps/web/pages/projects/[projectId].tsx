@@ -1,4 +1,5 @@
 import { useQuery, gql } from "@apollo/client";
+import { ProjectShowQuery } from "graphql_client";
 import { useRouter } from "next/router";
 
 const query = gql`
@@ -25,7 +26,7 @@ const query = gql`
 export default function Projects_ProjectId() {
   const router = useRouter();
   const { projectId } = router.query as { projectId: string };
-  const { data, loading } = useQuery(query, {
+  const { data, loading } = useQuery<ProjectShowQuery>(query, {
     variables: { id: projectId },
     skip: !projectId,
   });
@@ -43,7 +44,6 @@ export default function Projects_ProjectId() {
         {data?.project?.memberships && data?.project?.memberships.length > 0 && (
           <ul>
             {data.project.memberships.map((member) => {
-              console.log(member);
               return <li key={member.id}>{member.user?.profile?.fullName}</li>;
             })}
           </ul>

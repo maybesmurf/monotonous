@@ -6,7 +6,6 @@ import {
   ApolloProvider,
   gql,
   InMemoryCache,
-  useQuery,
 } from "@apollo/client";
 
 import { Header } from "components/header";
@@ -33,29 +32,32 @@ const client = new ApolloClient({
 
 export default function App({ Component, pageProps }) {
   const [setUser] = useAuth((s) => [s.setUser], shallow);
-  const { loading, data } = useQuery<MeQuery>(query);
 
   useEffect(() => {
-    if (data?.me && data.me.profile) {
-      setUser({
-        id: data.me.id,
-        firstName: data.me.profile.firstName,
-        lastName: data.me.profile.lastName,
-      });
-    }
-  }, [data]);
+    async function init() {
+      try {
+        const { data } = await client.query<MeQuery>({ query });
 
-  if (loading && !data) {
-    return <p>loading...</p>;
-  }
+        if (data?.me && data.me.profile) {
+          setUser({
+            id: data.me.id,
+            firstName: data.me.profile.firstName,
+            lastName: data.me.profile.lastName,
+          });
+        }
+      } catch (e) {
+        // Meh
+      }
+    }
+
+    init();
+  }, []);
 
   return (
     <ApolloProvider client={client}>
       <div className="min-h-screen flex flex-col">
         <Header />
-
         <Component {...pageProps} />
-
         <div className="mt-auto">
           <Footer />
         </div>
