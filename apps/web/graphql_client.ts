@@ -22,8 +22,12 @@ export type Invite = {
   createdAt: Scalars['Date'];
   email: Scalars['String'];
   id: Scalars['ID'];
+  invitedBy?: Maybe<User>;
+  invitedById?: Maybe<Scalars['ID']>;
   project?: Maybe<Project>;
+  projectId?: Maybe<Scalars['ID']>;
   team?: Maybe<Team>;
+  teamId?: Maybe<Scalars['ID']>;
 };
 
 export enum MembershipStatuses {
@@ -34,6 +38,7 @@ export enum MembershipStatuses {
 
 export type Mutation = {
   __typename: 'Mutation';
+  acceptInvite: SuccessResponse;
   confirmEmail?: Maybe<User>;
   createInvite: Invite;
   createProject: Project;
@@ -43,6 +48,11 @@ export type Mutation = {
   logout?: Maybe<SuccessResponse>;
   register?: Maybe<User>;
   requestLogin?: Maybe<SuccessResponse>;
+};
+
+
+export type MutationAcceptInviteArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -292,6 +302,19 @@ export type SignupMutation = (
   )> }
 );
 
+export type AcceptInviteMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type AcceptInviteMutation = (
+  { __typename: 'Mutation' }
+  & { acceptInvite: (
+    { __typename: 'SuccessResponse' }
+    & Pick<SuccessResponse, 'success'>
+  ) }
+);
+
 export type CreateInviteMutationVariables = Exact<{
   email: Scalars['String'];
   teamId?: Maybe<Scalars['ID']>;
@@ -372,6 +395,31 @@ export type MeQuery = (
       & Pick<UserProfile, 'firstName' | 'lastName'>
     )> }
   )> }
+);
+
+export type InvitesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type InvitesQuery = (
+  { __typename: 'Query' }
+  & { listInvites: Array<Maybe<(
+    { __typename: 'Invite' }
+    & Pick<Invite, 'id' | 'createdAt'>
+    & { invitedBy?: Maybe<(
+      { __typename: 'User' }
+      & Pick<User, 'id'>
+      & { profile?: Maybe<(
+        { __typename: 'UserProfile' }
+        & Pick<UserProfile, 'fullName'>
+      )> }
+    )>, project?: Maybe<(
+      { __typename: 'Project' }
+      & Pick<Project, 'id' | 'createdAt' | 'name'>
+    )>, team?: Maybe<(
+      { __typename: 'Team' }
+      & Pick<Team, 'id' | 'createdAt' | 'name'>
+    )> }
+  )>> }
 );
 
 export type ProjectShowQueryVariables = Exact<{
@@ -628,6 +676,39 @@ export function useSignupMutation(baseOptions?: Apollo.MutationHookOptions<Signu
 export type SignupMutationHookResult = ReturnType<typeof useSignupMutation>;
 export type SignupMutationResult = Apollo.MutationResult<SignupMutation>;
 export type SignupMutationOptions = Apollo.BaseMutationOptions<SignupMutation, SignupMutationVariables>;
+export const AcceptInviteDocument = gql`
+    mutation AcceptInvite($id: ID!) {
+  acceptInvite(id: $id) {
+    success
+  }
+}
+    `;
+export type AcceptInviteMutationFn = Apollo.MutationFunction<AcceptInviteMutation, AcceptInviteMutationVariables>;
+
+/**
+ * __useAcceptInviteMutation__
+ *
+ * To run a mutation, you first call `useAcceptInviteMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAcceptInviteMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [acceptInviteMutation, { data, loading, error }] = useAcceptInviteMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useAcceptInviteMutation(baseOptions?: Apollo.MutationHookOptions<AcceptInviteMutation, AcceptInviteMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AcceptInviteMutation, AcceptInviteMutationVariables>(AcceptInviteDocument, options);
+      }
+export type AcceptInviteMutationHookResult = ReturnType<typeof useAcceptInviteMutation>;
+export type AcceptInviteMutationResult = Apollo.MutationResult<AcceptInviteMutation>;
+export type AcceptInviteMutationOptions = Apollo.BaseMutationOptions<AcceptInviteMutation, AcceptInviteMutationVariables>;
 export const CreateInviteDocument = gql`
     mutation CreateInvite($email: String!, $teamId: ID, $projectId: ID) {
   createInvite(email: $email, teamId: $teamId, projectId: $projectId) {
@@ -819,6 +900,57 @@ export function useMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeQuery
 export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
 export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
 export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
+export const InvitesDocument = gql`
+    query Invites {
+  listInvites {
+    id
+    createdAt
+    invitedBy {
+      id
+      profile {
+        fullName
+      }
+    }
+    project {
+      id
+      createdAt
+      name
+    }
+    team {
+      id
+      createdAt
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __useInvitesQuery__
+ *
+ * To run a query within a React component, call `useInvitesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useInvitesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useInvitesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useInvitesQuery(baseOptions?: Apollo.QueryHookOptions<InvitesQuery, InvitesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<InvitesQuery, InvitesQueryVariables>(InvitesDocument, options);
+      }
+export function useInvitesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<InvitesQuery, InvitesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<InvitesQuery, InvitesQueryVariables>(InvitesDocument, options);
+        }
+export type InvitesQueryHookResult = ReturnType<typeof useInvitesQuery>;
+export type InvitesLazyQueryHookResult = ReturnType<typeof useInvitesLazyQuery>;
+export type InvitesQueryResult = Apollo.QueryResult<InvitesQuery, InvitesQueryVariables>;
 export const ProjectShowDocument = gql`
     query ProjectShow($id: ID!) {
   project(id: $id) {

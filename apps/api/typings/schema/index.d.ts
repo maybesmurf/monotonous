@@ -57,8 +57,12 @@ export interface NexusGenObjects {
     createdAt: NexusGenScalars['Date']; // Date!
     email: string; // String!
     id: string; // ID!
+    invitedBy?: NexusGenRootTypes['User'] | null; // User
+    invitedById?: string | null; // ID
     project?: NexusGenRootTypes['Project'] | null; // Project
+    projectId?: string | null; // ID
     team?: NexusGenRootTypes['Team'] | null; // Team
+    teamId?: string | null; // ID
   }
   Mutation: {};
   PaginationParams: { // root type
@@ -129,10 +133,15 @@ export interface NexusGenFieldTypes {
     createdAt: NexusGenScalars['Date']; // Date!
     email: string; // String!
     id: string; // ID!
+    invitedBy: NexusGenRootTypes['User'] | null; // User
+    invitedById: string | null; // ID
     project: NexusGenRootTypes['Project'] | null; // Project
+    projectId: string | null; // ID
     team: NexusGenRootTypes['Team'] | null; // Team
+    teamId: string | null; // ID
   }
   Mutation: { // field return type
+    acceptInvite: NexusGenRootTypes['SuccessResponse']; // SuccessResponse!
     confirmEmail: NexusGenRootTypes['User'] | null; // User
     createInvite: NexusGenRootTypes['Invite']; // Invite!
     createProject: NexusGenRootTypes['Project']; // Project!
@@ -210,10 +219,15 @@ export interface NexusGenFieldTypeNames {
     createdAt: 'Date'
     email: 'String'
     id: 'ID'
+    invitedBy: 'User'
+    invitedById: 'ID'
     project: 'Project'
+    projectId: 'ID'
     team: 'Team'
+    teamId: 'ID'
   }
   Mutation: { // field return type name
+    acceptInvite: 'SuccessResponse'
     confirmEmail: 'User'
     createInvite: 'Invite'
     createProject: 'Project'
@@ -288,6 +302,9 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    acceptInvite: { // args
+      id: string; // ID!
+    }
     confirmEmail: { // args
       email: string; // String!
       token: string; // String!

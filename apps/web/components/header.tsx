@@ -4,7 +4,7 @@ import { useAuth } from "hooks/use_auth";
 import { useLogoutMutation } from "graphql_client";
 
 export const Header = () => {
-  const [_, logout] = useLogoutMutation();
+  const [logout] = useLogoutMutation();
   const [loggedIn, resetUser] = useAuth((s) => [s.loggedIn, s.resetUser]);
 
   async function handleLogout() {
@@ -27,19 +27,14 @@ export const Header = () => {
       <nav className="ml-auto space-x-3">
         {loggedIn ? (
           <>
-            <Link href="/teams">
-              <a>Teams</a>
-            </Link>
+            <Link href="/teams">Teams</Link>
+            <Link href="/invites">Invites</Link>
             <button onClick={handleLogout}>Logout</button>
           </>
         ) : (
           <>
-            <Link href="/signup">
-              <a>Sign Up</a>
-            </Link>
-            <Link href="/login">
-              <a>Login</a>
-            </Link>
+            <Link href="/signup">Sign Up</Link>
+            <Link href="/login">Login</Link>
           </>
         )}
       </nav>

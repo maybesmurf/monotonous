@@ -20,6 +20,8 @@ export const config = {
     port: env.get("REDIS_PORT").default("6379").asPortNumber(),
   },
   mode,
+  isDev: mode === "development",
+  isProd: mode === "production",
   paths: {
     root: rootPath,
   },

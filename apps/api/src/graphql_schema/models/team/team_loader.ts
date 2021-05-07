@@ -17,12 +17,20 @@ export const TeamLoader: TeamLoader = {
     return queries.map((q) => records.filter((r) => r.teamId === q.obj.id));
   },
 
-  projects: async (queries, { prisma }) => {
-    const ids = queries.map((q) => q.obj.id);
+  projects: async (queries, { currentUser, prisma }) => {
     const records = await prisma.project.findMany({
-      where: { team: { id: { in: ids } } },
+      where: {
+        team: { id: { in: queries.map((q) => q.obj.id) } },
+        memberships: {
+          some: {
+            userId: currentUser!.id,
+          },
+        },
+      },
     });
 
-    return queries.map((q) => records.filter((r) => r.teamId === q.obj.id));
+    return queries.map((q) => {
+      return records.filter((r) => r.teamId === q.obj.id);
+    });
   },
 };

@@ -12,8 +12,3 @@ generates:
     config:
       maybeValue: T
       nonOptionalTypename: true
-  ./apps/web/schema_introspection.json:
-    plugins:
-      - "introspection"
-    config:
-      minify: true

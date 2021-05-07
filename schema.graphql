@@ -11,8 +11,12 @@ type Invite {
   createdAt: Date!
   email: String!
   id: ID!
+  invitedBy: User
+  invitedById: ID
   project: Project
+  projectId: ID
   team: Team
+  teamId: ID
 }
 
 enum MembershipStatuses {
@@ -22,6 +26,7 @@ enum MembershipStatuses {
 }
 
 type Mutation {
+  acceptInvite(id: ID!): SuccessResponse!
   confirmEmail(email: String!, token: String!): User
   createInvite(email: String!, projectId: ID, teamId: ID): Invite!
   createProject(name: String!, teamId: ID!): Project!

@@ -1,0 +1,5 @@
+mutation AcceptInvite($id: ID!) {
+  acceptInvite(id: $id) {
+    success
+  }
+}

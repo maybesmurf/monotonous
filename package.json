@@ -16,7 +16,6 @@
     "types": "yarn workspace @monotonous/types",
     "conf": "yarn workspace @monotonous/conf",
     "email": "yarn workspace @monotonous/email",
-    "sdk-client": "yarn workspace @monotonous/sdk-client",
     "sdk-server": "yarn workspace @monotonous/sdk-server",
     "gql:dev": "graphql-codegen --config codegen.yml --watch",
     "gql:build": "graphql-codegen --config codegen.yml"
@@ -90,7 +89,7 @@
     "prisma": "^2.18.0",
     "react-is": "^17.0.2",
     "sqlite3": "^5.0.2",
-    "tailwindcss": "^2.0.2",
+    "tailwindcss": "^2.1.2",
     "testcontainers": "^7.6.2",
     "ts-node-dev": "^1.0.0",
     "tsc-watch": "^4.2.9",

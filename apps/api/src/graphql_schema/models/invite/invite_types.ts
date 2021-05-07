@@ -15,8 +15,12 @@ export const Invite = objectType({
     t.nonNull.id("id");
     t.nonNull.date("createdAt");
     t.nonNull.string("email");
+    t.field("invitedBy", { type: "User" });
+    t.id("invitedById");
     t.field("project", { type: "Project" });
+    t.id("projectId");
     t.field("team", { type: "Team" });
+    t.id("teamId");
   },
 });
 
@@ -46,6 +50,14 @@ export const InviteMutations = extendType({
         teamId: idArg(),
       },
       resolve: resolvers.createInvite,
+    });
+
+    t.nonNull.field("acceptInvite", {
+      type: "SuccessResponse",
+      args: {
+        id: nonNull(idArg()),
+      },
+      resolve: resolvers.acceptInvite,
     });
 
     t.nonNull.field("deleteInvite", {
