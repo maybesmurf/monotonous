@@ -1,12 +1,15 @@
 import { MemberRoles } from ".prisma/client";
 import { FieldResolver } from "nexus";
+import { UnauthorizedError } from "../../errors";
 
 export const createProject: FieldResolver<"Mutation", "createProject"> = async (
   _root,
   { teamId, name },
   { currentUser, prisma, GqlError }
 ) => {
-  if (!currentUser) throw GqlError("Unauthorized");
+  if (!currentUser) {
+    throw UnauthorizedError();
+  }
 
   return prisma.project.create({
     data: {
@@ -14,7 +17,14 @@ export const createProject: FieldResolver<"Mutation", "createProject"> = async (
       teamId,
       memberships: {
         create: {
-          userId: currentUser.id,
+          membership: {
+            connect: {
+              userId_teamId: {
+                teamId,
+                userId: currentUser.id,
+              },
+            },
+          },
           role: MemberRoles.ADMIN,
         },
       },

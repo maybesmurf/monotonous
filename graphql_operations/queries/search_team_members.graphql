@@ -1,0 +1,16 @@
+query SearchTeamMembers($query: String, $cursor: String, $take: Int) {
+  listTeamMemberships(query: $query, cursor: $cursor, take: $take) {
+    id
+    createdAt
+    role
+    user {
+      id
+      profile {
+        id
+        firstName
+        lastName
+        fullName
+      }
+    }
+  }
+}

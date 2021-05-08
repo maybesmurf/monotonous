@@ -7,19 +7,27 @@ import {
   UnauthorizedError,
 } from "../../errors";
 
-export const addUserToProject: FieldResolver<
+export const addMemberToProject: FieldResolver<
   "Mutation",
-  "addUserToProject"
-> = async (_root, { email, teamId, projectId }, { currentUser, prisma }) => {
+  "addMemberToProject"
+> = async (_root, { id, projectId }, { currentUser, prisma }) => {
   if (!currentUser) {
     throw UnauthorizedError();
+  }
+
+  const membership = await prisma.teamMembership.findUnique({
+    where: { id },
+  });
+
+  if (!membership) {
+    throw BadRequestError("Team membership doesnt exist");
   }
 
   const admin = await prisma.teamMembership.findFirst({
     where: {
       role: MemberRoles.ADMIN,
       userId: currentUser.id,
-      teamId,
+      teamId: membership.teamId,
     },
   });
 
@@ -27,33 +35,11 @@ export const addUserToProject: FieldResolver<
     throw ForbiddenError();
   }
 
-  if (!email) {
-    throw BadRequestError();
-  }
-
-  const user = await prisma.user.findUnique({
-    where: { email },
-    include: {
-      teamMemberships: {
-        where: { teamId },
-      },
-    },
-  });
-
-  if (!user) {
-    throw BadRequestError();
-  }
-
-  const teamMembership = user.teamMemberships[0];
-
-  if (!teamMembership) {
-    throw ForbiddenError();
-  }
-
   return prisma.projectMembership.create({
     data: {
       projectId,
-      userId: user.id,
+      membershipId: membership.id,
+      role: MemberRoles.MEMBER,
     },
   });
 };

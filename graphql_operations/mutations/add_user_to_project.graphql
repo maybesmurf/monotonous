@@ -1,0 +1,16 @@
+mutation addMemberToProject($id: String!, $projectId: String!) {
+  addMemberToProject(id: $id, projectId: $projectId) {
+    id
+    membership {
+      user {
+        id
+        profile {
+          id
+          firstName
+          lastName
+          fullName
+        }
+      }
+    }
+  }
+}

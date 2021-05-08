@@ -8,8 +8,8 @@ export const ProjectMembership = objectType({
     t.nonNull.date("createdAt");
     t.nonNull.date("updatedAt");
     t.nonNull.field("role", { type: "MemberRoles" });
-    t.field("user", { type: "User" });
-    t.id("userId");
+    t.field("membership", { type: "TeamMembership" });
+    t.id("membershipId");
     t.field("project", { type: "Project" });
     t.id("projectId");
   },
@@ -18,14 +18,13 @@ export const ProjectMembership = objectType({
 export const ProjectMembershipMutations = extendType({
   type: "Mutation",
   definition(t) {
-    t.nonNull.field("addUserToProject", {
+    t.nonNull.field("addMemberToProject", {
       type: nonNull("ProjectMembership"),
       args: {
-        email: nonNull(stringArg()),
-        teamId: nonNull(idArg()),
-        projectId: nonNull(idArg()),
+        id: nonNull(stringArg()),
+        projectId: nonNull(stringArg()),
       },
-      resolve: resolvers.addUserToProject,
+      resolve: resolvers.addMemberToProject,
     });
 
     t.nonNull.field("removeUserFromProject", {

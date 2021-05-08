@@ -3,19 +3,18 @@ import { Loader } from "mercurius";
 import { Context } from "../../custom_context";
 
 type ProjectMembershipLoader = {
-  user: Loader<ProjectMembership, {}, Context>;
+  membership: Loader<ProjectMembership, {}, Context>;
   project: Loader<ProjectMembership, {}, Context>;
-  role: Loader<ProjectMembership, {}, Context>;
 };
 
 export const ProjectMembershipLoader: ProjectMembershipLoader = {
-  user: async (queries, { prisma }) => {
-    const users = await prisma.user.findMany({
-      where: { id: { in: queries.map((q) => q.obj.userId) } },
+  membership: async (queries, { prisma }) => {
+    const teamMemberships = await prisma.teamMembership.findMany({
+      where: { id: { in: queries.map((q) => q.obj.membershipId) } },
     });
 
     return queries.map((q) => {
-      return users.find((u) => u.id === q.obj.userId);
+      return teamMemberships.find((u) => u.id === q.obj.membershipId);
     });
   },
 

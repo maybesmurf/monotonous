@@ -1,3 +1,3 @@
-import { EmailQueue } from '@monotonous/sdk-server';
+import { EmailQueue } from "@monotonous/sdk-server";
 
 EmailQueue.initWorker();

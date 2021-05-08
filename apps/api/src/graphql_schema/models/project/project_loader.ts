@@ -23,13 +23,20 @@ export const ProjectLoader: ProjectLoader = {
   currentMember: async (queries, { currentUser, prisma }) => {
     const memberships = await prisma.projectMembership.findMany({
       where: {
-        project: { id: { in: queries.map((q) => q.obj.id) } },
+        project: {
+          id: { in: queries.map((q) => q.obj.id) },
+        },
+      },
+      include: {
+        membership: true,
       },
     });
 
     return queries.map((q) => {
       return memberships.find((m) => {
-        return m.projectId === q.obj.id && m.userId === currentUser!.id;
+        return (
+          m.projectId === q.obj.id && m.membership.userId === currentUser!.id
+        );
       });
     });
   },

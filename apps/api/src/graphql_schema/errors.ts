@@ -15,6 +15,9 @@ export function NotFoundError() {
   return new ExtError("Not Found", { code: StatusCodes.NOT_FOUND });
 }
 
-export function BadRequestError() {
-  return new ExtError("Bad Request", { code: StatusCodes.BAD_REQUEST });
+export function BadRequestError(message?: string) {
+  return new ExtError("Bad Request", {
+    code: StatusCodes.BAD_REQUEST,
+    message,
+  });
 }

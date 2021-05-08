@@ -100,12 +100,10 @@ export default function TeamShow() {
                 );
               })}
             </ul>
-
-            <Link href={`/teams/${teamId}/invites/new`}>
-              Invite a new member
-            </Link>
           </div>
         )}
+
+        <Link href={`/teams/${teamId}/invites/new`}>Invite a new member</Link>
       </div>
       <form className="flex-1" onSubmit={handleSubmit}>
         <h2 className="text-sm mb-10">Create Project</h2>

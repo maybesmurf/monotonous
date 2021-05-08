@@ -1,4 +1,12 @@
-import { extendType, list, nonNull, objectType } from "nexus";
+import {
+  extendType,
+  idArg,
+  intArg,
+  list,
+  nonNull,
+  objectType,
+  stringArg,
+} from "nexus";
 import * as resolvers from "./team_membership_resolvers";
 
 export const TeamMembership = objectType({
@@ -26,6 +34,11 @@ export const TeamMembershipQuery = extendType({
 
     t.nonNull.field("listTeamMemberships", {
       type: list("TeamMembership"),
+      args: {
+        query: stringArg(),
+        cursor: stringArg(),
+        take: intArg(),
+      },
       resolve: resolvers.listTeamMemberships,
     });
   },

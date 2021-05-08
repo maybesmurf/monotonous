@@ -81,12 +81,12 @@ export interface NexusGenObjects {
   ProjectMembership: { // root type
     createdAt: NexusGenScalars['Date']; // Date!
     id: string; // ID!
+    membership?: NexusGenRootTypes['TeamMembership'] | null; // TeamMembership
+    membershipId?: string | null; // ID
     project?: NexusGenRootTypes['Project'] | null; // Project
     projectId?: string | null; // ID
     role: NexusGenEnums['MemberRoles']; // MemberRoles!
     updatedAt: NexusGenScalars['Date']; // Date!
-    user?: NexusGenRootTypes['User'] | null; // User
-    userId?: string | null; // ID
   }
   Query: {};
   SuccessResponse: { // root type
@@ -143,7 +143,7 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     acceptInvite: NexusGenRootTypes['SuccessResponse']; // SuccessResponse!
-    addUserToProject: NexusGenRootTypes['ProjectMembership']; // ProjectMembership!
+    addMemberToProject: NexusGenRootTypes['ProjectMembership']; // ProjectMembership!
     confirmEmail: NexusGenRootTypes['User'] | null; // User
     createInvite: NexusGenRootTypes['Invite']; // Invite!
     createProject: NexusGenRootTypes['Project']; // Project!
@@ -173,12 +173,12 @@ export interface NexusGenFieldTypes {
   ProjectMembership: { // field return type
     createdAt: NexusGenScalars['Date']; // Date!
     id: string; // ID!
+    membership: NexusGenRootTypes['TeamMembership'] | null; // TeamMembership
+    membershipId: string | null; // ID
     project: NexusGenRootTypes['Project'] | null; // Project
     projectId: string | null; // ID
     role: NexusGenEnums['MemberRoles']; // MemberRoles!
     updatedAt: NexusGenScalars['Date']; // Date!
-    user: NexusGenRootTypes['User'] | null; // User
-    userId: string | null; // ID
   }
   Query: { // field return type
     listInvites: Array<NexusGenRootTypes['Invite'] | null>; // [Invite]!
@@ -234,7 +234,7 @@ export interface NexusGenFieldTypeNames {
   }
   Mutation: { // field return type name
     acceptInvite: 'SuccessResponse'
-    addUserToProject: 'ProjectMembership'
+    addMemberToProject: 'ProjectMembership'
     confirmEmail: 'User'
     createInvite: 'Invite'
     createProject: 'Project'
@@ -264,12 +264,12 @@ export interface NexusGenFieldTypeNames {
   ProjectMembership: { // field return type name
     createdAt: 'Date'
     id: 'ID'
+    membership: 'TeamMembership'
+    membershipId: 'ID'
     project: 'Project'
     projectId: 'ID'
     role: 'MemberRoles'
     updatedAt: 'Date'
-    user: 'User'
-    userId: 'ID'
   }
   Query: { // field return type name
     listInvites: 'Invite'
@@ -318,10 +318,9 @@ export interface NexusGenArgTypes {
     acceptInvite: { // args
       id: string; // ID!
     }
-    addUserToProject: { // args
-      email: string; // String!
-      projectId: string; // ID!
-      teamId: string; // ID!
+    addMemberToProject: { // args
+      id: string; // String!
+      projectId: string; // String!
     }
     confirmEmail: { // args
       email: string; // String!
@@ -363,6 +362,11 @@ export interface NexusGenArgTypes {
       email?: string | null; // String
       projectId?: string | null; // ID
       teamId?: string | null; // ID
+    }
+    listTeamMemberships: { // args
+      cursor?: string | null; // String
+      query?: string | null; // String
+      take?: number | null; // Int
     }
     listTeams: { // args
       cursor?: string | null; // ID

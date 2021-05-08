@@ -1,7 +1,11 @@
 import React, { FormEvent, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { TeamIndexQuery, useCreateTeamMutation } from "graphql_client";
+import {
+  TeamIndexQuery,
+  useCreateTeamMutation,
+  useTeamIndexQuery,
+} from "graphql_client";
 import { gql, useQuery } from "@apollo/client";
 
 const query = gql`
@@ -17,7 +21,7 @@ const query = gql`
 
 export default function TeamIndex() {
   const router = useRouter();
-  const { data, loading } = useQuery<TeamIndexQuery>(query);
+  const { data, loading } = useTeamIndexQuery();
   const [createTeam, createMeta] = useCreateTeamMutation();
   const [name, setName] = useState("");
 

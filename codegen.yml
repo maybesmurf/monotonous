@@ -2,7 +2,7 @@ overwrite: true
 schema: "schema.graphql"
 documents:
   - "apps/web/**/!(*.d).{ts,tsx}"
-  - "apps/web/**/*.graphql"
+  - "graphql_operations/**/*.graphql"
 generates:
   ./apps/web/graphql_client.ts:
     plugins:

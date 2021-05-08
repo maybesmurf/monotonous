@@ -23,7 +23,9 @@ export const TeamLoader: TeamLoader = {
         team: { id: { in: queries.map((q) => q.obj.id) } },
         memberships: {
           some: {
-            userId: currentUser!.id,
+            membership: {
+              userId: currentUser!.id,
+            },
           },
         },
       },

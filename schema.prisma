@@ -39,17 +39,16 @@ enum ProjectRoles {
 // ======================
 
 model User {
-  id                 String              @id @default(cuid())
-  createdAt          DateTime            @default(now())
-  updatedAt          DateTime            @updatedAt
-  confirmed          Boolean             @default(false)
-  email              String              @unique
+  id                String             @id @default(cuid())
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  confirmed         Boolean            @default(false)
+  email             String             @unique
   //
-  emailConfirmation  EmailConfirmation?
-  profile            UserProfile?
-  teamMemberships    TeamMembership[]
-  projectMemberships ProjectMembership[]
-  Invite             Invite[]
+  emailConfirmation EmailConfirmation?
+  profile           UserProfile?
+  teamMemberships   TeamMembership[]
+  Invite            Invite[]
 }
 
 model EmailConfirmation {
@@ -80,14 +79,16 @@ model Team {
 }
 
 model TeamMembership {
-  id        String      @id @default(cuid())
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-  role      MemberRoles @default(MEMBER)
-  user      User        @relation(fields: [userId], references: [id])
-  userId    String
-  team      Team        @relation(fields: [teamId], references: [id])
-  teamId    String
+  id                 String              @id @default(cuid())
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  role               MemberRoles         @default(MEMBER)
+  user               User                @relation(fields: [userId], references: [id])
+  userId             String
+  team               Team                @relation(fields: [teamId], references: [id])
+  teamId             String
+  // unused
+  projectMemberships ProjectMembership[]
 
   @@unique([userId, teamId])
 }
@@ -103,16 +104,16 @@ model Project {
 }
 
 model ProjectMembership {
-  id        String      @id @default(cuid())
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-  role      MemberRoles @default(MEMBER)
-  user      User        @relation(fields: [userId], references: [id])
-  userId    String
-  project   Project     @relation(fields: [projectId], references: [id])
-  projectId String
+  id           String         @id @default(cuid())
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  role         MemberRoles    @default(MEMBER)
+  membership   TeamMembership @relation(fields: [membershipId], references: [id])
+  membershipId String
+  project      Project        @relation(fields: [projectId], references: [id])
+  projectId    String
 
-  @@unique([userId, projectId])
+  @@unique([membershipId, projectId])
 }
 
 model Invite {

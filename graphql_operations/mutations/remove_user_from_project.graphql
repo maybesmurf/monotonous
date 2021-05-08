@@ -5,13 +5,15 @@ mutation RemoveUserFromProject($id: ID!) {
       id
       name
     }
-    user {
-      id
-      profile {
+    membership {
+      user {
         id
-        firstName
-        lastName
-        fullName
+        profile {
+          id
+          firstName
+          lastName
+          fullName
+        }
       }
     }
   }
