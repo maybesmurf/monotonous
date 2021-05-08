@@ -8,7 +8,10 @@ export const Project = objectType({
     t.nonNull.date("createdAt");
     t.nonNull.date("updatedAt");
     t.nonNull.string("name");
+    t.field("team", { type: "Team" });
+    t.id("teamId");
     t.field("memberships", { type: list("ProjectMembership") });
+    t.field("currentMember", { type: "ProjectMembership" });
   },
 });
 

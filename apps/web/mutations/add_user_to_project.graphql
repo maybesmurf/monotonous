@@ -1,0 +1,14 @@
+mutation AddUserToProject($email: String!, $teamId: ID!, $projectId: ID!) {
+  addUserToProject(email: $email, teamId: $teamId, projectId: $projectId) {
+    id
+    user {
+      id
+      profile {
+        id
+        firstName
+        lastName
+        fullName
+      }
+    }
+  }
+}

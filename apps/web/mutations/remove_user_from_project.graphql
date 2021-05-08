@@ -1,0 +1,18 @@
+mutation RemoveUserFromProject($id: ID!) {
+  removeUserFromProject(id: $id) {
+    id
+    project {
+      id
+      name
+    }
+    user {
+      id
+      profile {
+        id
+        firstName
+        lastName
+        fullName
+      }
+    }
+  }
+}

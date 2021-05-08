@@ -7,8 +7,7 @@ export const TeamMembership = objectType({
     t.nonNull.id("id");
     t.nonNull.date("createdAt");
     t.nonNull.date("updatedAt");
-    t.nonNull.field("status", { type: "MembershipStatuses" });
-    t.nonNull.field("role", { type: "TeamRoles" });
+    t.nonNull.field("role", { type: "MemberRoles" });
     t.field("user", { type: "User" });
     t.field("team", { type: "Team" });
   },

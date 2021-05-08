@@ -1,4 +1,5 @@
 import { gql } from "@apollo/client";
+import { createECDH } from "crypto";
 import {
   useAcceptInviteMutation,
   useDeleteInviteMutation,
@@ -16,11 +17,6 @@ gql`
           fullName
         }
       }
-      project {
-        id
-        createdAt
-        name
-      }
       team {
         id
         createdAt
@@ -31,7 +27,7 @@ gql`
 `;
 
 export default function Invites() {
-  const { data, loading } = useInvitesQuery();
+  const { data, loading, refetch } = useInvitesQuery();
   const [acceptInvite, acceptMeta] = useAcceptInviteMutation();
   const [deleteInvite, deleteMeta] = useDeleteInviteMutation();
 
@@ -39,6 +35,15 @@ export default function Invites() {
 
   if (!data && loading) {
     return <p>loading...</p>;
+  }
+
+  async function handleAccept(id: string) {
+    try {
+      await acceptInvite({ variables: { id } });
+      refetch();
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   return (
@@ -51,7 +56,6 @@ export default function Invites() {
               return (
                 <li key={invite.id} className="mt-10">
                   <p className="uppercase text-sm opacity-50 font-bold">
-                    {invite.project && "project"}
                     {invite.team && "team"}
                   </p>
                   <p>
@@ -64,20 +68,12 @@ export default function Invites() {
                       {invite.team.name}
                     </p>
                   )}
-                  {invite.project && (
-                    <p>
-                      <span className="text-sm uppercase mr-4">Project:</span>
-                      {invite.project.name}
-                    </p>
-                  )}
 
                   <div className="flex space-x-10 mt-4">
                     <button
                       disabled={disabled}
                       className="text-green-200"
-                      onClick={() =>
-                        acceptInvite({ variables: { id: invite.id } })
-                      }
+                      onClick={() => handleAccept(invite.id)}
                     >
                       Accept
                     </button>

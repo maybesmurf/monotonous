@@ -13,10 +13,14 @@ type Invite {
   id: ID!
   invitedBy: User
   invitedById: ID
-  project: Project
-  projectId: ID
   team: Team
   teamId: ID
+}
+
+enum MemberRoles {
+  ADMIN
+  BILLING
+  MEMBER
 }
 
 enum MembershipStatuses {
@@ -27,6 +31,7 @@ enum MembershipStatuses {
 
 type Mutation {
   acceptInvite(id: ID!): SuccessResponse!
+  addUserToProject(email: String!, projectId: ID!, teamId: ID!): ProjectMembership!
   confirmEmail(email: String!, token: String!): User
   createInvite(email: String!, projectId: ID, teamId: ID): Invite!
   createProject(name: String!, teamId: ID!): Project!
@@ -35,6 +40,7 @@ type Mutation {
   login(code: String!, email: String!): User
   logout: SuccessResponse
   register(email: String!, firstName: String!, lastName: String!): User
+  removeUserFromProject(id: ID!): ProjectMembership!
   requestLogin(email: String!): SuccessResponse
 }
 
@@ -46,18 +52,24 @@ type PaginationParams {
 
 type Project {
   createdAt: Date!
+  currentMember: ProjectMembership
   id: ID!
   memberships: [ProjectMembership]
   name: String!
+  team: Team
+  teamId: ID
   updatedAt: Date!
 }
 
 type ProjectMembership {
   createdAt: Date!
   id: ID!
-  name: String!
+  project: Project
+  projectId: ID
+  role: MemberRoles!
   updatedAt: Date!
   user: User
+  userId: ID
 }
 
 enum ProjectRoles {
@@ -98,17 +110,10 @@ type Team {
 type TeamMembership {
   createdAt: Date!
   id: ID!
-  role: TeamRoles!
-  status: MembershipStatuses!
+  role: MemberRoles!
   team: Team
   updatedAt: Date!
   user: User
-}
-
-enum TeamRoles {
-  ADMIN
-  BILLING
-  MEMBER
 }
 
 type User {

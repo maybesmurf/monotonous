@@ -17,8 +17,6 @@ export const Invite = objectType({
     t.nonNull.string("email");
     t.field("invitedBy", { type: "User" });
     t.id("invitedById");
-    t.field("project", { type: "Project" });
-    t.id("projectId");
     t.field("team", { type: "Team" });
     t.id("teamId");
   },

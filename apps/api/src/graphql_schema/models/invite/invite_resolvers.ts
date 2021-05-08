@@ -1,21 +1,23 @@
-import { PrismaPromise, TeamRoles } from ".prisma/client";
+import { PrismaPromise, MemberRoles } from ".prisma/client";
 import { EmailQueue } from "@monotonous/sdk-server";
 import { logger } from "env-var";
 import { GraphQLError } from "graphql";
 import { FieldResolver } from "nexus";
+import { ForbiddenError, NotFoundError, UnauthorizedError } from "../../errors";
 
 export const createInvite: FieldResolver<"Mutation", "createInvite"> = async (
   _root,
-  { email, teamId, projectId },
-  { currentUser, prisma, GqlError }
+  { email, teamId },
+  { currentUser, prisma }
 ) => {
-  if (!currentUser) throw GqlError("Unauthorized");
+  if (!currentUser) {
+    throw UnauthorizedError();
+  }
 
   const invite = await prisma.invite.create({
     data: {
       email,
       teamId: teamId ?? undefined,
-      projectId: projectId ?? undefined,
       invitedById: currentUser.id,
     },
   });
@@ -33,14 +35,21 @@ export const acceptInvite: FieldResolver<"Mutation", "acceptInvite"> = async (
   { id },
   { currentUser, logger, prisma, GqlError }
 ) => {
-  if (!currentUser) throw GqlError("Unauthorized");
+  if (!currentUser) {
+    throw UnauthorizedError();
+  }
 
   const invite = await prisma.invite.findUnique({
     where: { id },
   });
 
-  if (!invite) throw GqlError("Not Found");
-  if (invite.email !== currentUser.email) throw GqlError("Forbidden");
+  if (!invite) {
+    throw NotFoundError();
+  }
+
+  if (invite.email !== currentUser.email) {
+    throw ForbiddenError();
+  }
 
   const transactions: PrismaPromise<any>[] = [
     prisma.invite.delete({
@@ -54,17 +63,6 @@ export const acceptInvite: FieldResolver<"Mutation", "acceptInvite"> = async (
         data: {
           userId: currentUser.id,
           teamId: invite.teamId,
-        },
-      })
-    );
-  }
-
-  if (invite.projectId) {
-    transactions.push(
-      prisma.projectMembership.create({
-        data: {
-          userId: currentUser.id,
-          projectId: invite.projectId,
         },
       })
     );
@@ -93,7 +91,7 @@ export const deleteInvite: FieldResolver<"Mutation", "deleteInvite"> = async (
         memberships: {
           some: {
             userId: currentUser.id,
-            role: TeamRoles.ADMIN,
+            role: MemberRoles.ADMIN,
           },
         },
       },
@@ -123,16 +121,7 @@ export const listInvites: FieldResolver<"Query", "listInvites"> = async (
   return prisma.invite.findMany({
     where: {
       teamId: teamId ?? undefined,
-      projectId: projectId ?? undefined,
-      email: email ?? undefined,
-      // team: {
-      //   memberships: {
-      //     some: {
-      //       userId: { equals: currentUser.id },
-      //       role: { equals: TeamRoles.ADMIN },
-      //     },
-      //   },
-      // },
+      email: email ?? currentUser.email,
     },
   });
 };

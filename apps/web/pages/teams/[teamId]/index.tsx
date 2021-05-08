@@ -19,7 +19,6 @@ const query = gql`
       memberships {
         id
         role
-        status
         user {
           id
           profile {

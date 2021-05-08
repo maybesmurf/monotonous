@@ -4,7 +4,6 @@ import { Context } from "../../custom_context";
 
 type InviteLoader = {
   invitedBy: Loader<Invite, {}, Context>;
-  project: Loader<Invite, {}, Context>;
   team: Loader<Invite, {}, Context>;
 };
 
@@ -18,20 +17,6 @@ export const InviteLoader: InviteLoader = {
 
     return queries.map((q) => {
       return users.find((u) => u.id === q.obj.invitedById);
-    });
-  },
-
-  project: async (queries, { prisma }) => {
-    const projects = await prisma.project.findMany({
-      where: {
-        id: {
-          in: queries.map((q) => q.obj.projectId).filter(Boolean) as string[],
-        },
-      },
-    });
-
-    return queries.map((q) => {
-      return projects.find((p) => p.id === q.obj.projectId);
     });
   },
 

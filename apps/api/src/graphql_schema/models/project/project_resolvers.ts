@@ -1,3 +1,4 @@
+import { MemberRoles } from ".prisma/client";
 import { FieldResolver } from "nexus";
 
 export const createProject: FieldResolver<"Mutation", "createProject"> = async (
@@ -14,6 +15,7 @@ export const createProject: FieldResolver<"Mutation", "createProject"> = async (
       memberships: {
         create: {
           userId: currentUser.id,
+          role: MemberRoles.ADMIN,
         },
       },
     },
