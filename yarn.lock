@@ -647,6 +647,16 @@
   dependencies:
     purgecss "^3.1.3"
 
+"@giraphql/core@^2.4.2":
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/@giraphql/core/-/core-2.4.2.tgz#abcd917d2b10a5231febfa4acc57b57087cff9fa"
+  integrity sha512-4EalpW+/xEGDAMu31a/rQ7Ev3VNtH5rjhKL5yMn3qElNJkgxVf8zPrcBsQ5fXEzGZ6gu75xTAc6rbp5Md4czug==
+
+"@giraphql/plugin-dataloader@^2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@giraphql/plugin-dataloader/-/plugin-dataloader-2.1.2.tgz#63d04c0a9baace624fd655939090948a800c4e5d"
+  integrity sha512-twoSv26l70hYvCHwqudOVPQ23qMd/xwr26cSKLQlgUNnvyTr437Rptbrj/Vm7MfBMgjEHJ+xGS/FobX9903VYQ==
+
 "@graphql-codegen/cli@1.20.1":
   version "1.20.1"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/cli/-/cli-1.20.1.tgz#3b42eddb4ddbfc6ad37d0a838267165f77342e14"
@@ -1598,6 +1608,13 @@
   integrity sha512-anKkLmZZ+xm4p8JWBf4hElkM4XR+EZeA2M9BAkkTldmcyDY4mbdIJnRghDJH3Ov5ooY7/UAoENtmdMSkaAd7Cw==
   dependencies:
     "@types/node" "*"
+
+"@types/graphql-iso-date@^3.4.0":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@types/graphql-iso-date/-/graphql-iso-date-3.4.0.tgz#b6710b21e3b0bfdb1a0529b285148d98eac18b1f"
+  integrity sha512-V3jITHTsoI2E8TGt9+/HPDz6LWt3z9/HYnPJYWI6WwiLRexsngg7KzaQlCgQkA4jkEbGPROUD0hJFc9F02W9WA==
+  dependencies:
+    graphql "^15.1.0"
 
 "@types/graphql-upload@^8.0.4":
   version "8.0.4"
@@ -4092,7 +4109,7 @@ data-urls@^2.0.0:
     whatwg-mimetype "^2.3.0"
     whatwg-url "^8.0.0"
 
-dataloader@2.0.0:
+dataloader@2.0.0, dataloader@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/dataloader/-/dataloader-2.0.0.tgz#41eaf123db115987e21ca93c005cd7753c55fe6f"
   integrity sha512-YzhyDAwA4TaQIhM5go+vCLmU0UikghC/t9DTQYZR2M/UvZ1MdOhPezSDZcjj9uqQJOMqjLcpWtyW2iNINdlatQ==
@@ -5918,7 +5935,7 @@ graphql-ws@^4.4.1:
   resolved "https://registry.yarnpkg.com/graphql-ws/-/graphql-ws-4.4.2.tgz#f2d83f1863ba3069117199311d664fd28f4aaa8e"
   integrity sha512-Cz+t1w+8+tiHIKzcz45tMwrxJpPSQ7KNjQrfN8ADAELECkkBB7aSvAgpShWz0Tne8teH/UxzJsULObLVq5eMvQ==
 
-graphql@^15.3.0, graphql@^15.4.0, graphql@^15.5.0:
+graphql@^15.1.0, graphql@^15.3.0, graphql@^15.4.0, graphql@^15.5.0:
   version "15.5.0"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-15.5.0.tgz#39d19494dbe69d1ea719915b578bf920344a69d5"
   integrity sha512-OmaM7y0kaK31NKG31q4YbD2beNYa6jBBKtMFT6gLYJljHLJr42IqJ8KX08u3Li/0ifzTU5HjmoOOrwa5BRLeDA==

@@ -5,11 +5,9 @@ import { Logger } from "pino";
 import { AuthService, prisma, redis } from "@monotonous/sdk-server";
 import { config } from "@monotonous/conf";
 
-import { loaders } from "./graphql_schema/loaders";
-import { schema } from "./graphql_schema";
 import { PrismaClient } from ".prisma/client";
 import { CustomContext } from "./graphql_schema/custom_context";
-import { logger } from "handlebars";
+import { schema } from "./schema";
 
 export function createServer(params: { prisma: PrismaClient; logger: Logger }) {
   const server = fastify();
@@ -41,7 +39,6 @@ export function createServer(params: { prisma: PrismaClient; logger: Logger }) {
       };
     },
     schema,
-    loaders,
     graphiql: process.env.NODE_ENV !== "production" ? "playground" : false,
     jit: 1,
     cache: true,
