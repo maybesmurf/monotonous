@@ -14,6 +14,7 @@ import { JwtService } from '@nestjs/jwt';
 import { config } from '@monotonous/conf';
 import { CustomContext } from 'src/context';
 import { validate } from 'class-validator';
+import { JwtAuthGuard } from './guards/jwt.guard';
 
 @Resolver()
 export class AuthResolver {
@@ -41,6 +42,17 @@ export class AuthResolver {
     reply.setCookie(config.auth.cookiePrefix, token, {
       httpOnly: true,
       expires: new Date(config.auth.expires),
+    });
+
+    return user;
+  }
+
+  @Mutation(type => User)
+  @UseGuards(JwtAuthGuard)
+  async logout(@CurrentUser() user: User, @Context() { reply }: CustomContext) {
+    reply.setCookie(config.auth.cookiePrefix, null, {
+      httpOnly: true,
+      expires: new Date(),
     });
 
     return user;

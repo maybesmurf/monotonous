@@ -1,5 +1,24 @@
-mutation Signup($email: String!, $firstName: String!, $lastName: String!) {
-  register(email: $email, firstName: $firstName, lastName: $lastName) {
+mutation Signup(
+  $email: String!
+  $password: String!
+  $confirmation: String!
+  $firstName: String!
+  $lastName: String!
+) {
+  register(
+    input: {
+      email: $email
+      password: $password
+      confirmation: $confirmation
+      firstName: $firstName
+      lastName: $lastName
+    }
+  ) {
     id
+    profile {
+      id
+      firstName
+      lastName
+    }
   }
 }

@@ -11,13 +11,18 @@ import { TeamMembershipsModule } from './modules/team_memberships/team_membershi
 import { ProjectsModule } from './modules/projects/projects.module';
 import { ProjectMembershipsModule } from './modules/project_memberships/project_membersips.module';
 import { InvitesModule } from './modules/invites/invites.module';
+import { registerEnumType } from '@nestjs/graphql';
+import { MemberRoles } from '@prisma/client';
+import { UserProfilesModule } from './modules/user_profiles/user_profiles.module';
+
+registerEnumType(MemberRoles, { name: 'MemberRoles' });
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     LoggerModule.forRoot(),
     MercuriusModule.forRoot({
-      autoSchemaFile: true,
+      autoSchemaFile: '../../schema.graphql',
       altair: true,
       context: (request, reply) => {
         return { request, reply };
@@ -28,6 +33,7 @@ import { InvitesModule } from './modules/invites/invites.module';
     }),
     AuthModule,
     UsersModule,
+    UserProfilesModule,
     TeamsModule,
     TeamMembershipsModule,
     ProjectsModule,

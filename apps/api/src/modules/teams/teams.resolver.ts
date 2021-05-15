@@ -20,13 +20,10 @@ export class TeamsResolver {
 
   @Mutation(returns => Team)
   @UseGuards(JwtAuthGuard)
-  async createTeam(
-    @Args('input') input: CreateTeamInput,
-    @CurrentUser() user: User,
-  ) {
+  async createTeam(@Args('name') name: string, @CurrentUser() user: User) {
     return this.prisma.team.create({
       data: {
-        name: input.name,
+        name,
         memberships: {
           create: {
             userId: user.id,
@@ -107,7 +104,7 @@ export class TeamsResolver {
       return acc;
     }, {});
 
-    return queries.map(q => lookup[q.obj.id]);
+    return queries.map(q => lookup[q.obj.id] || []);
   }
 
   @ResolveLoader(type => Invite)

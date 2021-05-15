@@ -1,5 +1,7 @@
-mutation addMemberToProject($id: String!, $projectId: String!) {
-  addMemberToProject(id: $id, projectId: $projectId) {
+mutation addMemberToProject($teamMembershipId: String!, $projectId: String!) {
+  addMemberToProject(
+    input: { teamMembershipId: $teamMembershipId, projectId: $projectId }
+  ) {
     id
     membership {
       user {

@@ -6,9 +6,16 @@ import { User } from '../users/users.model';
 
 @ObjectType()
 export class TeamMembership extends BaseModel {
+  @Field(type => MemberRoles)
   role: MemberRoles;
+
+  @Field()
   userId: string;
+  @Field(type => User)
   user?: User;
+
+  @Field()
   teamId: string;
+  @Field(type => Team)
   team?: Team;
 }

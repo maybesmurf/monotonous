@@ -12,78 +12,66 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
-  Date: any;
+  /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
+  DateTime: any;
+};
+
+export type AddMemberToProjectInput = {
+  projectId: Scalars['String'];
+  teamMembershipId: Scalars['String'];
+};
+
+export type CreateInviteInput = {
+  email: Scalars['String'];
+  teamId: Scalars['String'];
+};
+
+export type CreateProjectInput = {
+  name: Scalars['String'];
+  teamId: Scalars['String'];
 };
 
 
 export type Invite = {
   __typename: 'Invite';
-  createdAt: Scalars['Date'];
-  email: Scalars['String'];
   id: Scalars['ID'];
+  createdAt: Scalars['DateTime'];
+  email: Scalars['String'];
+  invitedById: Scalars['String'];
   invitedBy?: Maybe<User>;
-  invitedById?: Maybe<Scalars['ID']>;
+  teamId: Scalars['String'];
   team?: Maybe<Team>;
-  teamId?: Maybe<Scalars['ID']>;
 };
 
 export enum MemberRoles {
   Admin = 'ADMIN',
-  Billing = 'BILLING',
-  Member = 'MEMBER'
-}
-
-export enum MembershipStatuses {
-  Accepted = 'ACCEPTED',
-  Banned = 'BANNED',
-  Pending = 'PENDING'
+  Member = 'MEMBER',
+  Billing = 'BILLING'
 }
 
 export type Mutation = {
   __typename: 'Mutation';
-  acceptInvite: SuccessResponse;
-  addMemberToProject: ProjectMembership;
-  confirmEmail?: Maybe<User>;
-  createInvite: Invite;
-  createProject: Project;
+  register: User;
+  login: User;
+  logout: User;
   createTeam: Team;
-  deleteInvite: SuccessResponse;
-  login?: Maybe<User>;
-  logout?: Maybe<SuccessResponse>;
-  register?: Maybe<User>;
-  removeUserFromProject: ProjectMembership;
-  requestLogin?: Maybe<SuccessResponse>;
+  createProject: Project;
+  addMemberToProject: ProjectMembership;
+  removeMemberFromProject: ProjectMembership;
+  createInvite: Invite;
+  acceptInvite: Invite;
+  deleteInvite: Invite;
 };
 
 
-export type MutationAcceptInviteArgs = {
-  id: Scalars['ID'];
+export type MutationRegisterArgs = {
+  input: RegisterInput;
 };
 
 
-export type MutationAddMemberToProjectArgs = {
-  id: Scalars['String'];
-  projectId: Scalars['String'];
-};
-
-
-export type MutationConfirmEmailArgs = {
+export type MutationLoginArgs = {
+  password: Scalars['String'];
   email: Scalars['String'];
-  token: Scalars['String'];
-};
-
-
-export type MutationCreateInviteArgs = {
-  email: Scalars['String'];
-  projectId?: Maybe<Scalars['ID']>;
-  teamId?: Maybe<Scalars['ID']>;
-};
-
-
-export type MutationCreateProjectArgs = {
-  name: Scalars['String'];
-  teamId: Scalars['ID'];
 };
 
 
@@ -92,110 +80,84 @@ export type MutationCreateTeamArgs = {
 };
 
 
+export type MutationCreateProjectArgs = {
+  input: CreateProjectInput;
+};
+
+
+export type MutationAddMemberToProjectArgs = {
+  input: AddMemberToProjectInput;
+};
+
+
+export type MutationRemoveMemberFromProjectArgs = {
+  projectMembershipId: Scalars['String'];
+};
+
+
+export type MutationCreateInviteArgs = {
+  input: CreateInviteInput;
+};
+
+
+export type MutationAcceptInviteArgs = {
+  id: Scalars['String'];
+};
+
+
 export type MutationDeleteInviteArgs = {
-  id: Scalars['ID'];
+  id: Scalars['String'];
 };
 
-
-export type MutationLoginArgs = {
-  code: Scalars['String'];
-  email: Scalars['String'];
-};
-
-
-export type MutationRegisterArgs = {
-  email: Scalars['String'];
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
-};
-
-
-export type MutationRemoveUserFromProjectArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type MutationRequestLoginArgs = {
-  email: Scalars['String'];
-};
-
-export type PaginationParams = {
-  __typename: 'PaginationParams';
-  cursor?: Maybe<Scalars['ID']>;
-  skip?: Maybe<Scalars['Int']>;
+export type PaginationInput = {
+  cursor?: Maybe<Scalars['String']>;
   take?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
 };
 
 export type Project = {
   __typename: 'Project';
-  createdAt: Scalars['Date'];
-  currentMember?: Maybe<ProjectMembership>;
   id: Scalars['ID'];
-  memberships?: Maybe<Array<Maybe<ProjectMembership>>>;
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
   name: Scalars['String'];
-  team?: Maybe<Team>;
-  teamId?: Maybe<Scalars['ID']>;
-  updatedAt: Scalars['Date'];
+  teamId: Scalars['String'];
+  team: Team;
+  memberships: Array<ProjectMembership>;
+  currentMember: ProjectMembership;
 };
 
 export type ProjectMembership = {
   __typename: 'ProjectMembership';
-  createdAt: Scalars['Date'];
   id: Scalars['ID'];
-  membership?: Maybe<TeamMembership>;
-  membershipId?: Maybe<Scalars['ID']>;
-  project?: Maybe<Project>;
-  projectId?: Maybe<Scalars['ID']>;
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
   role: MemberRoles;
-  updatedAt: Scalars['Date'];
+  membershipId: Scalars['String'];
+  membership: TeamMembership;
+  projectId: Scalars['String'];
+  project: Project;
 };
-
-export enum ProjectRoles {
-  Admin = 'ADMIN',
-  Reviewer = 'REVIEWER',
-  Viewer = 'VIEWER'
-}
 
 export type Query = {
   __typename: 'Query';
-  listInvites: Array<Maybe<Invite>>;
-  listTeamMemberships: Array<Maybe<TeamMembership>>;
-  listTeams: Array<Maybe<Team>>;
-  me?: Maybe<User>;
-  project: Project;
+  me: User;
   team: Team;
+  teams: Array<Team>;
   teamMembership: TeamMembership;
-};
-
-
-export type QueryListInvitesArgs = {
-  email?: Maybe<Scalars['String']>;
-  projectId?: Maybe<Scalars['ID']>;
-  teamId?: Maybe<Scalars['ID']>;
-};
-
-
-export type QueryListTeamMembershipsArgs = {
-  cursor?: Maybe<Scalars['String']>;
-  query?: Maybe<Scalars['String']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type QueryListTeamsArgs = {
-  cursor?: Maybe<Scalars['ID']>;
-  skip?: Maybe<Scalars['Int']>;
-  take?: Maybe<Scalars['Int']>;
-};
-
-
-export type QueryProjectArgs = {
-  id: Scalars['ID'];
+  teamMemberships: Array<TeamMembership>;
+  project: Project;
+  invites: Array<Invite>;
 };
 
 
 export type QueryTeamArgs = {
-  id: Scalars['ID'];
+  id: Scalars['String'];
+};
+
+
+export type QueryTeamsArgs = {
+  pagination?: Maybe<PaginationInput>;
 };
 
 
@@ -203,51 +165,73 @@ export type QueryTeamMembershipArgs = {
   id: Scalars['String'];
 };
 
-export type RegisterInput = {
-  email: Scalars['String'];
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
+
+export type QueryTeamMembershipsArgs = {
+  pagination?: Maybe<PaginationInput>;
+  query?: Maybe<Scalars['String']>;
 };
 
-export type SuccessResponse = {
-  __typename: 'SuccessResponse';
-  success: Scalars['Boolean'];
+
+export type QueryProjectArgs = {
+  id: Scalars['String'];
+};
+
+
+export type QueryInvitesArgs = {
+  teamId?: Maybe<Scalars['String']>;
+};
+
+export type RegisterInput = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+  confirmation: Scalars['String'];
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
 };
 
 export type Team = {
   __typename: 'Team';
-  createdAt: Scalars['Date'];
   id: Scalars['ID'];
-  memberships?: Maybe<Array<Maybe<TeamMembership>>>;
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
   name: Scalars['String'];
-  projects?: Maybe<Array<Maybe<Project>>>;
-  updatedAt: Scalars['Date'];
+  memberships: Array<TeamMembership>;
+  projects: Array<Project>;
+  invites: Array<Invite>;
 };
 
 export type TeamMembership = {
   __typename: 'TeamMembership';
-  createdAt: Scalars['Date'];
   id: Scalars['ID'];
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
   role: MemberRoles;
-  team?: Maybe<Team>;
-  updatedAt: Scalars['Date'];
+  userId: Scalars['String'];
   user?: Maybe<User>;
+  teamId: Scalars['String'];
+  team?: Maybe<Team>;
 };
 
 export type User = {
   __typename: 'User';
-  confirmed: Scalars['Boolean'];
-  email: Scalars['String'];
   id: Scalars['ID'];
-  profile?: Maybe<UserProfile>;
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
+  email: Scalars['String'];
+  confirmed: Scalars['Boolean'];
+  profile: UserProfile;
 };
 
 export type UserProfile = {
   __typename: 'UserProfile';
-  firstName: Scalars['String'];
-  fullName: Scalars['String'];
   id: Scalars['ID'];
+  createdAt: Scalars['DateTime'];
+  updatedAt: Scalars['DateTime'];
+  firstName: Scalars['String'];
   lastName: Scalars['String'];
+  fullName?: Maybe<Scalars['String']>;
+  userId: Scalars['String'];
+  user: User;
 };
 
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
@@ -255,14 +239,14 @@ export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type MeQuery = (
   { __typename: 'Query' }
-  & { me?: Maybe<(
+  & { me: (
     { __typename: 'User' }
     & Pick<User, 'id'>
-    & { profile?: Maybe<(
+    & { profile: (
       { __typename: 'UserProfile' }
       & Pick<UserProfile, 'firstName' | 'lastName'>
-    )> }
-  )> }
+    ) }
+  ) }
 );
 
 export type InvitesQueryVariables = Exact<{ [key: string]: never; }>;
@@ -270,25 +254,25 @@ export type InvitesQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type InvitesQuery = (
   { __typename: 'Query' }
-  & { listInvites: Array<Maybe<(
+  & { invites: Array<(
     { __typename: 'Invite' }
     & Pick<Invite, 'id' | 'createdAt'>
     & { invitedBy?: Maybe<(
       { __typename: 'User' }
       & Pick<User, 'id'>
-      & { profile?: Maybe<(
+      & { profile: (
         { __typename: 'UserProfile' }
         & Pick<UserProfile, 'fullName'>
-      )> }
+      ) }
     )>, team?: Maybe<(
       { __typename: 'Team' }
       & Pick<Team, 'id' | 'createdAt' | 'name'>
     )> }
-  )>> }
+  )> }
 );
 
 export type ProjectShowQueryVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars['String'];
 }>;
 
 
@@ -297,30 +281,30 @@ export type ProjectShowQuery = (
   & { project: (
     { __typename: 'Project' }
     & Pick<Project, 'id' | 'createdAt' | 'updatedAt' | 'name' | 'teamId'>
-    & { currentMember?: Maybe<(
+    & { currentMember: (
       { __typename: 'ProjectMembership' }
       & Pick<ProjectMembership, 'id' | 'role'>
-    )>, memberships?: Maybe<Array<Maybe<(
+    ), memberships: Array<(
       { __typename: 'ProjectMembership' }
       & Pick<ProjectMembership, 'id' | 'role'>
-      & { membership?: Maybe<(
+      & { membership: (
         { __typename: 'TeamMembership' }
         & Pick<TeamMembership, 'id' | 'role'>
         & { user?: Maybe<(
           { __typename: 'User' }
           & Pick<User, 'id'>
-          & { profile?: Maybe<(
+          & { profile: (
             { __typename: 'UserProfile' }
             & Pick<UserProfile, 'id' | 'fullName'>
-          )> }
+          ) }
         )> }
-      )> }
-    )>>> }
+      ) }
+    )> }
   ) }
 );
 
 export type TeamShowQueryVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars['String'];
 }>;
 
 
@@ -329,35 +313,35 @@ export type TeamShowQuery = (
   & { team: (
     { __typename: 'Team' }
     & Pick<Team, 'id' | 'createdAt' | 'updatedAt' | 'name'>
-    & { projects?: Maybe<Array<Maybe<(
+    & { projects: Array<(
       { __typename: 'Project' }
       & Pick<Project, 'id' | 'name'>
-    )>>>, memberships?: Maybe<Array<Maybe<(
+    )>, memberships: Array<(
       { __typename: 'TeamMembership' }
       & Pick<TeamMembership, 'id' | 'role'>
       & { user?: Maybe<(
         { __typename: 'User' }
         & Pick<User, 'id'>
-        & { profile?: Maybe<(
+        & { profile: (
           { __typename: 'UserProfile' }
           & Pick<UserProfile, 'id' | 'fullName'>
-        )> }
+        ) }
       )> }
-    )>>> }
+    )> }
   ) }
 );
 
 export type TeamInvitesQueryVariables = Exact<{
-  teamId?: Maybe<Scalars['ID']>;
+  teamId?: Maybe<Scalars['String']>;
 }>;
 
 
 export type TeamInvitesQuery = (
   { __typename: 'Query' }
-  & { listInvites: Array<Maybe<(
+  & { invites: Array<(
     { __typename: 'Invite' }
     & Pick<Invite, 'id' | 'createdAt' | 'email'>
-  )>> }
+  )> }
 );
 
 export type TeamIndexQueryVariables = Exact<{ [key: string]: never; }>;
@@ -365,27 +349,27 @@ export type TeamIndexQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type TeamIndexQuery = (
   { __typename: 'Query' }
-  & { listTeams: Array<Maybe<(
+  & { teams: Array<(
     { __typename: 'Team' }
     & Pick<Team, 'id' | 'createdAt' | 'updatedAt' | 'name'>
-  )>> }
+  )> }
 );
 
 export type AcceptInviteMutationVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars['String'];
 }>;
 
 
 export type AcceptInviteMutation = (
   { __typename: 'Mutation' }
   & { acceptInvite: (
-    { __typename: 'SuccessResponse' }
-    & Pick<SuccessResponse, 'success'>
+    { __typename: 'Invite' }
+    & Pick<Invite, 'id'>
   ) }
 );
 
 export type AddMemberToProjectMutationVariables = Exact<{
-  id: Scalars['String'];
+  teamMembershipId: Scalars['String'];
   projectId: Scalars['String'];
 }>;
 
@@ -395,42 +379,23 @@ export type AddMemberToProjectMutation = (
   & { addMemberToProject: (
     { __typename: 'ProjectMembership' }
     & Pick<ProjectMembership, 'id'>
-    & { membership?: Maybe<(
+    & { membership: (
       { __typename: 'TeamMembership' }
       & { user?: Maybe<(
         { __typename: 'User' }
         & Pick<User, 'id'>
-        & { profile?: Maybe<(
+        & { profile: (
           { __typename: 'UserProfile' }
           & Pick<UserProfile, 'id' | 'firstName' | 'lastName' | 'fullName'>
-        )> }
+        ) }
       )> }
-    )> }
+    ) }
   ) }
-);
-
-export type ConfirmEmailMutationVariables = Exact<{
-  token: Scalars['String'];
-  email: Scalars['String'];
-}>;
-
-
-export type ConfirmEmailMutation = (
-  { __typename: 'Mutation' }
-  & { confirmEmail?: Maybe<(
-    { __typename: 'User' }
-    & Pick<User, 'id'>
-    & { profile?: Maybe<(
-      { __typename: 'UserProfile' }
-      & Pick<UserProfile, 'firstName' | 'lastName'>
-    )> }
-  )> }
 );
 
 export type CreateInviteMutationVariables = Exact<{
   email: Scalars['String'];
-  teamId?: Maybe<Scalars['ID']>;
-  projectId?: Maybe<Scalars['ID']>;
+  teamId: Scalars['String'];
 }>;
 
 
@@ -443,7 +408,7 @@ export type CreateInviteMutation = (
 );
 
 export type CreateProjectMutationVariables = Exact<{
-  teamId: Scalars['ID'];
+  teamId: Scalars['String'];
   name: Scalars['String'];
 }>;
 
@@ -466,50 +431,50 @@ export type CreateTeamMutation = (
   & { createTeam: (
     { __typename: 'Team' }
     & Pick<Team, 'id' | 'createdAt' | 'updatedAt' | 'name'>
-    & { memberships?: Maybe<Array<Maybe<(
+    & { memberships: Array<(
       { __typename: 'TeamMembership' }
       & Pick<TeamMembership, 'id' | 'role'>
       & { user?: Maybe<(
         { __typename: 'User' }
         & Pick<User, 'id'>
-        & { profile?: Maybe<(
+        & { profile: (
           { __typename: 'UserProfile' }
           & Pick<UserProfile, 'id' | 'fullName'>
-        )> }
+        ) }
       )> }
-    )>>> }
+    )> }
   ) }
 );
 
 export type DeleteInviteMutationVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars['String'];
 }>;
 
 
 export type DeleteInviteMutation = (
   { __typename: 'Mutation' }
   & { deleteInvite: (
-    { __typename: 'SuccessResponse' }
-    & Pick<SuccessResponse, 'success'>
+    { __typename: 'Invite' }
+    & Pick<Invite, 'id'>
   ) }
 );
 
 export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
-  code: Scalars['String'];
+  password: Scalars['String'];
 }>;
 
 
 export type LoginMutation = (
   { __typename: 'Mutation' }
-  & { login?: Maybe<(
+  & { login: (
     { __typename: 'User' }
     & Pick<User, 'id'>
-    & { profile?: Maybe<(
+    & { profile: (
       { __typename: 'UserProfile' }
       & Pick<UserProfile, 'firstName' | 'lastName'>
-    )> }
-  )> }
+    ) }
+  ) }
 );
 
 export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
@@ -517,54 +482,43 @@ export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
 
 export type LogoutMutation = (
   { __typename: 'Mutation' }
-  & { logout?: Maybe<(
-    { __typename: 'SuccessResponse' }
-    & Pick<SuccessResponse, 'success'>
-  )> }
+  & { logout: (
+    { __typename: 'User' }
+    & Pick<User, 'id'>
+  ) }
 );
 
 export type RemoveUserFromProjectMutationVariables = Exact<{
-  id: Scalars['ID'];
+  projectMembershipId: Scalars['String'];
 }>;
 
 
 export type RemoveUserFromProjectMutation = (
   { __typename: 'Mutation' }
-  & { removeUserFromProject: (
+  & { removeMemberFromProject: (
     { __typename: 'ProjectMembership' }
     & Pick<ProjectMembership, 'id'>
-    & { project?: Maybe<(
+    & { project: (
       { __typename: 'Project' }
       & Pick<Project, 'id' | 'name'>
-    )>, membership?: Maybe<(
+    ), membership: (
       { __typename: 'TeamMembership' }
       & { user?: Maybe<(
         { __typename: 'User' }
         & Pick<User, 'id'>
-        & { profile?: Maybe<(
+        & { profile: (
           { __typename: 'UserProfile' }
           & Pick<UserProfile, 'id' | 'firstName' | 'lastName' | 'fullName'>
-        )> }
+        ) }
       )> }
-    )> }
+    ) }
   ) }
-);
-
-export type RequestLoginMutationVariables = Exact<{
-  email: Scalars['String'];
-}>;
-
-
-export type RequestLoginMutation = (
-  { __typename: 'Mutation' }
-  & { requestLogin?: Maybe<(
-    { __typename: 'SuccessResponse' }
-    & Pick<SuccessResponse, 'success'>
-  )> }
 );
 
 export type SignupMutationVariables = Exact<{
   email: Scalars['String'];
+  password: Scalars['String'];
+  confirmation: Scalars['String'];
   firstName: Scalars['String'];
   lastName: Scalars['String'];
 }>;
@@ -572,10 +526,14 @@ export type SignupMutationVariables = Exact<{
 
 export type SignupMutation = (
   { __typename: 'Mutation' }
-  & { register?: Maybe<(
+  & { register: (
     { __typename: 'User' }
     & Pick<User, 'id'>
-  )> }
+    & { profile: (
+      { __typename: 'UserProfile' }
+      & Pick<UserProfile, 'id' | 'firstName' | 'lastName'>
+    ) }
+  ) }
 );
 
 export type SearchTeamMembersQueryVariables = Exact<{
@@ -587,18 +545,18 @@ export type SearchTeamMembersQueryVariables = Exact<{
 
 export type SearchTeamMembersQuery = (
   { __typename: 'Query' }
-  & { listTeamMemberships: Array<Maybe<(
+  & { teamMemberships: Array<(
     { __typename: 'TeamMembership' }
     & Pick<TeamMembership, 'id' | 'createdAt' | 'role'>
     & { user?: Maybe<(
       { __typename: 'User' }
       & Pick<User, 'id'>
-      & { profile?: Maybe<(
+      & { profile: (
         { __typename: 'UserProfile' }
         & Pick<UserProfile, 'id' | 'firstName' | 'lastName' | 'fullName'>
-      )> }
+      ) }
     )> }
-  )>> }
+  )> }
 );
 
 
@@ -642,7 +600,7 @@ export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
 export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
 export const InvitesDocument = gql`
     query Invites {
-  listInvites {
+  invites {
     id
     createdAt
     invitedBy {
@@ -687,7 +645,7 @@ export type InvitesQueryHookResult = ReturnType<typeof useInvitesQuery>;
 export type InvitesLazyQueryHookResult = ReturnType<typeof useInvitesLazyQuery>;
 export type InvitesQueryResult = Apollo.QueryResult<InvitesQuery, InvitesQueryVariables>;
 export const ProjectShowDocument = gql`
-    query ProjectShow($id: ID!) {
+    query ProjectShow($id: String!) {
   project(id: $id) {
     id
     createdAt
@@ -745,7 +703,7 @@ export type ProjectShowQueryHookResult = ReturnType<typeof useProjectShowQuery>;
 export type ProjectShowLazyQueryHookResult = ReturnType<typeof useProjectShowLazyQuery>;
 export type ProjectShowQueryResult = Apollo.QueryResult<ProjectShowQuery, ProjectShowQueryVariables>;
 export const TeamShowDocument = gql`
-    query TeamShow($id: ID!) {
+    query TeamShow($id: String!) {
   team(id: $id) {
     id
     createdAt
@@ -798,8 +756,8 @@ export type TeamShowQueryHookResult = ReturnType<typeof useTeamShowQuery>;
 export type TeamShowLazyQueryHookResult = ReturnType<typeof useTeamShowLazyQuery>;
 export type TeamShowQueryResult = Apollo.QueryResult<TeamShowQuery, TeamShowQueryVariables>;
 export const TeamInvitesDocument = gql`
-    query TeamInvites($teamId: ID) {
-  listInvites(teamId: $teamId) {
+    query TeamInvites($teamId: String) {
+  invites(teamId: $teamId) {
     id
     createdAt
     email
@@ -836,7 +794,7 @@ export type TeamInvitesLazyQueryHookResult = ReturnType<typeof useTeamInvitesLaz
 export type TeamInvitesQueryResult = Apollo.QueryResult<TeamInvitesQuery, TeamInvitesQueryVariables>;
 export const TeamIndexDocument = gql`
     query TeamIndex {
-  listTeams {
+  teams {
     id
     createdAt
     updatedAt
@@ -872,9 +830,9 @@ export type TeamIndexQueryHookResult = ReturnType<typeof useTeamIndexQuery>;
 export type TeamIndexLazyQueryHookResult = ReturnType<typeof useTeamIndexLazyQuery>;
 export type TeamIndexQueryResult = Apollo.QueryResult<TeamIndexQuery, TeamIndexQueryVariables>;
 export const AcceptInviteDocument = gql`
-    mutation AcceptInvite($id: ID!) {
+    mutation AcceptInvite($id: String!) {
   acceptInvite(id: $id) {
-    success
+    id
   }
 }
     `;
@@ -905,8 +863,10 @@ export type AcceptInviteMutationHookResult = ReturnType<typeof useAcceptInviteMu
 export type AcceptInviteMutationResult = Apollo.MutationResult<AcceptInviteMutation>;
 export type AcceptInviteMutationOptions = Apollo.BaseMutationOptions<AcceptInviteMutation, AcceptInviteMutationVariables>;
 export const AddMemberToProjectDocument = gql`
-    mutation addMemberToProject($id: String!, $projectId: String!) {
-  addMemberToProject(id: $id, projectId: $projectId) {
+    mutation addMemberToProject($teamMembershipId: String!, $projectId: String!) {
+  addMemberToProject(
+    input: {teamMembershipId: $teamMembershipId, projectId: $projectId}
+  ) {
     id
     membership {
       user {
@@ -937,7 +897,7 @@ export type AddMemberToProjectMutationFn = Apollo.MutationFunction<AddMemberToPr
  * @example
  * const [addMemberToProjectMutation, { data, loading, error }] = useAddMemberToProjectMutation({
  *   variables: {
- *      id: // value for 'id'
+ *      teamMembershipId: // value for 'teamMembershipId'
  *      projectId: // value for 'projectId'
  *   },
  * });
@@ -949,47 +909,9 @@ export function useAddMemberToProjectMutation(baseOptions?: Apollo.MutationHookO
 export type AddMemberToProjectMutationHookResult = ReturnType<typeof useAddMemberToProjectMutation>;
 export type AddMemberToProjectMutationResult = Apollo.MutationResult<AddMemberToProjectMutation>;
 export type AddMemberToProjectMutationOptions = Apollo.BaseMutationOptions<AddMemberToProjectMutation, AddMemberToProjectMutationVariables>;
-export const ConfirmEmailDocument = gql`
-    mutation ConfirmEmail($token: String!, $email: String!) {
-  confirmEmail(token: $token, email: $email) {
-    id
-    profile {
-      firstName
-      lastName
-    }
-  }
-}
-    `;
-export type ConfirmEmailMutationFn = Apollo.MutationFunction<ConfirmEmailMutation, ConfirmEmailMutationVariables>;
-
-/**
- * __useConfirmEmailMutation__
- *
- * To run a mutation, you first call `useConfirmEmailMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useConfirmEmailMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [confirmEmailMutation, { data, loading, error }] = useConfirmEmailMutation({
- *   variables: {
- *      token: // value for 'token'
- *      email: // value for 'email'
- *   },
- * });
- */
-export function useConfirmEmailMutation(baseOptions?: Apollo.MutationHookOptions<ConfirmEmailMutation, ConfirmEmailMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<ConfirmEmailMutation, ConfirmEmailMutationVariables>(ConfirmEmailDocument, options);
-      }
-export type ConfirmEmailMutationHookResult = ReturnType<typeof useConfirmEmailMutation>;
-export type ConfirmEmailMutationResult = Apollo.MutationResult<ConfirmEmailMutation>;
-export type ConfirmEmailMutationOptions = Apollo.BaseMutationOptions<ConfirmEmailMutation, ConfirmEmailMutationVariables>;
 export const CreateInviteDocument = gql`
-    mutation CreateInvite($email: String!, $teamId: ID, $projectId: ID) {
-  createInvite(email: $email, teamId: $teamId, projectId: $projectId) {
+    mutation CreateInvite($email: String!, $teamId: String!) {
+  createInvite(input: {email: $email, teamId: $teamId}) {
     id
   }
 }
@@ -1011,7 +933,6 @@ export type CreateInviteMutationFn = Apollo.MutationFunction<CreateInviteMutatio
  *   variables: {
  *      email: // value for 'email'
  *      teamId: // value for 'teamId'
- *      projectId: // value for 'projectId'
  *   },
  * });
  */
@@ -1023,8 +944,8 @@ export type CreateInviteMutationHookResult = ReturnType<typeof useCreateInviteMu
 export type CreateInviteMutationResult = Apollo.MutationResult<CreateInviteMutation>;
 export type CreateInviteMutationOptions = Apollo.BaseMutationOptions<CreateInviteMutation, CreateInviteMutationVariables>;
 export const CreateProjectDocument = gql`
-    mutation CreateProject($teamId: ID!, $name: String!) {
-  createProject(teamId: $teamId, name: $name) {
+    mutation CreateProject($teamId: String!, $name: String!) {
+  createProject(input: {teamId: $teamId, name: $name}) {
     id
     createdAt
     updatedAt
@@ -1107,9 +1028,9 @@ export type CreateTeamMutationHookResult = ReturnType<typeof useCreateTeamMutati
 export type CreateTeamMutationResult = Apollo.MutationResult<CreateTeamMutation>;
 export type CreateTeamMutationOptions = Apollo.BaseMutationOptions<CreateTeamMutation, CreateTeamMutationVariables>;
 export const DeleteInviteDocument = gql`
-    mutation DeleteInvite($id: ID!) {
+    mutation DeleteInvite($id: String!) {
   deleteInvite(id: $id) {
-    success
+    id
   }
 }
     `;
@@ -1140,8 +1061,8 @@ export type DeleteInviteMutationHookResult = ReturnType<typeof useDeleteInviteMu
 export type DeleteInviteMutationResult = Apollo.MutationResult<DeleteInviteMutation>;
 export type DeleteInviteMutationOptions = Apollo.BaseMutationOptions<DeleteInviteMutation, DeleteInviteMutationVariables>;
 export const LoginDocument = gql`
-    mutation Login($email: String!, $code: String!) {
-  login(email: $email, code: $code) {
+    mutation Login($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
     id
     profile {
       firstName
@@ -1166,7 +1087,7 @@ export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutati
  * const [loginMutation, { data, loading, error }] = useLoginMutation({
  *   variables: {
  *      email: // value for 'email'
- *      code: // value for 'code'
+ *      password: // value for 'password'
  *   },
  * });
  */
@@ -1180,7 +1101,7 @@ export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, Log
 export const LogoutDocument = gql`
     mutation Logout {
   logout {
-    success
+    id
   }
 }
     `;
@@ -1210,8 +1131,8 @@ export type LogoutMutationHookResult = ReturnType<typeof useLogoutMutation>;
 export type LogoutMutationResult = Apollo.MutationResult<LogoutMutation>;
 export type LogoutMutationOptions = Apollo.BaseMutationOptions<LogoutMutation, LogoutMutationVariables>;
 export const RemoveUserFromProjectDocument = gql`
-    mutation RemoveUserFromProject($id: ID!) {
-  removeUserFromProject(id: $id) {
+    mutation RemoveUserFromProject($projectMembershipId: String!) {
+  removeMemberFromProject(projectMembershipId: $projectMembershipId) {
     id
     project {
       id
@@ -1246,7 +1167,7 @@ export type RemoveUserFromProjectMutationFn = Apollo.MutationFunction<RemoveUser
  * @example
  * const [removeUserFromProjectMutation, { data, loading, error }] = useRemoveUserFromProjectMutation({
  *   variables: {
- *      id: // value for 'id'
+ *      projectMembershipId: // value for 'projectMembershipId'
  *   },
  * });
  */
@@ -1257,43 +1178,17 @@ export function useRemoveUserFromProjectMutation(baseOptions?: Apollo.MutationHo
 export type RemoveUserFromProjectMutationHookResult = ReturnType<typeof useRemoveUserFromProjectMutation>;
 export type RemoveUserFromProjectMutationResult = Apollo.MutationResult<RemoveUserFromProjectMutation>;
 export type RemoveUserFromProjectMutationOptions = Apollo.BaseMutationOptions<RemoveUserFromProjectMutation, RemoveUserFromProjectMutationVariables>;
-export const RequestLoginDocument = gql`
-    mutation RequestLogin($email: String!) {
-  requestLogin(email: $email) {
-    success
-  }
-}
-    `;
-export type RequestLoginMutationFn = Apollo.MutationFunction<RequestLoginMutation, RequestLoginMutationVariables>;
-
-/**
- * __useRequestLoginMutation__
- *
- * To run a mutation, you first call `useRequestLoginMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useRequestLoginMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [requestLoginMutation, { data, loading, error }] = useRequestLoginMutation({
- *   variables: {
- *      email: // value for 'email'
- *   },
- * });
- */
-export function useRequestLoginMutation(baseOptions?: Apollo.MutationHookOptions<RequestLoginMutation, RequestLoginMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<RequestLoginMutation, RequestLoginMutationVariables>(RequestLoginDocument, options);
-      }
-export type RequestLoginMutationHookResult = ReturnType<typeof useRequestLoginMutation>;
-export type RequestLoginMutationResult = Apollo.MutationResult<RequestLoginMutation>;
-export type RequestLoginMutationOptions = Apollo.BaseMutationOptions<RequestLoginMutation, RequestLoginMutationVariables>;
 export const SignupDocument = gql`
-    mutation Signup($email: String!, $firstName: String!, $lastName: String!) {
-  register(email: $email, firstName: $firstName, lastName: $lastName) {
+    mutation Signup($email: String!, $password: String!, $confirmation: String!, $firstName: String!, $lastName: String!) {
+  register(
+    input: {email: $email, password: $password, confirmation: $confirmation, firstName: $firstName, lastName: $lastName}
+  ) {
     id
+    profile {
+      id
+      firstName
+      lastName
+    }
   }
 }
     `;
@@ -1313,6 +1208,8 @@ export type SignupMutationFn = Apollo.MutationFunction<SignupMutation, SignupMut
  * const [signupMutation, { data, loading, error }] = useSignupMutation({
  *   variables: {
  *      email: // value for 'email'
+ *      password: // value for 'password'
+ *      confirmation: // value for 'confirmation'
  *      firstName: // value for 'firstName'
  *      lastName: // value for 'lastName'
  *   },
@@ -1327,7 +1224,7 @@ export type SignupMutationResult = Apollo.MutationResult<SignupMutation>;
 export type SignupMutationOptions = Apollo.BaseMutationOptions<SignupMutation, SignupMutationVariables>;
 export const SearchTeamMembersDocument = gql`
     query SearchTeamMembers($query: String, $cursor: String, $take: Int) {
-  listTeamMemberships(query: $query, cursor: $cursor, take: $take) {
+  teamMemberships(query: $query, pagination: {cursor: $cursor, take: $take}) {
     id
     createdAt
     role

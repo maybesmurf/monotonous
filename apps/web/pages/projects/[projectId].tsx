@@ -11,7 +11,7 @@ import { useState } from "react";
 import { useDebounce } from "react-use";
 
 const query = gql`
-  query ProjectShow($id: ID!) {
+  query ProjectShow($id: String!) {
     project(id: $id) {
       id
       createdAt

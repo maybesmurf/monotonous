@@ -8,7 +8,7 @@ import {
 
 gql`
   query Invites {
-    listInvites {
+    invites {
       id
       createdAt
       invitedBy {
@@ -47,12 +47,12 @@ export default function Invites() {
   }
 
   return (
-    data?.listInvites && (
+    data?.invites && (
       <div className="container">
         <h1>List Invites</h1>
-        {data.listInvites.length > 0 ? (
+        {data.invites.length > 0 ? (
           <ul>
-            {data.listInvites.map((invite) => {
+            {data.invites.map((invite) => {
               return (
                 <li key={invite.id} className="mt-10">
                   <p className="uppercase text-sm opacity-50 font-bold">

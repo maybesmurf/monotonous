@@ -1,5 +1,5 @@
-mutation DeleteInvite($id: ID!) {
+mutation DeleteInvite($id: String!) {
   deleteInvite(id: $id) {
-    success
+    id
   }
 }

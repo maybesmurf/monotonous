@@ -6,10 +6,20 @@ import { User } from '../users/users.model';
 export class Invite {
   @Field(type => ID)
   id: string;
+
+  @Field()
   createdAt: Date;
+
+  @Field()
   email: string;
+
+  @Field()
   invitedById: string;
+  @Field(type => User)
   invitedBy?: User;
+
+  @Field()
   teamId: string;
+  @Field(type => Team)
   team?: Team;
 }

@@ -1,8 +1,10 @@
 import { NotFoundException, UseGuards } from '@nestjs/common';
-import { Args, ArgsType, Query, Resolver } from '@nestjs/graphql';
+import { Args, ArgsType, Parent, Query, Resolver } from '@nestjs/graphql';
+import { LoaderQuery, ResolveLoader } from 'nestjs-mercurius';
 import { paginationArgs, PaginationInput } from 'src/lib/pagination';
 import { PrismaService } from 'src/services/prisma/prisma.service';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
+import { User } from '../users/users.model';
 import { TeamMembership } from './team_memberships.model';
 
 @Resolver(of => TeamMembership)
@@ -49,5 +51,21 @@ export class TeamMembershipsResolver {
         : undefined,
       ...paginationArgs(pagination),
     });
+  }
+
+  @ResolveLoader(type => User)
+  async user(@Parent() queries: LoaderQuery<TeamMembership>[]) {
+    const users = await this.prisma.user.findMany({
+      where: {
+        id: { in: queries.map(q => q.obj.userId) },
+      },
+    });
+
+    const lookup = users.reduce((acc, u) => {
+      acc[u.id] = u;
+      return acc;
+    }, {});
+
+    return queries.map(q => lookup[q.obj.userId]);
   }
 }

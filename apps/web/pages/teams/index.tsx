@@ -10,7 +10,7 @@ import { gql, useQuery } from "@apollo/client";
 
 const query = gql`
   query TeamIndex {
-    listTeams {
+    teams {
       id
       createdAt
       updatedAt
@@ -52,9 +52,9 @@ export default function TeamIndex() {
       <div className="w-2/3">
         <h1>Teams</h1>
 
-        {data && data.listTeams.length > 0 && (
+        {data && data.teams.length > 0 && (
           <ul className="list-decimal">
-            {data.listTeams.map((team) => {
+            {data.teams.map((team) => {
               return (
                 <li key={team.id}>
                   <Link href={`/teams/${team.id}`}>

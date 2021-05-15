@@ -22,18 +22,6 @@ enum MemberRoles {
   BILLING
 }
 
-enum MembershipStatuses {
-  PENDING
-  ACCEPTED
-  BANNED
-}
-
-enum ProjectRoles {
-  ADMIN
-  REVIEWER
-  VIEWER
-}
-
 // ======================
 // Models
 // ======================

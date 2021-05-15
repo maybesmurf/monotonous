@@ -3,8 +3,8 @@ import { TeamInvitesQuery, useDeleteInviteMutation } from "graphql_client";
 import { useRouter } from "next/router";
 
 const query = gql`
-  query TeamInvites($teamId: ID) {
-    listInvites(teamId: $teamId) {
+  query TeamInvites($teamId: String) {
+    invites(teamId: $teamId) {
       id
       createdAt
       email
@@ -41,9 +41,9 @@ export default function Teams_TeamId_Invites() {
       <div className="w-2/3">
         <h1 className="text-2xl font-bold">Invites</h1>
 
-        {data?.listInvites && data.listInvites.length > 0 && (
+        {data?.invites && data.invites.length > 0 && (
           <ul>
-            {data.listInvites.map((invite) => {
+            {data.invites.map((invite) => {
               return (
                 <li key={invite.id} className="mb-5">
                   <div className="flex">

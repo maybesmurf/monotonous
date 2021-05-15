@@ -1,7 +1,5 @@
 import { PrismaPromise, MemberRoles } from "@prisma/client";
 import { EmailQueue } from "@monotonous/sdk-server";
-import { logger } from "env-var";
-import { GraphQLError } from "graphql";
 import { FieldResolver } from "nexus";
 import { ForbiddenError, NotFoundError, UnauthorizedError } from "../../errors";
 

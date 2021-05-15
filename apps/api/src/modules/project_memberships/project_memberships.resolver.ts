@@ -4,11 +4,14 @@ import {
   NotFoundException,
   UseGuards,
 } from '@nestjs/common';
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Parent, Resolver } from '@nestjs/graphql';
 import { MemberRoles } from '@prisma/client';
+import { LoaderQuery, ResolveLoader } from 'nestjs-mercurius';
 import { PrismaService } from 'src/services/prisma/prisma.service';
 import { CurrentUser } from '../auth/current_user.decorator';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
+import { TeamMembership } from '../team_memberships/team_memberships.model';
+import { TeamMembershipsModule } from '../team_memberships/team_memberships.module';
 import { User } from '../users/users.model';
 import { AddMemberToProjectInput } from './project_memberships.dto';
 import { ProjectMembership } from './project_memberships.model';
@@ -80,5 +83,21 @@ export class ProjectMembershipsResolver {
     return this.prisma.projectMembership.delete({
       where: { id: projectMembershipId },
     });
+  }
+
+  @ResolveLoader(type => TeamMembership)
+  async membership(@Parent() queries: LoaderQuery<ProjectMembership>[]) {
+    const memberships = await this.prisma.teamMembership.findMany({
+      where: {
+        id: { in: queries.map(q => q.obj.membershipId) },
+      },
+    });
+
+    const lookup = memberships.reduce((acc, m) => {
+      acc[m.id] = m;
+      return acc;
+    }, {});
+
+    return queries.map(q => lookup[q.obj.membershipId]);
   }
 }

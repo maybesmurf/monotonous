@@ -5,9 +5,11 @@ import {
 } from '@nestjs/common';
 import {
   Args,
+  ID,
   InputType,
   Mutation,
   ObjectType,
+  Query,
   Resolver,
 } from '@nestjs/graphql';
 import { PrismaPromise } from '@prisma/client';
@@ -25,6 +27,20 @@ export class InvitesResolver {
     private readonly prisma: PrismaService,
     private readonly logger: PinoLogger,
   ) {}
+
+  @Query(returns => [Invite])
+  @UseGuards(JwtAuthGuard)
+  async invites(
+    @CurrentUser() user: User,
+    @Args('teamId', { nullable: true }) teamId?: string,
+  ) {
+    return this.prisma.invite.findMany({
+      where: {
+        email: user.email,
+        teamId: teamId ?? undefined,
+      },
+    });
+  }
 
   @Mutation(returns => Invite)
   @UseGuards(JwtAuthGuard)
@@ -90,5 +106,27 @@ export class InvitesResolver {
       this.logger.error(e);
       return { success: false };
     }
+  }
+
+  @Mutation(type => Invite)
+  @UseGuards(JwtAuthGuard)
+  async deleteInvite(@CurrentUser() user: User, @Args('id') id: string) {
+    const invite = await this.prisma.invite.findFirst({
+      where: { id },
+    });
+
+    if (!invite) {
+      throw new NotFoundException();
+    }
+
+    if (invite.email !== user.email) {
+      throw new ForbiddenException();
+    }
+
+    await this.prisma.invite.delete({
+      where: { id },
+    });
+
+    return invite;
   }
 }

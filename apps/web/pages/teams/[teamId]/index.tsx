@@ -6,7 +6,7 @@ import { TeamShowQuery, useCreateProjectMutation } from "graphql_client";
 import { gql, useQuery } from "@apollo/client";
 
 const query = gql`
-  query TeamShow($id: ID!) {
+  query TeamShow($id: String!) {
     team(id: $id) {
       id
       createdAt

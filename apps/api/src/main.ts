@@ -21,7 +21,6 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
-      forbidUnknownValues: true,
       exceptionFactory: (errors: ValidationError[]) => {
         return new merc.ErrorWithProps('VALIDATION_ERROR', {
           invalidArgs: errors,

@@ -1,5 +1,5 @@
-mutation AcceptInvite($id: ID!) {
+mutation AcceptInvite($id: String!) {
   acceptInvite(id: $id) {
-    success
+    id
   }
 }

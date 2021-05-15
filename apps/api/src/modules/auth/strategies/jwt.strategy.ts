@@ -3,10 +3,11 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
 import { FastifyRequest } from 'fastify';
 import { config } from '@monotonous/conf';
+import { PrismaService } from 'src/services/prisma/prisma.service';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor() {
+  constructor(private readonly prisma: PrismaService) {
     super({
       jwtFromRequest: extractJwt,
       ignoreExpiration: false,
@@ -15,7 +16,9 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: { userId: string }) {
-    return { userId: payload.userId };
+    return this.prisma.user.findFirst({
+      where: { id: payload.userId },
+    });
   }
 }
 

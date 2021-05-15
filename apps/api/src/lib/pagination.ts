@@ -2,13 +2,14 @@ import { Field, InputType, Int } from '@nestjs/graphql';
 
 @InputType()
 export class PaginationInput {
-  cursor: string;
+  @Field({ nullable: true })
+  cursor?: string;
 
-  @Field(type => Int)
-  take: number;
+  @Field(type => Int, { nullable: true })
+  take?: number;
 
-  @Field(type => Int)
-  skip: number;
+  @Field(type => Int, { nullable: true })
+  skip?: number;
 }
 
 export function paginationArgs(pagination?: PaginationInput) {

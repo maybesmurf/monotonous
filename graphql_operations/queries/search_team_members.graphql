@@ -1,5 +1,5 @@
 query SearchTeamMembers($query: String, $cursor: String, $take: Int) {
-  listTeamMemberships(query: $query, cursor: $cursor, take: $take) {
+  teamMemberships(query: $query, pagination: { cursor: $cursor, take: $take }) {
     id
     createdAt
     role

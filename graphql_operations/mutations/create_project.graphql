@@ -1,5 +1,5 @@
-mutation CreateProject($teamId: ID!, $name: String!) {
-  createProject(teamId: $teamId, name: $name) {
+mutation CreateProject($teamId: String!, $name: String!) {
+  createProject(input: { teamId: $teamId, name: $name }) {
     id
     createdAt
     updatedAt
