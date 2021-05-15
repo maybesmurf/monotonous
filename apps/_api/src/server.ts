@@ -7,7 +7,7 @@ import { config } from "@monotonous/conf";
 
 import { loaders } from "./graphql_schema/loaders";
 import { schema } from "./graphql_schema";
-import { PrismaClient } from ".prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { CustomContext } from "./graphql_schema/custom_context";
 import { logger } from "handlebars";
 

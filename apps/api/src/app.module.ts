@@ -6,6 +6,11 @@ import { MercuriusModule } from 'nestjs-mercurius';
 import { PrismaService } from './services/prisma/prisma.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
+import { TeamsModule } from './modules/teams/teams.module';
+import { TeamMembershipsModule } from './modules/team_memberships/team_memberships.module';
+import { ProjectsModule } from './modules/projects/projects.module';
+import { ProjectMembershipsModule } from './modules/project_memberships/project_membersips.module';
+import { InvitesModule } from './modules/invites/invites.module';
 
 @Module({
   imports: [
@@ -23,6 +28,11 @@ import { UsersModule } from './modules/users/users.module';
     }),
     AuthModule,
     UsersModule,
+    TeamsModule,
+    TeamMembershipsModule,
+    ProjectsModule,
+    ProjectMembershipsModule,
+    InvitesModule,
   ],
   providers: [PrismaService],
 })

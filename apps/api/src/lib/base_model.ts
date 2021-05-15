@@ -4,10 +4,6 @@ import { Field, ID, ObjectType } from '@nestjs/graphql';
 export class BaseModel {
   @Field(type => ID)
   id: string;
-
-  @Field()
   createdAt: Date;
-
-  @Field()
   updatedAt: Date;
 }

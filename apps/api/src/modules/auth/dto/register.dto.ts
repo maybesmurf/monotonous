@@ -1,5 +1,6 @@
-import { Field, InputType } from '@nestjs/graphql';
-import { IsDefined, IsEmail } from 'class-validator';
+import { ArgsType, Field, InputType } from '@nestjs/graphql';
+import { IsDefined, IsEmail, MinLength } from 'class-validator';
+import { Match } from 'src/decorators/match.validator';
 
 @InputType()
 export class RegisterInput {
@@ -13,6 +14,7 @@ export class RegisterInput {
 
   @Field()
   @IsDefined()
+  @Match('password')
   confirmation: string;
 
   @Field()
@@ -21,5 +23,6 @@ export class RegisterInput {
 
   @Field()
   @IsDefined()
+  @MinLength(10)
   lastName: string;
 }

@@ -5,6 +5,9 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import cookie from 'fastify-cookie';
+import { ValidationPipe } from '@nestjs/common';
+import { ValidationError } from 'class-validator';
+import merc from 'mercurius';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -13,6 +16,19 @@ async function bootstrap() {
   );
 
   app.register(cookie);
+
+  // Register a global validation pipe
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      forbidUnknownValues: true,
+      exceptionFactory: (errors: ValidationError[]) => {
+        return new merc.ErrorWithProps('VALIDATION_ERROR', {
+          invalidArgs: errors,
+        });
+      },
+    }),
+  );
 
   try {
     await app.listen(3000);

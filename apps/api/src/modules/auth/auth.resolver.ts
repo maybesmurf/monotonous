@@ -1,4 +1,9 @@
-import { BadRequestException, UseGuards } from '@nestjs/common';
+import {
+  BadRequestException,
+  UseGuards,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
 import { User } from '../users/users.model';
 import { LocalAuthGuard } from './guards/local.guard';
@@ -6,9 +11,9 @@ import { AuthService } from './auth.service';
 import { CurrentUser } from './current_user.decorator';
 import { RegisterInput } from './dto/register.dto';
 import { JwtService } from '@nestjs/jwt';
-import { FastifyReply } from 'fastify';
 import { config } from '@monotonous/conf';
 import { CustomContext } from 'src/context';
+import { validate } from 'class-validator';
 
 @Resolver()
 export class AuthResolver {
@@ -19,10 +24,7 @@ export class AuthResolver {
 
   @Mutation(type => User)
   async register(@Args('input') input: RegisterInput) {
-    if (input.password !== input.confirmation) {
-      throw new BadRequestException('Password and confirmation do not match');
-    }
-
+    await validate(input);
     return this.auth.registerUser(input);
   }
 

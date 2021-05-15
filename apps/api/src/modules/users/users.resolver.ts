@@ -1,11 +1,11 @@
-import { Request, UseGuards } from '@nestjs/common';
-import { Resolver, Query } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
+import { Resolver, Query, Parent } from '@nestjs/graphql';
 import { PrismaService } from 'src/services/prisma/prisma.service';
 import { User } from 'src/modules/users/users.model';
-import { AuthGuard } from '@nestjs/passport';
-import { FastifyRequest } from 'fastify';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 import { CurrentUser } from '../auth/current_user.decorator';
+import { LoaderQuery, ResolveLoader } from 'nestjs-mercurius';
+import { UserProfile } from '../user_profiles/user_profiles.model';
 
 @Resolver(type => User)
 export class UsersResolver {
@@ -17,32 +17,19 @@ export class UsersResolver {
     return user;
   }
 
-  // @Mutation(returns => User)
-  // async createUser(
-  //   @Args('input')
-  //   { email, firstName, lastName }: CreateUserInput,
-  // ) {
+  @ResolveLoader(returns => UserProfile)
+  async profile(@Parent() queries: LoaderQuery<User>[]) {
+    const profiles = await this.prisma.userProfile.findMany({
+      where: {
+        userId: { in: queries.map(q => q.obj.id) },
+      },
+    });
 
-  //   return this.prisma.user.create({
-  //     data: {
-  //       email,
-  //       profile: {
-  //         create: { firstName, lastName },
-  //       },
-  //     },
-  //   });
-  // }
+    const lookup = profiles.reduce((acc, p) => {
+      acc[p.userId] = p;
+      return acc;
+    }, {});
 
-  // @Query(returns => User)
-  // async user(@Args('id') id: string) {
-  //   const user = this.prisma.user.findUnique({
-  //     where: { id },
-  //   });
-
-  //   if (!user) {
-  //     throw new NotFoundException('No user found');
-  //   }
-
-  //   return user;
-  // }
+    return queries.map(q => lookup[q.obj.id]);
+  }
 }

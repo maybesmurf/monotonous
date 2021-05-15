@@ -1,4 +1,4 @@
-import { MemberRoles } from ".prisma/client";
+import { MemberRoles } from "@prisma/client";
 import { FieldResolver } from "nexus";
 import { UnauthorizedError } from "../../errors";
 
