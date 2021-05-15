@@ -4,7 +4,8 @@ import { LoggerModule } from 'nestjs-pino';
 import { MercuriusModule } from 'nestjs-mercurius';
 
 import { PrismaService } from './services/prisma/prisma.service';
-import { AccountsModule } from './modules/accounts/accounts.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
   imports: [
@@ -13,12 +14,15 @@ import { AccountsModule } from './modules/accounts/accounts.module';
     MercuriusModule.forRoot({
       autoSchemaFile: true,
       altair: true,
-      context: (request, reply) => ({}),
+      context: (request, reply) => {
+        return { request, reply };
+      },
       subscription: {
         context: (connection, request) => ({}),
       },
     }),
-    AccountsModule,
+    AuthModule,
+    UsersModule,
   ],
   providers: [PrismaService],
 })

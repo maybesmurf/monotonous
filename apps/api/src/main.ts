@@ -4,13 +4,15 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
-import { Logger } from 'nestjs-pino';
+import cookie from 'fastify-cookie';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter(),
   );
+
+  app.register(cookie);
 
   try {
     await app.listen(3000);
@@ -20,4 +22,5 @@ async function bootstrap() {
     console.error(e);
   }
 }
+
 bootstrap();
