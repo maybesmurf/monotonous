@@ -2,132 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type UserProfile {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  firstName: String!
-  lastName: String!
-  fullName: String
-  userId: String!
-  user: User!
-}
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
-type User {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  email: String!
-  confirmed: Boolean!
-  profile: UserProfile!
-}
-
-type TeamMembership {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  role: MemberRoles!
-  userId: String!
-  user: User
-  teamId: String!
-  team: Team
-}
-
-enum MemberRoles {
-  ADMIN
-  MEMBER
-  BILLING
-}
-
-type ProjectMembership {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  role: MemberRoles!
-  membershipId: String!
-  membership: TeamMembership!
-  projectId: String!
-  project: Project!
-}
-
-type Project {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  name: String!
-  teamId: String!
-  team: Team!
-  memberships: [ProjectMembership!]!
-  currentMember: ProjectMembership!
-}
-
-type Team {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  name: String!
-  memberships: [TeamMembership!]!
-  projects: [Project!]!
-  invites: [Invite!]!
-}
-
-type Invite {
-  id: ID!
-  createdAt: DateTime!
-  email: String!
-  invitedById: String!
-  invitedBy: User
-  teamId: String!
-  team: Team
-}
-
-type Query {
-  me: User!
-  team(id: String!): Team!
-  teams(pagination: PaginationInput): [Team!]!
-  teamMembership(id: String!): TeamMembership!
-  teamMemberships(pagination: PaginationInput, query: String): [TeamMembership!]!
-  project(id: String!): Project!
-  invites(teamId: String): [Invite!]!
-}
-
-input PaginationInput {
-  cursor: String
-  take: Int
-  skip: Int
-}
-
-type Mutation {
-  register(input: RegisterInput!): User!
-  login(password: String!, email: String!): User!
-  logout: User!
-  createTeam(name: String!): Team!
-  createProject(input: CreateProjectInput!): Project!
-  addMemberToProject(input: AddMemberToProjectInput!): ProjectMembership!
-  removeMemberFromProject(projectMembershipId: String!): ProjectMembership!
-  createInvite(input: CreateInviteInput!): Invite!
-  acceptInvite(id: String!): Invite!
-  deleteInvite(id: String!): Invite!
-}
-
-input RegisterInput {
-  email: String!
-  password: String!
-  confirmation: String!
-  firstName: String!
-  lastName: String!
-}
-
-input CreateProjectInput {
-  name: String!
-  teamId: String!
-}
-
 input AddMemberToProjectInput {
   projectId: String!
   teamMembershipId: String!
@@ -136,4 +10,130 @@ input AddMemberToProjectInput {
 input CreateInviteInput {
   email: String!
   teamId: String!
+}
+
+input CreateProjectInput {
+  name: String!
+  teamId: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Invite {
+  createdAt: DateTime!
+  email: String!
+  id: ID!
+  invitedBy: User!
+  invitedById: String!
+  team: Team!
+  teamId: String!
+}
+
+enum MemberRoles {
+  ADMIN
+  BILLING
+  MEMBER
+}
+
+type Mutation {
+  acceptInvite(id: String!): Invite!
+  addMemberToProject(input: AddMemberToProjectInput!): ProjectMembership!
+  createInvite(input: CreateInviteInput!): Invite!
+  createProject(input: CreateProjectInput!): Project!
+  createTeam(name: String!): Team!
+  deleteInvite(id: String!): Invite!
+  login(email: String!, password: String!): User!
+  logout: User!
+  register(input: RegisterInput!): User!
+  removeMemberFromProject(projectMembershipId: String!): ProjectMembership!
+}
+
+input PaginationInput {
+  cursor: String
+  skip: Int
+  take: Int
+}
+
+type Project {
+  createdAt: DateTime!
+  currentMember: ProjectMembership!
+  id: ID!
+  memberships: [ProjectMembership!]!
+  name: String!
+  team: Team!
+  teamId: String!
+  updatedAt: DateTime!
+}
+
+type ProjectMembership {
+  createdAt: DateTime!
+  id: ID!
+  membership: TeamMembership!
+  membershipId: String!
+  project: Project!
+  projectId: String!
+  role: MemberRoles!
+  updatedAt: DateTime!
+}
+
+type Query {
+  invites(teamId: String): [Invite!]!
+  me: User!
+  project(id: String!): Project!
+  team(id: String!): Team!
+  teamMembership(id: String!): TeamMembership!
+  teamMemberships(pagination: PaginationInput, query: String): [TeamMembership!]!
+  teams(pagination: PaginationInput): [Team!]!
+}
+
+input RegisterInput {
+  confirmation: String!
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+}
+
+type Team {
+  createdAt: DateTime!
+  id: ID!
+  invites: [Invite!]!
+  memberships: [TeamMembership!]!
+  name: String!
+  projects: [Project!]!
+  updatedAt: DateTime!
+}
+
+type TeamMembership {
+  createdAt: DateTime!
+  id: ID!
+  role: MemberRoles!
+  team: Team!
+  teamId: String!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+}
+
+type User {
+  confirmed: Boolean!
+  createdAt: DateTime!
+  email: String!
+  id: ID!
+  profile: UserProfile!
+  updatedAt: DateTime!
+}
+
+type UserProfile {
+  createdAt: DateTime!
+  firstName: String!
+  fullName: String
+  id: ID!
+  lastName: String!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
 }

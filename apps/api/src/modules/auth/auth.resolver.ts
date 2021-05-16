@@ -9,7 +9,7 @@ import { User } from '../users/users.model';
 import { LocalAuthGuard } from './guards/local.guard';
 import { AuthService } from './auth.service';
 import { CurrentUser } from './current_user.decorator';
-import { RegisterInput } from './dto/register.dto';
+import { RegisterInput } from './auth.dto';
 import { JwtService } from '@nestjs/jwt';
 import { config } from '@monotonous/conf';
 import { CustomContext } from 'src/context';

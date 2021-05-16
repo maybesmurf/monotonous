@@ -59,8 +59,8 @@ export default function Projects_ProjectId() {
 
   const admin = data?.project.currentMember?.role === MemberRoles.Admin;
   const cursor =
-    results && results?.listTeamMemberships.length
-      ? results?.listTeamMemberships[results?.listTeamMemberships.length - 1].id
+    results && results?.teamMemberships.length
+      ? results?.teamMemberships[results?.teamMemberships.length - 1].id
       : undefined;
 
   useDebounce(
@@ -77,10 +77,10 @@ export default function Projects_ProjectId() {
     <div>loading...</div>;
   }
 
-  async function handleAddUser(id: string) {
+  async function handleAddMember(teamMembershipId: string) {
     try {
       await addMember({
-        variables: { projectId, id },
+        variables: { projectId, teamMembershipId },
       });
 
       clearSearch?.({ query: "" });
@@ -91,9 +91,12 @@ export default function Projects_ProjectId() {
     }
   }
 
-  async function handleRemoveMember(id: string) {
+  async function handleRemoveMember(projectMembershipId: string) {
     try {
-      await removeMember({ variables: { id } });
+      await removeMember({
+        variables: { projectMembershipId },
+      });
+
       refetch();
     } catch (e) {
       console.error(e);
@@ -137,13 +140,13 @@ export default function Projects_ProjectId() {
               className="bg-gray-800 text-white"
             />
 
-            {results && results.listTeamMemberships.length > 0 && (
+            {results && results.teamMemberships.length > 0 && (
               <ul className="mt-10">
-                {results.listTeamMemberships.map((member) => {
+                {results.teamMemberships.map((member) => {
                   return (
                     <li key={member.id} className="flex">
                       <p>{member.user?.profile?.fullName}</p>
-                      <button onClick={() => handleAddUser(member.id)}>
+                      <button onClick={() => handleAddMember(member.id)}>
                         Add
                       </button>
                     </li>

@@ -34,69 +34,33 @@ export type CreateProjectInput = {
 
 export type Invite = {
   __typename: 'Invite';
-  id: Scalars['ID'];
   createdAt: Scalars['DateTime'];
   email: Scalars['String'];
+  id: Scalars['ID'];
+  invitedBy: User;
   invitedById: Scalars['String'];
-  invitedBy?: Maybe<User>;
+  team: Team;
   teamId: Scalars['String'];
-  team?: Maybe<Team>;
 };
 
 export enum MemberRoles {
   Admin = 'ADMIN',
-  Member = 'MEMBER',
-  Billing = 'BILLING'
+  Billing = 'BILLING',
+  Member = 'MEMBER'
 }
 
 export type Mutation = {
   __typename: 'Mutation';
-  register: User;
+  acceptInvite: Invite;
+  addMemberToProject: ProjectMembership;
+  createInvite: Invite;
+  createProject: Project;
+  createTeam: Team;
+  deleteInvite: Invite;
   login: User;
   logout: User;
-  createTeam: Team;
-  createProject: Project;
-  addMemberToProject: ProjectMembership;
+  register: User;
   removeMemberFromProject: ProjectMembership;
-  createInvite: Invite;
-  acceptInvite: Invite;
-  deleteInvite: Invite;
-};
-
-
-export type MutationRegisterArgs = {
-  input: RegisterInput;
-};
-
-
-export type MutationLoginArgs = {
-  password: Scalars['String'];
-  email: Scalars['String'];
-};
-
-
-export type MutationCreateTeamArgs = {
-  name: Scalars['String'];
-};
-
-
-export type MutationCreateProjectArgs = {
-  input: CreateProjectInput;
-};
-
-
-export type MutationAddMemberToProjectArgs = {
-  input: AddMemberToProjectInput;
-};
-
-
-export type MutationRemoveMemberFromProjectArgs = {
-  projectMembershipId: Scalars['String'];
-};
-
-
-export type MutationCreateInviteArgs = {
-  input: CreateInviteInput;
 };
 
 
@@ -105,59 +69,100 @@ export type MutationAcceptInviteArgs = {
 };
 
 
+export type MutationAddMemberToProjectArgs = {
+  input: AddMemberToProjectInput;
+};
+
+
+export type MutationCreateInviteArgs = {
+  input: CreateInviteInput;
+};
+
+
+export type MutationCreateProjectArgs = {
+  input: CreateProjectInput;
+};
+
+
+export type MutationCreateTeamArgs = {
+  name: Scalars['String'];
+};
+
+
 export type MutationDeleteInviteArgs = {
   id: Scalars['String'];
 };
 
+
+export type MutationLoginArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
+
+export type MutationRegisterArgs = {
+  input: RegisterInput;
+};
+
+
+export type MutationRemoveMemberFromProjectArgs = {
+  projectMembershipId: Scalars['String'];
+};
+
 export type PaginationInput = {
   cursor?: Maybe<Scalars['String']>;
-  take?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
 };
 
 export type Project = {
   __typename: 'Project';
-  id: Scalars['ID'];
   createdAt: Scalars['DateTime'];
-  updatedAt: Scalars['DateTime'];
-  name: Scalars['String'];
-  teamId: Scalars['String'];
-  team: Team;
-  memberships: Array<ProjectMembership>;
   currentMember: ProjectMembership;
+  id: Scalars['ID'];
+  memberships: Array<ProjectMembership>;
+  name: Scalars['String'];
+  team: Team;
+  teamId: Scalars['String'];
+  updatedAt: Scalars['DateTime'];
 };
 
 export type ProjectMembership = {
   __typename: 'ProjectMembership';
-  id: Scalars['ID'];
   createdAt: Scalars['DateTime'];
-  updatedAt: Scalars['DateTime'];
-  role: MemberRoles;
-  membershipId: Scalars['String'];
+  id: Scalars['ID'];
   membership: TeamMembership;
-  projectId: Scalars['String'];
+  membershipId: Scalars['String'];
   project: Project;
+  projectId: Scalars['String'];
+  role: MemberRoles;
+  updatedAt: Scalars['DateTime'];
 };
 
 export type Query = {
   __typename: 'Query';
+  invites: Array<Invite>;
   me: User;
+  project: Project;
   team: Team;
-  teams: Array<Team>;
   teamMembership: TeamMembership;
   teamMemberships: Array<TeamMembership>;
-  project: Project;
-  invites: Array<Invite>;
+  teams: Array<Team>;
+};
+
+
+export type QueryInvitesArgs = {
+  teamId?: Maybe<Scalars['String']>;
+};
+
+
+export type QueryProjectArgs = {
+  id: Scalars['String'];
 };
 
 
 export type QueryTeamArgs = {
   id: Scalars['String'];
-};
-
-
-export type QueryTeamsArgs = {
-  pagination?: Maybe<PaginationInput>;
 };
 
 
@@ -172,66 +177,61 @@ export type QueryTeamMembershipsArgs = {
 };
 
 
-export type QueryProjectArgs = {
-  id: Scalars['String'];
-};
-
-
-export type QueryInvitesArgs = {
-  teamId?: Maybe<Scalars['String']>;
+export type QueryTeamsArgs = {
+  pagination?: Maybe<PaginationInput>;
 };
 
 export type RegisterInput = {
-  email: Scalars['String'];
-  password: Scalars['String'];
   confirmation: Scalars['String'];
+  email: Scalars['String'];
   firstName: Scalars['String'];
   lastName: Scalars['String'];
+  password: Scalars['String'];
 };
 
 export type Team = {
   __typename: 'Team';
-  id: Scalars['ID'];
   createdAt: Scalars['DateTime'];
-  updatedAt: Scalars['DateTime'];
-  name: Scalars['String'];
-  memberships: Array<TeamMembership>;
-  projects: Array<Project>;
+  id: Scalars['ID'];
   invites: Array<Invite>;
+  memberships: Array<TeamMembership>;
+  name: Scalars['String'];
+  projects: Array<Project>;
+  updatedAt: Scalars['DateTime'];
 };
 
 export type TeamMembership = {
   __typename: 'TeamMembership';
-  id: Scalars['ID'];
   createdAt: Scalars['DateTime'];
-  updatedAt: Scalars['DateTime'];
+  id: Scalars['ID'];
   role: MemberRoles;
-  userId: Scalars['String'];
-  user?: Maybe<User>;
+  team: Team;
   teamId: Scalars['String'];
-  team?: Maybe<Team>;
+  updatedAt: Scalars['DateTime'];
+  user: User;
+  userId: Scalars['String'];
 };
 
 export type User = {
   __typename: 'User';
-  id: Scalars['ID'];
-  createdAt: Scalars['DateTime'];
-  updatedAt: Scalars['DateTime'];
-  email: Scalars['String'];
   confirmed: Scalars['Boolean'];
+  createdAt: Scalars['DateTime'];
+  email: Scalars['String'];
+  id: Scalars['ID'];
   profile: UserProfile;
+  updatedAt: Scalars['DateTime'];
 };
 
 export type UserProfile = {
   __typename: 'UserProfile';
-  id: Scalars['ID'];
   createdAt: Scalars['DateTime'];
-  updatedAt: Scalars['DateTime'];
   firstName: Scalars['String'];
-  lastName: Scalars['String'];
   fullName?: Maybe<Scalars['String']>;
-  userId: Scalars['String'];
+  id: Scalars['ID'];
+  lastName: Scalars['String'];
+  updatedAt: Scalars['DateTime'];
   user: User;
+  userId: Scalars['String'];
 };
 
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
@@ -257,17 +257,17 @@ export type InvitesQuery = (
   & { invites: Array<(
     { __typename: 'Invite' }
     & Pick<Invite, 'id' | 'createdAt'>
-    & { invitedBy?: Maybe<(
+    & { invitedBy: (
       { __typename: 'User' }
       & Pick<User, 'id'>
       & { profile: (
         { __typename: 'UserProfile' }
         & Pick<UserProfile, 'fullName'>
       ) }
-    )>, team?: Maybe<(
+    ), team: (
       { __typename: 'Team' }
       & Pick<Team, 'id' | 'createdAt' | 'name'>
-    )> }
+    ) }
   )> }
 );
 
@@ -290,14 +290,14 @@ export type ProjectShowQuery = (
       & { membership: (
         { __typename: 'TeamMembership' }
         & Pick<TeamMembership, 'id' | 'role'>
-        & { user?: Maybe<(
+        & { user: (
           { __typename: 'User' }
           & Pick<User, 'id'>
           & { profile: (
             { __typename: 'UserProfile' }
             & Pick<UserProfile, 'id' | 'fullName'>
           ) }
-        )> }
+        ) }
       ) }
     )> }
   ) }
@@ -319,14 +319,14 @@ export type TeamShowQuery = (
     )>, memberships: Array<(
       { __typename: 'TeamMembership' }
       & Pick<TeamMembership, 'id' | 'role'>
-      & { user?: Maybe<(
+      & { user: (
         { __typename: 'User' }
         & Pick<User, 'id'>
         & { profile: (
           { __typename: 'UserProfile' }
           & Pick<UserProfile, 'id' | 'fullName'>
         ) }
-      )> }
+      ) }
     )> }
   ) }
 );
@@ -381,14 +381,14 @@ export type AddMemberToProjectMutation = (
     & Pick<ProjectMembership, 'id'>
     & { membership: (
       { __typename: 'TeamMembership' }
-      & { user?: Maybe<(
+      & { user: (
         { __typename: 'User' }
         & Pick<User, 'id'>
         & { profile: (
           { __typename: 'UserProfile' }
           & Pick<UserProfile, 'id' | 'firstName' | 'lastName' | 'fullName'>
         ) }
-      )> }
+      ) }
     ) }
   ) }
 );
@@ -434,14 +434,14 @@ export type CreateTeamMutation = (
     & { memberships: Array<(
       { __typename: 'TeamMembership' }
       & Pick<TeamMembership, 'id' | 'role'>
-      & { user?: Maybe<(
+      & { user: (
         { __typename: 'User' }
         & Pick<User, 'id'>
         & { profile: (
           { __typename: 'UserProfile' }
           & Pick<UserProfile, 'id' | 'fullName'>
         ) }
-      )> }
+      ) }
     )> }
   ) }
 );
@@ -503,14 +503,14 @@ export type RemoveUserFromProjectMutation = (
       & Pick<Project, 'id' | 'name'>
     ), membership: (
       { __typename: 'TeamMembership' }
-      & { user?: Maybe<(
+      & { user: (
         { __typename: 'User' }
         & Pick<User, 'id'>
         & { profile: (
           { __typename: 'UserProfile' }
           & Pick<UserProfile, 'id' | 'firstName' | 'lastName' | 'fullName'>
         ) }
-      )> }
+      ) }
     ) }
   ) }
 );
@@ -548,14 +548,14 @@ export type SearchTeamMembersQuery = (
   & { teamMemberships: Array<(
     { __typename: 'TeamMembership' }
     & Pick<TeamMembership, 'id' | 'createdAt' | 'role'>
-    & { user?: Maybe<(
+    & { user: (
       { __typename: 'User' }
       & Pick<User, 'id'>
       & { profile: (
         { __typename: 'UserProfile' }
         & Pick<UserProfile, 'id' | 'firstName' | 'lastName' | 'fullName'>
       ) }
-    )> }
+    ) }
   )> }
 );
 

@@ -23,6 +23,7 @@ registerEnumType(MemberRoles, { name: 'MemberRoles' });
     LoggerModule.forRoot(),
     MercuriusModule.forRoot({
       autoSchemaFile: '../../schema.graphql',
+      sortSchema: true,
       altair: true,
       context: (request, reply) => {
         return { request, reply };

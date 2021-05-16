@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/services/prisma/prisma.service';
 import { hash, verify } from 'argon2';
 import { User } from '../users/users.model';
-import { RegisterInput } from './dto/register.dto';
+import { RegisterInput } from './auth.dto';
 
 @Injectable()
 export class AuthService {

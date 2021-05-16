@@ -23,6 +23,5 @@ export class RegisterInput {
 
   @Field()
   @IsDefined()
-  @MinLength(10)
   lastName: string;
 }
