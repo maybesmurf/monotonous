@@ -7,7 +7,7 @@ import { Header } from "components/header";
 import { Footer } from "components/footer";
 import { useAuth } from "hooks/use_auth";
 import { MeQuery } from "graphql_client";
-import { gqlClient } from "lib/gql_client";
+import { apolloClient } from "lib/apollo_client";
 
 const query = gql`
   query Me {
@@ -27,7 +27,7 @@ export default function App({ Component, pageProps }) {
   useEffect(() => {
     async function init() {
       try {
-        const { data } = await gqlClient.query<MeQuery>({ query });
+        const { data } = await apolloClient.query<MeQuery>({ query });
 
         if (data?.me && data.me.profile) {
           setUser({
@@ -45,7 +45,7 @@ export default function App({ Component, pageProps }) {
   }, []);
 
   return (
-    <ApolloProvider client={gqlClient}>
+    <ApolloProvider client={apolloClient}>
       <div className="min-h-screen flex flex-col">
         <Header />
         <Component {...pageProps} />

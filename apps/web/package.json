@@ -5,15 +5,10 @@
   "scripts": {
     "clean": "rm -rf ./.next ./node_modules",
     "dev": "next dev -p 8080",
-    "build": "NODE_ENV=production yarn tw:prod && next build",
-    "start": "next start -p 8080",
-    "tw:dev": "NODE_ENV=development postcss ./styles/index.css -o ./styles/compiled.css -w",
-    "tw:build": "NODE_ENV=production postcss ./styles/index.css -o ./styles/compiled.css"
+    "build": "next build",
+    "start": "next start -p 8080"
   },
   "dependencies": {
     "@monotonous/conf": "1.0.0"
-  },
-  "devDependencies": {
-    "postcss": "^8.2.10"
   }
 }

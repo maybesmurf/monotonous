@@ -5,32 +5,6 @@ import Link from "next/link";
 import { TeamShowQuery, useCreateProjectMutation } from "graphql_client";
 import { gql, useQuery } from "@apollo/client";
 
-const query = gql`
-  query TeamShow($id: String!) {
-    team(id: $id) {
-      id
-      createdAt
-      updatedAt
-      name
-      projects {
-        id
-        name
-      }
-      memberships {
-        id
-        role
-        user {
-          id
-          profile {
-            id
-            fullName
-          }
-        }
-      }
-    }
-  }
-`;
-
 export default function TeamShow() {
   const router = useRouter();
   const { teamId } = router.query as { teamId: string };
@@ -124,3 +98,29 @@ export default function TeamShow() {
     </div>
   );
 }
+
+const query = gql`
+  query TeamShow($id: String!) {
+    team(id: $id) {
+      id
+      createdAt
+      updatedAt
+      name
+      projects {
+        id
+        name
+      }
+      memberships {
+        id
+        role
+        user {
+          id
+          profile {
+            id
+            fullName
+          }
+        }
+      }
+    }
+  }
+`;
