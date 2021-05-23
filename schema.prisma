@@ -22,22 +22,34 @@ enum MemberRoles {
   BILLING
 }
 
+enum NotificationTypes {
+  TEAM_INVITE
+  NEW_TEAM_MEMBER
+  REMOVED_FROM_TEAM
+  REMOVED_FROM_PROJECT
+  PAYMENT_ACCEPTED
+  PAYMENT_REJECTED
+}
+
 // ======================
 // Models
 // ======================
 
 model User {
-  id                String             @id @default(cuid())
-  createdAt         DateTime           @default(now())
-  updatedAt         DateTime           @updatedAt
-  confirmed         Boolean            @default(false)
-  email             String             @unique
-  passwordHash      String
+  id                   String             @id @default(cuid())
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+  confirmed            Boolean            @default(false)
+  email                String             @unique
+  passwordHash         String
   //
-  emailConfirmation EmailConfirmation?
-  profile           UserProfile?
-  teamMemberships   TeamMembership[]
-  Invite            Invite[]
+  emailConfirmation    EmailConfirmation?
+  profile              UserProfile?
+  teamMemberships      TeamMembership[]
+  invites              Invite[]
+  notifications        Notification[]     @relation("NotificationUser")
+  // Unused
+  subjectNotifications Notification[]     @relation("NotificationSubject")
 }
 
 model EmailConfirmation {
@@ -58,13 +70,14 @@ model UserProfile {
 }
 
 model Team {
-  id          String           @id @default(cuid())
-  createdAt   DateTime         @default(now())
-  updatedAt   DateTime         @updatedAt
-  name        String
-  memberships TeamMembership[]
-  projects    Project[]
-  invites     Invite[]
+  id           String           @id @default(cuid())
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  name         String
+  memberships  TeamMembership[]
+  projects     Project[]
+  invites      Invite[]
+  Notification Notification[]
 }
 
 model TeamMembership {
@@ -83,13 +96,14 @@ model TeamMembership {
 }
 
 model Project {
-  id          String              @id @default(cuid())
-  createdAt   DateTime            @default(now())
-  updatedAt   DateTime            @updatedAt
-  name        String
-  team        Team                @relation(fields: [teamId], references: [id])
-  teamId      String
-  memberships ProjectMembership[]
+  id           String              @id @default(cuid())
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+  name         String
+  team         Team                @relation(fields: [teamId], references: [id])
+  teamId       String
+  memberships  ProjectMembership[]
+  Notification Notification[]
 }
 
 model ProjectMembership {
@@ -111,9 +125,26 @@ model Invite {
   email       String
   invitedBy   User     @relation(fields: [invitedById], references: [id])
   invitedById String
-  team        Team?    @relation(fields: [teamId], references: [id])
-  teamId      String?
+  team        Team     @relation(fields: [teamId], references: [id])
+  teamId      String
 
   @@unique([email, teamId])
   @@index([email])
+}
+
+model Notification {
+  id        String            @id @default(cuid())
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+  seenAt    DateTime?
+  type      NotificationTypes
+  //
+  userId    String
+  user      User              @relation("NotificationUser", fields: [userId], references: [id])
+  subjectId String
+  subject   User              @relation("NotificationSubject", fields: [subjectId], references: [id])
+  teamId    String?
+  team      Team?             @relation(fields: [teamId], references: [id])
+  projectId String?
+  project   Project?          @relation(fields: [projectId], references: [id])
 }

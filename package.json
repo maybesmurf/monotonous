@@ -21,7 +21,7 @@
     "gql:build": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
-    "@apollo/client": "3.4.0-beta.22",
+    "@apollo/client": "3.4.0-beta.27",
     "@prisma/client": "^2.22.1",
     "@sinclair/typebox": "^0.16.5",
     "argon2": "^0.27.2",
@@ -102,10 +102,7 @@
   },
   "workspaces": [
     "packages/conf",
-    "packages/email",
-    "packages/sdk-server",
     "apps/api",
-    "apps/web",
-    "apps/worker"
+    "apps/web"
   ]
 }

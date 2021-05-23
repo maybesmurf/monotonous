@@ -51,6 +51,31 @@ type Mutation {
   removeMemberFromProject(projectMembershipId: String!): ProjectMembership!
 }
 
+type Notification {
+  createdAt: DateTime!
+  id: ID!
+  project: Project
+  projectId: String!
+  seenAt: DateTime!
+  subject: User!
+  subjectId: String!
+  team: Team
+  teamId: String!
+  type: NotificationTypes!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+}
+
+enum NotificationTypes {
+  NEW_TEAM_MEMBER
+  PAYMENT_ACCEPTED
+  PAYMENT_REJECTED
+  REMOVED_FROM_PROJECT
+  REMOVED_FROM_TEAM
+  TEAM_INVITE
+}
+
 input PaginationInput {
   cursor: String
   skip: Int
@@ -82,6 +107,7 @@ type ProjectMembership {
 type Query {
   invites(teamId: String): [Invite!]!
   me: User!
+  notifications(pagination: PaginationInput): [Notification!]!
   project(id: String!): Project!
   team(id: String!): Team!
   teamMembership(id: String!): TeamMembership!
@@ -95,6 +121,10 @@ input RegisterInput {
   firstName: String!
   lastName: String!
   password: String!
+}
+
+type Subscription {
+  onCatCreated(name: String!): Notification!
 }
 
 type Team {

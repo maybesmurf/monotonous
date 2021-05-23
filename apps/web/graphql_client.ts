@@ -109,6 +109,32 @@ export type MutationRemoveMemberFromProjectArgs = {
   projectMembershipId: Scalars['String'];
 };
 
+export type Notification = {
+  __typename: 'Notification';
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ID'];
+  project?: Maybe<Project>;
+  projectId: Scalars['String'];
+  seenAt: Scalars['DateTime'];
+  subject: User;
+  subjectId: Scalars['String'];
+  team?: Maybe<Team>;
+  teamId: Scalars['String'];
+  type: NotificationTypes;
+  updatedAt: Scalars['DateTime'];
+  user: User;
+  userId: Scalars['String'];
+};
+
+export enum NotificationTypes {
+  NewTeamMember = 'NEW_TEAM_MEMBER',
+  PaymentAccepted = 'PAYMENT_ACCEPTED',
+  PaymentRejected = 'PAYMENT_REJECTED',
+  RemovedFromProject = 'REMOVED_FROM_PROJECT',
+  RemovedFromTeam = 'REMOVED_FROM_TEAM',
+  TeamInvite = 'TEAM_INVITE'
+}
+
 export type PaginationInput = {
   cursor?: Maybe<Scalars['String']>;
   skip?: Maybe<Scalars['Int']>;
@@ -143,6 +169,7 @@ export type Query = {
   __typename: 'Query';
   invites: Array<Invite>;
   me: User;
+  notifications: Array<Notification>;
   project: Project;
   team: Team;
   teamMembership: TeamMembership;
@@ -153,6 +180,11 @@ export type Query = {
 
 export type QueryInvitesArgs = {
   teamId?: Maybe<Scalars['String']>;
+};
+
+
+export type QueryNotificationsArgs = {
+  pagination?: Maybe<PaginationInput>;
 };
 
 
@@ -187,6 +219,16 @@ export type RegisterInput = {
   firstName: Scalars['String'];
   lastName: Scalars['String'];
   password: Scalars['String'];
+};
+
+export type Subscription = {
+  __typename: 'Subscription';
+  onCatCreated: Notification;
+};
+
+
+export type SubscriptionOnCatCreatedArgs = {
+  name: Scalars['String'];
 };
 
 export type Team = {
@@ -233,6 +275,31 @@ export type UserProfile = {
   user: User;
   userId: Scalars['String'];
 };
+
+export type NotificationsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type NotificationsQuery = (
+  { __typename: 'Query' }
+  & { notifications: Array<(
+    { __typename: 'Notification' }
+    & Pick<Notification, 'id'>
+    & { subject: (
+      { __typename: 'User' }
+      & Pick<User, 'id'>
+      & { profile: (
+        { __typename: 'UserProfile' }
+        & Pick<UserProfile, 'fullName'>
+      ) }
+    ), team?: Maybe<(
+      { __typename: 'Team' }
+      & Pick<Team, 'id' | 'name'>
+    )>, project?: Maybe<(
+      { __typename: 'Project' }
+      & Pick<Project, 'id' | 'name'>
+    )> }
+  )> }
+);
 
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -560,6 +627,54 @@ export type SearchTeamMembersQuery = (
 );
 
 
+export const NotificationsDocument = gql`
+    query Notifications {
+  notifications {
+    id
+    subject {
+      id
+      profile {
+        fullName
+      }
+    }
+    team {
+      id
+      name
+    }
+    project {
+      id
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __useNotificationsQuery__
+ *
+ * To run a query within a React component, call `useNotificationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useNotificationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useNotificationsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useNotificationsQuery(baseOptions?: Apollo.QueryHookOptions<NotificationsQuery, NotificationsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<NotificationsQuery, NotificationsQueryVariables>(NotificationsDocument, options);
+      }
+export function useNotificationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<NotificationsQuery, NotificationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<NotificationsQuery, NotificationsQueryVariables>(NotificationsDocument, options);
+        }
+export type NotificationsQueryHookResult = ReturnType<typeof useNotificationsQuery>;
+export type NotificationsLazyQueryHookResult = ReturnType<typeof useNotificationsLazyQuery>;
+export type NotificationsQueryResult = Apollo.QueryResult<NotificationsQuery, NotificationsQueryVariables>;
 export const MeDocument = gql`
     query Me {
   me {
