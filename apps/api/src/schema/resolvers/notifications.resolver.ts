@@ -8,19 +8,19 @@ import { NotificationsLoader } from '../loaders/notifications.loader';
 import { User } from '../types/user.type';
 import { Notification } from '../types/notification.type';
 import { SubTopics } from '../schema.constants';
+import { Public } from 'src/auth/decorators/public.decorator';
 
 @Resolver(of => Notification)
 export class NotificationsResolver extends NotificationsLoader {
-  @Query(_returns => [Notification])
+  @Query(returns => [Notification])
   async notifications(
     @CurrentUser() user: User,
-    @Context('pubsub') pubsub: PubSub,
     @Args('pagination', { nullable: true }) pagination?: PaginationInput,
   ): Promise<Notification[]> {
     return this.prisma.notification.findMany({
-      // where: {
-      //   userId: user.id,
-      // },
+      where: {
+        userId: user.id,
+      },
       ...paginationArgs(pagination),
     });
   }

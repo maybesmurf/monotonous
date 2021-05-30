@@ -22,10 +22,14 @@ registerEnumType(NotificationTypes, { name: 'NotificationTypes' });
       autoSchemaFile: '../../schema.graphql',
       sortSchema: true,
       altair: true,
-      context: (request, reply) => ({ request, reply }),
+      context: (request, reply) => {
+        return { request, reply };
+      },
       subscription: {
         emitter,
-        context: (connection, request) => ({ connection, request }),
+        context: (connection, request) => {
+          return { connection, request };
+        },
       },
     }),
     AuthModule,
