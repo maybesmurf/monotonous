@@ -1,13 +1,14 @@
 import { NotificationTypes } from '.prisma/client';
 import { Injectable } from '@nestjs/common';
 import { PubSubHost } from 'nestjs-mercurius';
+import { SubTopics } from 'src/schema/schema.constants';
 import { PrismaService } from 'src/services/prisma/prisma.service';
 import { ICreateNotificationParams } from './notifications.interface';
 
 @Injectable()
 export class NotificationsService {
   errorCodes = {
-    UNAUTHORIZED_CREATE: 'noticication/UNAUTHORIZED_CREATE',
+    UNAUTHORIZED_CREATE: 'notification/UNAUTHORIZED_CREATE',
   };
 
   constructor(
@@ -34,7 +35,7 @@ export class NotificationsService {
     });
 
     this.pubsub.getInstance()?.publish({
-      topic: 'NEW_NOTIFICATION',
+      topic: SubTopics.NEW_NOTIFICATION,
       payload: { newNotification: notification },
     });
 

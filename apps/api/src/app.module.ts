@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { MemberRoles, NotificationTypes } from '@prisma/client';
 import { SchemaModule } from './schema/schema.module';
 import { GlobalJwtAuthGuard } from './auth/guards/jwt.guard';
+import { emitter } from './schema/emitter';
 
 registerEnumType(MemberRoles, { name: 'MemberRoles' });
 registerEnumType(NotificationTypes, { name: 'NotificationTypes' });
@@ -21,8 +22,11 @@ registerEnumType(NotificationTypes, { name: 'NotificationTypes' });
       autoSchemaFile: '../../schema.graphql',
       sortSchema: true,
       altair: true,
-      subscription: true,
       context: (request, reply) => ({ request, reply }),
+      subscription: {
+        emitter,
+        context: (connection, request) => ({ connection, request }),
+      },
     }),
     AuthModule,
     SchemaModule,

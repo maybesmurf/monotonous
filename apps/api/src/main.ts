@@ -15,6 +15,8 @@ async function bootstrap() {
     new FastifyAdapter(),
   );
 
+  app.enableShutdownHooks();
+
   app.register(cookie);
 
   // Register a global validation pipe

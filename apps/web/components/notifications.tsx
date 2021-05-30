@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 import { useNotificationsQuery } from 'graphql_client';
 
 export const Notifications = () => {
-  const { data } = useNotificationsQuery();
+  const { data } = useNotificationsQuery({});
 
   return (
     <div className="relative group">

@@ -3,7 +3,14 @@ import {
   NotFoundException,
   UseGuards,
 } from '@nestjs/common';
-import { Args, InputType, Mutation, Query, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  Context,
+  InputType,
+  Mutation,
+  Query,
+  Resolver,
+} from '@nestjs/graphql';
 import { PrismaPromise } from '@prisma/client';
 import { CurrentUser } from '../../auth/decorators/current_user.decorator';
 import { JwtAuthGuard } from '../../auth/guards/jwt.guard';
@@ -11,6 +18,9 @@ import { User } from '../types/user.type';
 import { CreateInviteInput } from '../input_types/create_invite.input';
 import { Invite } from '../types/invite.type';
 import { InvitesLoader } from '../loaders/invites.loader';
+import { PubSub } from 'mercurius';
+import { SubTopics } from '../schema.constants';
+import { notContains } from 'class-validator';
 
 @Resolver(of => Invite)
 export class InvitesResolver extends InvitesLoader {
@@ -33,6 +43,7 @@ export class InvitesResolver extends InvitesLoader {
   async createInvite(
     @CurrentUser() user: User,
     @Args('input') input: CreateInviteInput,
+    @Context('pubsub') pubsub: PubSub,
   ): Promise<Invite> {
     const invite = await this.prisma.invite.create({
       data: {
@@ -47,9 +58,9 @@ export class InvitesResolver extends InvitesLoader {
     });
 
     if (invitedUser) {
-      await this.notificationsService.createNotification({
-        userId: user.id,
-        subjectId: invitedUser.id,
+      const notification = await this.notificationsService.createNotification({
+        userId: invitedUser.id,
+        subjectId: user.id,
         teamId: input.teamId,
       });
     }

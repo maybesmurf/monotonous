@@ -4,26 +4,26 @@ import React, {
   FormEvent,
   useEffect,
   useState,
-} from "react";
-import { useRouter } from "next/router";
-import { useSignupMutation } from "graphql_client";
-import { useAuth } from "hooks/use_auth";
+} from 'react';
+import { useRouter } from 'next/router';
+import { useSignupMutation } from 'graphql_client';
+import { useAuth } from 'hooks/use_auth';
 
 export default function Signup() {
   const router = useRouter();
-  const loggedIn = useAuth((s) => s.loggedIn);
+  const loggedIn = useAuth(s => s.loggedIn);
   const [signup, { data, loading }] = useSignupMutation();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmation, setConfirmation] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmation, setConfirmation] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
   useEffect(() => {
-    if (loggedIn) router.replace("/");
+    if (loggedIn) router.replace('/');
   }, [loggedIn]);
 
-  type InputProps = ComponentProps<"input"> & { label: string };
+  type InputProps = ComponentProps<'input'> & { label: string };
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -43,37 +43,37 @@ export default function Signup() {
 
   const inputs: InputProps[] = [
     {
-      label: "Email Address",
-      name: "email",
-      type: "email",
+      label: 'Email Address',
+      name: 'email',
+      type: 'email',
       value: email,
-      onChange: (e) => setEmail(e.currentTarget.value),
+      onChange: e => setEmail(e.currentTarget.value),
     },
     {
-      label: "Password",
-      name: "password",
-      type: "password",
+      label: 'Password',
+      name: 'password',
+      type: 'password',
       value: password,
-      onChange: (e) => setPassword(e.currentTarget.value),
+      onChange: e => setPassword(e.currentTarget.value),
     },
     {
-      label: "Confirm Password",
-      name: "confirmation",
-      type: "password",
+      label: 'Confirm Password',
+      name: 'confirmation',
+      type: 'password',
       value: confirmation,
-      onChange: (e) => setConfirmation(e.currentTarget.value),
+      onChange: e => setConfirmation(e.currentTarget.value),
     },
     {
-      label: "First Name",
-      name: "firstName",
+      label: 'First Name',
+      name: 'firstName',
       value: firstName,
-      onChange: (e) => setFirstName(e.currentTarget.value),
+      onChange: e => setFirstName(e.currentTarget.value),
     },
     {
-      label: "Last Name",
-      name: "lastName",
+      label: 'Last Name',
+      name: 'lastName',
       value: lastName,
-      onChange: (e) => setLastName(e.currentTarget.value),
+      onChange: e => setLastName(e.currentTarget.value),
     },
   ];
 
@@ -84,7 +84,7 @@ export default function Signup() {
     >
       {inputs.map(({ label, ...input }) => {
         return (
-          <p className="flex flex-col">
+          <p key={label} className="flex flex-col">
             <label htmlFor="email">{label}</label>
             <input
               {...input}

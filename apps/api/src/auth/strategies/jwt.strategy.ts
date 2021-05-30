@@ -23,5 +23,5 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 }
 
 function extractJwt(req: FastifyRequest) {
-  return req.cookies[config.auth.cookiePrefix];
+  return req?.cookies?.[config.auth.cookiePrefix];
 }

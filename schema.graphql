@@ -55,12 +55,12 @@ type Notification {
   createdAt: DateTime!
   id: ID!
   project: Project
-  projectId: String!
-  seenAt: DateTime!
+  projectId: String
+  seenAt: DateTime
   subject: User!
   subjectId: String!
   team: Team
-  teamId: String!
+  teamId: String
   type: NotificationTypes!
   updatedAt: DateTime!
   user: User!
@@ -124,7 +124,7 @@ input RegisterInput {
 }
 
 type Subscription {
-  onCatCreated(name: String!): Notification!
+  newNotification: Notification!
 }
 
 type Team {

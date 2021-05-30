@@ -114,12 +114,12 @@ export type Notification = {
   createdAt: Scalars['DateTime'];
   id: Scalars['ID'];
   project?: Maybe<Project>;
-  projectId: Scalars['String'];
-  seenAt: Scalars['DateTime'];
+  projectId?: Maybe<Scalars['String']>;
+  seenAt?: Maybe<Scalars['DateTime']>;
   subject: User;
   subjectId: Scalars['String'];
   team?: Maybe<Team>;
-  teamId: Scalars['String'];
+  teamId?: Maybe<Scalars['String']>;
   type: NotificationTypes;
   updatedAt: Scalars['DateTime'];
   user: User;
@@ -223,12 +223,7 @@ export type RegisterInput = {
 
 export type Subscription = {
   __typename: 'Subscription';
-  onCatCreated: Notification;
-};
-
-
-export type SubscriptionOnCatCreatedArgs = {
-  name: Scalars['String'];
+  newNotification: Notification;
 };
 
 export type Team = {

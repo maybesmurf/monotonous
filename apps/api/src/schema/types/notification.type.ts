@@ -16,7 +16,7 @@ export class Notification {
   updatedAt: Date;
 
   @Field({ nullable: true })
-  seenAt: Date | null;
+  seenAt?: Date | null;
 
   @Field(type => NotificationTypes)
   type: NotificationTypes;
