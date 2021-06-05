@@ -223,7 +223,7 @@ export type RegisterInput = {
 
 export type Subscription = {
   __typename: 'Subscription';
-  newNotification: Notification;
+  onNewNotification: Notification;
 };
 
 export type Team = {
@@ -294,6 +294,17 @@ export type NotificationsQuery = (
       & Pick<Project, 'id' | 'name'>
     )> }
   )> }
+);
+
+export type OnNewNotificationSubSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type OnNewNotificationSubSubscription = (
+  { __typename: 'Subscription' }
+  & { onNewNotification: (
+    { __typename: 'Notification' }
+    & Pick<Notification, 'id'>
+  ) }
 );
 
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
@@ -670,6 +681,35 @@ export function useNotificationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type NotificationsQueryHookResult = ReturnType<typeof useNotificationsQuery>;
 export type NotificationsLazyQueryHookResult = ReturnType<typeof useNotificationsLazyQuery>;
 export type NotificationsQueryResult = Apollo.QueryResult<NotificationsQuery, NotificationsQueryVariables>;
+export const OnNewNotificationSubDocument = gql`
+    subscription OnNewNotificationSub {
+  onNewNotification {
+    id
+  }
+}
+    `;
+
+/**
+ * __useOnNewNotificationSubSubscription__
+ *
+ * To run a query within a React component, call `useOnNewNotificationSubSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useOnNewNotificationSubSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useOnNewNotificationSubSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useOnNewNotificationSubSubscription(baseOptions?: Apollo.SubscriptionHookOptions<OnNewNotificationSubSubscription, OnNewNotificationSubSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<OnNewNotificationSubSubscription, OnNewNotificationSubSubscriptionVariables>(OnNewNotificationSubDocument, options);
+      }
+export type OnNewNotificationSubSubscriptionHookResult = ReturnType<typeof useOnNewNotificationSubSubscription>;
+export type OnNewNotificationSubSubscriptionResult = Apollo.SubscriptionResult<OnNewNotificationSubSubscription>;
 export const MeDocument = gql`
     query Me {
   me {

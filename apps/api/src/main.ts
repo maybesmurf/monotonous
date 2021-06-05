@@ -5,6 +5,7 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import cookie from 'fastify-cookie';
+import cors from 'fastify-cors';
 import { ValidationPipe } from '@nestjs/common';
 import { ValidationError } from 'class-validator';
 import merc from 'mercurius';
@@ -17,6 +18,11 @@ async function bootstrap() {
 
   app.enableShutdownHooks();
 
+  app.register(cors, {
+    origin: '*',
+    credentials: true,
+    allowedHeaders: ['cookie'],
+  });
   app.register(cookie);
 
   // Register a global validation pipe

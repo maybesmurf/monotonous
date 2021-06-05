@@ -32,11 +32,20 @@ export class NotificationsService {
         team: { connect: { id: params.teamId } },
         subject: { connect: { id: params.subjectId } },
       },
+      include: {
+        project: true,
+        subject: {
+          include: {
+            profile: true,
+          },
+        },
+        team: true,
+      },
     });
 
     this.pubsub.getInstance()?.publish({
       topic: SubTopics.NEW_NOTIFICATION,
-      payload: { newNotification: notification },
+      payload: notification,
     });
 
     return notification;

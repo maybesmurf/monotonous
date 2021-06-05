@@ -7,14 +7,14 @@ import { WebSocketLink } from '@apollo/client/link/ws';
 const IS_BROWSER = typeof window !== 'undefined';
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:3000/graphql',
+  uri: '/graphql',
 });
 
 const wsLink = IS_BROWSER
   ? new WebSocketLink({
-      uri: 'ws://localhost:3000/subscriptions',
+      uri: 'ws://localhost:3000/graphql',
       options: {
-        reconnect: true,
+        reconnect: false,
       },
     })
   : null;

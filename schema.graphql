@@ -124,7 +124,7 @@ input RegisterInput {
 }
 
 type Subscription {
-  newNotification: Notification!
+  onNewNotification: Notification!
 }
 
 type Team {

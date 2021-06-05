@@ -1,8 +1,32 @@
+import { useEffect } from 'react';
 import { gql } from '@apollo/client';
 import { useNotificationsQuery } from 'graphql_client';
 
 export const Notifications = () => {
-  const { data } = useNotificationsQuery({});
+  const { data, subscribeToMore } = useNotificationsQuery({
+    fetchPolicy: 'cache-and-network',
+  });
+
+  useEffect(() => {
+    const unsub = subscribeToMore({
+      document: subscription,
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data) {
+          return prev;
+        }
+
+        return {
+          ...prev,
+          notifications: [
+            // @ts-ignore
+            subscriptionData.data.onNewNotification,
+            ...prev.notifications,
+          ],
+        };
+      },
+    });
+    return () => unsub();
+  }, []);
 
   return (
     <div className="relative group">
@@ -42,6 +66,14 @@ const query = gql`
         id
         name
       }
+    }
+  }
+`;
+
+const subscription = gql`
+  subscription OnNewNotificationSub {
+    onNewNotification {
+      id
     }
   }
 `;

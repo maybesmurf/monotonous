@@ -25,8 +25,10 @@ export class NotificationsResolver extends NotificationsLoader {
     });
   }
 
-  @Subscription(() => Notification)
-  newNotification(@Context('pubsub') pubsub: PubSub) {
+  @Subscription(() => Notification, {
+    resolve: payload => payload,
+  })
+  onNewNotification(@Context('pubsub') pubsub: PubSub) {
     return toAsyncIterator(pubsub.subscribe(SubTopics.NEW_NOTIFICATION));
   }
 }
