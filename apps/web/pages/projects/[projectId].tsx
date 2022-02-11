@@ -74,7 +74,7 @@ export default function Projects_ProjectId() {
   );
 
   if (!data || loading) {
-    <div>loading...</div>;
+    return <div>loading...</div>;
   }
 
   async function handleAddUser(id: string) {
